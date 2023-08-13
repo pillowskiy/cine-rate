@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { BookmarkPlus, Star } from 'lucide-react';
 import { Button } from '../ui/button';
 
-interface CreationCardProps extends HTMLAttributes<HTMLDivElement> {
+export interface CreationCardProps extends HTMLAttributes<HTMLDivElement> {
   width: number;
   height: number;
 
