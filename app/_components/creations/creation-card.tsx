@@ -1,8 +1,7 @@
+import type { HTMLAttributes } from 'react';
 import { buildImagePath } from '@libs/tmdb';
 import { cn } from '@libs/index';
-import { getRelativeTime } from '@libs/time';
-import type { HTMLAttributes } from 'react';
-import { Creation } from '@app/types/creation-types';
+import { ICreation } from '@app/types/creation-types';
 import Image from 'next/image';
 import { BookmarkPlus, Star } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -11,7 +10,7 @@ interface CreationCardProps extends HTMLAttributes<HTMLDivElement> {
   width: number;
   height: number;
 
-  creation: Creation;
+  creation: ICreation;
   size?: 'default' | 'sm';
 }
 
@@ -27,7 +26,7 @@ export function CreationCard({
     creation.title || creation.original_title || creation.original_name;
 
   return (
-    <section className={cn('snap-center space-y-2', className)} {...props}>
+    <article className={cn('snap-center space-y-2', className)} {...props}>
       <figure className='relative overflow-hidden rounded-md'>
         <Image
           className={cn(
@@ -65,6 +64,6 @@ export function CreationCard({
           <span>({creation.vote_count} reviews)</span>
         </div>
       </div>
-    </section>
+    </article>
   );
 }

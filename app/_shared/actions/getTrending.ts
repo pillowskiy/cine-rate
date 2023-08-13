@@ -1,4 +1,4 @@
-import type { TrendingCreationsResponse } from '@/app/_types/creation-types';
+import type { TrendingCreationsResponse } from '@app/types/creation-types';
 import { $api } from '../api/api-interceptor';
 
 interface GetTrendingOptions {

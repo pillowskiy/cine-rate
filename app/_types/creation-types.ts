@@ -1,6 +1,6 @@
-import { MediaType } from '.';
+import type { MediaType, BaseResponse } from '.';
 
-export interface Creation {
+export interface ICreation {
   adult: boolean;
   backdrop_path: string;
   id: number;
@@ -19,9 +19,4 @@ export interface Creation {
   vote_count: number;
 }
 
-export interface TrendingCreationsResponse {
-  page: number;
-  results: Creation[];
-  total_pages: number;
-  total_results: number;
-}
+export type TrendingCreationsResponse = BaseResponse<ICreation>;
