@@ -3,3 +3,15 @@ export enum MediaType {
   TV = 'tv',
   People = 'people',
 }
+
+export enum Gender {
+  WOMAN = 1,
+  MAN = 2,
+}
+
+export type BaseResponse<T extends unknown> = {
+  page: number;
+  results: T[];
+  total_pages: number;
+  total_results: number;
+};
