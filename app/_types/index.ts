@@ -9,6 +9,10 @@ export enum Gender {
   MAN = 2,
 }
 
+export enum CreationVideoSite {
+  YOUTUBE = 'YouTube',
+}
+
 export type BaseResponse<T extends unknown> = {
   page: number;
   results: T[];

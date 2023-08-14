@@ -1,4 +1,4 @@
-import type { MediaType, BaseResponse } from '.';
+import type { MediaType, BaseResponse, CreationVideoSite } from '.';
 
 export interface ICreation {
   adult: boolean;
@@ -19,4 +19,21 @@ export interface ICreation {
   vote_count: number;
 }
 
+export interface ICreationVideo {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: CreationVideoSite;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
+}
+
 export type TrendingCreationsResponse = BaseResponse<ICreation>;
+export type CreationVideosResponse = {
+  id: number;
+  results: ICreationVideo[];
+};
