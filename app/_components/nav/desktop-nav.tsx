@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 
 export function DesktopNav() {
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <div className='mr-4 hidden md:flex'>
       <Link href='/' className='mr-6 flex items-center space-x-2'>

@@ -15,7 +15,7 @@ export default async function Home() {
   if (!creations || !celebrities || !upcoming) return null;
 
   return (
-    <div className='h-screen w-full'>
+    <div className='min-h-screen w-full'>
       <div className='mt-6 flex items-center justify-between'>
         <div className='space-y-1'>
           <h2 className='text-2xl font-semibold tracking-tight'>Trands now</h2>
