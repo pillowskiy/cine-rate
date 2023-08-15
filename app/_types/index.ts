@@ -19,3 +19,14 @@ export type BaseResponse<T extends unknown> = {
   total_pages: number;
   total_results: number;
 };
+
+export interface IProductionCountry {
+  iso_3166_1: string;
+  name: string;
+}
+
+export interface ICreationLanguage {
+  english_name: string;
+  iso_639_1: string;
+  name: string;
+}
