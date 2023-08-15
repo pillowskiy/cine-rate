@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { BookmarkPlus, Star } from 'lucide-react';
 import { Button } from '../ui/button';
 import { YoutubePlayer } from '../youtube-player';
+import Link from 'next/link';
 
 export interface CreationCardProps extends HTMLAttributes<HTMLDivElement> {
   width: number;
@@ -27,14 +28,14 @@ export function CreationCard({
     creation.title || creation.original_title || creation.original_name;
 
   return (
-    <div className='group relative'>
-      <article
-        className={cn(
-          'relative snap-center space-y-2 group-hover:opacity-0',
-          className
-        )}
-        {...props}
-      >
+    <article
+      className={cn(
+        'relative snap-center space-y-2 group-hover:opacity-0',
+        className
+      )}
+      {...props}
+    >
+      <Link href={`${creation.media_type}/${creation.id}`}>
         <figure className='relative overflow-hidden rounded-md'>
           <Image
             className={cn(
@@ -57,24 +58,22 @@ export function CreationCard({
             </Button>
           </div>
         </figure>
-        <div className='space-y-1'>
-          <h2
-            className='text-md truncate font-semibold tracking-tight'
-            title={title}
-          >
-            {title}
-          </h2>
-          <div className='flex items-center justify-between text-xs'>
-            <div className='flex items-center space-x-1.5'>
-              <Star className='h-4 w-4 fill-yellow-300 text-yellow-400' />
-              <span>{creation.vote_average.toFixed(1)}</span>
-            </div>
-            <span>({creation.vote_count} reviews)</span>
+      </Link>
+      <div className='space-y-1'>
+        <h2
+          className='text-md truncate font-semibold tracking-tight'
+          title={title}
+        >
+          {title}
+        </h2>
+        <div className='flex items-center justify-between text-xs'>
+          <div className='flex items-center space-x-1.5'>
+            <Star className='h-4 w-4 fill-yellow-300 text-yellow-400' />
+            <span>{creation.vote_average.toFixed(1)}</span>
           </div>
+          <span>({creation.vote_count} reviews)</span>
         </div>
-      </article>
-      <article className='border-md absolute left-0 top-0 z-10 hidden h-[150px] w-[250px] scale-150 overflow-hidden bg-red-500 group-hover:block'>
-      </article>
-    </div>
+      </div>
+    </article>
   );
 }
