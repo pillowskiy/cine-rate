@@ -3,41 +3,93 @@ import { getMovieDetails } from '@actions/getMovieDetails';
 import Image from 'next/image';
 import getColors from 'get-image-colors';
 import { getDarkestColor } from '@libs/get-image.colors';
-import { cn } from '@libs/index';
+import { YoutubePlayer } from '@components/youtube-player';
+import { FileVideo, FileImage } from 'lucide-react';
+import { getVideos } from '@actions/getVideos';
+import { buildURL } from '@/app/_libs/ytdl';
 
 interface MoviePageProps {
   params: { id?: string | undefined };
 }
 
-function getBrightness(hex: string) {
-  const red = parseInt(hex.slice(1, 3), 16);
-  const green = parseInt(hex.slice(3, 5), 16);
-  const blue = parseInt(hex.slice(5, 7), 16);
-  return (red * 299 + green * 587 + blue * 114) / 1000;
-}
-
 export default async function MoviePage({ params }: MoviePageProps) {
   if (!params.id || isNaN(+params.id)) return null;
   const { data: movie } = await getMovieDetails(+params.id, {});
+  const { data: videos } = await getVideos(movie.id);
+
+  if (!movie || !videos) return null;
+
+  // TEMP
+  const officialTrailer = videos.results.find(
+    (video) => video.official && video.type === 'Trailer'
+  );
+  const video = officialTrailer || videos.results[0];
+
   const colors = await getColors(buildImagePath(movie.backdrop_path));
   const { color } = getDarkestColor(colors);
-  if (!movie) return null;
 
   return (
-    <div className='mt-4 min-h-screen w-full'>
-      <header className='relative flex gap-8 p-8'>
-        <div className='w-[260px] min-w-[260px] overflow-hidden rounded-md'>
-          <Image
-            className={
-              'object-fit aspect-[4/6] transition-all ease-in-out hover:scale-105'
-            }
-            src={buildImagePath(movie.poster_path)}
-            alt='Movie Image'
-            width={260}
-            height={420}
-          />
+    <div className='mt-4 min-h-screen w-full text-primary-foreground'>
+      <header className='relative p-4'>
+        <div className='space-y-1'>
+          <div className='flex items-center space-x-2'>
+            <h2 className='text-2xl font-semibold tracking-tight'>
+              {movie.title || movie.original_title}
+            </h2>
+            <p className='text-sm opacity-70'>{movie.release_date}</p>
+          </div>
+          <p className='text-sm opacity-90'>
+            {movie.genres.map((genre) => genre.name).join(', ')}
+          </p>
         </div>
-        <div className='absolute left-0 top-0 -z-20 h-[460px] w-full overflow-hidden rounded-md'>
+
+        <div className='jutisfy-between my-4 flex flex-col flex-wrap gap-4 md:flex-row lg:flex-wrap'>
+          <figure className='sm:flex-[1 1 260px] w-full overflow-hidden rounded-md md:w-[260px]'>
+            <Image
+              className={
+                'h-full w-full object-cover transition-all ease-in-out hover:scale-105'
+              }
+              src={buildImagePath(movie.poster_path)}
+              alt='Movie Image'
+              width={260}
+              height={420}
+            />
+          </figure>
+
+          <div className='flex-grow'>
+            <YoutubePlayer
+              className='h-full w-full'
+              url={buildURL(video.key)}
+            />
+          </div>
+
+          <figure className='lg:flex-[1 1 200px] flex w-full gap-4 overflow-hidden rounded-md lg:w-[200px] lg:flex-col'>
+            <div className='backdrop-blur-5 grid h-auto w-full place-items-center rounded-md p-2 backdrop-blur-[25px] md:h-full'>
+              <div className='m-auto space-y-1 text-center flex lg:flex-col gap-1'>
+                <FileVideo className='m-auto h-5 w-5 md:h-[48px] md:w-[48px]' />
+                <p className='text-sm font-medium uppercase'>videos</p>
+              </div>
+            </div>
+            <div className='backdrop-blur-5 grid h-auto w-full place-items-center rounded-md p-2 backdrop-blur-[25px] md:h-full'>
+              <div className='m-auto space-y-1 text-center flex lg:flex-col gap-1'>
+                <FileImage className='m-auto h-5 w-5 md:h-[48px] md:w-[48px]' />
+                <p className='text-sm font-medium uppercase'>photos</p>
+              </div>
+            </div>
+          </figure>
+        </div>
+
+        <div className='w-full space-y-4 md:w-[260px] md:min-w-[260px]'>
+          <div className='flex items-center space-x-1.5 overflow-auto truncate text-sm opacity-70'>
+            {movie.genres.map((genre) => (
+              <span className='rounded-md border p-1 text-xs' key={genre.id}>
+                {genre.name}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className='absolute left-0 top-0 -z-20 h-full w-full overflow-hidden rounded-md'>
           <Image
             className={
               'aspect-[16/9] h-full w-full scale-110 object-cover object-top'
@@ -56,37 +108,6 @@ export default async function MoviePage({ params }: MoviePageProps) {
             }
           />
         </div>
-
-        <section className='space-y-4 text-primary-foreground'>
-          <div className='space-y-1'>
-            <div className='flex items-center space-x-2'>
-              <h2 className='text-2xl font-semibold tracking-tight'>
-                {movie.title || movie.original_title}
-              </h2>
-              <p className='text-sm opacity-70'>{movie.release_date}</p>
-            </div>
-            <div className='flex items-center space-x-2 truncate text-sm opacity-70'>
-              {movie.production_countries.map((country) => (
-                <span
-                  className='rounded-md border p-1 text-xs'
-                  key={country.iso_3166_1}
-                >
-                  {country.name}
-                </span>
-              ))}
-            </div>
-            <p className='opacity-90'>
-              {movie.genres.map((genre) => genre.name).join(', ')}
-            </p>
-          </div>
-
-          <div className='max-w-[80%] space-y-1'>
-            <h2 className='text-2xl font-semibold tracking-tight'>
-              {movie.tagline}
-            </h2>
-            <p className='text-sm'>{movie.overview}</p>
-          </div>
-        </section>
       </header>
     </div>
   );
