@@ -52,6 +52,7 @@ export default async function Home() {
         <section className='flex snap-x space-x-4 pb-4'>
           {creations.results.map((creation) => (
             <CreationArticle
+              aspect='horizontal'
               key={creation.id}
               creation={creation}
               className='w-[260px]'
@@ -77,6 +78,7 @@ export default async function Home() {
         <section className='flex snap-x space-x-4 pb-4'>
           {upcoming.results.map((creation) => (
             <CreationArticle
+              aspect='horizontal'
               key={creation.id}
               creation={creation}
               className='w-[260px]'

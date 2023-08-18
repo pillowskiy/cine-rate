@@ -40,12 +40,15 @@ interface ActionButton {
   Image: ReactNode;
 }
 
-interface BaseArticleContentProps {
+export interface BaseArticleFigureProps {
+  className?: string;
   size?: 'default' | 'sm';
   height: number;
   width: number;
   alt: string;
   src: string;
+
+  aspect?: 'vertical' | 'horizontal';
 
   actionButtons?: ActionButton[];
 }
@@ -56,26 +59,34 @@ export function BaseArticleFigure({
   width,
   alt,
   src,
+  aspect = 'vertical',
   actionButtons,
-}: BaseArticleContentProps) {
+}: BaseArticleFigureProps) {
   return (
-    <figure className='relative overflow-hidden rounded-md'>
-      <Image
+    <figure className={cn('relative overflow-hidden rounded-md')}>
+      <div
         className={cn(
-          'object-fit h-auto w-auto transition-all ease-in-out hover:scale-105',
-          className
+          'w-full',
+          aspect === 'vertical' ? 'aspect-[2/3]' : 'aspect-[16/9]'
         )}
-        height={height}
-        width={width}
-        alt={alt}
-        src={src}
-      />
-      <div className='absolute right-2 top-2 flex gap-2'>
+      >
+        <Image
+          className={cn(
+            'h-full w-full object-cover transition-all ease-in-out hover:scale-105',
+            className
+          )}
+          height={height}
+          width={width}
+          alt={alt}
+          src={src}
+        />
+      </div>
+      <div className='absolute right-2 bottom-2 flex gap-2'>
         {actionButtons &&
           actionButtons.map((button, index) => (
             <Button
               key={index}
-              className='h-7 w-7'
+              className='h-7 w-7 opacity-60 transition-all hover:opacity-100'
               size='icon'
               variant='outline'
             >

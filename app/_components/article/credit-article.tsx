@@ -16,8 +16,9 @@ interface CreditArticleProps extends HTMLAttributes<HTMLDivElement> {
 export function CreditArticle({ credit, ...props }: CreditArticleProps) {
   return (
     <BaseArticle {...props}>
-      <Link href={`celebrities/${credit.id}`}>
+      <Link href={`/celebrities/${credit.id}`}>
         <BaseArticleFigure
+          aspect='vertical'
           src={buildImagePath(credit.profile_path)}
           alt='Person Avatar'
           width={480}

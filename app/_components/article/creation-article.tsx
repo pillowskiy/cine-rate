@@ -6,6 +6,7 @@ import {
   BaseArticle,
   BaseArticleContent,
   BaseArticleFigure,
+  BaseArticleFigureProps,
 } from './base-article';
 import Link from 'next/link';
 
@@ -14,6 +15,7 @@ interface CreationArticleProps extends Omit<BaseArticleProps, 'src' | 'href'> {
   width: number;
   height: number;
   creation: ICreation;
+  aspect?: BaseArticleFigureProps['aspect'];
 }
 
 export function CreationArticle({
@@ -21,6 +23,7 @@ export function CreationArticle({
   size = 'default',
   width,
   height,
+  aspect = 'vertical',
   ...props
 }: CreationArticleProps) {
   const { title, original_title, original_name } = creation;
@@ -28,11 +31,12 @@ export function CreationArticle({
 
   return (
     <BaseArticle {...props}>
-      <Link href={`${creation.media_type}/${creation.id}`}>
+      <Link href={`/${creation.media_type}/${creation.id}`}>
         <BaseArticleFigure
           src={buildImagePath(
             size === 'default' ? creation.poster_path : creation.backdrop_path
           )}
+          aspect={aspect}
           width={width}
           height={height}
           alt='Creation Image'
