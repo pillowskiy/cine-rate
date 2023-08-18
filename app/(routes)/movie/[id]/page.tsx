@@ -7,6 +7,8 @@ import { YoutubePlayer } from '@components/youtube-player';
 import { FileVideo, FileImage } from 'lucide-react';
 import { getVideos } from '@actions/getVideos';
 import { buildURL } from '@/app/_libs/ytdl';
+import { MovieCast } from './movie-cast';
+import { SimilarCreations } from './similar-creations';
 
 interface MoviePageProps {
   params: { id?: string | undefined };
@@ -29,8 +31,8 @@ export default async function MoviePage({ params }: MoviePageProps) {
   const { color } = getDarkestColor(colors);
 
   return (
-    <div className='mt-4 min-h-screen w-full text-primary-foreground'>
-      <header className='relative p-4'>
+    <div className='mt-4 min-h-screen w-full space-y-6'>
+      <header className='relative p-4 text-primary-foreground'>
         <div className='space-y-1'>
           <div className='flex items-center space-x-2'>
             <h2 className='text-2xl font-semibold tracking-tight'>
@@ -65,13 +67,13 @@ export default async function MoviePage({ params }: MoviePageProps) {
 
           <figure className='lg:flex-[1 1 200px] flex w-full gap-4 overflow-hidden rounded-md lg:w-[200px] lg:flex-col'>
             <div className='backdrop-blur-5 grid h-auto w-full place-items-center rounded-md p-2 backdrop-blur-[25px] md:h-full'>
-              <div className='m-auto space-y-1 text-center flex lg:flex-col gap-1'>
+              <div className='m-auto flex gap-1 space-y-1 text-center lg:flex-col'>
                 <FileVideo className='m-auto h-5 w-5 md:h-[48px] md:w-[48px]' />
                 <p className='text-sm font-medium uppercase'>videos</p>
               </div>
             </div>
             <div className='backdrop-blur-5 grid h-auto w-full place-items-center rounded-md p-2 backdrop-blur-[25px] md:h-full'>
-              <div className='m-auto space-y-1 text-center flex lg:flex-col gap-1'>
+              <div className='m-auto flex gap-1 space-y-1 text-center lg:flex-col'>
                 <FileImage className='m-auto h-5 w-5 md:h-[48px] md:w-[48px]' />
                 <p className='text-sm font-medium uppercase'>photos</p>
               </div>
@@ -109,6 +111,9 @@ export default async function MoviePage({ params }: MoviePageProps) {
           />
         </div>
       </header>
+
+      <MovieCast movie={movie} />
+      <SimilarCreations movieId={movie.id} />
     </div>
   );
 }
