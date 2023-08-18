@@ -1,11 +1,10 @@
-import { CreationCard } from '@components/creations/creation-card';
 import { Separator } from '@ui/separator';
 import { ScrollArea, ScrollBar } from '@ui/scroll-area';
 import { getTrending } from '@actions/getTrending';
 import { getCelebrities } from '@actions/getCelebrities';
-import { CelebrityCard } from '@components/celebrity-card';
 import { getUpcoming } from '@actions/getUpcoming';
-import { CreationHoverCard } from '@components/creations/creation-hover-card';
+import { CreationArticle } from '@components/article/creation-article';
+import { CelebrityArticle } from '@components/article/celebrity-article';
 
 export default async function Home() {
   // TEMP
@@ -28,7 +27,7 @@ export default async function Home() {
       <ScrollArea>
         <section className='flex snap-x space-x-4 pb-4'>
           {creations.results.map((creation) => (
-            <CreationCard
+            <CreationArticle
               key={creation.id}
               creation={creation}
               className='w-[260px]'
@@ -52,7 +51,7 @@ export default async function Home() {
       <ScrollArea>
         <section className='flex snap-x space-x-4 pb-4'>
           {creations.results.map((creation) => (
-            <CreationCard
+            <CreationArticle
               key={creation.id}
               creation={creation}
               className='w-[260px]'
@@ -77,7 +76,7 @@ export default async function Home() {
       <ScrollArea>
         <section className='flex snap-x space-x-4 pb-4'>
           {upcoming.results.map((creation) => (
-            <CreationHoverCard
+            <CreationArticle
               key={creation.id}
               creation={creation}
               className='w-[260px]'
@@ -102,7 +101,7 @@ export default async function Home() {
       <ScrollArea>
         <section className='flex snap-x space-x-4 pb-4'>
           {celebrities.results.map((celebrity) => (
-            <CelebrityCard
+            <CelebrityArticle
               key={celebrity.id}
               celebrity={celebrity}
               className='w-[260px]'
