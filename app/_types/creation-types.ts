@@ -1,4 +1,5 @@
 import type { MediaType, BaseResponse, CreationVideoSite } from '.';
+import type { IMediaResource } from './media-types';
 
 export interface ICreation {
   adult: boolean;
@@ -36,4 +37,10 @@ export type TrendingCreationsResponse = BaseResponse<ICreation>;
 export type CreationVideosResponse = {
   id: number;
   results: ICreationVideo[];
+};
+export type CreationImagesResponse = {
+  id: number;
+  backdrops: IMediaResource[];
+  logos: IMediaResource[];
+  posters: IMediaResource[];
 };
