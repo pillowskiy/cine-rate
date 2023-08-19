@@ -9,6 +9,8 @@ import { getVideos } from '@actions/getVideos';
 import { buildURL } from '@/app/_libs/ytdl';
 import { MovieCast } from './movie-cast';
 import { SimilarCreations } from './similar-creations';
+import { MediaTabs } from './media-tabs';
+import { Separator } from '@ui/separator';
 
 interface MoviePageProps {
   params: { id?: string | undefined };
@@ -31,7 +33,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
   const { color } = getDarkestColor(colors);
 
   return (
-    <div className='mt-4 min-h-screen w-full space-y-6'>
+    <div className='mt-4 min-h-screen w-full'>
       <header className='relative p-4 text-primary-foreground'>
         <div className='space-y-1'>
           <div className='flex items-center space-x-2'>
@@ -112,7 +114,35 @@ export default async function MoviePage({ params }: MoviePageProps) {
         </div>
       </header>
 
+      <div className='flex items-center justify-between'>
+        <div className='space-y-1'>
+          <h2 className='text-2xl font-semibold tracking-tight'>Cast</h2>
+          <p className='text-sm text-muted-foreground'>
+            The movie cast.
+          </p>
+        </div>
+      </div>
+      <Separator className='my-4' />
       <MovieCast movie={movie} />
+
+      <div className='flex items-center justify-between'>
+        <div className='space-y-1'>
+          <h2 className='text-2xl font-semibold tracking-tight'>Media</h2>
+          <p className='text-sm text-muted-foreground'>
+            Resources that may interest you.
+          </p>
+        </div>
+      </div>
+      <Separator className='my-4' />
+      <MediaTabs creationId={movie.id} mediaType='movie' />
+
+      <div className='mt-6 flex items-center justify-between'>
+        <div className='space-y-1'>
+          <h2 className='text-2xl font-semibold tracking-tight'>Similar</h2>
+          <p className='text-sm text-muted-foreground'>More like this.</p>
+        </div>
+      </div>
+      <Separator className='my-4' />
       <SimilarCreations movieId={movie.id} />
     </div>
   );
