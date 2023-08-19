@@ -5,12 +5,14 @@ import getColors from 'get-image-colors';
 import { getDarkestColor } from '@libs/get-image.colors';
 import { YoutubePlayer } from '@components/youtube-player';
 import { FileVideo, FileImage } from 'lucide-react';
+import { getReviews } from '@actions/getReviews';
 import { getVideos } from '@actions/getVideos';
 import { buildURL } from '@/app/_libs/ytdl';
 import { MovieCast } from './movie-cast';
 import { SimilarCreations } from './similar-creations';
 import { MediaTabs } from './media-tabs';
 import { Separator } from '@ui/separator';
+import { ReviewCard } from '@/app/_components/card/review-card';
 
 interface MoviePageProps {
   params: { id?: string | undefined };
@@ -20,8 +22,10 @@ export default async function MoviePage({ params }: MoviePageProps) {
   if (!params.id || isNaN(+params.id)) return null;
   const { data: movie } = await getMovieDetails(+params.id, {});
   const { data: videos } = await getVideos(movie.id);
+  const { data: reviews } = await getReviews('movie', movie.id);
 
-  if (!movie || !videos) return null;
+  // TEMP
+  if (!movie || !videos || !reviews) return null;
 
   // TEMP
   const officialTrailer = videos.results.find(
@@ -33,8 +37,8 @@ export default async function MoviePage({ params }: MoviePageProps) {
   const { color } = getDarkestColor(colors);
 
   return (
-    <div className='mt-4 min-h-screen w-full'>
-      <header className='relative p-4 text-primary-foreground'>
+    <div className='min-h-screen w-full'>
+      <header className='my-4 relative p-4 text-primary-foreground'>
         <div className='space-y-1'>
           <div className='flex items-center space-x-2'>
             <h2 className='text-2xl font-semibold tracking-tight'>
@@ -117,9 +121,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
       <div className='flex items-center justify-between'>
         <div className='space-y-1'>
           <h2 className='text-2xl font-semibold tracking-tight'>Cast</h2>
-          <p className='text-sm text-muted-foreground'>
-            The movie cast.
-          </p>
+          <p className='text-sm text-muted-foreground'>The movie cast.</p>
         </div>
       </div>
       <Separator className='my-4' />
@@ -144,6 +146,21 @@ export default async function MoviePage({ params }: MoviePageProps) {
       </div>
       <Separator className='my-4' />
       <SimilarCreations movieId={movie.id} />
+
+      <div className='flex items-center justify-between'>
+        <div className='space-y-1'>
+          <h2 className='text-2xl font-semibold tracking-tight'>Reviews</h2>
+          <p className='text-sm text-muted-foreground'>
+            Feedback from our users.
+          </p>
+        </div>
+      </div>
+      <Separator className='my-4' />
+      <section className='space-y-4'>
+        {reviews.results.map((review) => (
+          <ReviewCard key={review.id} review={review} />
+        ))}
+      </section>
     </div>
   );
 }
