@@ -31,8 +31,8 @@ export default async function Home() {
               key={creation.id}
               creation={creation}
               className='w-[260px]'
-              width={480}
-              height={854}
+              width={260}
+              height={390}
             />
           ))}
         </section>
@@ -57,8 +57,8 @@ export default async function Home() {
               creation={creation}
               className='w-[260px]'
               size='sm'
-              width={720}
-              height={480}
+              width={260}
+              height={140}
             />
           ))}
         </section>
@@ -83,8 +83,8 @@ export default async function Home() {
               creation={creation}
               className='w-[260px]'
               size='sm'
-              width={720}
-              height={480}
+              width={260}
+              height={140}
             />
           ))}
         </section>

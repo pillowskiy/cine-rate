@@ -23,8 +23,8 @@ export function CelebrityArticle({
           aspect='vertical'
           src={buildImagePath(celebrity.profile_path)}
           alt='Person Avatar'
-          width={480}
-          height={854}
+          width={260}
+          height={390}
         />
       </Link>
       <BaseArticleContent>
