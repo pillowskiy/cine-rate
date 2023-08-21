@@ -47,7 +47,6 @@ export function YoutubePlayer({
       </div>
       <ReactPlayer
         url={url}
-        className='w-full'
         width='120%'
         height='130%'
         muted={isMuted}

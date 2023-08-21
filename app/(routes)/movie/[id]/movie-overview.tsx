@@ -1,3 +1,4 @@
+import { CreationPoster } from '@components/creation-poster';
 import type { IMovieDetails } from '@app/types/movies-types';
 import { Separator } from '@ui/separator';
 
@@ -15,7 +16,17 @@ export default function MovieOverview({ movie }: MovieOverviewProps) {
         </div>
       </div>
       <Separator className='my-4' />
-      <span>{movie.overview}</span>
+      <div className='flex space-x-4 sm:space-x-0'>
+        <div>
+          <CreationPoster
+            className='block w-[120px] min-w-[120px] sm:hidden'
+            posterPath={movie.poster_path}
+            width={320}
+            height={550}
+          />
+        </div>
+        <span className='flex-grow text-sm md:text-base'>{movie.overview}</span>
+      </div>
       <Separator className='my-4' />
       <div className='flex flex-col flex-wrap justify-between space-y-2 text-base md:flex-row md:items-center'>
         <div>

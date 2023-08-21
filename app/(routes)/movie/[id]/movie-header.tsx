@@ -8,6 +8,7 @@ import { getDarkestColor } from '@libs/get-image.colors';
 import { buildImagePath } from '@libs/tmdb';
 import { buildURL } from '@libs/ytdl';
 import { getCreationVideos } from '@/app/_shared/actions/getCreationVideos';
+import { CreationPoster } from '@/app/_components/creation-poster';
 
 interface CreationHeaderProps {
   movie: IMovieDetails;
@@ -37,21 +38,18 @@ export default async function MovieHeader({ movie }: CreationHeaderProps) {
         </p>
       </div>
 
-      <div className='jutisfy-between my-4 flex flex-col flex-wrap gap-4 md:flex-row lg:flex-wrap'>
-        <figure className='sm:flex-[1 1 260px] w-full overflow-hidden rounded-md md:w-[260px]'>
-          <Image
-            className={
-              'h-full w-full object-cover transition-all ease-in-out hover:scale-105'
-            }
-            src={buildImagePath(movie.poster_path)}
-            alt='Movie Image'
-            width={260}
-            height={420}
+      <div className='jutisfy-between my-4 flex flex-col flex-wrap gap-4 sm:flex-row lg:flex-wrap'>
+        <CreationPoster
+          className='md:flex-[1 1 260px] w-[260px] hidden sm:block'
+          posterPath={movie.poster_path}
+          width={260}
+          height={420}
+        />
+        <div className='sm:flex-grow'>
+          <YoutubePlayer
+            className='h-full w-full'
+            url={buildURL(video.key)}
           />
-        </figure>
-
-        <div className='flex-grow'>
-          <YoutubePlayer className='h-full w-full' url={buildURL(video.key)} />
         </div>
 
         <figure className='lg:flex-[1 1 200px] flex w-full gap-4 overflow-hidden rounded-md lg:w-[200px] lg:flex-col'>

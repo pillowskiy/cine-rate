@@ -1,7 +1,6 @@
 import { buildImagePath } from '@libs/tmdb';
 import type { ICredit } from '@app/types/celebrity-types';
 import {
-  BaseArticleProps,
   BaseArticle,
   BaseArticleContent,
   BaseArticleFigure,
