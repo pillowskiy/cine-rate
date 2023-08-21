@@ -13,6 +13,16 @@ export enum CreationVideoSite {
   YOUTUBE = 'YouTube',
 }
 
+export enum MediaTypes {
+  Movie = 'movie',
+  TV = 'tv',
+  Person = 'person'
+}
+
+export type BaseParams = {
+  language?: string;
+}
+
 export type BaseResponse<T extends unknown> = {
   page: number;
   results: T[];
