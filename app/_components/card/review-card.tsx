@@ -19,6 +19,7 @@ export function ReviewCard({ review }: ReviewCardProps) {
           <AvatarFallback>
             {review.author
               .split(' ')
+              .slice(0, 2)
               .map((str) => str[0].toUpperCase())
               .join('')}
           </AvatarFallback>
