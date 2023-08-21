@@ -1,27 +1,36 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs';
-import { getImages } from '@actions/getImages';
-import { getVideos } from '@actions/getVideos';
-import { CreationVideoSite } from '@app/types/index';
-import { Carousel } from '@components/carousel';
+import Image from 'next/image';
+import { CreationVideoSite, MediaType } from '@app/types/index';
 import { YoutubePlayer } from '@components/youtube-player';
+import { Carousel } from '@components/carousel';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs';
+import { Separator } from '@ui/separator';
+import { getCreationImages } from '@/app/_shared/actions/getCreationImages';
+import { getCreationVideos } from '@/app/_shared/actions/getCreationVideos';
 import { buildURL } from '@libs/ytdl';
 import { buildImagePath } from '@libs/tmdb';
-import Image from 'next/image';
-import { cn } from '@/app/_libs';
+import { cn } from '@libs/index';
 
 interface MediaTabsProps {
-  mediaType: 'movie' | 'tv' | 'person';
   creationId: number;
 }
 
-export async function MediaTabs({ mediaType, creationId }: MediaTabsProps) {
-  const { data: videos } = await getVideos(creationId);
-  const { data: images } = await getImages(mediaType, creationId);
+export default async function MediaTabs({ creationId }: MediaTabsProps) {
+  const { data: videos } = await getCreationVideos(creationId, MediaType.Movie);
+  const { data: images } = await getCreationImages(creationId, MediaType.Movie);
 
   if (!videos) return null;
 
   return (
     <section>
+      <div className='flex items-center justify-between'>
+        <div className='space-y-1'>
+          <h2 className='text-2xl font-semibold tracking-tight'>Media</h2>
+          <p className='text-sm text-muted-foreground'>
+            Resources that may interest you.
+          </p>
+        </div>
+      </div>
+      <Separator className='my-4' />
       <Tabs className='my-2' defaultValue='backdrops'>
         <TabsList>
           <TabsTrigger value='videos'>Videos</TabsTrigger>
@@ -50,7 +59,9 @@ export async function MediaTabs({ mediaType, creationId }: MediaTabsProps) {
           <Carousel>
             {images.backdrops.slice(0, 20).map((image, index) => (
               <div
-                className={cn('overflow-hidden rounded-md h-[150px] md:h-[300px] aspect-[16/9]')}
+                className={cn(
+                  'aspect-[16/9] h-[150px] overflow-hidden rounded-md md:h-[300px]'
+                )}
                 key={image.file_path}
               >
                 <Image
@@ -67,14 +78,17 @@ export async function MediaTabs({ mediaType, creationId }: MediaTabsProps) {
         <TabsContent value='posters'>
           <Carousel>
             {images.posters.slice(0, 20).map((image, index) => (
-              <div className='overflow-hidden rounded-md h-[150px] md:h-[300px] aspect-[2/3]' key={image.file_path}>
-                  <Image
-                    className='h-full w-auto object-cover'
-                    src={buildImagePath(image.file_path)}
-                    alt={`Image #${index}`}
-                    width={image.width}
-                    height={image.height}
-                  />
+              <div
+                className='aspect-[2/3] h-[150px] overflow-hidden rounded-md md:h-[300px]'
+                key={image.file_path}
+              >
+                <Image
+                  className='h-full w-auto object-cover'
+                  src={buildImagePath(image.file_path)}
+                  alt={`Image #${index}`}
+                  width={image.width}
+                  height={image.height}
+                />
               </div>
             ))}
           </Carousel>
