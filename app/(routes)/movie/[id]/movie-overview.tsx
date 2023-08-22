@@ -1,4 +1,4 @@
-import { CreationPoster } from '@components/creation-poster';
+import { BaseFigure } from '@components/figure/base-figure';
 import type { IMovieDetails } from '@app/types/movies-types';
 import { Separator } from '@ui/separator';
 
@@ -18,7 +18,7 @@ export default function MovieOverview({ movie }: MovieOverviewProps) {
       <Separator className='my-4' />
       <div className='flex space-x-4 sm:space-x-0'>
         <div>
-          <CreationPoster
+          <BaseFigure
             className='block w-[120px] min-w-[120px] sm:hidden'
             posterPath={movie.poster_path}
             width={320}

@@ -1,14 +1,14 @@
 import type { IMovieDetails } from '@app/types/movies-types';
 import { MediaType } from '@app/types/index';
 import { YoutubePlayer } from '@components/youtube-player';
+import { BaseFigure } from '@components/figure/base-figure';
 import { FileImage, FileVideo } from 'lucide-react';
 import Image from 'next/image';
 import getColors from 'get-image-colors';
 import { getDarkestColor } from '@libs/get-image.colors';
 import { buildImagePath } from '@libs/tmdb';
 import { buildURL } from '@libs/ytdl';
-import { getCreationVideos } from '@/app/_shared/actions/getCreationVideos';
-import { CreationPoster } from '@/app/_components/creation-poster';
+import { getCreationVideos } from '@actions/getCreationVideos';
 
 interface CreationHeaderProps {
   movie: IMovieDetails;
@@ -39,7 +39,7 @@ export default async function MovieHeader({ movie }: CreationHeaderProps) {
       </div>
 
       <div className='jutisfy-between my-4 flex flex-col flex-wrap gap-4 sm:flex-row lg:flex-wrap'>
-        <CreationPoster
+        <BaseFigure
           className='md:flex-[1 1 260px] w-[260px] hidden sm:block'
           posterPath={movie.poster_path}
           width={260}

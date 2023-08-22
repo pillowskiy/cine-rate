@@ -19,13 +19,13 @@ export default async function MoviePage({ params }: MoviePageProps) {
   if (!movie) return null;
 
   return (
-    <div className='min-h-screen w-full space-y-6'>
+    <main className='min-h-screen w-full space-y-6'>
       <MovieHeader movie={movie} />
       <MovieOverview movie={movie} />
       <MovieCast creationId={movie.id} />
       <MediaTabs creationId={movie.id} />
       <SimilarCreations movieId={movie.id} />
       <CreationReviews creationId={movie.id} />
-    </div>
+    </main>
   );
 }
