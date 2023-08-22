@@ -1,19 +1,19 @@
 import Image, { type ImageProps } from 'next/image';
 import { buildImagePath } from '@libs/tmdb';
-import { cn } from '../_libs';
+import { cn } from '../../_libs';
 
-interface CreationPoster extends Omit<ImageProps, 'alt' | 'src'> {
+interface BaseFigureProps extends Omit<ImageProps, 'alt' | 'src'> {
   alt?: string;
   className?: string;
   posterPath: string;
 }
 
-export function CreationPoster({
+export function BaseFigure({
   posterPath,
   alt,
   className,
   ...props
-}: CreationPoster) {
+}: BaseFigureProps) {
   return (
     <figure className={cn('w-full overflow-hidden rounded-md', className)}>
       <Image
