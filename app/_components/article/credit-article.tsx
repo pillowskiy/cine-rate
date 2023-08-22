@@ -1,5 +1,5 @@
 import { buildImagePath } from '@libs/tmdb';
-import type { ICredit } from '@app/types/celebrity-types';
+import type { ICredit } from '@app/types/person-types';
 import {
   BaseArticle,
   BaseArticleContent,
@@ -25,7 +25,7 @@ export function CreditArticle({ credit, ...props }: CreditArticleProps) {
         />
       </Link>
       <BaseArticleContent>
-        <h2 className='text-md truncate font-semibold tracking-tight'>
+        <h2 className='truncate font-semibold tracking-tight'>
           {credit.name}
         </h2>
         <span className='text-xs'>{credit.character}</span>

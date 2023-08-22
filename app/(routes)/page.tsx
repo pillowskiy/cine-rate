@@ -4,7 +4,7 @@ import { getTrending } from '@actions/getTrending';
 import { getCelebrities } from '@actions/getCelebrities';
 import { getUpcoming } from '@actions/getUpcoming';
 import { CreationArticle } from '@components/article/creation-article';
-import { CelebrityArticle } from '@components/article/celebrity-article';
+import { PersonArticle } from '@components/article/person-article';
 
 export default async function Home() {
   // TEMP
@@ -103,7 +103,7 @@ export default async function Home() {
       <ScrollArea>
         <section className='flex snap-x space-x-4 pb-4'>
           {celebrities.results.map((celebrity) => (
-            <CelebrityArticle
+            <PersonArticle
               key={celebrity.id}
               celebrity={celebrity}
               className='w-[260px]'

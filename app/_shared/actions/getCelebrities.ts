@@ -1,4 +1,4 @@
-import type { CelebritiesResponse } from '@app/types/celebrity-types';
+import type { CelebritiesResponse } from '@app/types/person-types';
 import { $api } from '../api/api-interceptor';
 
 interface GetCelebritiesOptions {

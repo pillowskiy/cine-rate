@@ -1,5 +1,5 @@
 import { buildImagePath } from '@libs/tmdb';
-import type { ICelebrity } from '@app/types/celebrity-types';
+import type { ICelebrity } from '@app/types/person-types';
 import {
   BaseArticleProps,
   BaseArticle,
@@ -8,14 +8,14 @@ import {
 } from './base-article';
 import Link from 'next/link';
 
-interface CelebrityArticleProps extends Omit<BaseArticleProps, 'src' | 'href'> {
+interface PersonArticleProps extends Omit<BaseArticleProps, 'src' | 'href'> {
   celebrity: ICelebrity;
 }
 
-export function CelebrityArticle({
+export function PersonArticle({
   celebrity,
   ...props
-}: CelebrityArticleProps) {
+}: PersonArticleProps) {
   return (
     <BaseArticle {...props}>
       <Link href={`/celebrities/${celebrity.id}`}>

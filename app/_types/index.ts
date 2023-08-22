@@ -1,12 +1,14 @@
 export enum MediaType {
   Movie = 'movie',
   TV = 'tv',
-  People = 'people',
+  Person = 'person',
 }
 
 export enum Gender {
-  WOMAN = 1,
-  MAN = 2,
+  Unknown = 0,
+  Woman = 1,
+  Man = 2,
+  NonBinary = 3,
 }
 
 export enum CreationVideoSite {
@@ -16,12 +18,12 @@ export enum CreationVideoSite {
 export enum MediaTypes {
   Movie = 'movie',
   TV = 'tv',
-  Person = 'person'
+  Person = 'person',
 }
 
 export type BaseParams = {
   language?: string;
-}
+};
 
 export type BaseResponse<T extends unknown> = {
   page: number;
@@ -39,4 +41,12 @@ export interface ICreationLanguage {
   english_name: string;
   iso_639_1: string;
   name: string;
+}
+
+export interface ITranslation<T extends object> {
+  iso_3166_1: string;
+  iso_639_1: string;
+  name: string;
+  english_name: string;
+  data: T;
 }
