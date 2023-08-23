@@ -17,7 +17,7 @@ export default async function CombinedCredits({
   return (
     <section>
       <div>
-        <h2 className='text-lg leading-none'>Known for</h2>
+        <h2 className='text-lg leading-none font-medium'>Known for</h2>
         <Separator className='my-4' />
       </div>
 

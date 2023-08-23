@@ -21,7 +21,7 @@ export default async function PersonBiography({
   return (
     <section className='relative text-sm md:text-base'>
       <div>
-        <h2 className='text-lg leading-none'>Biography</h2>
+        <h2 className='text-lg leading-none font-medium'>Biography</h2>
         <Separator className='my-4' />
       </div>
 
