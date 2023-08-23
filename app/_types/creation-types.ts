@@ -33,7 +33,7 @@ export interface ICreationVideo {
   id: string;
 }
 
-export type TrendingCreationsResponse = BaseResponse<ICreation>;
+export type CreationsResponse = BaseResponse<ICreation>;
 export type CreationVideosResponse = {
   id: number;
   results: ICreationVideo[];

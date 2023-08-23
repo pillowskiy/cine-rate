@@ -1,4 +1,4 @@
-import type { TrendingCreationsResponse } from '@app/types/creation-types';
+import type { CreationsResponse } from '@app/types/creation-types';
 import { $api } from '../api/api-interceptor';
 
 interface GetTrendingOptions {
@@ -10,7 +10,7 @@ export const getTrending = ({
   language = 'es-US',
   periodParam = 'week',
 }: GetTrendingOptions) => {
-  return $api.get<TrendingCreationsResponse>(`/3/trending/all/${periodParam}`, {
+  return $api.get<CreationsResponse>(`/3/trending/all/${periodParam}`, {
     params: { language },
   });
 };
