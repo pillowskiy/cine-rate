@@ -1,8 +1,8 @@
 import { Separator } from '@ui/separator';
 import { ScrollArea, ScrollBar } from '@ui/scroll-area';
 import { getTrending } from '@actions/getTrending';
-import { getCelebrities } from '@actions/getCelebrities';
-import { getUpcoming } from '@actions/getUpcoming';
+import { Sort, getMovies } from '@actions/getMovies';
+import { getCelebrities } from '@/app/_shared/actions/getCelebrities';
 import { CreationArticle } from '@components/article/creation-article';
 import { PersonArticle } from '@components/article/person-article';
 
@@ -10,12 +10,12 @@ export default async function Home() {
   // TEMP
   const { data: creations } = await getTrending({});
   const { data: celebrities } = await getCelebrities({});
-  const { data: upcoming } = await getUpcoming({});
+  const { data: upcoming } = await getMovies(Sort.Upcoming);
   if (!creations || !celebrities || !upcoming) return null;
 
   return (
-    <div className='min-h-screen w-full'>
-      <div className='mt-6 flex items-center justify-between'>
+    <main className='min-h-screen w-full space-y-6'>
+      <div className='flex items-center justify-between'>
         <div className='space-y-1'>
           <h2 className='text-2xl font-semibold tracking-tight'>Trands now</h2>
           <p className='text-sm text-muted-foreground'>
@@ -39,7 +39,7 @@ export default async function Home() {
         <ScrollBar orientation='horizontal' />
       </ScrollArea>
 
-      <div className='mt-6 flex items-center justify-between'>
+      <div className='flex items-center justify-between'>
         <div className='space-y-1'>
           <h2 className='text-2xl font-semibold tracking-tight'>Popular</h2>
           <p className='text-sm text-muted-foreground'>
@@ -65,7 +65,7 @@ export default async function Home() {
         <ScrollBar className='' orientation='horizontal' />
       </ScrollArea>
 
-      <div className='mt-6 flex items-center justify-between'>
+      <div className='flex items-center justify-between'>
         <div className='space-y-1'>
           <h2 className='text-2xl font-semibold tracking-tight'>Upcoming!</h2>
           <p className='text-sm text-muted-foreground'>
@@ -91,7 +91,7 @@ export default async function Home() {
         <ScrollBar className='' orientation='horizontal' />
       </ScrollArea>
 
-      <div className='mt-6 flex items-center justify-between'>
+      <div className='flex items-center justify-between'>
         <div className='space-y-1'>
           <h2 className='text-2xl font-semibold tracking-tight'>Celebrities</h2>
           <p className='text-sm text-muted-foreground'>
@@ -112,6 +112,6 @@ export default async function Home() {
         </section>
         <ScrollBar orientation='horizontal' />
       </ScrollArea>
-    </div>
+    </main>
   );
 }
