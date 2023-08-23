@@ -15,20 +15,20 @@ export function DesktopNav() {
       </Link>
       <nav className='flex items-center space-x-6 text-sm font-medium'>
         <Link
-          href='/movies'
+          href='/movie'
           className={cn(
             'transition-colors hover:text-foreground/80',
-            pathname === '/movies' ? 'text-foreground' : 'text-foreground/60'
+            pathname === '/movie' ? 'text-foreground' : 'text-foreground/60'
           )}
         >
           Movies
         </Link>
 
         <Link
-          href='/tv-shows'
+          href='/tv'
           className={cn(
             'transition-colors hover:text-foreground/80',
-            pathname === '/tv-shows' ? 'text-foreground' : 'text-foreground/60'
+            pathname === '/tv' ? 'text-foreground' : 'text-foreground/60'
           )}
         >
           TV Shows
