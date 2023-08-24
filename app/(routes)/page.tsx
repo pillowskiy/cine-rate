@@ -1,10 +1,10 @@
 import { Separator } from '@ui/separator';
-import { ScrollArea, ScrollBar } from '@ui/scroll-area';
 import { getTrending } from '@actions/getTrending';
 import { Sort, getMovies } from '@actions/getMovies';
 import { getCelebrities } from '@/app/_shared/actions/getCelebrities';
 import { CreationArticle } from '@components/article/creation-article';
 import { PersonArticle } from '@components/article/person-article';
+import { Carousel } from '@components/carousel';
 
 export default async function Home() {
   // TEMP
@@ -24,20 +24,17 @@ export default async function Home() {
         </div>
       </div>
       <Separator className='my-4' />
-      <ScrollArea>
-        <section className='flex snap-x space-x-4 pb-4'>
-          {creations.results.map((creation) => (
-            <CreationArticle
-              key={creation.id}
-              creation={creation}
-              className='w-[260px]'
-              width={260}
-              height={390}
-            />
-          ))}
-        </section>
-        <ScrollBar orientation='horizontal' />
-      </ScrollArea>
+      <Carousel>
+        {creations.results.map((creation) => (
+          <CreationArticle
+            key={creation.id}
+            creation={creation}
+            className='w-[260px]'
+            width={260}
+            height={390}
+          />
+        ))}
+      </Carousel>
 
       <div className='flex items-center justify-between'>
         <div className='space-y-1'>
@@ -48,22 +45,19 @@ export default async function Home() {
         </div>
       </div>
       <Separator className='my-4' />
-      <ScrollArea>
-        <section className='flex snap-x space-x-4 pb-4'>
-          {creations.results.map((creation) => (
-            <CreationArticle
-              aspect='horizontal'
-              key={creation.id}
-              creation={creation}
-              className='w-[260px]'
-              size='sm'
-              width={260}
-              height={140}
-            />
-          ))}
-        </section>
-        <ScrollBar className='' orientation='horizontal' />
-      </ScrollArea>
+      <Carousel>
+        {creations.results.map((creation) => (
+          <CreationArticle
+            aspect='horizontal'
+            key={creation.id}
+            creation={creation}
+            className='w-[260px]'
+            size='sm'
+            width={260}
+            height={140}
+          />
+        ))}
+      </Carousel>
 
       <div className='flex items-center justify-between'>
         <div className='space-y-1'>
@@ -74,22 +68,19 @@ export default async function Home() {
         </div>
       </div>
       <Separator className='my-4' />
-      <ScrollArea>
-        <section className='flex snap-x space-x-4 pb-4'>
-          {upcoming.results.map((creation) => (
-            <CreationArticle
-              aspect='horizontal'
-              key={creation.id}
-              creation={creation}
-              className='w-[260px]'
-              size='sm'
-              width={260}
-              height={140}
-            />
-          ))}
-        </section>
-        <ScrollBar className='' orientation='horizontal' />
-      </ScrollArea>
+      <Carousel>
+        {upcoming.results.map((creation) => (
+          <CreationArticle
+            aspect='horizontal'
+            key={creation.id}
+            creation={creation}
+            className='w-[260px]'
+            size='sm'
+            width={260}
+            height={140}
+          />
+        ))}
+      </Carousel>
 
       <div className='flex items-center justify-between'>
         <div className='space-y-1'>
@@ -100,18 +91,15 @@ export default async function Home() {
         </div>
       </div>
       <Separator className='my-4' />
-      <ScrollArea>
-        <section className='flex snap-x space-x-4 pb-4'>
-          {celebrities.results.map((celebrity) => (
-            <PersonArticle
-              key={celebrity.id}
-              celebrity={celebrity}
-              className='w-[260px]'
-            />
-          ))}
-        </section>
-        <ScrollBar orientation='horizontal' />
-      </ScrollArea>
+      <Carousel>
+        {celebrities.results.map((celebrity) => (
+          <PersonArticle
+            key={celebrity.id}
+            celebrity={celebrity}
+            className='w-[260px]'
+          />
+        ))}
+      </Carousel>
     </main>
   );
 }
