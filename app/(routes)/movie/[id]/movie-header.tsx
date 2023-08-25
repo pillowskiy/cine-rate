@@ -21,7 +21,9 @@ export default async function MovieHeader({ movie }: CreationHeaderProps) {
   );
   const video = officialTrailer || videos.results[0];
 
-  const colors = await getColors(buildImagePath({ path: movie.backdrop_path, scale: 'backdrop' }));
+  const colors = await getColors(
+    buildImagePath({ path: movie.backdrop_path, scale: 'backdrop' })
+  );
   const { color } = getDarkestColor(colors);
 
   return (
@@ -40,16 +42,13 @@ export default async function MovieHeader({ movie }: CreationHeaderProps) {
 
       <div className='jutisfy-between my-4 flex flex-col flex-wrap gap-4 sm:flex-row lg:flex-wrap'>
         <BaseFigure
-          className='md:flex-[1 1 260px] w-[260px] hidden sm:block'
+          className='md:flex-[1 1 260px] hidden w-[260px] sm:block'
           posterPath={movie.poster_path}
           width={260}
           height={420}
         />
         <div className='sm:flex-grow'>
-          <YoutubePlayer
-            className='h-full w-full'
-            url={buildURL(video.key)}
-          />
+          <YoutubePlayer className='h-full w-full' url={buildURL(video.key)} />
         </div>
 
         <figure className='lg:flex-[1 1 200px] flex w-full gap-4 overflow-hidden rounded-md lg:w-[200px] lg:flex-col'>
@@ -83,7 +82,10 @@ export default async function MovieHeader({ movie }: CreationHeaderProps) {
           className={
             'aspect-[16/9] h-full w-full scale-110 object-cover object-top'
           }
-          src={buildImagePath({ path: movie.backdrop_path })}
+          src={buildImagePath({
+            path: movie.backdrop_path,
+            scale: 'large_backdrop',
+          })}
           alt='Movie Image'
           width={1920}
           height={1080}

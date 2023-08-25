@@ -14,7 +14,8 @@ export function ReviewCard({ review }: ReviewCardProps) {
       <CardContent className='flex  justify-between space-x-4 p-4'>
         <Avatar>
           <AvatarImage
-            src={buildImagePath({ path: review.author_details.avatar_path })}
+            src={buildImagePath({ path: review.author_details.avatar_path, scale: 'avatar' })}
+            loading='lazy'
           />
           <AvatarFallback>
             {review.author

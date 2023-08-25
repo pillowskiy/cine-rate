@@ -23,7 +23,7 @@ export function YoutubePlayer({
   return (
     <figure
       className={cn(
-        'relative grid place-items-center overflow-hidden rounded-md',
+        'relative grid place-items-center overflow-hidden rounded-md backdrop-blur-lg',
         className
       )}
     >
