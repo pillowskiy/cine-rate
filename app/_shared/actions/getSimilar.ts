@@ -1,4 +1,4 @@
-import type { TrendingCreationsResponse } from '@app/types/creation-types';
+import type { CreationsResponse } from '@app/types/creation-types';
 import { $api } from '../api/api-interceptor';
 
 interface GetSimilarOptions {
@@ -7,7 +7,7 @@ interface GetSimilarOptions {
 }
 
 export const getSimilar = (movieId: number, params?: GetSimilarOptions) => {
-  return $api.get<TrendingCreationsResponse>(`/3/movie/${movieId}/similar`, {
+  return $api.get<CreationsResponse>(`/3/movie/${movieId}/similar`, {
     params,
   });
 };
