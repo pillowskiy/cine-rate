@@ -81,7 +81,7 @@ export function BaseArticleFigure({
           src={src}
         />
       </div>
-      <div className='absolute right-2 bottom-2 flex gap-2'>
+      <div className='absolute bottom-2 right-2 flex gap-2'>
         {actionButtons &&
           actionButtons.map((button, index) => (
             <Button

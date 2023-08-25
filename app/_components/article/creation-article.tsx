@@ -34,7 +34,9 @@ export function CreationArticle({
       <Link href={`/${creation.media_type}/${creation.id}`}>
         <BaseArticleFigure
           src={buildImagePath(
-            size === 'default' ? creation.poster_path : creation.backdrop_path
+            size === 'default'
+              ? { path: creation.poster_path, scale: 'poster' }
+              : { path: creation.backdrop_path, scale: 'backdrop' }
           )}
           aspect={aspect}
           width={width}

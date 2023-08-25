@@ -21,7 +21,7 @@ export default async function MovieHeader({ movie }: CreationHeaderProps) {
   );
   const video = officialTrailer || videos.results[0];
 
-  const colors = await getColors(buildImagePath(movie.backdrop_path));
+  const colors = await getColors(buildImagePath({ path: movie.backdrop_path, scale: 'backdrop' }));
   const { color } = getDarkestColor(colors);
 
   return (
@@ -83,7 +83,7 @@ export default async function MovieHeader({ movie }: CreationHeaderProps) {
           className={
             'aspect-[16/9] h-full w-full scale-110 object-cover object-top'
           }
-          src={buildImagePath(movie.backdrop_path)}
+          src={buildImagePath({ path: movie.backdrop_path })}
           alt='Movie Image'
           width={1920}
           height={1080}

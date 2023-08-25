@@ -1,12 +1,9 @@
 import Image from 'next/image';
-import { CreationVideoSite, MediaType } from '@app/types/index';
-import { YoutubePlayer } from '@components/youtube-player';
+import { MediaType } from '@app/types/index';
 import { Carousel } from '@components/carousel';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs';
 import { Separator } from '@ui/separator';
-import { getCreationImages } from '@/app/_shared/actions/getCreationImages';
-import { getCreationVideos } from '@/app/_shared/actions/getCreationVideos';
-import { buildURL } from '@libs/ytdl';
+import { getCreationImages } from '@actions/getCreationImages';
 import { buildImagePath } from '@libs/tmdb';
 import { cn } from '@libs/index';
 
@@ -15,10 +12,9 @@ interface MediaTabsProps {
 }
 
 export default async function MediaTabs({ creationId }: MediaTabsProps) {
-  const { data: videos } = await getCreationVideos(creationId, MediaType.Movie);
   const { data: images } = await getCreationImages(creationId, MediaType.Movie);
 
-  if (!videos) return null;
+  if (!images) return null;
 
   return (
     <section>
@@ -33,7 +29,6 @@ export default async function MediaTabs({ creationId }: MediaTabsProps) {
       <Separator className='my-4' />
       <Tabs className='my-2' defaultValue='backdrops'>
         <TabsList>
-          <TabsTrigger value='videos'>Videos</TabsTrigger>
           <TabsTrigger value='backdrops' disabled={!images?.backdrops.length}>
             Backdrops
           </TabsTrigger>
@@ -41,20 +36,6 @@ export default async function MediaTabs({ creationId }: MediaTabsProps) {
             Posters
           </TabsTrigger>
         </TabsList>
-        <TabsContent value='videos'>
-          <Carousel>
-            {videos.results.map(
-              (video) =>
-                video.site === CreationVideoSite.YOUTUBE && (
-                  <YoutubePlayer
-                    className='aspect-[16/8] h-[150px] md:h-[300px]'
-                    key={video.id}
-                    url={buildURL(video.key)}
-                  />
-                )
-            )}
-          </Carousel>
-        </TabsContent>
         <TabsContent value='backdrops'>
           <Carousel>
             {images.backdrops.slice(0, 20).map((image, index) => (
@@ -66,10 +47,10 @@ export default async function MediaTabs({ creationId }: MediaTabsProps) {
               >
                 <Image
                   className='h-full w-auto object-cover'
-                  src={buildImagePath(image.file_path)}
+                  src={buildImagePath({ path: image.file_path, scale: 'backdrop' })}
                   alt={`Image #${index}`}
-                  width={image.width}
-                  height={image.height}
+                  width={720}
+                  height={480}
                 />
               </div>
             ))}
@@ -84,10 +65,10 @@ export default async function MediaTabs({ creationId }: MediaTabsProps) {
               >
                 <Image
                   className='h-full w-auto object-cover'
-                  src={buildImagePath(image.file_path)}
+                  src={buildImagePath({ path: image.file_path, scale: 'poster' })}
                   alt={`Image #${index}`}
-                  width={image.width}
-                  height={image.height}
+                  width={260}
+                  height={390}
                 />
               </div>
             ))}

@@ -20,7 +20,7 @@ export function BaseFigure({
         className={
           'w-full object-cover transition-all ease-in-out hover:scale-105'
         }
-        src={buildImagePath(posterPath)}
+        src={buildImagePath({ path: posterPath, scale: 'poster' })}
         alt={alt || 'Creation Poster'}
         {...props}
       />

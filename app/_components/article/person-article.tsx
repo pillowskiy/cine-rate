@@ -21,7 +21,7 @@ export function PersonArticle({
       <Link href={`/celebrities/${celebrity.id}`}>
         <BaseArticleFigure
           aspect='vertical'
-          src={buildImagePath(celebrity.profile_path)}
+          src={buildImagePath({path: celebrity.profile_path, scale: 'poster' })}
           alt='Person Avatar'
           width={260}
           height={390}

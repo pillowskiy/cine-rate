@@ -18,16 +18,14 @@ export function CreditArticle({ credit, ...props }: CreditArticleProps) {
       <Link href={`/celebrities/${credit.id}`}>
         <BaseArticleFigure
           aspect='vertical'
-          src={buildImagePath(credit.profile_path)}
+          src={buildImagePath({ path: credit.profile_path, scale: 'poster' })}
           alt='Person Avatar'
           width={480}
           height={854}
         />
       </Link>
       <BaseArticleContent>
-        <h2 className='truncate font-semibold tracking-tight'>
-          {credit.name}
-        </h2>
+        <h2 className='truncate font-semibold tracking-tight'>{credit.name}</h2>
         <span className='text-xs'>{credit.character}</span>
       </BaseArticleContent>
     </BaseArticle>
