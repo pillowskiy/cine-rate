@@ -72,7 +72,7 @@ export function BaseArticleFigure({
       >
         <Image
           className={cn(
-            'h-full w-full object-cover transition-all ease-in-out hover:scale-105',
+            'h-full w-auto object-cover transition-all ease-in-out hover:scale-105',
             className
           )}
           height={height}
