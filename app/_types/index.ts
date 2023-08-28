@@ -50,3 +50,8 @@ export interface ITranslation<T extends object> {
   english_name: string;
   data: T;
 }
+
+export interface INextPageParams {
+  searchParams?: Record<string, string>
+  params?: Record<string, string | number | symbol>
+}
