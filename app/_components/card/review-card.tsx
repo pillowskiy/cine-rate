@@ -3,6 +3,7 @@ import { Card, CardContent } from '../ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { CalendarDays } from 'lucide-react';
 import { buildImagePath } from '@/app/_libs/tmdb';
+import { UserAvatar } from '../user-avatar';
 
 interface ReviewCardProps {
   review: IReview;
@@ -12,19 +13,10 @@ export function ReviewCard({ review }: ReviewCardProps) {
   return (
     <Card className='md:max-w-[600px]'>
       <CardContent className='flex  justify-between space-x-4 p-4'>
-        <Avatar>
-          <AvatarImage
-            src={buildImagePath({ path: review.author_details.avatar_path, scale: 'avatar' })}
-            loading='lazy'
-          />
-          <AvatarFallback>
-            {review.author
-              .split(' ')
-              .slice(0, 2)
-              .map((str) => str[0].toUpperCase())
-              .join('')}
-          </AvatarFallback>
-        </Avatar>
+        <UserAvatar
+          path={review.author_details.avatar_path}
+          username={review.author}
+        />
         <div className='space-y-1'>
           <div>
             <h4 className='text-sm font-semibold leading-none'>

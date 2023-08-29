@@ -3,8 +3,13 @@ import { SearchInput } from '@ui/search-input';
 import { BookmarkPlus, LogIn } from 'lucide-react';
 import { DesktopNav } from '@components/nav/desktop-nav';
 import Link from 'next/link';
+import { getSessionUser } from '@actions/getSessionUser';
+import { UserAvatar } from './user-avatar';
 
-export default function Header() {
+export default async function Header() {
+  // TEMP: use server side user store
+  const user = await getSessionUser();
+
   return (
     <header className='supports-backdrop-blur:bg-background/60 sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur'>
       <div className='container flex h-14 items-center justify-between'>
@@ -14,11 +19,19 @@ export default function Header() {
           <Button variant='outline' size='icon'>
             <BookmarkPlus className='h-5 w-5' />
           </Button>
-          <Link href='/auth'>
-            <Button variant='outline' size='icon'>
-              <LogIn className='h-5 w-5' />
-            </Button>
-          </Link>
+          {user ? (
+            <UserAvatar
+              path={user.avatar.tmdb.avatar_path}
+              gravatarHash={user.avatar.gravatar.hash}
+              username={user.username}
+            />
+          ) : (
+            <Link href='/auth'>
+              <Button variant='outline' size='icon'>
+                <LogIn className='h-5 w-5' />
+              </Button>
+            </Link>
+          )}
         </section>
       </div>
     </header>

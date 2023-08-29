@@ -2,7 +2,7 @@ export const TMDB_IMAGE_URL = 'https://image.tmdb.org/t/p/';
 
 interface TMDBImagePathProps {
   path: string | null;
-  scale?: keyof typeof scales
+  scale?: keyof typeof scales;
 }
 
 const scales = {
@@ -13,6 +13,10 @@ const scales = {
 } as const;
 
 export function buildImagePath({ path, scale }: TMDBImagePathProps) {
-  if (!path) return '';
+  if (!path) return '/';
   return TMDB_IMAGE_URL + (scale ? scales[scale] : 'original') + path;
+}
+
+export function buildGravatarPath(hash: string) {
+  return `https://secure.gravatar.com/avatar/${hash}?s=90`;
 }
