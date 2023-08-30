@@ -2,6 +2,8 @@ import type { HTMLAttributes, ReactNode } from 'react';
 import { cn } from '@libs/index';
 import Image from 'next/image';
 import { Button } from '@ui/button';
+import { Image as FallbackIcon } from 'lucide-react';
+import { ImageFromPath } from '../image/ImageFromPath';
 
 export interface BaseArticleProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -46,7 +48,7 @@ export interface BaseArticleFigureProps {
   height: number;
   width: number;
   alt: string;
-  src: string;
+  src: string | null;
 
   aspect?: 'vertical' | 'horizontal';
 
@@ -70,7 +72,7 @@ export function BaseArticleFigure({
           aspect === 'vertical' ? 'aspect-[2/3]' : 'aspect-[16/9]'
         )}
       >
-        <Image
+        <ImageFromPath
           className={cn(
             'h-full w-auto object-cover transition-all ease-in-out hover:scale-105',
             className

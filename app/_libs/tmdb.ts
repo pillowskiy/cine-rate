@@ -13,7 +13,7 @@ const scales = {
 } as const;
 
 export function buildImagePath({ path, scale }: TMDBImagePathProps) {
-  if (!path) return '/';
+  if (!path) return null;
   return TMDB_IMAGE_URL + (scale ? scales[scale] : 'original') + path;
 }
 

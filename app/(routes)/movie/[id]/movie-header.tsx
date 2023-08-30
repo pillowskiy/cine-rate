@@ -9,6 +9,7 @@ import { getDarkestColor } from '@libs/get-image.colors';
 import { buildImagePath } from '@libs/tmdb';
 import { buildURL } from '@libs/ytdl';
 import { getCreationVideos } from '@actions/getCreationVideos';
+import { ImageFromPath } from '@/app/_components/image/ImageFromPath';
 
 interface CreationHeaderProps {
   movie: IMovieDetails;
@@ -22,7 +23,7 @@ export default async function MovieHeader({ movie }: CreationHeaderProps) {
   const video = officialTrailer || videos.results[0];
 
   const colors = await getColors(
-    buildImagePath({ path: movie.backdrop_path, scale: 'backdrop' })
+    buildImagePath({ path: movie.backdrop_path, scale: 'backdrop' }) || ''
   );
   const { color } = getDarkestColor(colors);
 
@@ -78,7 +79,7 @@ export default async function MovieHeader({ movie }: CreationHeaderProps) {
       </div>
 
       <div className='absolute left-0 top-0 -z-20 h-full w-full overflow-hidden rounded-md'>
-        <Image
+        <ImageFromPath
           className={
             'aspect-[16/9] h-full w-full scale-110 object-cover object-top'
           }
