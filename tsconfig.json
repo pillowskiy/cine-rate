@@ -21,6 +21,7 @@
     ],
     "paths": {
       "@/*": ["./*"],
+      "@config/*": ["./app/_config/*"],
       "@components/*": ["./app/_components/*"],
       "@ui/*": ["./app/_components/ui/*"],
       "@app/types/*": ["./app/_types/*"],
