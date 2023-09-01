@@ -1,9 +1,9 @@
 import type { IMovieDetails } from '@app/types/movies-types';
+import type { ITVDetails } from '@app/types/tv-types';
 import { MediaType } from '@app/types/index';
 import { YoutubePlayer } from '@components/youtube-player';
 import { BaseFigure } from '@components/figure/base-figure';
 import { FileImage, FileVideo } from 'lucide-react';
-import Image from 'next/image';
 import getColors from 'get-image-colors';
 import { getDarkestColor } from '@libs/get-image.colors';
 import { buildImagePath } from '@libs/tmdb';
@@ -12,18 +12,22 @@ import { getCreationVideos } from '@actions/getCreationVideos';
 import { ImageFromPath } from '@/app/_components/image/ImageFromPath';
 
 interface CreationHeaderProps {
-  movie: IMovieDetails;
+  details: IMovieDetails | ITVDetails;
+  mediaType: MediaType;
 }
 
-export default async function MovieHeader({ movie }: CreationHeaderProps) {
-  const { data: videos } = await getCreationVideos(movie.id, MediaType.Movie);
+export default async function MovieHeader({
+  details,
+  mediaType,
+}: CreationHeaderProps) {
+  const { data: videos } = await getCreationVideos(details.id, mediaType);
   const officialTrailer = videos.results.find(
     (video) => video.official && video.type === 'Trailer'
   );
   const video = officialTrailer || videos.results[0];
 
   const colors = await getColors(
-    buildImagePath({ path: movie.backdrop_path, scale: 'backdrop' }) || ''
+    buildImagePath({ path: details.backdrop_path, scale: 'backdrop' }) || ''
   );
   const { color } = getDarkestColor(colors);
 
@@ -32,19 +36,16 @@ export default async function MovieHeader({ movie }: CreationHeaderProps) {
       <div className='space-y-1'>
         <div className='flex items-center space-x-2'>
           <h2 className='text-2xl font-semibold tracking-tight'>
-            {movie.title || movie.original_title}
+            {details.title || details.original_title}
           </h2>
-          <p className='text-sm opacity-70'>{movie.release_date}</p>
+          <p className='text-sm opacity-70'>{details.release_date}</p>
         </div>
-        <p className='text-sm opacity-90'>
-          {movie.genres.map((genre) => genre.name).join(', ')}
-        </p>
       </div>
 
       <div className='jutisfy-between my-4 flex flex-col flex-wrap gap-4 sm:flex-row lg:flex-wrap'>
         <BaseFigure
           className='md:flex-[1 1 260px] hidden w-[260px] sm:block'
-          posterPath={movie.poster_path}
+          posterPath={details.poster_path}
           width={260}
           height={420}
         />
@@ -70,7 +71,7 @@ export default async function MovieHeader({ movie }: CreationHeaderProps) {
 
       <div className='w-full space-y-4 md:w-[260px] md:min-w-[260px]'>
         <div className='flex items-center space-x-1.5 overflow-auto truncate text-sm opacity-70'>
-          {movie.genres.map((genre) => (
+          {details.genres.map((genre) => (
             <span className='rounded-md border p-1 text-xs' key={genre.id}>
               {genre.name}
             </span>
@@ -84,7 +85,7 @@ export default async function MovieHeader({ movie }: CreationHeaderProps) {
             'aspect-[16/9] h-full w-full scale-110 object-cover object-top'
           }
           src={buildImagePath({
-            path: movie.backdrop_path,
+            path: details.backdrop_path,
             scale: 'large_backdrop',
           })}
           alt='Movie Image'

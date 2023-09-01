@@ -7,5 +7,8 @@ export function getCreationVideos(
   mediaType: MediaType,
   params?: BaseParams
 ) {
-  return $api.get<CreationVideosResponse>(`/3/movie/${creationId}/videos`);
+  return $api.get<CreationVideosResponse>(
+    `/3/${mediaType}/${creationId}/videos`,
+    { params }
+  );
 }
