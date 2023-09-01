@@ -2,13 +2,18 @@ import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
 import { Separator } from '@ui/separator';
 import { getSimilar } from '@actions/getSimilar';
+import type { MediaType } from '@app/types/index';
 
 interface SimilarCreationsProps {
-  movieId: number;
+  creationId: number;
+  mediaType: MediaType;
 }
 
-export default async function SimilarCreations({ movieId }: SimilarCreationsProps) {
-  const { data: creations } = await getSimilar(movieId);
+export default async function CreationSimilar({
+  creationId,
+  mediaType,
+}: SimilarCreationsProps) {
+  const { data: creations } = await getSimilar(creationId, mediaType);
 
   if (!creations) return null;
 
