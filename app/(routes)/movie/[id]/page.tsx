@@ -1,30 +1,28 @@
 import { getCreationDetails } from '@actions/getCreationDetails';
 import MovieCast from './movie-cast';
-import SimilarCreations from './similar-creations';
+import CreationSimilar from '@components/creation/creation-similar';
 import MediaTabs from './media-tabs';
-import { MediaType } from '@app/types/index';
-import MovieHeader from './movie-header';
+import { INextPageParams, MediaType } from '@app/types/index';
+import CreationHeader from '@/app/_components/creation/creation-header';
 import MovieOverview from './movie-overview';
 import CreationReviews from './creation-reviews';
+import CreationCast from '@components/creation/creation-cast';
 
-interface MoviePageProps {
-  params: { id?: string | undefined };
-}
-
-export default async function MoviePage({ params }: MoviePageProps) {
-  if (!params.id || isNaN(+params.id)) return null;
-  const { data: movie } = await getCreationDetails(+params.id, MediaType.Movie);
+export default async function MoviePage({ params }: INextPageParams) {
+  const paramId = +(params?.id.toString() || NaN);
+  if (isNaN(paramId)) return null;
+  const { data: movie } = await getCreationDetails(paramId, MediaType.Movie);
 
   // TEMP
   if (!movie) return null;
 
   return (
     <main className='min-h-screen w-full space-y-6'>
-      <MovieHeader movie={movie} />
+      <CreationHeader details={movie} mediaType={MediaType.Movie} />
       <MovieOverview movie={movie} />
-      <MovieCast creationId={movie.id} />
+      <CreationCast creationId={movie.id} mediaType={MediaType.Movie} />
       <MediaTabs creationId={movie.id} />
-      <SimilarCreations movieId={movie.id} />
+      <CreationSimilar creationId={movie.id} mediaType={MediaType.Movie} />
       <CreationReviews creationId={movie.id} />
     </main>
   );
