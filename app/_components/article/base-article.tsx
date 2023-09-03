@@ -1,9 +1,7 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { cn } from '@libs/index';
-import Image from 'next/image';
 import { Button } from '@ui/button';
-import { Image as FallbackIcon } from 'lucide-react';
-import { ImageFromPath } from '../image/ImageFromPath';
+import { ImageFromPath } from '../image/image-from-path';
 
 export interface BaseArticleProps extends HTMLAttributes<HTMLDivElement> {}
 
