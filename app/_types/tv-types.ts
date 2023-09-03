@@ -10,7 +10,6 @@ export interface ITVDetails {
   adult: boolean;
   backdrop_path: string;
   belongs_to_collection: null | number;
-  budget: number;
   genres: IPartialGenre[];
   homepage?: string;
   id: number;
@@ -23,7 +22,6 @@ export interface ITVDetails {
   production_companies: IPartialCompany[];
   production_countries: IProductionCountry[];
   release_date: string;
-  revenue: number;
   runtime: number;
   spoken_languages: ICreationLanguage[];
   status: string;

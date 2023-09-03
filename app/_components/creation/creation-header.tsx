@@ -1,18 +1,18 @@
-import type { IMovieDetails } from '@app/types/movies-types';
-import type { ITVDetails } from '@app/types/tv-types';
-import { MediaType } from '@app/types/index';
+import type { CreationDetailsProps } from './common/types';
+import type { MediaType } from '@app/types/index';
+
+import { FileImage, FileVideo, Star, TrendingUp } from 'lucide-react';
+import getColors from 'get-image-colors';
 import { YoutubePlayer } from '@components/youtube-player';
 import { BaseFigure } from '@components/figure/base-figure';
-import { FileImage, FileVideo } from 'lucide-react';
-import getColors from 'get-image-colors';
 import { getDarkestColor } from '@libs/get-image.colors';
 import { buildImagePath } from '@libs/tmdb';
 import { buildURL } from '@libs/ytdl';
 import { getCreationVideos } from '@actions/getCreationVideos';
-import { ImageFromPath } from '@/app/_components/image/ImageFromPath';
-
-interface CreationHeaderProps {
-  details: IMovieDetails | ITVDetails;
+import { ImageFromPath } from '@components/image/image-from-path';
+import { Button } from '@ui/button';
+import { getRealesedDate, getTitle } from './common/utils';
+interface CreationHeaderProps extends CreationDetailsProps {
   mediaType: MediaType;
 }
 
@@ -20,6 +20,7 @@ export default async function MovieHeader({
   details,
   mediaType,
 }: CreationHeaderProps) {
+  // TEMP: to tmdb utils
   const { data: videos } = await getCreationVideos(details.id, mediaType);
   const officialTrailer = videos.results.find(
     (video) => video.official && video.type === 'Trailer'
@@ -30,15 +31,53 @@ export default async function MovieHeader({
     buildImagePath({ path: details.backdrop_path, scale: 'backdrop' }) || ''
   );
   const { color } = getDarkestColor(colors);
-
   return (
     <header className='relative my-4 p-4 text-primary-foreground'>
-      <div className='space-y-1'>
-        <div className='flex items-center space-x-2'>
-          <h2 className='text-2xl font-semibold tracking-tight'>
-            {details.title || details.original_title}
-          </h2>
-          <p className='text-sm opacity-70'>{details.release_date}</p>
+      <div className='flex flex-col justify-between gap-4 sm:flex-row'>
+        <div className='space-y-1'>
+          <div className='flex items-center space-x-2'>
+            <h2 className='text-2xl font-semibold tracking-tight'>
+              {getTitle(details)}
+            </h2>
+            <p className='text-sm opacity-70'>{getRealesedDate(details)}</p>
+          </div>
+          <div className='flex items-center space-x-1.5 overflow-auto truncate text-sm opacity-70'>
+            {details.genres.map((genre) => (
+              <span className='rounded-md border p-1 text-xs' key={genre.id}>
+                {genre.name}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className='flex gap-4'>
+          <div className='flex flex-col items-center justify-center space-y-1 text-center'>
+            <span className='text-xs font-semibold uppercase'>TMDB Rating</span>
+            <Button className='text-lg' variant='ghost' size='sm'>
+              <Star className='mr-1.5 h-7 w-7 fill-yellow-400 text-yellow-400' />
+              <span>{details.vote_average.toFixed(1)}</span>
+            </Button>
+          </div>
+
+          <div className='flex flex-col items-center justify-center space-y-1 text-center'>
+            <span className='text-xs font-semibold uppercase'>Your Rating</span>
+            <Button
+              className='text-lg text-blue-400 hover:text-blue-400'
+              variant='ghost'
+              size='sm'
+            >
+              <Star className='mr-1.5 h-7 w-7' />
+              <span>Rate</span>
+            </Button>
+          </div>
+
+          <div className='flex flex-col items-center justify-center space-y-1 text-center'>
+            <span className='text-xs font-semibold uppercase'>Popularity</span>
+            <Button className='text-lg' variant='ghost' size='sm'>
+              <TrendingUp className='mr-1.5 h-7 w-7 fill-green-400 text-green-400' />
+              <span>{details.popularity.toFixed(0)}</span>
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -67,16 +106,6 @@ export default async function MovieHeader({
             </div>
           </div>
         </figure>
-      </div>
-
-      <div className='w-full space-y-4 md:w-[260px] md:min-w-[260px]'>
-        <div className='flex items-center space-x-1.5 overflow-auto truncate text-sm opacity-70'>
-          {details.genres.map((genre) => (
-            <span className='rounded-md border p-1 text-xs' key={genre.id}>
-              {genre.name}
-            </span>
-          ))}
-        </div>
       </div>
 
       <div className='absolute left-0 top-0 -z-20 h-full w-full overflow-hidden rounded-md'>

@@ -6,6 +6,8 @@ interface PersonKnownAsProps {
 }
 
 export default function PersonKnownAs({ person }: PersonKnownAsProps) {
+  if (!person.also_known_as.length) return null;
+
   return (
     <section>
       <div>

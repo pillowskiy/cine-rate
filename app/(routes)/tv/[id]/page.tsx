@@ -4,6 +4,7 @@ import CreationSimilar from '@components/creation/creation-similar';
 import { getCreationDetails } from '@actions/getCreationDetails';
 import { MediaType, type INextPageParams } from '@app/types/index';
 import CurrentSeason from './current-season';
+import CreationOverview from '@/app/_components/creation/creation-overview';
 
 export default async function TVPage({ params }: INextPageParams) {
   const paramId = +(params?.id.toString() || NaN);
@@ -16,6 +17,7 @@ export default async function TVPage({ params }: INextPageParams) {
   return (
     <main className='min-h-screen w-full space-y-6'>
       <CreationHeader details={tv} mediaType={MediaType.TV} />
+      <CreationOverview details={tv} />
       <CreationCast creationId={tv.id} mediaType={MediaType.TV} />
       {tv.seasons.length && <CurrentSeason season={tv.seasons.at(-1)!} />}
       <CreationSimilar creationId={tv.id} mediaType={MediaType.TV} />

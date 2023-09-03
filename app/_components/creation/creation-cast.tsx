@@ -1,18 +1,13 @@
-import { MediaType } from '@app/types/index';
+import type { CreationIdentifierProps } from './common/types';
 import { CreditArticle } from '@components/article/credit-article';
 import { Carousel } from '@components/carousel';
 import { Separator } from '@ui/separator';
 import { getCreationCredits } from '@actions/getCreationCredits';
 
-interface CreationCastProps {
-  creationId: number;
-  mediaType: MediaType;
-}
-
 export default async function CreationCast({
   creationId,
   mediaType,
-}: CreationCastProps) {
+}: CreationIdentifierProps) {
   const { data: credits } = await getCreationCredits(creationId, mediaType);
 
   // TEMP
