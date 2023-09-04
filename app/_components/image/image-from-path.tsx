@@ -16,8 +16,8 @@ export function ImageFromPath({
     return (
       <div
         className={cn(
-          className,
-          'grid h-full w-full place-items-center bg-secondary'
+          'grid h-full w-full place-items-center bg-secondary',
+          className
         )}
       >
         <FallbackIcon className='m-auto h-12 w-12 text-primary/70' />

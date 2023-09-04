@@ -17,7 +17,7 @@ export function UserAvatar({ username, path, gravatarHash }: UserAvatarProps) {
             : buildImagePath({
                 path,
                 scale: 'avatar',
-              })
+              }) || undefined
         }
         loading='lazy'
       />

@@ -138,7 +138,7 @@ export async function CreationFilterDialog({
           </div>
           <ScrollBar orientation='vertical' />
         </ScrollArea>
-        <DialogFooter>
+        <DialogFooter className='pt-4'>
           <DialogClose asChild>
             <Button>Search</Button>
           </DialogClose>

@@ -63,7 +63,7 @@ export function BaseArticleFigure({
   actionButtons,
 }: BaseArticleFigureProps) {
   return (
-    <figure className={cn('relative overflow-hidden rounded-md')}>
+    <figure className='relative overflow-hidden rounded-md'>
       <div
         className={cn(
           'w-full',

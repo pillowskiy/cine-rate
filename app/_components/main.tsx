@@ -6,7 +6,7 @@ interface MainProps {
 
 export default function Main({ children }: MainProps) {
   return (
-    <main className='container'>
+    <main className='container my-4'>
       {children}
     </main>
   );
