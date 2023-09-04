@@ -36,10 +36,14 @@ export default async function MovieHeader({
       <div className='flex flex-col justify-between gap-4 sm:flex-row'>
         <div className='space-y-1'>
           <div className='flex items-center space-x-2'>
-            <h2 className='text-2xl font-semibold tracking-tight'>
+            <h2 className='flex-grow truncate text-2xl font-semibold tracking-tight'>
               {getTitle(details)}
             </h2>
-            <p className='text-sm opacity-70'>{getRealesedDate(details)}</p>
+            <div className='w-max'>
+              <p className='text-xs opacity-70 sm:text-sm'>
+                {getRealesedDate(details)}
+              </p>
+            </div>
           </div>
           <div className='flex items-center space-x-1.5 overflow-auto truncate text-sm opacity-70'>
             {details.genres.map((genre) => (
@@ -50,7 +54,7 @@ export default async function MovieHeader({
           </div>
         </div>
 
-        <div className='flex gap-4'>
+        <div className='flex justify-between gap-4 sm:justify-start'>
           <div className='flex flex-col items-center justify-center space-y-1 text-center'>
             <span className='text-xs font-semibold uppercase'>TMDB Rating</span>
             <Button className='text-lg' variant='ghost' size='sm'>
@@ -61,11 +65,7 @@ export default async function MovieHeader({
 
           <div className='flex flex-col items-center justify-center space-y-1 text-center'>
             <span className='text-xs font-semibold uppercase'>Your Rating</span>
-            <Button
-              className='text-lg text-blue-400 hover:text-blue-400'
-              variant='ghost'
-              size='sm'
-            >
+            <Button className='text-lg' variant='ghost' size='sm'>
               <Star className='mr-1.5 h-7 w-7' />
               <span>Rate</span>
             </Button>
@@ -74,7 +74,7 @@ export default async function MovieHeader({
           <div className='flex flex-col items-center justify-center space-y-1 text-center'>
             <span className='text-xs font-semibold uppercase'>Popularity</span>
             <Button className='text-lg' variant='ghost' size='sm'>
-              <TrendingUp className='mr-1.5 h-7 w-7 fill-green-400 text-green-400' />
+              <TrendingUp className='mr-1.5 h-7 w-7' />
               <span>{details.popularity.toFixed(0)}</span>
             </Button>
           </div>
@@ -86,10 +86,13 @@ export default async function MovieHeader({
           className='md:flex-[1 1 260px] hidden w-[260px] sm:block'
           posterPath={details.poster_path}
           width={260}
-          height={420}
+          height={460}
         />
-        <div className='sm:flex-grow'>
-          <YoutubePlayer className='h-full w-full' url={buildURL(video.key)} />
+        <div className='h-max w-full sm:w-auto sm:flex-grow'>
+          <YoutubePlayer
+            className='aspect-[16/8] h-full w-full'
+            url={buildURL(video.key)}
+          />
         </div>
 
         <figure className='lg:flex-[1 1 200px] flex w-full gap-4 overflow-hidden rounded-md lg:w-[200px] lg:flex-col'>
@@ -122,9 +125,9 @@ export default async function MovieHeader({
           height={1080}
         />
         <div
-          style={{
-            backgroundImage: `linear-gradient(to left, rgba(255,0,0,0), ${color.hex()})`,
-          }}
+          // style={{
+          //   backgroundImage: `linear-gradient(to left, rgba(255,0,0,0), ${color.hex()})`,
+          // }}
           className={
             'absolute left-0 top-0 h-full w-full bg-gradient-to-r backdrop-blur-sm'
           }
