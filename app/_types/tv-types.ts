@@ -1,7 +1,7 @@
 import { ICreationLanguage, IProductionCountry } from '.';
 import { IPartialCompany } from './company-types';
 import type { IPartialGenre } from './genre-types';
-import { ICelebrity } from './person-types';
+import { ICelebrity, ICredit } from './person-types';
 
 export interface ITVDetails {
   created_by: ICelebrity[];
@@ -72,3 +72,13 @@ export interface ISeason {
   season_number: number;
   vote_average: number;
 }
+
+export interface IEpisodeDetails extends IEpisode {
+  crew: ICelebrity[];
+  guest_stars: ICredit[];
+}
+export interface ISeasonDetails extends ISeason {
+  episodes: IEpisodeDetails[];
+}
+
+export type SeasonDetailsResponse = ISeasonDetails;
