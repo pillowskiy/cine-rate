@@ -11,6 +11,7 @@ import {
 } from '../ui/dialog';
 import { SeasonCard } from '../article/season-article';
 import Link from 'next/link';
+import { ScrollArea, ScrollBar } from '../ui/scroll-area';
 
 interface SeasonsDialogProps {
   seriesId: number;
@@ -28,19 +29,24 @@ export function SeasonsDialog({ seasons, seriesId }: SeasonsDialogProps) {
           <DialogTitle>Seasons</DialogTitle>
           <DialogDescription>All seasons of the series</DialogDescription>
         </DialogHeader>
-        {seasons.map((season) => (
-          <SeasonCard
-            key={season.id}
-            season={season}
-            action={
-              <Link href={`/tv/${seriesId}/${season.season_number}/`}>
-                <DialogClose asChild>
-                  <Button>Read more</Button>
-                </DialogClose>
-              </Link>
-            }
-          />
-        ))}
+        <ScrollArea>
+          <div className='mr-4 max-h-[460px] space-y-4'>
+            {seasons.map((season) => (
+              <SeasonCard
+                key={season.id}
+                season={season}
+                action={
+                  <Link href={`/tv/${seriesId}/${season.season_number}/`}>
+                    <DialogClose asChild>
+                      <Button>Read more</Button>
+                    </DialogClose>
+                  </Link>
+                }
+              />
+            ))}
+          </div>
+          <ScrollBar orientation='vertical' />
+        </ScrollArea>
       </DialogContent>
     </Dialog>
   );
