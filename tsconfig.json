@@ -26,6 +26,7 @@
       "@ui/*": ["./app/_components/ui/*"],
       "@app/types/*": ["./app/_types/*"],
       "@actions/*": ["./app/_shared/actions/*"],
+      "@hooks/*": ["./app/_hooks/*"],
       "@libs/*": ["./app/_libs/*"],
     }
   },

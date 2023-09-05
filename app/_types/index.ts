@@ -21,9 +21,7 @@ export enum MediaTypes {
   Person = 'person',
 }
 
-export type BaseParams = {
-  language?: string;
-};
+export type BaseParams = Record<string, string>;
 
 export type BaseResponse<T extends unknown> = {
   page: number;
