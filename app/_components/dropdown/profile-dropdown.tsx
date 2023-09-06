@@ -33,7 +33,7 @@ export async function ProfileDropdown({ children }: ProfileDropdownProps) {
         <DropdownMenuLabel>{user.name || user.username}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem disabled>
             <MessageSquare className='mr-2 h-4 w-4' />
             <span>Discussions</span>
           </DropdownMenuItem>

@@ -8,7 +8,6 @@ import { usePathname } from 'next/navigation';
 export function AppNav() {
   const pathname = usePathname();
   const routes = Object.entries(OriginRoutes);
-  console.log(routes);
 
   return (
     <nav className='flex items-center space-x-6 text-sm font-medium'>
