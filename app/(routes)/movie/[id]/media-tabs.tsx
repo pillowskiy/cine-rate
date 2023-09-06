@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { MediaType } from '@app/types/index';
 import { Carousel } from '@components/carousel';
+import { ImageFromPath } from '@components/image/image-from-path';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs';
 import { Separator } from '@ui/separator';
 import { getCreationImages } from '@actions/getCreationImages';
@@ -41,11 +42,11 @@ export default async function MediaTabs({ creationId }: MediaTabsProps) {
             {images.backdrops.slice(0, 20).map((image, index) => (
               <div
                 className={cn(
-                  'aspect-[16/9] h-[150px] overflow-hidden rounded-md md:h-[300px]'
+                  'aspect-[16/9] h-[150px] overflow-hidden rounded-md lg:h-[300px]'
                 )}
                 key={image.file_path}
               >
-                <Image
+                <ImageFromPath
                   className='h-full w-auto object-cover'
                   src={buildImagePath({ path: image.file_path, scale: 'backdrop' })}
                   alt={`Image #${index}`}
@@ -63,7 +64,7 @@ export default async function MediaTabs({ creationId }: MediaTabsProps) {
                 className='aspect-[2/3] h-[150px] overflow-hidden rounded-md md:h-[300px]'
                 key={image.file_path}
               >
-                <Image
+                <ImageFromPath
                   className='h-full w-auto object-cover'
                   src={buildImagePath({ path: image.file_path, scale: 'poster' })}
                   alt={`Image #${index}`}

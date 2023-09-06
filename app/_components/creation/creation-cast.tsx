@@ -25,7 +25,7 @@ export default async function CreationCast({
       <Carousel>
         {credits.cast.slice(0, 10).map((credit) => (
           <CreditArticle
-            className='w-[120px] sm:w-[260px]'
+            className='w-[120px] lg:w-[260px]'
             key={credit.id}
             credit={credit}
           />
