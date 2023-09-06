@@ -1,6 +1,11 @@
 import type { MediaType, BaseResponse, CreationVideoSite } from '.';
 import type { IMediaResource } from './media-types';
 
+export interface IKeyword {
+  id: number;
+  name: string;
+}
+
 export interface ICreation {
   adult: boolean;
   backdrop_path: string;
@@ -43,4 +48,8 @@ export type CreationImagesResponse = {
   backdrops: IMediaResource[];
   logos: IMediaResource[];
   posters: IMediaResource[];
+};
+export type CreationKeywordsResponse = {
+  id: number;
+  keywords: IKeyword[];
 };
