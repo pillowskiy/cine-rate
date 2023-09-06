@@ -1,16 +1,13 @@
 import type { CreationDetailsProps } from './common/types';
 import type { MediaType } from '@app/types/index';
 
-import { FileImage, FileVideo, Star, TrendingUp } from 'lucide-react';
-import getColors from 'get-image-colors';
+import { FileImage, FileVideo } from 'lucide-react';
 import { YoutubePlayer } from '@components/youtube-player';
 import { BaseFigure } from '@components/figure/base-figure';
-import { getDarkestColor } from '@libs/get-image.colors';
 import { buildImagePath } from '@libs/tmdb';
 import { buildURL } from '@libs/ytdl';
 import { getCreationVideos } from '@actions/getCreationVideos';
 import { ImageFromPath } from '@components/image/image-from-path';
-import { Button } from '@ui/button';
 import { getRealesedDate, getTitle } from './common/utils';
 import { CreationActions } from './creation-actions';
 interface CreationHeaderProps extends CreationDetailsProps {
@@ -28,11 +25,6 @@ export default async function MovieHeader({
   );
   const video = officialTrailer || videos.results[0];
 
-  // TEMP
-  const colors = await getColors(
-    buildImagePath({ path: details.backdrop_path, scale: 'backdrop' }) || ''
-  );
-  const { color } = getDarkestColor(colors);
   return (
     <header className='relative my-4 p-4 text-primary-foreground'>
       <div className='flex flex-col justify-between gap-4 sm:flex-row'>
