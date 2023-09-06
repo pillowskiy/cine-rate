@@ -17,8 +17,8 @@ interface CreationSortSelectProps {
 export function CreationSortSelect({ Sort }: CreationSortSelectProps) {
   return (
     <Select defaultValue={Sort.Popular}>
-      <SelectTrigger className='w-[180px]'>
-        <SelectValue placeholder='Sort results by' />
+      <SelectTrigger className='w-[120px] sm:w-[180px]'>
+        <SelectValue className='mr-2' placeholder='Sort results by' />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>

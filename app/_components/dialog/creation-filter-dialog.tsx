@@ -24,7 +24,6 @@ import { Label } from '@ui/label';
 import { Input } from '@ui/input';
 import { Separator } from '@ui/separator';
 import { Toggle } from '@ui/toggle';
-import { Slider } from '@ui/slider';
 import { getGenres } from '@actions/getGenres';
 
 interface CreationFilterDialogProps {
@@ -86,53 +85,6 @@ export async function CreationFilterDialog({
                       {genre.name}
                     </Toggle>
                   ))}
-              </div>
-            </div>
-
-            <Separator className='my-4' />
-
-            <div className='grid w-full items-center gap-2'>
-              <Label>User evaluation</Label>
-              <div className='space-y-2'>
-                <Slider defaultValue={[10]} max={10} step={1} />
-                <div className='flex items-center justify-between'>
-                  <div className='mx-3' />
-                  {Array.from({ length: ~~(10 / 5) }, (_, index) => (
-                    <span className='text-sm' key={index}>
-                      {(index + 1) * 5}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className='grid w-full items-center gap-2'>
-              <Label>Minimal size of user evaluation</Label>
-              <div className='space-y-2'>
-                <Slider defaultValue={[0]} max={500} step={50} />
-                <div className='flex items-center justify-between'>
-                  <div className='mx-3' />
-                  {Array.from({ length: 500 / 100 }, (_, index) => (
-                    <span className='ml-2 text-sm' key={index}>
-                      {(index + 1) * 100}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className='grid w-full items-center gap-2'>
-              <Label>Duration (minutes)</Label>
-              <div className='space-y-2'>
-                <Slider defaultValue={[180]} max={360} step={15} />
-                <div className='flex items-center justify-between'>
-                  <div className='mx-4' />
-                  {Array.from({ length: 360 / 60 }, (_, index) => (
-                    <span className='ml-2 text-sm' key={index}>
-                      {(index + 1) * 60}
-                    </span>
-                  ))}
-                </div>
               </div>
             </div>
           </div>

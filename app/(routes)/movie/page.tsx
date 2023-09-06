@@ -26,28 +26,27 @@ export default async function MoviesPage() {
   return (
     <main className='space-y-6'>
       <header className='flex justify-between gap-4 overflow-hidden py-2'>
-        <div className='flex gap-2'>
+        <div className='flex gap-2 flex-wrap'>
           <CreationFilterDialog mediaType={MediaType.Movie}>
             <Button size='icon' variant='outline' title='Filter'>
               <Filter className='h-5 w-5' />
             </Button>
           </CreationFilterDialog>
-          <div className='hidden gap-2 md:flex'>
-            <CreationSortSelect Sort={Sort} />
 
-            <Select defaultValue='all'>
-              <SelectTrigger className='w-[180px]'>
-                <SelectValue placeholder='Show me' />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value='all'>All</SelectItem>
-                  <SelectItem value='watched'>Watched Movies</SelectItem>
-                  <SelectItem value='unwatched'>Unwatched Movies</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
+          <CreationSortSelect Sort={Sort} />
+
+          <Select defaultValue='all'>
+            <SelectTrigger className='w-[120px] sm:w-[180px]'>
+              <SelectValue placeholder='Show me' />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value='all'>All</SelectItem>
+                <SelectItem value='watched'>Watched Movies</SelectItem>
+                <SelectItem value='unwatched'>Unwatched Movies</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
       </header>
       <section className='flex flex-wrap gap-4'>
