@@ -36,7 +36,12 @@ export function SeasonsDialog({ seasons, seriesId }: SeasonsDialogProps) {
                 key={season.id}
                 season={season}
                 action={
-                  <Link href={`/tv/${seriesId}/${season.season_number}/`}>
+                  <Link
+                    href={{
+                      pathname: `/tv/${seriesId}/episodes`,
+                      query: { season: season.season_number },
+                    }}
+                  >
                     <DialogClose asChild>
                       <Button>Read more</Button>
                     </DialogClose>
