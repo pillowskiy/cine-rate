@@ -17,37 +17,37 @@ import { $api } from '../api/api-interceptor';
  *  Docs: https://themoviedb.api-docs.io/3/discover/tv-discover
  */
 interface GetDiscoverParams<T extends MediaType> {
-  region: string;
+  region?: string;
 
   // use in conjunction with region
-  certification: string;
+  certification?: string;
   // use in conjunction with region
-  'certification.gte': string;
+  'certification.gte'?: string;
   // use in conjunction with region
-  'certification.lte': string;
+  'certification.lte'?: string;
 
-  certification_country: string;
+  certification_country?: string;
 
-  include_adult: boolean;
-  include_video: boolean;
-  language: string;
-  page: number;
-  primary_release_year: number;
-  'primary_release_date.gte': Date;
-  'primary_release_date.lte': Date;
-  'release_date.gte': Date;
-  'release_date.lte': Date;
+  include_adult?: boolean;
+  include_video?: boolean;
+  language?: string;
+  page?: number;
+  primary_release_year?: number;
+  'primary_release_date.gte'?: Date;
+  'primary_release_date.lte'?: Date;
+  'release_date.gte'?: Date;
+  'release_date.lte'?: Date;
 
-  sort_by: T extends MediaType.Movie ? MovieSort : TVSort;
+  sort_by?: T extends MediaType.Movie ? MovieSort : TVSort;
 
-  'vote_average.gte': number;
-  'vote_average.lte': number;
+  'vote_average.gte'?: number;
+  'vote_average.lte'?: number;
 
-  'vote_count.gte': number;
-  'vote_count.lte': number;
+  'vote_count.gte'?: number;
+  'vote_count.lte'?: number;
 
-  watch_region: string;
-  year: number;
+  watch_region?: string;
+  year?: number;
 }
 
 export function getDiscover<T extends MediaType>(
