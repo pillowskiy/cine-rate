@@ -23,7 +23,9 @@ export default async function MovieHeader({
   const officialTrailer = videos.results.find(
     (video) => video.official && video.type === 'Trailer'
   );
-  const video = officialTrailer || videos.results[0];
+  const video = videos.results.length
+    ? officialTrailer || videos.results[0]
+    : null;
 
   return (
     <header className='relative my-4 p-4 text-primary-foreground'>
@@ -59,10 +61,12 @@ export default async function MovieHeader({
           height={460}
         />
         <div className='h-max w-full sm:w-auto sm:flex-grow'>
-          <YoutubePlayer
-            className='aspect-[16/8] h-full w-full'
-            url={buildURL(video.key)}
-          />
+          {video?.key && (
+            <YoutubePlayer
+              className='aspect-[16/8] h-full w-full'
+              url={buildURL(video.key)}
+            />
+          )}
         </div>
 
         <figure className='lg:flex-[1 1 200px] flex w-full gap-4 overflow-hidden rounded-md lg:w-[200px] lg:flex-col'>

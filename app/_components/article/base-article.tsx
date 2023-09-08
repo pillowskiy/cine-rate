@@ -67,13 +67,13 @@ export function BaseArticleFigure({
       <div
         className={cn(
           'w-full',
-          aspect === 'vertical' ? 'aspect-[2/3]' : 'aspect-[16/9]'
+          aspect === 'vertical' ? 'aspect-[2/3]' : 'aspect-[16/9]',
+          className
         )}
       >
         <ImageFromPath
           className={cn(
             'h-full w-auto object-cover transition-all ease-in-out hover:scale-105',
-            className
           )}
           height={height}
           width={width}
