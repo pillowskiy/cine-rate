@@ -18,7 +18,7 @@ export default async function MovieDetails({
         <div className='flex items-center justify-between'>
           <div className='space-y-1'>
             <h2 className='text-2xl font-semibold tracking-tight'>Details</h2>
-            <p className='truncate text-sm text-muted-foreground'>
+            <p className='text-sm text-muted-foreground'>
               Interesting about {getTitle(details)}.
             </p>
           </div>

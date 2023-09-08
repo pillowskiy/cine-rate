@@ -13,7 +13,9 @@ export default async function CreationReviews({
   const { data: reviews } = await getCreationReviews(
     creationId,
     MediaType.Movie
-  );
+  ).catch(() => ({ data: null }));
+
+  if (!reviews?.results.length) return null;
 
   return (
     <section>

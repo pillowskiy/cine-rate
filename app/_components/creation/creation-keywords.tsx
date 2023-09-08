@@ -12,14 +12,14 @@ export default async function CreationKeywords({
     () => ({ data: null })
   );
 
-  if (!data) return null;
+  if (!data?.keywords.length) return null;
 
   return (
     <div>
       <div className='flex items-center justify-between'>
         <div className='space-y-1'>
           <h2 className='text-2xl font-semibold tracking-tight'>Keywords</h2>
-          <p className='truncate text-sm text-muted-foreground'>
+          <p className='text-sm text-muted-foreground'>
             Keywords of {getTitle(details)}.
           </p>
         </div>
