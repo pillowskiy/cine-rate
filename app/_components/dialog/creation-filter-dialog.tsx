@@ -1,14 +1,7 @@
 import type { ReactNode } from 'react';
 import type { MediaType } from '@app/types/index';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@ui/select';
 import { Button } from '@ui/button';
+import { LanguageSelect } from '@components/select/language-select';
 import {
   Dialog,
   DialogContent,
@@ -48,7 +41,7 @@ export async function CreationFilterDialog({
           </DialogDescription>
         </DialogHeader>
         <ScrollArea>
-          <div className='mr-4 max-h-[460px] space-y-4'>
+          <div className='mr-4 max-h-[460px] space-y-4 px-2'>
             <h2>Realese Date</h2>
             <div className='flex justify-between gap-4'>
               <div className='grid w-full max-w-sm items-center gap-2'>
@@ -64,16 +57,7 @@ export async function CreationFilterDialog({
 
             <div className='grid w-full items-center gap-2'>
               <Label>Language</Label>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder='Choose language' />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value='en-US'>English</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+              <LanguageSelect />
             </div>
 
             <div className='grid w-full items-center gap-2'>
