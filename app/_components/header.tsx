@@ -1,5 +1,4 @@
 import { Button } from '@ui/button';
-import { SearchInput } from '@ui/search-input';
 import { BookmarkPlus, LogIn } from 'lucide-react';
 import { DesktopNav } from '@components/nav/desktop-nav';
 import { MobileNav } from '@components/nav/mobile-nav';
@@ -9,6 +8,7 @@ import { UserAvatar } from '@components/user-avatar';
 import { ProfileDropdown } from '@components/dropdown/profile-dropdown';
 import { headers } from 'next/headers';
 import { MOBILE_VIEW_REGEXP } from '@config/regexp';
+import { SearchDialog } from './dialog/search-dialog';
 
 export default async function Header() {
   // TEMP: use server side user store
@@ -22,9 +22,7 @@ export default async function Header() {
       <div className='container flex h-14 w-full items-center justify-between gap-2'>
         {isMobileView ? <MobileNav /> : <DesktopNav />}
         <section className='flex w-full space-x-2 md:w-max'>
-          <div className='flex-grow'>
-            <SearchInput />
-          </div>
+          <SearchDialog />
           <Button variant='outline' size='icon'>
             <BookmarkPlus className='h-5 w-5' />
           </Button>
