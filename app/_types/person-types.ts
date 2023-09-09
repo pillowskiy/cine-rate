@@ -1,10 +1,11 @@
-import type { BaseResponse, Gender, ITranslation } from '.';
+import type { BaseResponse, Gender, ITranslation, MediaType } from '.';
 import type { ICreation } from './creation-types';
 
 export interface ICelebrity {
   adult: boolean;
   gender: Gender;
   id: number;
+  media_type: MediaType;
   known_for: ICreation[];
   known_for_department: string;
   name: string;
