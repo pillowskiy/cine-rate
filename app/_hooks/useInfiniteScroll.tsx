@@ -4,18 +4,13 @@ export default function useInfiniteScroll<
   T extends (...args: unknown[]) => unknown,
 >(callback: T, dependency: unknown) {
   const [canScroll, setCanScroll] = useState(true);
-  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const parent = ref.current;
-    if (!parent) return;
-
     const handleScroll = () => {
       const { innerHeight } = window;
       const { scrollTop, offsetHeight } = document.documentElement;
 
       const inBottom = innerHeight + scrollTop === offsetHeight;
-      console.log(inBottom, scrollTop, innerHeight, offsetHeight);
       if (canScroll && inBottom) {
         callback();
         setCanScroll(false);
@@ -33,5 +28,5 @@ export default function useInfiniteScroll<
     setCanScroll(true);
   }, [dependency]);
 
-  return { canScroll, ref };
+  return { canScroll };
 }

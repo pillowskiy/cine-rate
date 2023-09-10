@@ -49,6 +49,11 @@ export interface ITranslation<T extends object> {
   data: T;
 }
 
+export interface IPagination {
+  currentPage: number;
+  totalPages: number;
+}
+
 export interface INextPageParams {
   searchParams?: Record<string, string>
   params?: Record<string, string | number | symbol>

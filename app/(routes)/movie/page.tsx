@@ -7,7 +7,7 @@ export default async function MoviesPage() {
   return (
     <main className='space-y-6'>
       <CreationCatalogHeader mediaType={MediaType.Movie} Sort={Sort} />
-      <CreationCatalog className='flex-wrap' mediaType={MediaType.Movie} />
+      <CreationCatalog mediaType={MediaType.Movie} />
     </main>
   );
 }
