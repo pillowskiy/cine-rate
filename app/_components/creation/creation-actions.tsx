@@ -4,7 +4,7 @@ import type { CreationDetailsProps } from './common/types';
 
 export function CreationActions({ details }: CreationDetailsProps) {
   return (
-    <div className='flex justify-between gap-4 sm:justify-start w-fit overflow-x-auto'>
+    <div className='w-full flex justify-between gap-4 sm:justify-start sm:w-fit overflow-x-auto'>
       <div className='flex flex-col items-center justify-center space-y-1 text-center'>
         <span className='text-xs font-semibold uppercase'>TMDB Rating</span>
         <Button className='text-lg' variant='ghost' size='sm'>

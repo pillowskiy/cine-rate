@@ -32,7 +32,7 @@ export default async function MovieHeader({
       <div className='flex flex-col justify-between gap-4 sm:flex-row'>
         <div className='space-y-1'>
           <div className='flex items-center space-x-2'>
-            <h2 className='flex-grow truncate text-2xl font-semibold tracking-tight'>
+            <h2 className='flex-grow truncate text-2xl font-semibold tracking-tight max-w-[600px]'>
               {getTitle(details)}
             </h2>
             <div className='w-max'>
