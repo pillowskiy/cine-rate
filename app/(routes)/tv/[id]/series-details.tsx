@@ -46,9 +46,9 @@ export default async function SeriesDetails({
           </li>
 
           <li>
-            <span className='font-semibold'>Number of Episodes</span>
+            <span className='font-semibold'>Number of Seasons</span>
             <p className='text-foreground/70'>
-              {details.number_of_seasons} ({details.number_of_episodes} episodes)
+              {details.number_of_seasons} seasons ({details.number_of_episodes} episodes)
             </p>
           </li>
 

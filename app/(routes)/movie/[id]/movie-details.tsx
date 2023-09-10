@@ -51,17 +51,21 @@ export default async function MovieDetails({
           <li>
             <span className='font-semibold'>Revenue</span>
             <p className='text-foreground/70'>
-              {details.revenue.toLocaleString('en-US', {
-                style: 'currency',
-                currency: 'USD',
-              })}
+              {details.revenue
+                ? details.revenue.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                  })
+                : 'Unknown'}
             </p>
           </li>
 
           <li>
             <span className='font-semibold'>Production Companies</span>
             <p className='text-foreground/70'>
-              {details.production_companies.map(company => company.name).join(', ')}
+              {details.production_companies
+                .map((company) => company.name)
+                .join(', ')}
             </p>
           </li>
         </ul>
