@@ -28,7 +28,7 @@ export function PersonArticle({
         />
       </Link>
       <BaseArticleContent>
-        <h2 className='text-md truncate font-semibold tracking-tight'>
+        <h2 className='text-md truncate font-semibold tracking-tight' title={celebrity.name}>
           {celebrity.name}
         </h2>
         <div className='flex items-center justify-between text-xs'>
