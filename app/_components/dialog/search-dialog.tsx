@@ -1,24 +1,18 @@
 'use client';
 
 import { cn, groupBy } from '@libs/index';
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogTrigger,
-} from '@ui/dialog';
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@ui/dialog';
 import { Button } from '@ui/button';
 import { Loader, Search, Star, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { MultiSearchResponse } from '@/app/_types/search-types';
-import { MediaType } from '@/app/_types';
-import { ImageFromPath } from '../image/image-from-path';
-import { buildImagePath } from '@/app/_libs/tmdb';
+import type { MultiSearchResponse } from '@app/types/search-types';
+import { MediaType } from '@app/types/index';
 import Link from 'next/link';
 import { Carousel } from '../carousel';
 import { PersonArticle } from '../article/person-article';
-import { useDebounce } from '@/app/_hooks/useDebounce';
+import { useDebounce } from '@hooks/useDebounce';
+import { HorizontalCreationArticle } from '../article/creation-article';
 
 function getMultipleSearch(query: string) {
   return axios.get<MultiSearchResponse>('/api/search/multiple', {
@@ -78,6 +72,87 @@ export function SearchDialog() {
           {isLoading && (
             <div className='absolute left-0 top-0 grid h-full w-full place-items-center bg-background'>
               <Loader className='m-auto h-16 w-16 animate-spin' />
+            </div>
+          )}
+
+          {!!data?.person && (
+            <div>
+              <span className='px-2 text-sm font-semibold text-foreground/70'>
+                Most Popular Celebrities
+              </span>
+              <Carousel className='space-x-0'>
+                {data.person
+                  .sort((a, b) => b.popularity - a.popularity)
+                  .map((person) => {
+                    if (!('known_for' in person)) return null;
+
+                    return (
+                      <DialogClose key={person.id} asChild>
+                        <Link
+                          href={`/celebrity/${person.id}`}
+                          className='flex cursor-pointer gap-2 rounded-md p-2 transition-all hover:bg-accent'
+                        >
+                          <PersonArticle
+                            className='w-[120px] min-w-[120px]'
+                            celebrity={person}
+                          />
+                        </Link>
+                      </DialogClose>
+                    );
+                  })}
+              </Carousel>
+            </div>
+          )}
+
+          {!!data?.movie && (
+            <div>
+              <span className='px-2 text-sm font-semibold text-foreground/70'>
+                Most Popular Movies
+              </span>
+              {data.movie
+                .sort((a, b) => b.popularity - a.popularity)
+                .slice(0, 3)
+                .map((movie) => {
+                  if ('known_for' in movie) return null;
+                  return (
+                    <DialogClose key={movie.id} asChild>
+                      <Link href={`/movie/${movie.id}`} passHref legacyBehavior>
+                        <HorizontalCreationArticle
+                          creation={movie}
+                          alt='Series Backdrop'
+                          width={260}
+                          height={190}
+                        />
+                      </Link>
+                    </DialogClose>
+                  );
+                })}
+            </div>
+          )}
+
+          {!!data?.tv && (
+            <div>
+              <span className='px-2 text-sm font-semibold text-foreground/70'>
+                Most Popular Series and Shows
+              </span>
+              {data.tv
+                .sort((a, b) => b.popularity - a.popularity)
+                .slice(0, 3)
+                .map((tv) => {
+                  if ('known_for' in tv) return null;
+                  return (
+                    <DialogClose key={tv.id} asChild>
+                      <Link href={`/tv/${tv.id}`} passHref legacyBehavior>
+                        <HorizontalCreationArticle
+                          creation={tv}
+                          alt='Series Backdrop'
+                          width={260}
+                          height={190}
+                        />
+                      </Link>
+                    </DialogClose>
+                  );
+                })}
             </div>
           )}
         </div>
