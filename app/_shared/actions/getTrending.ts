@@ -6,11 +6,11 @@ interface GetTrendingOptions {
   periodParam?: 'day' | 'week';
 }
 
-export const getTrending = ({
+export function getTrending({
   language = 'es-US',
   periodParam = 'week',
-}: GetTrendingOptions) => {
+}: GetTrendingOptions = {}) {
   return $api.get<CreationsResponse>(`/3/trending/all/${periodParam}`, {
     params: { language },
   });
-};
+}

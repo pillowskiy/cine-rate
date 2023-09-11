@@ -48,7 +48,6 @@ export default function CreationCatalog({
           key={movie.id}
           creation={movie}
           className='mb-4 w-[40%] flex-grow md:w-[260px]'
-          alt='Creation Poster'
           width={260}
           height={390}
         />

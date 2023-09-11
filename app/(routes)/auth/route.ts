@@ -12,7 +12,6 @@ function getTokenApproveURL(requestToken: string) {
 }
 
 export async function GET({ url }: NextRequest) {
-  console.log(cookies().getAll());
   try {
     if (cookies().get('session_id')) {
       throw new Error('You are already authorized');

@@ -74,7 +74,7 @@ export const CreationArticle = memo(
 
 CreationArticle.displayName = 'CreationArticle';
 
-interface CreationArticleProps extends Omit<BaseArticleProps, 'src' | 'href'> {
+interface HorizontalCreationArticle extends Omit<BaseArticleProps, 'src' | 'href'> {
   alt: string;
   width: number;
   height: number;
@@ -89,7 +89,7 @@ export const HorizontalCreationArticle = memo(
     alt,
     className,
     ...props
-  }: CreationArticleProps) => {
+  }: HorizontalCreationArticle) => {
     const { title, original_title, original_name } = creation;
     const displayTitle = title || original_title || original_name;
     return (
