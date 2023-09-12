@@ -8,7 +8,7 @@ interface GetTrendingOptions {
 
 export function getTrending({
   language = 'es-US',
-  periodParam = 'week',
+  periodParam = 'day',
 }: GetTrendingOptions = {}) {
   return $api.get<CreationsResponse>(`/3/trending/all/${periodParam}`, {
     params: { language },

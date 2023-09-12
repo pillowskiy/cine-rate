@@ -13,9 +13,9 @@ export default async function TrendsCarousel() {
     <section>
       <div className='flex items-center justify-between'>
         <div className='space-y-1'>
-          <h2 className='text-2xl font-semibold tracking-tight'>Trands now</h2>
+          <h2 className='text-2xl font-semibold tracking-tight'>Trends now</h2>
           <p className='text-sm text-muted-foreground'>
-            This week&apos;s top TV and movies.
+            The most popular movies and TV series today
           </p>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { MediaType } from '@app/types/index';
-import TrendsCarousel from './trands-carousel';
+import TrendsCarousel from './trends-carousel';
 import MoviesCarousel from './movies-carousel';
 import CreationCarousel from './creation-carousel';
 import CelebrityCarousel from './celebrity-carousel';
