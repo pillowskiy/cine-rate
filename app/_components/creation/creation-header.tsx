@@ -32,7 +32,7 @@ export default async function MovieHeader({
       <div className='flex flex-col justify-between gap-4 sm:flex-row'>
         <div className='space-y-1'>
           <div className='flex items-center space-x-2'>
-            <h2 className='flex-grow truncate text-2xl font-semibold tracking-tight max-w-[600px]'>
+            <h2 className='max-w-[600px] flex-grow truncate text-2xl font-semibold tracking-tight'>
               {getTitle(details)}
             </h2>
             <div className='w-max'>
@@ -59,6 +59,7 @@ export default async function MovieHeader({
           posterPath={details.poster_path}
           width={260}
           height={460}
+          priority
         />
         <div className='h-max w-full sm:w-auto sm:flex-grow'>
           {video?.key && (
@@ -95,8 +96,9 @@ export default async function MovieHeader({
             scale: 'large_backdrop',
           })}
           alt='Movie Image'
-          width={1920}
-          height={1080}
+          width={1000}
+          height={450}
+          priority
         />
         <div
           // style={{
