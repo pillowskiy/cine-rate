@@ -1,4 +1,5 @@
-import { getCelebrities } from '@/app/_shared/actions/getCelebrities';
+import { MediaType } from '@app/types/index';
+import { getPopular } from '@actions/getPopular';
 import { isAxiosError } from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 import zod from 'zod';
@@ -26,7 +27,7 @@ export function GET(request: NextRequest) {
   }
 
   const { page } = result.data;
-  return getCelebrities({ page: page.toString() })
+  return getPopular(MediaType.Person, { page: page.toString() })
     .then(({ data }) => {
       return NextResponse.json(data, { status: 200 });
     })
