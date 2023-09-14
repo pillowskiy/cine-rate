@@ -41,10 +41,12 @@ export default async function MovieDetails({
           <li>
             <span className='font-semibold'>Budget</span>
             <p className='text-foreground/70'>
-              {details.budget.toLocaleString('en-US', {
-                style: 'currency',
-                currency: 'USD',
-              })}
+              {details.budget
+                ? details.budget.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                  })
+                : 'Unknown'}
             </p>
           </li>
 
