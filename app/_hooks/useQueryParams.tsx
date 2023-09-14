@@ -22,5 +22,10 @@ export default function useQueryParams<T = {}>() {
     router.push(`${pathname}${query}`);
   }
 
-  return { urlSearchParams, setQueryParams };
+  function appendQueryParams(params: Partial<T>) {
+    const searchParamsObj = Object.fromEntries(searchParams.entries());
+    return setQueryParams(Object.assign(searchParamsObj, params));
+  }
+
+  return { urlSearchParams, setQueryParams, appendQueryParams };
 }

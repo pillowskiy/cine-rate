@@ -1,3 +1,5 @@
+'use client';
+
 import type { Sort as MovieSort } from '@actions/getMovies';
 import type { Sort as TVSort } from '@actions/getTV';
 import {
@@ -9,14 +11,22 @@ import {
   SelectValue,
 } from '../ui/select';
 import { capitalize } from '@libs/index';
+import useQueryParams from '@hooks/useQueryParams';
 
 interface CreationSortSelectProps {
   Sort: typeof MovieSort | typeof TVSort;
 }
 
 export function CreationSortSelect({ Sort }: CreationSortSelectProps) {
+  const { appendQueryParams, urlSearchParams } = useQueryParams();
+
   return (
-    <Select defaultValue={Sort.Popular}>
+    <Select
+      onValueChange={(newValue) => {
+        appendQueryParams({ sort_by: newValue });
+      }}
+      defaultValue={urlSearchParams.get('sort_by') || undefined}
+    >
       <SelectTrigger className='w-[120px] sm:w-[180px]'>
         <SelectValue className='mr-2' placeholder='Sort results by' />
       </SelectTrigger>
