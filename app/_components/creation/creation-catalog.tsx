@@ -1,6 +1,6 @@
 'use client';
 
-import { type HTMLAttributes, useEffect, useState } from 'react';
+import { type HTMLAttributes, useEffect, useState, useMemo } from 'react';
 import type { CreationsResponse } from '@app/types/creation-types';
 import type { IPagination, MediaType } from '@app/types/index';
 import { Loader } from 'lucide-react';
@@ -9,6 +9,7 @@ import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import { cn } from '@libs/index';
 import axios from 'axios';
 import { initialPagination } from '@/app/_config/pagination';
+import { useSearchParams } from 'next/navigation';
 
 interface CreationCatalogProps extends HTMLAttributes<HTMLDivElement> {
   mediaType: MediaType;
@@ -21,11 +22,14 @@ export default function CreationCatalog({
 }: CreationCatalogProps) {
   const [items, setItems] = useState<CreationsResponse['results'] | null>(null);
   const [pagination, setPagination] = useState<IPagination>(initialPagination);
+  const searchParams = useSearchParams();
+  const searchParamsObj = useMemo(() => Object.fromEntries(searchParams.entries()), [searchParams]);
 
-  const fetch = async () => {
+  const fetch = async (page: number = pagination.currentPage + 1) => {
     const params = {
       mediaType,
-      page: pagination.currentPage + 1,
+      page,
+      ...searchParamsObj,
     };
     return axios
       .get<CreationsResponse>('api/discover', { params })
@@ -34,8 +38,13 @@ export default function CreationCatalog({
         setPagination((prev) => ({ ...prev, currentPage: data.page }));
       });
   };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => void fetch(), []);
+  
+  useEffect(() => {
+    setItems(null);
+    void fetch(1);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParamsObj]);
   const { canScroll } = useInfiniteScroll(fetch, pagination.currentPage);
 
   // TEMP

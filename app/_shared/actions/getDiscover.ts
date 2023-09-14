@@ -16,7 +16,7 @@ import { $api } from '../api/api-interceptor';
  *  Reference: https://developer.themoviedb.org/reference/discover-tv
  *  Docs: https://themoviedb.api-docs.io/3/discover/tv-discover
  */
-interface GetDiscoverParams<T extends MediaType> {
+export interface GetDiscoverParams {
   region?: string;
 
   // use in conjunction with region
@@ -33,12 +33,15 @@ interface GetDiscoverParams<T extends MediaType> {
   language?: string;
   page?: number;
   primary_release_year?: number;
-  'primary_release_date.gte'?: Date;
-  'primary_release_date.lte'?: Date;
-  'release_date.gte'?: Date;
-  'release_date.lte'?: Date;
+  'primary_release_date.gte'?: string;
+  'primary_release_date.lte'?: string;
+  'release_date.gte'?: string;
+  'release_date.lte'?: string;
 
-  sort_by?: T extends MediaType.Movie ? MovieSort : TVSort;
+  // TEMP
+  sort_by?: MovieSort | TVSort;
+  
+  with_genres?: string;
 
   'vote_average.gte'?: number;
   'vote_average.lte'?: number;
@@ -52,7 +55,7 @@ interface GetDiscoverParams<T extends MediaType> {
 
 export function getDiscover<T extends MediaType>(
   mediaType: T,
-  params?: GetDiscoverParams<T>
+  params?: GetDiscoverParams
 ) {
   return $api.get<CreationsResponse>(`/3/discover/${mediaType}/`, { params });
 }
