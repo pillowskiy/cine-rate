@@ -4,4 +4,4 @@ export interface ILanguage {
   name: string;
 }
 
-export type LanguagesListResponse = ILanguage[];
+export type LanguagesResponse = ILanguage[];

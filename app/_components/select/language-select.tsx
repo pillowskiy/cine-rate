@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from '@ui/select';
 
-import { getLanguages } from '@/app/_shared/actions/getLanguages';
+import { getLanguages } from '@actions/getLanguages';
 
 export async function LanguageSelect() {
   const { data: languages } = await getLanguages().catch(() => ({ data: [] }));
