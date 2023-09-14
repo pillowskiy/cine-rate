@@ -23,7 +23,7 @@ export default async function Header() {
         {isMobileView ? <MobileNav /> : <DesktopNav />}
         <section className='flex w-full space-x-2 md:w-max'>
           <SearchDialog />
-          <Button variant='outline' size='icon'>
+          <Button className='aspect-square' variant='outline' size='icon'>
             <BookmarkPlus className='h-5 w-5' />
           </Button>
           {user ? (
@@ -36,7 +36,7 @@ export default async function Header() {
             </ProfileDropdown>
           ) : (
             <Link href='/auth'>
-              <Button variant='outline' size='icon'>
+              <Button className='aspect-square' variant='outline' size='icon'>
                 <LogIn className='h-5 w-5' />
               </Button>
             </Link>

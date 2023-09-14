@@ -18,7 +18,7 @@ export function MobileNav() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant='outline' size='icon'>
+        <Button className='aspect-square' variant='outline' size='icon'>
           <Menu className='h-5 w-5' />
         </Button>
       </SheetTrigger>
