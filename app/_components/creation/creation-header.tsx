@@ -50,7 +50,7 @@ export default async function MovieHeader({
           </div>
         </div>
 
-        <CreationActions details={details} />
+        <CreationActions details={details} mediaType={mediaType} />
       </div>
 
       <div className='jutisfy-between my-4 flex flex-col flex-wrap gap-4 sm:flex-row lg:flex-wrap'>
@@ -86,7 +86,7 @@ export default async function MovieHeader({
         </figure>
       </div>
 
-      <div className='absolute left-0 top-0 -z-20 h-full w-full overflow-hidden rounded-md'>
+      <div className='absolute left-0 top-0 -z-20 h-full w-full overflow-hidden rounded-md bg-black'>
         <ImageFromPath
           className={
             'aspect-[16/9] h-full w-full scale-110 object-cover object-top'
@@ -101,11 +101,8 @@ export default async function MovieHeader({
           priority
         />
         <div
-          // style={{
-          //   backgroundImage: `linear-gradient(to left, rgba(255,0,0,0), ${color.hex()})`,
-          // }}
           className={
-            'absolute left-0 top-0 h-full w-full bg-gradient-to-r backdrop-blur-sm'
+            'absolute left-0 top-0 h-full w-full bg-gradient-to-r backdrop-blur-sm bg-black/20'
           }
         />
       </div>

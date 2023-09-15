@@ -2,6 +2,8 @@ import type { ITVDetails } from '@app/types/tv-types';
 import { Separator } from '@ui/separator';
 import { SeasonsDialog } from '@components/dialog/seasons-dialog';
 import { SeasonCard } from '@components/article/season-article';
+import { Button } from '@/app/_components/ui/button';
+import Link from 'next/link';
 
 interface SerriesSeasonsProps {
   details: ITVDetails;
@@ -28,7 +30,21 @@ export default async function SerriesSeasons({ details }: SerriesSeasonsProps) {
         className='rounded-md border p-4'
         season={currentSeason}
         action={
-          <SeasonsDialog seriesId={details.id} seasons={details.seasons} />
+          <div className='flex flex-col gap-4 sm:flex-row'>
+            <Link
+              href={{
+                pathname: `/tv/${details.id}/episodes`,
+                query: { season: currentSeason.season_number },
+              }}
+              passHref
+              legacyBehavior
+            >
+              <Button>
+                More info about {currentSeason.name}
+              </Button>
+            </Link>
+            <SeasonsDialog seriesId={details.id} seasons={details.seasons} />
+          </div>
         }
       />
     </section>

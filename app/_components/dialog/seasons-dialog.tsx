@@ -22,7 +22,7 @@ export function SeasonsDialog({ seasons, seriesId }: SeasonsDialogProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>View all seasons</Button>
+        <Button variant='outline'>View all seasons</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -41,6 +41,8 @@ export function SeasonsDialog({ seasons, seriesId }: SeasonsDialogProps) {
                       pathname: `/tv/${seriesId}/episodes`,
                       query: { season: season.season_number },
                     }}
+                    passHref
+                    legacyBehavior
                   >
                     <DialogClose asChild>
                       <Button>Read more</Button>

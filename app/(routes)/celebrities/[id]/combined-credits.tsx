@@ -24,7 +24,7 @@ export default async function CombinedCredits({
       <Carousel>
         {credits.cast
           .sort(
-            (a, b) => b.popularity - a.popularity
+            (a, b) => b.vote_count - a.vote_count
           )
           .slice(0, 20)
           .map((credit) => (
