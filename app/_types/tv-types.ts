@@ -1,7 +1,7 @@
 import { ICreationLanguage, IProductionCountry } from '.';
 import { IPartialCompany } from './company-types';
 import type { IPartialGenre } from './genre-types';
-import { ICelebrity, ICredit } from './person-types';
+import { ICelebrity, ICredit, ICrew } from './person-types';
 
 export interface ITVDetails {
   created_by: ICelebrity[];
@@ -47,7 +47,7 @@ export interface ITVDetails {
 }
 
 export interface IEpisode {
-  id: 2558114;
+  id: number;
   name: string;
   overview: string;
   vote_average: number;
@@ -74,9 +74,10 @@ export interface ISeason {
 }
 
 export interface IEpisodeDetails extends IEpisode {
-  crew: ICelebrity[];
+  crew: ICrew[];
   guest_stars: ICredit[];
 }
+
 export interface ISeasonDetails extends ISeason {
   episodes: IEpisodeDetails[];
 }

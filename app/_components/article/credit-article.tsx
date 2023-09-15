@@ -4,28 +4,43 @@ import {
   BaseArticle,
   BaseArticleContent,
   BaseArticleFigure,
+  BaseArticleFigureProps,
 } from './base-article';
 import Link from 'next/link';
 import { HTMLAttributes } from 'react';
 
 interface CreditArticleProps extends HTMLAttributes<HTMLDivElement> {
   credit: ICredit;
+  aspect?: BaseArticleFigureProps['aspect'];
+  figureClassName?: string;
+  width?: number;
+  height?: number;
 }
 
-export function CreditArticle({ credit, ...props }: CreditArticleProps) {
+export function CreditArticle({
+  credit,
+  aspect,
+  figureClassName,
+  width,
+  height,
+  ...props
+}: CreditArticleProps) {
   return (
     <BaseArticle {...props}>
       <Link href={`/celebrities/${credit.id}`}>
         <BaseArticleFigure
-          aspect='vertical'
+          className={figureClassName}
+          aspect={aspect || 'vertical'}
           src={buildImagePath({ path: credit.profile_path, scale: 'poster' })}
           alt='Person Avatar'
-          width={480}
-          height={854}
+          width={width || 480}
+          height={height || 854}
         />
       </Link>
       <BaseArticleContent>
-        <h2 className='truncate font-semibold tracking-tight'>{credit.name}</h2>
+        <h2 className='truncate font-semibold tracking-tight'>
+          {credit.original_name}
+        </h2>
         <span className='text-xs'>{credit.character}</span>
       </BaseArticleContent>
     </BaseArticle>

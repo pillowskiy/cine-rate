@@ -13,14 +13,16 @@ export interface ICelebrity {
   profile_path: string;
 }
 
-export interface ICredit extends ICelebrity {
+export interface ICredit extends Omit<ICelebrity, 'name' | 'known_for'> {
   credit_id: number;
   cast_id: number;
   character: number;
   original_name: string;
+}
 
-  name: never;
-  known_for: never;
+export interface ICrew extends Omit<ICredit, 'character' | 'cast_id'> {
+  job: string;
+  department: string;
 }
 
 export interface ICombinedCredits extends ICreation {

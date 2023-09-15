@@ -5,12 +5,14 @@ import {
 } from '@components/article/base-article';
 import { buildImagePath } from '@libs/tmdb';
 import { Star } from 'lucide-react';
+import { EpisodeDetails } from './episode-details';
 
 interface EpisodeArticleProps {
+  seriesId: number;
   episode: IEpisode;
 }
 
-export function EpisodeArticle({ episode }: EpisodeArticleProps) {
+export function EpisodeArticle({ seriesId, episode }: EpisodeArticleProps) {
   return (
     <BaseArticle className='space-y-4 rounded-md border p-4' key={episode.id}>
       <section className='flex w-full flex-col items-start gap-4 sm:flex-row'>
@@ -43,6 +45,7 @@ export function EpisodeArticle({ episode }: EpisodeArticleProps) {
           {!!episode.overview && <p>{episode.overview}</p>}
         </div>
       </section>
+      <EpisodeDetails seriesId={seriesId} episode={episode} />
     </BaseArticle>
   );
 }
