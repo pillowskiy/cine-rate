@@ -4,7 +4,6 @@ import CreationCast from '@components/creation/creation-cast';
 import CreationHeader from '@components/creation/creation-header';
 import CreationSimilar from '@components/creation/creation-similar';
 import CreationOverview from '@components/creation/creation-overview';
-import CreationReviews from '@components/creation/creation-reviews';
 
 import SerriesSeasons from './series-seasons';
 import SeriesDetails from './series-details';
@@ -31,7 +30,6 @@ export default async function TVPage({ params }: INextPageParams) {
         </div>
         <SeriesDetails className='min-w-[260px] space-y-6' details={tv} />
       </section>
-      <CreationReviews creationId={tv.id} />
     </main>
   );
 }

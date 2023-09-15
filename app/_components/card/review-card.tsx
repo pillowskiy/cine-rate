@@ -12,7 +12,7 @@ interface ReviewCardProps {
 export function ReviewCard({ review }: ReviewCardProps) {
   return (
     <Card className='md:max-w-[600px]'>
-      <CardContent className='flex  justify-between space-x-4 p-4'>
+      <CardContent className='flex space-x-4 p-4'>
         <UserAvatar
           path={review.author_details.avatar_path}
           username={review.author}

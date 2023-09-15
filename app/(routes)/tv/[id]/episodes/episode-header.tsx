@@ -1,4 +1,5 @@
 import type { ITVDetails } from '@app/types/tv-types';
+import { MediaType } from '@app/types/index';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { buildImagePath } from '@libs/tmdb';
 import Link from 'next/link';
@@ -39,7 +40,7 @@ export default function EpisodeHeader({ series }: EpisodeHeaderProps) {
           </div>
           <h2 className='text-2xl font-semibold'>Episode List</h2>
         </div>
-        <CreationActions details={series} />
+        <CreationActions details={series} mediaType={MediaType.TV} />
       </div>
     </header>
   );
