@@ -3,6 +3,7 @@ import TrendsCarousel from './trends-carousel';
 import MoviesCarousel from './movies-carousel';
 import CreationCarousel from './creation-carousel';
 import CelebrityCarousel from './celebrity-carousel';
+import WatchlistCarousel from './watchlist-carousel';
 
 export default async function Home() {
   return (
@@ -10,6 +11,7 @@ export default async function Home() {
       <TrendsCarousel />
       <CreationCarousel mediaType={MediaType.Movie} />
       <CreationCarousel mediaType={MediaType.TV} />
+      <WatchlistCarousel />
       <MoviesCarousel />
       <CelebrityCarousel />
     </main>
