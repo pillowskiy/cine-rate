@@ -28,7 +28,7 @@ export default async function MovieHeader({
     : null;
 
   return (
-    <header className='relative my-4 p-4 text-primary-foreground'>
+    <header className='relative my-4 p-4 text-white'>
       <div className='flex flex-col justify-between gap-4 sm:flex-row'>
         <div className='space-y-1'>
           <div className='flex items-center space-x-2'>
@@ -43,7 +43,7 @@ export default async function MovieHeader({
           </div>
           <div className='flex items-center space-x-1.5 overflow-auto truncate text-sm opacity-70'>
             {details.genres.map((genre) => (
-              <span className='rounded-md border p-1 text-xs' key={genre.id}>
+              <span className='rounded-md border border-white/70  p-1 text-xs' key={genre.id}>
                 {genre.name}
               </span>
             ))}

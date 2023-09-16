@@ -14,7 +14,7 @@ export function CreationActions({ details, mediaType }: CreationActionsProps) {
       <div className='flex flex-col items-center justify-center space-y-1 text-center'>
         <span className='text-xs font-semibold uppercase'>TMDB Rating</span>
         <CreationReviewsDialog creationId={details.id} mediaType={mediaType}>
-          <Button className='text-lg' variant='ghost' size='sm'>
+          <Button className='text-lg hover:bg-white hover:text-black' variant='ghost' size='sm'>
             <Star className='mr-1.5 h-7 w-7 fill-yellow-400 text-yellow-400' />
             <span>{details.vote_average.toFixed(1)}</span>
           </Button>
@@ -23,7 +23,7 @@ export function CreationActions({ details, mediaType }: CreationActionsProps) {
 
       <div className='flex flex-col items-center justify-center space-y-1 text-center'>
         <span className='text-xs font-semibold uppercase'>Your Rating</span>
-        <Button className='text-lg' variant='ghost' size='sm'>
+        <Button className='text-lg hover:bg-white hover:text-black' variant='ghost' size='sm'>
           <Star className='mr-1.5 h-7 w-7' />
           <span>Rate</span>
         </Button>
@@ -31,7 +31,7 @@ export function CreationActions({ details, mediaType }: CreationActionsProps) {
 
       <div className='flex flex-col items-center justify-center space-y-1 text-center'>
         <span className='text-xs font-semibold uppercase'>Popularity</span>
-        <Button className='text-lg' variant='ghost' size='sm'>
+        <Button className='text-lg hover:bg-white hover:text-black' variant='ghost' size='sm'>
           <TrendingUp className='mr-1.5 h-7 w-7' />
           <span>{details.popularity.toFixed(0)}</span>
         </Button>

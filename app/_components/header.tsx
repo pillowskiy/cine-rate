@@ -1,5 +1,5 @@
 import { Button } from '@ui/button';
-import { BookmarkPlus, LogIn } from 'lucide-react';
+import { LogIn } from 'lucide-react';
 import { DesktopNav } from '@components/nav/desktop-nav';
 import { MobileNav } from '@components/nav/mobile-nav';
 import Link from 'next/link';
@@ -9,6 +9,7 @@ import { ProfileDropdown } from '@components/dropdown/profile-dropdown';
 import { headers } from 'next/headers';
 import { MOBILE_VIEW_REGEXP } from '@config/regexp';
 import { SearchDialog } from './dialog/search-dialog';
+import { ToggleTheme } from './toggle-theme';
 
 export default async function Header() {
   // TEMP: use server side user store
@@ -23,9 +24,7 @@ export default async function Header() {
         {isMobileView ? <MobileNav /> : <DesktopNav />}
         <section className='flex w-full space-x-2 md:w-max'>
           <SearchDialog />
-          <Button className='aspect-square' variant='outline' size='icon'>
-            <BookmarkPlus className='h-5 w-5' />
-          </Button>
+          <ToggleTheme />
           {user ? (
             <ProfileDropdown>
               <UserAvatar
