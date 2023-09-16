@@ -1,4 +1,5 @@
 import type { ITVDetails } from '@app/types/tv-types';
+import { MediaType } from '@app/types/index';
 import CreationKeywords from '@components/creation/creation-keywords';
 import { getTitle } from '@components/creation/common/utils';
 import { Separator } from '@ui/separator';
@@ -16,9 +17,9 @@ export default async function SeriesDetails({
     <div {...props}>
       <section>
         <div className='flex items-center justify-between'>
-          <div className='space-y-1'>
+          <div className='space-y-1 max-w-full'>
             <h2 className='text-2xl font-semibold tracking-tight'>Details</h2>
-            <p className='text-sm text-muted-foreground'>
+            <p className='text-sm text-muted-foreground truncate'>
               Interesting about {getTitle(details)}.
             </p>
           </div>
@@ -75,7 +76,7 @@ export default async function SeriesDetails({
         </ul>
       </section>
 
-      <CreationKeywords details={details} />
+      <CreationKeywords mediaType={MediaType.TV} details={details} />
     </div>
   );
 }

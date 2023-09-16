@@ -1,5 +1,6 @@
 import type { IMovieDetails } from '@app/types/movies-types';
-import CreationKeywords from '@/app/_components/creation/creation-keywords';
+import { MediaType } from '@app/types/index';
+import CreationKeywords from '@components/creation/creation-keywords';
 import { getTitle } from '@components/creation/common/utils';
 import { Separator } from '@ui/separator';
 import { HTMLAttributes } from 'react';
@@ -16,7 +17,7 @@ export default async function MovieDetails({
     <div {...props}>
       <section>
         <div className='flex items-center justify-between'>
-          <div className='space-y-1'>
+          <div className='space-y-1 max-w-full'>
             <h2 className='text-2xl font-semibold tracking-tight'>Details</h2>
             <p className='text-sm text-muted-foreground truncate'>
               Interesting about {getTitle(details)}.
@@ -73,7 +74,7 @@ export default async function MovieDetails({
         </ul>
       </section>
 
-      <CreationKeywords details={details} />
+      <CreationKeywords mediaType={MediaType.Movie} details={details} />
     </div>
   );
 }

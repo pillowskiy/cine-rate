@@ -1,6 +1,9 @@
 import type { CreationDetailsProps } from './common/types';
 import type { MediaType } from '@app/types/index';
 
+import Link from 'next/link';
+
+import { Button } from '@ui/button';
 import { FileImage, FileVideo } from 'lucide-react';
 import { YoutubePlayer } from '@components/youtube-player';
 import { BaseFigure } from '@components/figure/base-figure';
@@ -43,9 +46,21 @@ export default async function MovieHeader({
           </div>
           <div className='flex items-center space-x-1.5 overflow-auto truncate text-sm opacity-70'>
             {details.genres.map((genre) => (
-              <span className='rounded-md border border-white/70  p-1 text-xs' key={genre.id}>
-                {genre.name}
-              </span>
+              <Link
+                key={genre.id}
+                href={{
+                  pathname: `/${mediaType}`,
+                  query: {
+                    with_genres: genre.id,
+                  },
+                }}
+                passHref
+                legacyBehavior
+              >
+                <Button className='h-7 text-xs px-2' variant='outline'>
+                  {genre.name}
+                </Button>
+              </Link>
             ))}
           </div>
         </div>
@@ -102,7 +117,7 @@ export default async function MovieHeader({
         />
         <div
           className={
-            'absolute left-0 top-0 h-full w-full bg-gradient-to-r backdrop-blur-sm bg-black/20'
+            'absolute left-0 top-0 h-full w-full bg-black/20 bg-gradient-to-r backdrop-blur-sm'
           }
         />
       </div>

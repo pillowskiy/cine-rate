@@ -1,14 +1,20 @@
 import type { CreationDetailsProps } from './common/types';
+import type { MediaType } from '@app/types/index';
 import { Separator } from '@ui/separator';
 import { Button } from '@ui/button';
 import { getTitle } from './common/utils';
-import { MediaType } from '@app/types/index';
 import { getCreationKeywords } from '@actions/getCreationKeywords';
+import Link from 'next/link';
+
+interface CreationKeywordsProps extends CreationDetailsProps {
+  mediaType: MediaType.Movie | MediaType.TV;
+}
 
 export default async function CreationKeywords({
+  mediaType,
   details,
-}: CreationDetailsProps) {
-  const { data } = await getCreationKeywords(details.id, MediaType.Movie).catch(
+}: CreationKeywordsProps) {
+  const { data } = await getCreationKeywords(details.id, mediaType).catch(
     () => ({ data: null })
   );
 
@@ -28,9 +34,21 @@ export default async function CreationKeywords({
 
       <div className='flex flex-wrap gap-2'>
         {data.keywords.map((keyword) => (
-          <Button className='h-7 text-sm' key={keyword.id} variant='outline'>
-            {keyword.name}
-          </Button>
+          <Link
+            href={{
+              pathname: `/${mediaType}`,
+              query: {
+                with_keywords: keyword.name,
+              },
+            }}
+            key={keyword.id}
+            passHref
+            legacyBehavior
+          >
+            <Button className='h-7 text-sm' variant='outline'>
+              {keyword.name}
+            </Button>
+          </Link>
         ))}
       </div>
     </div>

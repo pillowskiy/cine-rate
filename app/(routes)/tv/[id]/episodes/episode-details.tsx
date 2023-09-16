@@ -8,7 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@ui/accordion';
-import { CreditArticle } from '@/app/_components/article/credit-article';
+import { CreditArticle } from '@components/article/credit-article';
 
 interface EpisodeDetailsProps {
   episode: IEpisode;
