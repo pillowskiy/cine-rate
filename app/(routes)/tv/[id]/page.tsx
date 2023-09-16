@@ -28,7 +28,7 @@ export default async function TVPage({ params }: INextPageParams) {
           {tv.seasons.length && <SerriesSeasons details={tv} />}
           <CreationSimilar creationId={tv.id} mediaType={MediaType.TV} />
         </div>
-        <SeriesDetails className='min-w-[260px] space-y-6' details={tv} />
+        <SeriesDetails className='min-w-[260px] w-full sm:w-[260px] space-y-6' details={tv} />
       </section>
     </main>
   );

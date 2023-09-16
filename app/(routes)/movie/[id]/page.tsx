@@ -29,7 +29,7 @@ export default async function MoviePage({ params }: INextPageParams) {
           <MediaTabs creationId={movie.id} />
           <CreationSimilar creationId={movie.id} mediaType={MediaType.Movie} />
         </div>
-        <MovieDetails className='min-w-[260px] w-[260px] space-y-6' details={movie} />
+        <MovieDetails className='min-w-[260px] w-full sm:w-[260px] space-y-6' details={movie} />
       </section>
     </main>
   );

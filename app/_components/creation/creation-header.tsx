@@ -57,7 +57,7 @@ export default async function MovieHeader({
                 passHref
                 legacyBehavior
               >
-                <Button className='h-7 text-xs px-2' variant='outline'>
+                <Button className='text-white/70 border-white/70 h-7 text-xs px-2 bg-transparent' variant='outline'>
                   {genre.name}
                 </Button>
               </Link>
