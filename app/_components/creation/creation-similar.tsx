@@ -8,9 +8,11 @@ export default async function CreationSimilar({
   creationId,
   mediaType,
 }: CreationIdentifierProps) {
-  const { data: creations } = await getSimilar(creationId, mediaType);
+  const { data: creations } = await getSimilar(creationId, mediaType).catch(
+    () => ({ data: null })
+  );
 
-  if (!creations) return null;
+  if (!creations?.results.length) return null;
 
   return (
     <section>

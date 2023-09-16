@@ -33,10 +33,16 @@ export async function CreationReviewsDialog({
           <DialogTitle>Reviews</DialogTitle>
           <DialogDescription>Feedback from our users.</DialogDescription>
         </DialogHeader>
-        <div className='space-y-4 overflow-y-auto md:max-h-[400px] px-6'>
-          {reviews?.results.length && reviews.results.map((review) => (
+        <div className='space-y-4 overflow-y-auto md:max-h-[400px] min-h-[300px] px-6'>
+          {!!reviews?.results.length ? reviews.results.map((review) => (
             <ReviewCard key={review.id} review={review} />
-          ))}
+          )): (
+            <div className='h-full grid place-items-center'>
+              <span className='text-foreground/70'>
+                There are not reviews yet.
+              </span>
+            </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>

@@ -21,6 +21,7 @@ function getMultipleSearch(query: string) {
 }
 
 export function SearchDialog() {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<Record<
     MediaType,
@@ -42,10 +43,14 @@ export function SearchDialog() {
   }, [debounceQuery]);
 
   return (
-    <Dialog onOpenChange={(isOpen) => !isOpen && setData(null)}>
+    <Dialog
+      open={isDialogOpen}
+      onOpenChange={(isOpen) => !isOpen && setData(null)}
+    >
       <DialogTrigger asChild>
         <Button
           variant='outline'
+          onClick={() => setIsDialogOpen(true)}
           className={cn(
             'relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64'
           )}
@@ -61,7 +66,7 @@ export function SearchDialog() {
           <Search className='h-4 w-4 text-foreground/70' />
           <input
             onChange={({ target }) => setQuery(target.value.toLowerCase())}
-            className='flex-grow border-none px-0 py-2 text-sm outline-none'
+            className='flex-grow border-none bg-transparent px-0 py-2 text-sm outline-none'
             placeholder='Type a command or search...'
           />
           <DialogClose>
@@ -87,17 +92,20 @@ export function SearchDialog() {
                     if (!('known_for' in person)) return null;
 
                     return (
-                      <DialogClose key={person.id} asChild>
-                        <Link
-                          href={`/celebrity/${person.id}`}
-                          className='flex cursor-pointer gap-2 rounded-md p-2 transition-all hover:bg-accent'
-                        >
+                      <Link
+                        key={person.id}
+                        href={`/celebrity/${person.id}`}
+                        passHref
+                        legacyBehavior
+                      >
+                        <div className='flex cursor-pointer gap-2 rounded-md p-2 transition-all hover:bg-accent'>
                           <PersonArticle
                             className='w-[120px] min-w-[120px]'
+                            onClick={() => setIsDialogOpen(false)}
                             celebrity={person}
                           />
-                        </Link>
-                      </DialogClose>
+                        </div>
+                      </Link>
                     );
                   })}
               </Carousel>
@@ -115,16 +123,20 @@ export function SearchDialog() {
                 .map((movie) => {
                   if ('known_for' in movie) return null;
                   return (
-                    <DialogClose key={movie.id} asChild>
-                      <Link href={`/movie/${movie.id}`} passHref legacyBehavior>
-                        <HorizontalCreationArticle
-                          creation={movie}
-                          alt='Series Backdrop'
-                          width={260}
-                          height={190}
-                        />
-                      </Link>
-                    </DialogClose>
+                    <Link
+                      key={movie.id}
+                      href={`/movie/${movie.id}`}
+                      passHref
+                      legacyBehavior
+                    >
+                      <HorizontalCreationArticle
+                        creation={movie}
+                        alt='Series Backdrop'
+                        onClick={() => setIsDialogOpen(false)}
+                        width={260}
+                        height={190}
+                      />
+                    </Link>
                   );
                 })}
             </div>
@@ -141,16 +153,20 @@ export function SearchDialog() {
                 .map((tv) => {
                   if ('known_for' in tv) return null;
                   return (
-                    <DialogClose key={tv.id} asChild>
-                      <Link href={`/tv/${tv.id}`} passHref legacyBehavior>
-                        <HorizontalCreationArticle
-                          creation={tv}
-                          alt='Series Backdrop'
-                          width={260}
-                          height={190}
-                        />
-                      </Link>
-                    </DialogClose>
+                    <Link
+                      key={tv.id}
+                      href={`/tv/${tv.id}`}
+                      passHref
+                      legacyBehavior
+                    >
+                      <HorizontalCreationArticle
+                        creation={tv}
+                        onClick={() => setIsDialogOpen(false)}
+                        alt='Series Backdrop'
+                        width={260}
+                        height={190}
+                      />
+                    </Link>
                   );
                 })}
             </div>

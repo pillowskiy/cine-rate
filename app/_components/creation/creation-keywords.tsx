@@ -18,7 +18,7 @@ export default async function CreationKeywords({
     () => ({ data: null })
   );
 
-  if (!data?.keywords.length) return null;
+  if (!data?.keywords?.length) return null;
 
   return (
     <div>
