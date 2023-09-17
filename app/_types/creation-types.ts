@@ -38,6 +38,12 @@ export interface ICreationVideo {
   id: string;
 }
 
+export type ToggleFavoriteData = {
+  mediaType: MediaType;
+  mediaId: number;
+  isFavorite: boolean;
+}
+
 export type CreationsResponse = BaseResponse<ICreation>;
 export type CreationVideosResponse = {
   id: number;
@@ -53,3 +59,9 @@ export type CreationKeywordsResponse = {
   id: number;
   keywords: IKeyword[];
 };
+
+export type ToggleFavoriteResponse = {
+  success: boolean;
+  status_code: number;
+  status_message: string;
+}

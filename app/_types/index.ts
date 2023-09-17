@@ -58,3 +58,7 @@ export interface INextPageParams {
   searchParams?: Record<string, string>
   params?: Record<string, string | number | symbol>
 }
+
+export interface IApiReject {
+  message: string;
+}
