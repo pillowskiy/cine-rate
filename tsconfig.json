@@ -27,6 +27,7 @@
       "@app/types/*": ["./app/_types/*"],
       "@actions/*": ["./app/_shared/actions/*"],
       "@hooks/*": ["./app/_hooks/*"],
+      "@redux/*": ["./app/_redux/*"],
       "@libs/*": ["./app/_libs/*"],
     }
   },
