@@ -45,7 +45,10 @@ export function SearchDialog() {
   return (
     <Dialog
       open={isDialogOpen}
-      onOpenChange={(isOpen) => !isOpen && setData(null)}
+      onOpenChange={(isOpen) => {
+        setIsDialogOpen(isOpen);
+        !isOpen && setData(null);
+      }}
     >
       <DialogTrigger asChild>
         <Button
