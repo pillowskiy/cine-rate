@@ -25,8 +25,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <StoreProvider>
           <ThemeProvider attribute='class' defaultTheme='light' enableSystem>
-            <Header />
-            <Main>{children}</Main>
+            <div className='min-h-screen flex flex-col'>
+              <Header />
+              <Main>{children}</Main>
+            </div>
             <Footer />
           </ThemeProvider>
         </StoreProvider>
