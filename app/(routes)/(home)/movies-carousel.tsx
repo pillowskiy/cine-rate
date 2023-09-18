@@ -18,7 +18,7 @@ export default async function MoviesCarousel() {
         <div className='space-y-1'>
           <h2 className='text-2xl font-semibold tracking-tight'>Upcoming!</h2>
           <p className='text-sm text-muted-foreground'>
-            Novelties that may be interesting
+            Novelties that may be interesting.
           </p>
         </div>
       </div>

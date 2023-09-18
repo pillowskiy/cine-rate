@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from '@ui/select';
 import { ArrowDownUp } from 'lucide-react';
-import { memo, startTransition } from 'react';
+import { startTransition } from 'react';
 
 interface EpisodeFilterProps {
   series: ITVDetails;

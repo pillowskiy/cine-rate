@@ -15,7 +15,7 @@ export default async function TrendsCarousel() {
         <div className='space-y-1'>
           <h2 className='text-2xl font-semibold tracking-tight'>Trends now</h2>
           <p className='text-sm text-muted-foreground'>
-            The most popular movies and TV series today
+            The most popular movies and TV series today.
           </p>
         </div>
       </div>

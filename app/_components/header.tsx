@@ -34,7 +34,7 @@ export default async function Header() {
               />
             </ProfileDropdown>
           ) : (
-            <Link href='/auth'>
+            <Link href='/auth' passHref legacyBehavior>
               <Button className='aspect-square' variant='outline' size='icon'>
                 <LogIn className='h-5 w-5' />
               </Button>

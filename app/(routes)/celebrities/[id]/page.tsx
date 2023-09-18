@@ -1,17 +1,19 @@
 import { BaseFigure } from '@components/figure/base-figure';
-import { getPersonDetails } from '@actions/getPersonDetails';
 import PersonBiography from './person-biography';
 import CombinedCredits from './combined-credits';
 import PersonKnownAs from './person-known-as';
 import PersonDetails from './person-details';
+
+import { getPersonDetails } from '@actions/getPersonDetails';
+import { intParamPipe } from '@libs/common/next';
+
 interface PersonPageProps {
   params: { id?: string | undefined };
 }
 
 export default async function PersonPage({ params }: PersonPageProps) {
-  // TEMP;
-  if (!params.id || isNaN(+params.id)) return null;
-  const { data: person } = await getPersonDetails(+params.id);
+  const personId = intParamPipe('id', params);
+  const { data: person } = await getPersonDetails(personId);
 
   // TEMP;
   if (!person) return null;
