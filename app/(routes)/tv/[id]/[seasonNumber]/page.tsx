@@ -1,4 +1,4 @@
-import { intParamPipe } from '@libs/common/next';
+import { pipe } from '@libs/common/next';
 import { MediaType, type INextPageParams, BaseParams } from '@app/types/index';
 import type { SeasonDetailsResponse } from '@app/types/tv-types';
 import { $api } from '@/app/_shared/api/api-interceptor';
@@ -21,8 +21,8 @@ async function getSeasonDetails(
 }
 
 export default async function SeasonPage({ params }: INextPageParams) {
-  const seriesId = intParamPipe('id', params);
-  const seasonNumber = intParamPipe('seasonNumber', params);
+  const seriesId = pipe.strToInt(params?.id);
+  const seasonNumber = pipe.strToInt(params?.seasonNumber);
   const { data: season } = await getSeasonDetails(seriesId, seasonNumber);
 
   // TEMP

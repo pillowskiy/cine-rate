@@ -1,18 +1,13 @@
 'use client';
 
 import type { INextPageParams } from '@app/types/index';
-import type { AuthApproveResponse } from '@app/types/auth-types';
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@ui/card';
-import { Button } from '@ui/button';
-import axios, { isAxiosError } from 'axios';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useAppDispatch } from '@/app/_redux/hooks';
+import { approve } from '@/app/_redux/user/user-actions';
+import { pipe } from '@/app/_libs/common/next';
+import { useRouter } from 'next/navigation';
+import Loader from '@components/loader';
+import { useToast } from '@ui/use-toast';
 
 const statusDescription = {
   200: 'You have successfully authorized us to receive and modify your data through the TMDB service.',
@@ -33,47 +28,39 @@ function getStatusDescription(status: number) {
     : statusDescription.default;
 }
 
-interface ApproveData extends AuthApproveResponse {
-  status: number;
-}
-
 /*
  * https://github.com/vercel/next.js/issues/52799#issuecomment-1645124081
  */
 
 export default function ApprovePage({ searchParams }: INextPageParams) {
-  const [data, setData] = useState<ApproveData | null>();
+  const requestToken = pipe.string(searchParams?.request_token);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const { toast } = useToast();
 
   useEffect(() => {
-    axios
-      .get<AuthApproveResponse>('/auth/approve/api', {
-        params: searchParams,
-        withCredentials: true,
-      })
-      .then((res) => setData({ message: res.data.message, status: res.status }))
-      .catch((err) => {
-        if (!isAxiosError(err) || !err.response) return;
-        const { data, status } = err.response;
-        setData({ message: data.message, status });
-      });
+    async function handleResult() {
+      const result = await dispatch(approve(requestToken));
+
+      router.replace('/');
+
+      if (approve.fulfilled.match(result)) {
+        toast({
+          title: 'Successfully approval!',
+          description:
+            'You have successfully authorized us to receive and modify your data through the TMDB service.',
+        });
+      } else if (result.payload) {
+        const { message, status } = result.payload;
+        toast({
+          title: message,
+          description: getStatusDescription(status),
+        });
+      }
+    }
+    handleResult();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // TEMP
-  if (!data) return null;
-
-  return (
-    <div className='grid place-items-center'>
-      <Card>
-        <CardHeader className='max-w-[550px]'>
-          <CardTitle>{data.message}</CardTitle>
-          <CardDescription>{getStatusDescription(data.status)}</CardDescription>
-        </CardHeader>
-        <CardFooter>
-          <Link href='/'>
-            <Button>Back Home</Button>
-          </Link>
-        </CardFooter>
-      </Card>
-    </div>
-  );
+  return <Loader />;
 }

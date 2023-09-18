@@ -1,6 +1,6 @@
 import { getCreationDetails } from '@actions/getCreationDetails';
 import { MediaType, type INextPageParams } from '@app/types/index';
-import { intParamPipe } from '@libs/common/next';
+import { pipe } from '@libs/common/next';
 import EpisodeFilter from './episode-filter';
 import EpisodeList from './episode-list';
 import EpisodeHeader from './episode-header';
@@ -9,7 +9,7 @@ export default async function EpisodesPage({
   params,
   searchParams,
 }: INextPageParams) {
-  const seriesId = intParamPipe('id', params);
+  const seriesId = pipe.strToInt(params?.id);
   const seasonNumber = parseInt(searchParams?.season || '1');
   const { data: series } = await getCreationDetails(seriesId, MediaType.TV);
 
