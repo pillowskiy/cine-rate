@@ -10,7 +10,7 @@ export default function useInfiniteScroll<
       const { innerHeight } = window;
       const { scrollTop, offsetHeight } = document.documentElement;
 
-      const inBottom = innerHeight + scrollTop === offsetHeight;
+      const inBottom = innerHeight + scrollTop >= offsetHeight - 120;
       if (canScroll && inBottom) {
         callback();
         setCanScroll(false);
