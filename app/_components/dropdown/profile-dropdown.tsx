@@ -1,4 +1,6 @@
-import { Suspense, type ReactNode } from 'react';
+'use client';
+
+import type { ReactNode } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,14 +14,14 @@ import {
 
 import { MessageSquare, Mails, Star, BookmarkPlus, LogOut } from 'lucide-react';
 
-import { getSessionUser } from '@actions/getSessionUser';
+import { useAppSelector } from '@/app/_redux/hooks';
 
 interface ProfileDropdownProps {
   children: ReactNode;
 }
 
-export async function ProfileDropdown({ children }: ProfileDropdownProps) {
-  const user = await getSessionUser();
+export function ProfileDropdown({ children }: ProfileDropdownProps) {
+  const { user } = useAppSelector((state) => state.user);
 
   // TEMP
   if (!user) return null;

@@ -61,4 +61,5 @@ export interface INextPageParams {
 
 export interface IApiReject {
   message: string;
+  status: number;
 }

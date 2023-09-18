@@ -10,10 +10,13 @@ import {
     PURGE,
     REGISTER,
 } from 'redux-persist';
+
 import { favoriteSlice } from './favorite/favorites-slice';
+import { userSlice } from './user/user-slice';
 
 const rootReducer = combineReducers({
-    favorites: favoriteSlice.reducer
+    favorites: favoriteSlice.reducer,
+    user: userSlice.reducer
 });
 const persistedReducer = persistReducer({ key: 'root', storage }, rootReducer);
 
