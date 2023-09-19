@@ -26,6 +26,7 @@ export default async function CreationSimilar({
       <Carousel>
         {creations.results.map((creation) => (
           <CreationArticle
+            defaultMediaType={mediaType}
             aspect='horizontal'
             key={creation.id}
             creation={creation}

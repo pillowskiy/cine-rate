@@ -56,6 +56,7 @@ export default function CreationCatalog({
 
     return items.map((movie) => (
       <CreationArticle
+        defaultMediaType={mediaType}
         key={movie.id}
         creation={movie}
         className='mb-4 w-[40%] flex-grow md:w-[260px]'

@@ -1,3 +1,4 @@
+import { MediaType } from '@app/types/index';
 import { Separator } from '@ui/separator';
 import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
@@ -16,6 +17,7 @@ async function CreationCarousel({ sort }: { sort: Sort }) {
     <Carousel>
       {data.results.map((creation) => (
         <CreationArticle
+          defaultMediaType={MediaType.Movie}
           aspect='horizontal'
           key={creation.id}
           creation={creation}
@@ -34,9 +36,11 @@ export default function MoviesCarousel() {
     <section>
       <div className='flex items-center justify-between'>
         <div className='space-y-1'>
-          <h2 className='text-2xl font-semibold tracking-tight'>Movies that Conquer the World!</h2>
+          <h2 className='text-2xl font-semibold tracking-tight'>
+            Movies that Conquer the World!
+          </h2>
           <p className='text-sm text-muted-foreground'>
-          The most popular blockbusters and unforgettable masterpieces.
+            The most popular blockbusters and unforgettable masterpieces.
           </p>
         </div>
       </div>

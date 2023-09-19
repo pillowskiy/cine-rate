@@ -1,3 +1,4 @@
+import { MediaType } from '@app/types/index';
 import { Separator } from '@ui/separator';
 import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
@@ -16,6 +17,7 @@ async function CreationCarousel({ sort }: { sort: Sort }) {
     <Carousel>
       {data.results.map((creation) => (
         <CreationArticle
+          defaultMediaType={MediaType.TV}
           aspect='horizontal'
           key={creation.id}
           creation={creation}
