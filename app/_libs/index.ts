@@ -8,15 +8,16 @@ export function cn(...inputs: ClassValue[]) {
 interface CapitalizeOptions {
   join?: string;
   assignLowerCase?: boolean;
+  split?: string;
 }
 export function capitalize(
   string: string,
   options?: CapitalizeOptions
 ): string {
   return (options?.assignLowerCase ? string.toLocaleLowerCase() : string)
-    .split(' ')
+    .split(options?.split ?? ' ')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(options?.join || ' ');
+    .join(options?.join ?? ' ');
 }
 
 type ObjectKeys = string | number | symbol;

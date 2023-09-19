@@ -1,12 +1,12 @@
 import { Separator } from '@ui/separator';
 import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
-import { Sort, getMovies } from '@actions/getMovies';
+import { Sort, getTV } from '@actions/getTV';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@components/ui/tabs';
 import { capitalize } from '@libs/index';
 
 async function CreationCarousel({ sort }: { sort: Sort }) {
-  const { data } = await getMovies(sort).catch(() => ({
+  const { data } = await getTV(sort).catch(() => ({
     data: null,
   }));
 
@@ -29,19 +29,21 @@ async function CreationCarousel({ sort }: { sort: Sort }) {
   );
 }
 
-export default function MoviesCarousel() {
+export default function SeriesCarousel() {
   return (
     <section>
       <div className='flex items-center justify-between'>
         <div className='space-y-1'>
-          <h2 className='text-2xl font-semibold tracking-tight'>Movies that Conquer the World!</h2>
+          <h2 className='text-2xl font-semibold tracking-tight'>
+            Captivating Series
+          </h2>
           <p className='text-sm text-muted-foreground'>
-          The most popular blockbusters and unforgettable masterpieces.
+            The most popular and widely known TV series.
           </p>
         </div>
       </div>
       <Separator className='my-4' />
-      <Tabs defaultValue={Sort.Popular}>
+      <Tabs defaultValue={Sort.TopRated}>
         <TabsList className='w-full md:w-fit'>
           {Object.values(Sort).map((value) => (
             <TabsTrigger key={value} value={value}>
