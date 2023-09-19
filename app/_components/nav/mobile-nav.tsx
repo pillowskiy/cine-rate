@@ -1,9 +1,6 @@
 import {
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -27,13 +24,8 @@ export function MobileNav() {
           <SheetTitle>
             <Logo />
           </SheetTitle>
-          <SheetDescription>
-            CineRate: Rating, Reviews and more with IMDb
-          </SheetDescription>
         </SheetHeader>
-        <div className='flex flex-col gap-2 text-lg'>
-          <AppNav />
-        </div>
+        <AppNav className='my-4 flex flex-col space-y-2 pl-6 text-base' />
       </SheetContent>
     </Sheet>
   );

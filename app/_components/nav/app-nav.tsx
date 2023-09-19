@@ -4,13 +4,16 @@ import { OriginRoutes } from '@config/routes';
 import Link from 'next/link';
 import { cn } from '@libs/index';
 import { usePathname } from 'next/navigation';
+import { ComponentProps } from 'react';
 
-export function AppNav() {
+interface AppNavProps extends Omit<ComponentProps<'nav'>, 'children'> {}
+
+export function AppNav({ className, ...props }: AppNavProps) {
   const pathname = usePathname();
   const routes = Object.entries(OriginRoutes);
 
   return (
-    <nav className='flex items-center space-x-6 text-sm font-medium'>
+    <nav className={cn('text-sm font-medium', className)} {...props}>
       {routes.map(([name, href]) => (
         <Link
           key={href}
