@@ -1,22 +1,19 @@
-import { Button } from '@/app/_components/ui/button';
+import { Button } from '@ui/button';
+import { Heading } from '@components/heading';
+import { Separator } from '@ui/separator';
 import { BookmarkPlus, LogIn } from 'lucide-react';
 import Link from 'next/link';
 
 export default function WatchlistCarousel() {
   return (
     <section className='relative'>
-      <div className='flex items-center justify-between'>
-        <div className='space-y-1'>
-          <h2 className='text-2xl font-semibold tracking-tight'>
-            From your watchlist
-          </h2>
-          <p className='text-sm text-muted-foreground'>
-            Discover top picks from your watchlist.
-          </p>
-        </div>
-      </div>
+      <Heading
+        title='From your watchlist'
+        description='Discover top picks from your watchlist.'
+      />
+      <Separator className='my-4' />
 
-      <div className='grid w-full place-items-center gap-4 p-4'>
+      <div className='grid w-full place-items-center gap-4 p-6 mt-6'>
         <BookmarkPlus className='h-10 w-10' />
 
         <div className='space-y-1 text-center'>
@@ -37,9 +34,9 @@ export default function WatchlistCarousel() {
       </div>
 
       <div className='absolute inset-0 -z-10 h-full w-full'>
-        <div className='absolute left-[45%] top-[35%] h-[16px] w-[16px] -translate-x-[50%] animate-pulse rounded-full bg-green-500 blur-xl sm:h-[32px] sm:w-[32px]' />
-        <div className='absolute left-[50%] top-[20%] h-[24px] w-[24px] -translate-x-[50%] animate-pulse rounded-full bg-red-500 blur-xl sm:h-[96px] sm:w-[96px]' />
-        <div className='absolute left-[55%] top-[35%] h-[18px] w-[18px] -translate-x-[50%] animate-pulse rounded-full bg-blue-500 blur-xl sm:h-[64px] sm:w-[64px]' />
+        <div className='absolute left-[45%] top-[40%] h-[16px] w-[16px] -translate-x-[50%] animate-pulse rounded-full bg-green-500 blur-xl sm:h-[32px] sm:w-[32px]' />
+        <div className='absolute left-[50%] top-[30%] h-[24px] w-[24px] -translate-x-[50%] animate-pulse rounded-full bg-red-500 blur-xl sm:h-[96px] sm:w-[96px]' />
+        <div className='absolute left-[55%] top-[40%] h-[18px] w-[18px] -translate-x-[50%] animate-pulse rounded-full bg-blue-500 blur-xl sm:h-[64px] sm:w-[64px]' />
       </div>
     </section>
   );

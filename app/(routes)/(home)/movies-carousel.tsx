@@ -1,9 +1,10 @@
 import { MediaType } from '@app/types/index';
 import { Separator } from '@ui/separator';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@ui/tabs';
 import { CreationArticle } from '@components/article/creation-article';
+import { Heading } from '@components/heading';
 import { Carousel } from '@components/carousel';
 import { Sort, getMovies } from '@actions/getMovies';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@components/ui/tabs';
 import { capitalize } from '@libs/index';
 
 async function CreationCarousel({ sort }: { sort: Sort }) {
@@ -34,16 +35,10 @@ async function CreationCarousel({ sort }: { sort: Sort }) {
 export default function MoviesCarousel() {
   return (
     <section>
-      <div className='flex items-center justify-between'>
-        <div className='space-y-1'>
-          <h2 className='text-2xl font-semibold tracking-tight'>
-            Movies that Conquer the World!
-          </h2>
-          <p className='text-sm text-muted-foreground'>
-            The most popular blockbusters and unforgettable masterpieces.
-          </p>
-        </div>
-      </div>
+      <Heading
+        title='Movies that Conquer the World!'
+        description='The most popular blockbusters and unforgettable masterpieces.'
+      />
       <Separator className='my-4' />
       <Tabs defaultValue={Sort.Popular}>
         <TabsList className='w-full md:w-fit'>

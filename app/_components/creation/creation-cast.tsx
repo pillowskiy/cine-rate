@@ -3,6 +3,7 @@ import { CreditArticle } from '@components/article/credit-article';
 import { Carousel } from '@components/carousel';
 import { Separator } from '@ui/separator';
 import { getCreationCredits } from '@actions/getCreationCredits';
+import { Heading } from '@components/heading';
 
 export default async function CreationCast({
   creationId,
@@ -15,12 +16,7 @@ export default async function CreationCast({
 
   return (
     <section>
-      <div className='flex items-center justify-between'>
-        <div className='space-y-1'>
-          <h2 className='text-2xl font-semibold tracking-tight'>Cast</h2>
-          <p className='text-sm text-muted-foreground'>The creation cast.</p>
-        </div>
-      </div>
+      <Heading title='Cast' description='The creation cast.' />
       <Separator className='my-4' />
       <Carousel>
         {credits.cast.slice(0, 10).map((credit) => (

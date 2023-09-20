@@ -3,6 +3,7 @@ import { PersonArticle } from '@components/article/person-article';
 import { Carousel } from '@components/carousel';
 import { getPopular } from '@actions/getPopular';
 import { Separator } from '@ui/separator';
+import { Heading } from '@components/heading';
 
 export default async function CelebrityCarousel() {
   const { data: celebrities } = await getPopular(MediaType.Person).catch(
@@ -14,14 +15,10 @@ export default async function CelebrityCarousel() {
 
   return (
     <section>
-      <div className='flex items-center justify-between'>
-        <div className='space-y-1'>
-          <h2 className='text-2xl font-semibold tracking-tight'>Celebrities</h2>
-          <p className='text-sm text-muted-foreground'>
-            The most popular celebrities.
-          </p>
-        </div>
-      </div>
+      <Heading
+        title='Celebrities'
+        description='The most popular celebrities.'
+      />
       <Separator className='my-4' />
       <Carousel>
         {celebrities.results.map((celebrity) => (

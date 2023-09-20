@@ -9,6 +9,7 @@ import {
   AccordionTrigger,
 } from '@ui/accordion';
 import { CreditArticle } from '@components/article/credit-article';
+import { Heading } from '@components/heading';
 
 interface EpisodeDetailsProps {
   episode: IEpisode;
@@ -35,16 +36,10 @@ export async function EpisodeDetails({
         <AccordionContent>
           <section className='mt-4 flex gap-4'>
             <div className='w-full min-w-[260px] sm:w-[260px]'>
-              <div className='flex items-center justify-between'>
-                <div className='space-y-1'>
-                  <h2 className='text-2xl font-semibold tracking-tight'>
-                    Crew ({details.crew.length})
-                  </h2>
-                  <p className='text-sm text-muted-foreground'>
-                    Crew of episode.
-                  </p>
-                </div>
-              </div>
+              <Heading
+                title={`Crew (${details.crew.length})`}
+                description='Crew of episode.'
+              />
               <Separator className='my-4' />
 
               <ul className='space-y-4'>
@@ -69,7 +64,7 @@ export async function EpisodeDetails({
               </div>
               <Separator className='my-4' />
 
-              <section className='grid grid-cols-2 gap-4 max-h-[600px] overflow-y-auto'>
+              <section className='grid max-h-[600px] grid-cols-2 gap-4 overflow-y-auto'>
                 {details.guest_stars.map((star) => (
                   <CreditArticle
                     aspect='vertical'

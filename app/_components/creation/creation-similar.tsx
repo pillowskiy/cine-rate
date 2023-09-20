@@ -3,6 +3,7 @@ import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
 import { Separator } from '@ui/separator';
 import { getSimilar } from '@actions/getSimilar';
+import { Heading } from '@components/heading';
 
 export default async function CreationSimilar({
   creationId,
@@ -16,12 +17,7 @@ export default async function CreationSimilar({
 
   return (
     <section>
-      <div className='mt-6 flex items-center justify-between'>
-        <div className='space-y-1'>
-          <h2 className='text-2xl font-semibold tracking-tight'>Similar</h2>
-          <p className='text-sm text-muted-foreground'>More like this.</p>
-        </div>
-      </div>
+      <Heading title='Similar' description='>More like this.' />
       <Separator className='my-4' />
       <Carousel>
         {creations.results.map((creation) => (

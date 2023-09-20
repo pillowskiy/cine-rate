@@ -5,6 +5,7 @@ import { Button } from '@ui/button';
 import { getTitle } from './common/utils';
 import { getCreationKeywords } from '@actions/getCreationKeywords';
 import Link from 'next/link';
+import { Heading } from '@components/heading';
 
 interface CreationKeywordsProps extends CreationDetailsProps {
   mediaType: MediaType.Movie | MediaType.TV;
@@ -22,14 +23,10 @@ export default async function CreationKeywords({
 
   return (
     <div>
-      <div className='flex items-center justify-between'>
-        <div className='space-y-1'>
-          <h2 className='text-2xl font-semibold tracking-tight'>Keywords</h2>
-          <p className='text-sm text-muted-foreground'>
-            Keywords of {getTitle(details)}.
-          </p>
-        </div>
-      </div>
+      <Heading
+        title='Keywords'
+        description={`Keywords of ${getTitle(details)}.`}
+      />
       <Separator className='my-4' />
 
       <div className='flex flex-wrap gap-2'>

@@ -1,9 +1,10 @@
 import { MediaType } from '@app/types/index';
 import { Separator } from '@ui/separator';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@ui/tabs';
 import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
+import { Heading } from '@components/heading';
 import { Sort, getTV } from '@actions/getTV';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@components/ui/tabs';
 import { capitalize } from '@libs/index';
 
 async function CreationCarousel({ sort }: { sort: Sort }) {
@@ -34,16 +35,10 @@ async function CreationCarousel({ sort }: { sort: Sort }) {
 export default function SeriesCarousel() {
   return (
     <section>
-      <div className='flex items-center justify-between'>
-        <div className='space-y-1'>
-          <h2 className='text-2xl font-semibold tracking-tight'>
-            Captivating Series
-          </h2>
-          <p className='text-sm text-muted-foreground'>
-            The most popular and widely known TV series.
-          </p>
-        </div>
-      </div>
+      <Heading
+        title='Captivating Series'
+        description='The most popular and widely known TV series.'
+      />
       <Separator className='my-4' />
       <Tabs defaultValue={Sort.TopRated}>
         <TabsList className='w-full md:w-fit'>
