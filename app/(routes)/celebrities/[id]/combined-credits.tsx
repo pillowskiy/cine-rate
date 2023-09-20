@@ -1,7 +1,19 @@
+import type { CombinedCreditsResponse } from '@app/types/person-types';
+import type { BaseParams } from '@app/types/index';
 import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
-import { getCombinedCredits } from '@actions/getCombinedCredits';
 import { Separator } from '@ui/separator';
+import { $api } from '@/app/_shared/api/api-interceptor';
+import { MediaType } from '@config/enums';
+
+export function getCombinedCredits(personId: number, params?: BaseParams) {
+  return $api.get<CombinedCreditsResponse>(
+    `/3/${MediaType.Person}/${personId}/combined_credits`,
+    {
+      params,
+    }
+  );
+}
 
 interface CombinedCreditsProps {
   personId: number;
@@ -17,15 +29,13 @@ export default async function CombinedCredits({
   return (
     <section>
       <div>
-        <h2 className='text-lg leading-none font-medium'>Known for</h2>
+        <h2 className='text-lg font-medium leading-none'>Known for</h2>
         <Separator className='my-4' />
       </div>
 
       <Carousel>
         {credits.cast
-          .sort(
-            (a, b) => b.vote_count - a.vote_count
-          )
+          .sort((a, b) => b.vote_count - a.vote_count)
           .slice(0, 20)
           .map((credit) => (
             <CreationArticle

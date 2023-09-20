@@ -1,13 +1,13 @@
-import { MediaType } from '@app/types/index';
+import { MediaType, TVSort } from '@config/enums';
 import { Separator } from '@ui/separator';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@ui/tabs';
 import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
 import { Heading } from '@components/heading';
-import { Sort, getTV } from '@actions/getTV';
+import { getTV } from '@actions/getTV';
 import { capitalize } from '@libs/index';
 
-async function CreationCarousel({ sort }: { sort: Sort }) {
+async function CreationCarousel({ sort }: { sort: TVSort }) {
   const { data } = await getTV(sort).catch(() => ({
     data: null,
   }));
@@ -40,15 +40,15 @@ export default function SeriesCarousel() {
         description='The most popular and widely known TV series.'
       />
       <Separator className='my-4' />
-      <Tabs defaultValue={Sort.TopRated}>
+      <Tabs defaultValue={TVSort.TopRated}>
         <TabsList className='w-full md:w-fit'>
-          {Object.values(Sort).map((value) => (
+          {Object.values(TVSort).map((value) => (
             <TabsTrigger key={value} value={value}>
               {capitalize(value, { split: '_' })}
             </TabsTrigger>
           ))}
         </TabsList>
-        {Object.values(Sort).map((value) => (
+        {Object.values(TVSort).map((value) => (
           <TabsContent key={value} value={value}>
             <CreationCarousel sort={value} />
           </TabsContent>

@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import { MediaType } from '@app/types/index';
+import { MediaType } from '@config/enums';
 import { Carousel } from '@components/carousel';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs';

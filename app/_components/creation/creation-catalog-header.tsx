@@ -6,16 +6,17 @@ import { CreationShowSelect } from '@components/select/creation-show-select';
 
 import { Filter } from 'lucide-react';
 
-import { Sort as MoviesSort } from '@actions/getMovies';
-import { Sort as SeriesSort } from '@actions/getTV';
-import { MediaType } from '@app/types/index';
+import { MediaType, MovieSort, TVSort } from '@config/enums';
 
 interface CreationCatalogHeaderProps {
-    mediaType: MediaType;
-    Sort: typeof MoviesSort | typeof SeriesSort;
+  mediaType: MediaType;
+  Sort: typeof MovieSort | typeof TVSort;
 }
 
-export default function CreationCatalogHeader({ mediaType, Sort }: CreationCatalogHeaderProps) {
+export default function CreationCatalogHeader({
+  mediaType,
+  Sort,
+}: CreationCatalogHeaderProps) {
   return (
     <header className='flex gap-2 overflow-hidden py-2'>
       <CreationFilterDialog mediaType={mediaType}>

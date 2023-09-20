@@ -1,5 +1,5 @@
-import { getGenres } from "@/app/_shared/actions/getGenres";
-import { MediaType } from "@/app/_types";
+import { getGenres } from "@actions/getGenres";
+import { MediaType } from "@config/enums";
 import { isAxiosError } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import zod from 'zod';

@@ -1,6 +1,7 @@
 import { pipe } from '@libs/common/next';
-import { MediaType, type INextPageParams, BaseParams } from '@app/types/index';
+import type { INextPageParams, BaseParams } from '@app/types/index';
 import type { SeasonDetailsResponse } from '@app/types/tv-types';
+import { MediaType } from '@config/enums';
 import { $api } from '@/app/_shared/api/api-interceptor';
 import { Star } from 'lucide-react';
 import {

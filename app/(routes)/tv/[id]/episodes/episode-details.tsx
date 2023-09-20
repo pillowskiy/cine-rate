@@ -1,6 +1,5 @@
 import type { IEpisode } from '@app/types/tv-types';
 import { Separator } from '@ui/separator';
-import { getEpisodeDetails } from '@actions/getEpisodeDetails';
 
 import {
   Accordion,
@@ -10,6 +9,24 @@ import {
 } from '@ui/accordion';
 import { CreditArticle } from '@components/article/credit-article';
 import { Heading } from '@components/heading';
+
+import type { BaseParams } from '@app/types/index';
+import type { IEpisodeDetails } from '@app/types/tv-types';
+import { $api } from '@/app/_shared/api/api-interceptor';
+
+export function getEpisodeDetails(
+  seriesId: number,
+  seasonNumber: number,
+  episodeNumber: number,
+  params?: BaseParams
+) {
+  return $api.get<IEpisodeDetails>(
+    `/3/tv/${seriesId}` +
+      `/season/${seasonNumber}` +
+      `/episode/${episodeNumber}`,
+    { params }
+  );
+}
 
 interface EpisodeDetailsProps {
   episode: IEpisode;

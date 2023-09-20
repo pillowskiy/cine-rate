@@ -1,5 +1,5 @@
 import type { INextPageParams } from '@app/types/index';
-import { MediaType } from '@app/types/index';
+import { MediaType } from '@config/enums';
 
 import CreationCast from '@components/creation/creation-cast';
 import CreationHeader from '@components/creation/creation-header';

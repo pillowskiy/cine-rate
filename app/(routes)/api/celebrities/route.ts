@@ -1,4 +1,4 @@
-import { MediaType } from '@app/types/index';
+import { MediaType } from '@config/enums';
 import { getPopular } from '@actions/getPopular';
 import { isAxiosError } from 'axios';
 import { NextRequest, NextResponse } from 'next/server';

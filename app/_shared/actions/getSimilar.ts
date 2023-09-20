@@ -1,6 +1,6 @@
 import type { CreationsResponse } from '@app/types/creation-types';
 import { $api } from '../api/api-interceptor';
-import { MediaType } from '@app/types/index';
+import { MediaType } from '@config/enums';
 
 interface GetSimilarOptions {
   language?: string;

@@ -1,4 +1,5 @@
-import { MediaType, type INextPageParams } from '@app/types/index';
+import { MediaType } from '@config/enums';
+import type { INextPageParams } from '@app/types/index';
 
 import CreationCast from '@components/creation/creation-cast';
 import CreationHeader from '@components/creation/creation-header';
@@ -28,7 +29,10 @@ export default async function TVPage({ params }: INextPageParams) {
           {tv.seasons.length && <SerriesSeasons details={tv} />}
           <CreationSimilar creationId={tv.id} mediaType={MediaType.TV} />
         </div>
-        <SeriesDetails className='min-w-[260px] w-full sm:w-[260px] space-y-6' details={tv} />
+        <SeriesDetails
+          className='w-full min-w-[260px] space-y-6 sm:w-[260px]'
+          details={tv}
+        />
       </section>
     </main>
   );

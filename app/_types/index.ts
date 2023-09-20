@@ -1,26 +1,3 @@
-export enum MediaType {
-  Movie = 'movie',
-  TV = 'tv',
-  Person = 'person',
-}
-
-export enum Gender {
-  Unknown = 0,
-  Woman = 1,
-  Man = 2,
-  NonBinary = 3,
-}
-
-export enum CreationVideoSite {
-  YOUTUBE = 'YouTube',
-}
-
-export enum MediaTypes {
-  Movie = 'movie',
-  TV = 'tv',
-  Person = 'person',
-}
-
 export type BaseParams = Record<string, string>;
 
 export type BaseResponse<T extends unknown> = {

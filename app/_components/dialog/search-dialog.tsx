@@ -7,7 +7,7 @@ import { Loader, Search, Star, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import type { MultiSearchResponse } from '@app/types/search-types';
-import { MediaType } from '@app/types/index';
+import { MediaType } from '@config/enums';
 import Link from 'next/link';
 import { Carousel } from '../carousel';
 import { PersonArticle } from '../article/person-article';

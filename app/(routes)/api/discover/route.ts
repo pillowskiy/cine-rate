@@ -1,7 +1,5 @@
 import { getDiscover } from '@/app/_shared/actions/getDiscover';
-import { Sort as MovieSort } from '@/app/_shared/actions/getMovies';
-import { Sort as TVSort } from '@actions/getTV';
-import { MediaType } from '@/app/_types';
+import { MediaType, TVSort, MovieSort } from '@config/enums';
 import { isAxiosError } from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 import zod from 'zod';

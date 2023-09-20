@@ -1,4 +1,4 @@
-import { MediaType } from '@app/types/index';
+import { MediaType } from '@config/enums';
 import { PersonArticle } from '@components/article/person-article';
 import { Carousel } from '@components/carousel';
 import { getPopular } from '@actions/getPopular';

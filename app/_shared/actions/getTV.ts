@@ -1,13 +1,8 @@
 import type { CreationsResponse } from "@app/types/creation-types";
+import type { BaseParams } from "@app/types/index";
 import { $api } from "../api/api-interceptor";
+import { TVSort } from "@config/enums";
 
-export enum Sort {
-    TopRated = 'top_rated',
-    AiringToday = 'airing_today',
-    OnTheAir = 'on_the_air',
-    Popular = 'popular',
-}
-
-export function getTV(sort: Sort = Sort.Popular) {
+export function getTV(sort: TVSort, params?: BaseParams) {
     return $api.get<CreationsResponse>(`/3/tv/${sort}`);
 }

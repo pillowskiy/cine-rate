@@ -1,6 +1,8 @@
+import type { INextPageParams } from '@app/types/index';
 import { getCreationDetails } from '@actions/getCreationDetails';
-import { MediaType, type INextPageParams } from '@app/types/index';
+import { MediaType } from '@config/enums';
 import { pipe } from '@libs/common/next';
+
 import EpisodeFilter from './episode-filter';
 import EpisodeList from './episode-list';
 import EpisodeHeader from './episode-header';
