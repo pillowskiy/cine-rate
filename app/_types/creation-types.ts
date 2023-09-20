@@ -1,4 +1,5 @@
-import type { MediaType, BaseResponse, CreationVideoSite } from '.';
+import type { BaseResponse } from '.';
+import type { MediaType, CreationVideoSite } from '@config/enums';
 import type { IMediaResource } from './media-types';
 
 export interface IKeyword {

@@ -1,9 +1,5 @@
-import type { MediaType } from '@app/types/index';
+import type { MediaType, TVSort, MovieSort } from '@config/enums';
 import type { CreationsResponse } from '@app/types/creation-types';
-
-// TEMP
-import type { Sort as MovieSort } from './getMovies';
-import type { Sort as TVSort } from './getTV';
 
 import { $api } from '../api/api-interceptor';
 

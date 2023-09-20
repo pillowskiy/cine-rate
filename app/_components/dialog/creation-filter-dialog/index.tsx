@@ -7,7 +7,7 @@ import {
   type SetStateAction,
   createContext
 } from 'react';
-import type { MediaType } from '@app/types/index';
+import type { MediaType } from '@config/enums';
 import { Button } from '@ui/button';
 import {
   Dialog,

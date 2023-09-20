@@ -1,4 +1,4 @@
-import type { MediaType } from '@app/types/index';
+import type { MediaType } from '@config/enums';
 import { Star, TrendingUp } from 'lucide-react';
 import { Button } from '@ui/button';
 import type { CreationDetailsProps } from './common/types';

@@ -2,7 +2,8 @@
 
 import { type HTMLAttributes, useEffect, useState, useMemo } from 'react';
 import type { CreationsResponse } from '@app/types/creation-types';
-import type { IPagination, MediaType } from '@app/types/index';
+import type { IPagination } from '@app/types/index';
+import type { MediaType } from '@config/enums';
 import { CreationArticle } from '@components/article/creation-article';
 import { CatalogSkeletonGroup } from '@components/catalog-skeleton-group';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';

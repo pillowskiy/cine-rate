@@ -17,7 +17,7 @@ export default async function CreationSimilar({
 
   return (
     <section>
-      <Heading title='Similar' description='>More like this.' />
+      <Heading title='Similar' description='More like this.' />
       <Separator className='my-4' />
       <Carousel>
         {creations.results.map((creation) => (

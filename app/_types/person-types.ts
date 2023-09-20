@@ -1,4 +1,5 @@
-import type { BaseResponse, Gender, ITranslation, MediaType } from '.';
+import type { BaseResponse, ITranslation } from '.';
+import type { Gender, MediaType } from '@config/enums';
 import type { ICreation } from './creation-types';
 
 export interface ICelebrity {

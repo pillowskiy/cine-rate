@@ -1,4 +1,5 @@
-import type { BaseParams, MediaType } from '@app/types/index';
+import type { BaseParams } from '@app/types/index';
+import type { MediaType } from '@config/enums';
 import type { GenresResponse } from '@app/types/genre-types';
 import { $api } from '../api/api-interceptor';
 

@@ -2,9 +2,9 @@
 
 import type { INextPageParams } from '@app/types/index';
 import { useEffect } from 'react';
-import { useAppDispatch } from '@/app/_redux/hooks';
-import { approve } from '@/app/_redux/user/user-actions';
-import { pipe } from '@/app/_libs/common/next';
+import { useAppDispatch } from '@redux/hooks';
+import { approve } from '@redux/user/user-actions';
+import { pipe } from '@libs/common/next';
 import { useRouter } from 'next/navigation';
 import Loader from '@components/loader';
 import { useToast } from '@ui/use-toast';

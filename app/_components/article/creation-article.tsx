@@ -1,6 +1,6 @@
-import { ReactNode, memo } from 'react';
+import type { MediaType } from '@config/enums';
+import { type ReactNode, memo } from 'react';
 import { buildImagePath } from '@libs/tmdb';
-import type { MediaType } from '@app/types/index';
 import { ICreation } from '@app/types/creation-types';
 import { Star } from 'lucide-react';
 import {

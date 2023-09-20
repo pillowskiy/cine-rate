@@ -2,7 +2,7 @@
 
 import { useContext, useEffect, useState } from 'react';
 import type { GenresResponse } from '@app/types/genre-types';
-import type { MediaType } from '@app/types/index';
+import type { MediaType } from '@config/enums';
 import { Toggle } from '@ui/toggle';
 import { Label } from '@ui/label';
 import { Loader } from 'lucide-react';

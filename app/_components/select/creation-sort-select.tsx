@@ -1,7 +1,6 @@
 'use client';
 
-import type { Sort as MovieSort } from '@actions/getMovies';
-import type { Sort as TVSort } from '@actions/getTV';
+import type { MovieSort, TVSort } from '@config/enums';
 import {
   Select,
   SelectContent,
@@ -9,7 +8,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../ui/select';
+} from '@ui/select';
 import { capitalize } from '@libs/index';
 import useQueryParams from '@hooks/useQueryParams';
 

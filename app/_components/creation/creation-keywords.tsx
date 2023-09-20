@@ -1,5 +1,5 @@
 import type { CreationDetailsProps } from './common/types';
-import type { MediaType } from '@app/types/index';
+import type { MediaType } from '@config/enums';
 import { Separator } from '@ui/separator';
 import { Button } from '@ui/button';
 import { getTitle } from './common/utils';

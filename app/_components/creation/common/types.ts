@@ -1,4 +1,4 @@
-import type { MediaType } from '@app/types/index';
+import type { MediaType } from '@config/enums';
 import type { IMovieDetails } from '@app/types/movies-types';
 import type { ITVDetails } from '@app/types/tv-types';
 
