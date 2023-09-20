@@ -7,6 +7,13 @@ import { Heading } from '@components/heading';
 import { getTV } from '@actions/getTV';
 import { capitalize } from '@libs/index';
 
+const emojis: Record<TVSort, string> = {
+  [TVSort.AiringToday]: '🍿',
+  [TVSort.OnTheAir]: '🎥',
+  [TVSort.Popular]: '🔥',
+  [TVSort.TopRated]: '⭐',
+};
+
 async function CreationCarousel({ sort }: { sort: TVSort }) {
   const { data } = await getTV(sort).catch(() => ({
     data: null,
@@ -41,10 +48,17 @@ export default function SeriesCarousel() {
       />
       <Separator className='my-4' />
       <Tabs defaultValue={TVSort.TopRated}>
-        <TabsList className='w-full md:w-fit'>
+        <TabsList>
           {Object.values(TVSort).map((value) => (
-            <TabsTrigger key={value} value={value}>
-              {capitalize(value, { split: '_' })}
+            <TabsTrigger
+              className='flex items-center gap-1'
+              key={value}
+              value={value}
+            >
+              {emojis[value]}
+              <span className='hidden sm:block'>
+                {capitalize(value, { split: '_' })}
+              </span>
             </TabsTrigger>
           ))}
         </TabsList>

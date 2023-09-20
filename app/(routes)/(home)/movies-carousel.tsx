@@ -7,6 +7,13 @@ import { Carousel } from '@components/carousel';
 import { getMovies } from '@actions/getMovies';
 import { capitalize } from '@libs/index';
 
+const emojis: Record<MovieSort, string> = {
+  [MovieSort.NowPlaying]: '🎥',
+  [MovieSort.Upcoming]: '🆕',
+  [MovieSort.Popular]: '🔥',
+  [MovieSort.TopRated]: '⭐',
+};
+
 async function CreationCarousel({ sort }: { sort: MovieSort }) {
   const { data } = await getMovies(sort).catch(() => ({
     data: null,
@@ -41,10 +48,17 @@ export default function MoviesCarousel() {
       />
       <Separator className='my-4' />
       <Tabs defaultValue={MovieSort.Popular}>
-        <TabsList className='w-full md:w-fit'>
+        <TabsList>
           {Object.values(MovieSort).map((value) => (
-            <TabsTrigger key={value} value={value}>
-              {capitalize(value, { split: '_' })}
+            <TabsTrigger
+              className='flex items-center gap-1'
+              key={value}
+              value={value}
+            >
+              {emojis[value]}
+              <span className='hidden sm:block'>
+                {capitalize(value, { split: '_' })}
+              </span>
             </TabsTrigger>
           ))}
         </TabsList>
