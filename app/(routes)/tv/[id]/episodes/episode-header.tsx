@@ -1,5 +1,5 @@
 import type { ITVDetails } from '@app/types/tv-types';
-import { MediaType } from '@app/types/index';
+import { MediaType } from '@config/enums';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { buildImagePath } from '@libs/tmdb';
 import Link from 'next/link';

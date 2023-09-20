@@ -1,6 +1,6 @@
 'use client';
 
-import useQueryParams from '@/app/_hooks/useQueryParams';
+import useQueryParams from '@hooks/useQueryParams';
 import type { ITVDetails } from '@app/types/tv-types';
 import { Button } from '@ui/button';
 import {

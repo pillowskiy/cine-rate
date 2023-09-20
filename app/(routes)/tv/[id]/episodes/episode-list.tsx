@@ -1,5 +1,6 @@
 import type { SeasonDetailsResponse } from '@app/types/tv-types';
-import { type BaseParams, MediaType } from '@app/types/index';
+import type { BaseParams } from '@app/types/index';
+import { MediaType } from '@config/enums';
 import { EpisodeArticle } from './episode-article';
 import { $api } from '@/app/_shared/api/api-interceptor';
 

@@ -1,7 +1,8 @@
-import { memo } from 'react';
+import { ReactNode, memo } from 'react';
 import { buildImagePath } from '@libs/tmdb';
+import type { MediaType } from '@app/types/index';
 import { ICreation } from '@app/types/creation-types';
-import { BookmarkPlus, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
 import {
   BaseArticleProps,
   BaseArticle,
@@ -10,8 +11,8 @@ import {
   BaseArticleFigureProps,
 } from './base-article';
 import Link from 'next/link';
-import { ImageFromPath } from '../image/image-from-path';
-import { cn } from '@/app/_libs';
+import { ImageFromPath } from '@components/image/image-from-path';
+import { cn } from '@libs/index';
 
 interface CreationArticleProps extends Omit<BaseArticleProps, 'src' | 'href'> {
   size?: 'default' | 'sm';
@@ -19,6 +20,8 @@ interface CreationArticleProps extends Omit<BaseArticleProps, 'src' | 'href'> {
   height: number;
   creation: ICreation;
   aspect?: BaseArticleFigureProps['aspect'];
+  defaultMediaType?: MediaType;
+  actions?: ReactNode;
 }
 
 export const CreationArticle = memo(
@@ -27,31 +30,35 @@ export const CreationArticle = memo(
     size = 'default',
     width,
     height,
+    actions,
+    defaultMediaType,
     aspect = 'vertical',
     ...props
   }: CreationArticleProps) => {
+    const mediaType = creation.media_type || defaultMediaType;
+    if (!mediaType) return null;
+
     const { title, original_title, original_name } = creation;
     const creationTitle = title || original_title || original_name;
 
     return (
       <BaseArticle {...props}>
-        <Link href={`/${creation.media_type}/${creation.id}`}>
-          <BaseArticleFigure
-            src={buildImagePath(
-              size === 'default'
-                ? { path: creation.poster_path, scale: 'poster' }
-                : { path: creation.backdrop_path, scale: 'backdrop' }
-            )}
-            aspect={aspect}
-            width={width}
-            height={height}
-            alt='Creation Image'
-            actionButtons={[
-              { Image: <BookmarkPlus className='h-4 w-4' /> },
-              { Image: <Star className='h-4 w-4' /> },
-            ]}
-          />
-        </Link>
+        <div className='relative'>
+          <Link href={`/${mediaType}/${creation.id}`}>
+            <BaseArticleFigure
+              src={buildImagePath(
+                size === 'default'
+                  ? { path: creation.poster_path, scale: 'poster' }
+                  : { path: creation.backdrop_path, scale: 'backdrop' }
+              )}
+              aspect={aspect}
+              width={width}
+              height={height}
+              alt='Creation Image'
+            />
+          </Link>
+          {actions}
+        </div>
         <BaseArticleContent>
           <h2
             className='text-md truncate font-semibold tracking-tight'
@@ -74,7 +81,8 @@ export const CreationArticle = memo(
 
 CreationArticle.displayName = 'CreationArticle';
 
-interface HorizontalCreationArticle extends Omit<BaseArticleProps, 'src' | 'href'> {
+interface HorizontalCreationArticle
+  extends Omit<BaseArticleProps, 'src' | 'href'> {
   alt: string;
   width: number;
   height: number;
@@ -95,7 +103,7 @@ export const HorizontalCreationArticle = memo(
     return (
       <article
         className={cn(
-          'w-full flex cursor-pointer gap-2 rounded-md p-2 transition-all hover:bg-accent',
+          'flex w-full cursor-pointer gap-2 rounded-md p-2 transition-all hover:bg-accent',
           className
         )}
         {...props}

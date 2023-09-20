@@ -50,7 +50,7 @@ export interface BaseArticleFigureProps {
 
   aspect?: 'vertical' | 'horizontal';
 
-  actionButtons?: ActionButton[];
+  actionButtons?: ReturnType<typeof Button>[];
 }
 
 export function BaseArticleFigure({
@@ -60,7 +60,6 @@ export function BaseArticleFigure({
   alt,
   src,
   aspect = 'vertical',
-  actionButtons,
 }: BaseArticleFigureProps) {
   return (
     <figure className='relative overflow-hidden rounded-md'>
@@ -80,19 +79,6 @@ export function BaseArticleFigure({
           alt={alt}
           src={src}
         />
-      </div>
-      <div className='absolute bottom-2 right-2 flex gap-2'>
-        {actionButtons &&
-          actionButtons.map((button, index) => (
-            <Button
-              key={index}
-              className='h-7 w-7 opacity-60 transition-all hover:opacity-100'
-              size='icon'
-              variant='outline'
-            >
-              {button.Image}
-            </Button>
-          ))}
       </div>
     </figure>
   );
