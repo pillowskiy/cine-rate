@@ -8,13 +8,20 @@ export default function Footer() {
         <div className='flex items-center gap-4'>
           <span className='text-sm font-semibold'>Made with</span>
           <Link href='https://nextjs.org/'>
-            <Image src='next.svg' alt='Next Logo' width={96} height={96} />
+            <Image
+              className='h-4 w-auto'
+              src='next.svg'
+              alt='Next Logo'
+              width={96}
+              height={96}
+            />
           </Link>
         </div>
         <div className='flex items-center gap-4'>
           <span className='text-sm font-semibold'>Data provided by</span>
           <Link href='https://www.themoviedb.org/'>
             <Image
+              className='h-4 w-auto'
               src='/tmdb-logo.svg'
               alt='TMDB Logo'
               width={96}
