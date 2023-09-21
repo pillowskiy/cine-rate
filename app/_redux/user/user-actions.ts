@@ -23,5 +23,16 @@ export const approve = createAsyncThunk<AccountDetailsResponse, string, AuthThun
         } catch (err) {
             return api.rejectWithValue(rejectAxios(err));
         }
-    }
+    },
+);
+
+export const getUser = createAsyncThunk<AccountDetailsResponse, never, AuthThunkConfig>(
+    'user/',
+    async (_, api) => {
+        try {
+            return axios.get<AccountDetailsResponse>('/api/user/').then(({ data }) => data);
+        } catch (err) {
+            return api.rejectWithValue(rejectAxios(err));
+        }
+    },
 );

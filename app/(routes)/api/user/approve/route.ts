@@ -25,7 +25,7 @@ export async function GET({
 
     try {
         const { data } = await postSession(parsedToken.data);
-        const user = await getSessionUser(data.session_id);
+        const { data: user } = await getSessionUser(data.session_id);
         const response = NextResponse.json(
             user,
             { status: 200 }
@@ -38,7 +38,6 @@ export async function GET({
 
         return response;
     } catch (err) {
-        console.log(err);
         if (!isAxiosError(err)) {
             return NextResponse.json(
                 {
@@ -53,7 +52,7 @@ export async function GET({
                 {
                     message: 'The approval was denied.',
                 },
-                { status: err.response?.status }
+                { status: 401 }
             );
         }
 

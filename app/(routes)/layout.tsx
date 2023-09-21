@@ -7,6 +7,8 @@ import Footer from '@components/footer';
 
 import ThemeProvider from '@components/theme-provider';
 import StoreProvider from '@components/store-provider';
+import AuthProvider from '@components/auth-provider';
+
 import { Toaster } from '@components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -26,13 +28,15 @@ export default function RootLayout({
       <body className={inter.className}>
         <Toaster />
         <StoreProvider>
-          <ThemeProvider attribute='class' defaultTheme='light' enableSystem>
-            <div className='flex min-h-screen flex-col'>
-              <Header />
-              <Main>{children}</Main>
-            </div>
-            <Footer />
-          </ThemeProvider>
+          <AuthProvider>
+            <ThemeProvider attribute='class' defaultTheme='light' enableSystem>
+              <div className='flex min-h-screen flex-col'>
+                <Header />
+                <Main>{children}</Main>
+              </div>
+              <Footer />
+            </ThemeProvider>
+          </AuthProvider>
         </StoreProvider>
       </body>
     </html>
