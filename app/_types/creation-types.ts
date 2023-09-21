@@ -41,8 +41,12 @@ export interface ICreationVideo {
 
 export type ToggleFavoriteData = {
   mediaType: MediaType;
-  mediaId: number;
-  isFavorite: boolean;
+  creationId: number;
+  favorite: boolean;
+}
+
+export type AddRatingData = {
+  value: number;
 }
 
 export type CreationsResponse = BaseResponse<ICreation>;
@@ -65,4 +69,11 @@ export type ToggleFavoriteResponse = {
   success: boolean;
   status_code: number;
   status_message: string;
+}
+
+export type AccountStatesResponse = {
+  id: 346698;
+  favorite: boolean;
+  rated: boolean;
+  watchlist: boolean;
 }

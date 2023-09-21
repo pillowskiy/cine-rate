@@ -1,5 +1,5 @@
 import type { MediaType } from '@config/enums';
-import { type ReactNode, memo } from 'react';
+import { memo } from 'react';
 import { buildImagePath } from '@libs/tmdb';
 import { ICreation } from '@app/types/creation-types';
 import { Star } from 'lucide-react';
@@ -13,6 +13,7 @@ import {
 import Link from 'next/link';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { cn } from '@libs/index';
+import { CreationStates } from '../creation/account-states';
 
 interface CreationArticleProps extends Omit<BaseArticleProps, 'src' | 'href'> {
   size?: 'default' | 'sm';
@@ -21,7 +22,6 @@ interface CreationArticleProps extends Omit<BaseArticleProps, 'src' | 'href'> {
   creation: ICreation;
   aspect?: BaseArticleFigureProps['aspect'];
   defaultMediaType?: MediaType;
-  actions?: ReactNode;
 }
 
 export const CreationArticle = memo(
@@ -30,7 +30,6 @@ export const CreationArticle = memo(
     size = 'default',
     width,
     height,
-    actions,
     defaultMediaType,
     aspect = 'vertical',
     ...props
@@ -57,7 +56,7 @@ export const CreationArticle = memo(
               alt='Creation Image'
             />
           </Link>
-          {actions}
+          <CreationStates creationId={creation.id} mediaType={mediaType} />
         </div>
         <BaseArticleContent>
           <h2
