@@ -51,7 +51,7 @@ export async function EpisodeDetails({
       <AccordionItem className='border-b-0' value='item-1'>
         <AccordionTrigger className='p-0'>Expand</AccordionTrigger>
         <AccordionContent>
-          <section className='mt-4 flex gap-4'>
+          <section className='mt-4 flex flex-col sm:flex-row gap-4'>
             <div className='w-full min-w-[260px] sm:w-[260px]'>
               <Heading
                 title={`Crew (${details.crew.length})`}
@@ -59,7 +59,7 @@ export async function EpisodeDetails({
               />
               <Separator className='my-4' />
 
-              <ul className='space-y-4'>
+              <ul className='max-h-[200px] sm:max-h-[600px] space-y-4 overflow-y-auto'>
                 {details.crew.map((crew) => (
                   <li key={crew.id}>
                     <span className='font-semibold'>{crew.original_name}</span>
@@ -81,7 +81,7 @@ export async function EpisodeDetails({
               </div>
               <Separator className='my-4' />
 
-              <section className='grid max-h-[600px] grid-cols-2 gap-4 overflow-y-auto'>
+              <section className='grid max-h-[400px] sm:max-h-[600px] md:grid-cols-2 gap-4 overflow-y-auto'>
                 {details.guest_stars.map((star) => (
                   <CreditArticle
                     aspect='vertical'

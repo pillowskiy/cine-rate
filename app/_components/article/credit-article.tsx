@@ -37,7 +37,7 @@ export function CreditArticle({
           height={height || 854}
         />
       </Link>
-      <BaseArticleContent>
+      <BaseArticleContent className='overflow-hidden'>
         <h2 className='truncate font-semibold tracking-tight'>
           {credit.original_name}
         </h2>
