@@ -17,9 +17,9 @@ export default async function SeriesDetails({
     <div {...props}>
       <section>
         <div className='flex items-center justify-between'>
-          <div className='space-y-1 max-w-full'>
+          <div className='max-w-full space-y-1'>
             <h2 className='text-2xl font-semibold tracking-tight'>Details</h2>
-            <p className='text-sm text-muted-foreground truncate'>
+            <p className='truncate text-sm text-muted-foreground'>
               Interesting about {getTitle(details)}.
             </p>
           </div>
@@ -42,14 +42,15 @@ export default async function SeriesDetails({
           <li>
             <span className='font-semibold'>Created By</span>
             <p className='text-foreground/70'>
-              {details.created_by.map(celebrity => celebrity.name).join(', ')}
+              {details.created_by.map((celebrity) => celebrity.name).join(', ')}
             </p>
           </li>
 
           <li>
             <span className='font-semibold'>Number of Seasons</span>
             <p className='text-foreground/70'>
-              {details.number_of_seasons} seasons ({details.number_of_episodes} episodes)
+              {details.number_of_seasons} seasons ({details.number_of_episodes}{' '}
+              episodes)
             </p>
           </li>
 
@@ -60,17 +61,19 @@ export default async function SeriesDetails({
             </p>
           </li>
 
-          <li>
-            <span className='font-semibold'>Runtime</span>
-            <p className='text-foreground/70'>
-              {details.runtime}
-            </p>
-          </li>
+          {details.runtime && (
+            <li>
+              <span className='font-semibold'>Runtime</span>
+              <p className='text-foreground/70'>{details.runtime}</p>
+            </li>
+          )}
 
           <li>
             <span className='font-semibold'>Production Companies</span>
             <p className='text-foreground/70'>
-              {details.production_companies.map(company => company.name).join(', ')}
+              {details.production_companies
+                .map((company) => company.name)
+                .join(', ')}
             </p>
           </li>
         </ul>
