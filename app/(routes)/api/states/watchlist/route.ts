@@ -1,7 +1,6 @@
-import { getSessionUser } from '@actions/getSessionUser';
 import { $api } from '@/app/_shared/api/api-interceptor';
 import { MediaType } from '@config/enums';
-import { ToggleFavoriteResponse } from '@app/types/creation-types';
+import { ToggleResponse } from '@app/types/creation-types';
 import { isAxiosError } from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 import zod from 'zod';
@@ -10,20 +9,17 @@ import { cookies } from 'next/headers';
 const bodyDto = zod.object({
     mediaType: zod.nativeEnum(MediaType),
     creationId: zod.number(),
-    favorite: zod.boolean(),
+    watchlist: zod.boolean(),
 });
 
 export async function POST(request: NextRequest) {
     const sessionCookie = cookies().get('session_id');
-    const user = await getSessionUser(sessionCookie?.value || "")
-        .then(res => res.data)
-        .catch(() => null);
-    if (!user) {
+    const sessionId = sessionCookie?.value;
+    if (!sessionId) {
         return NextResponse.json({
             message: 'Only authorized users can do this action'
         }, { status: 401 })
     }
-
 
     const body = await request.json();
     const result = bodyDto.safeParse(body);
@@ -40,13 +36,13 @@ export async function POST(request: NextRequest) {
         );
     }
 
-    const { creationId, favorite, mediaType } = result.data;
+    const { creationId, watchlist, mediaType } = result.data;
 
-    return $api.post<ToggleFavoriteResponse>(`/3/account/${user.id}/favorite`, {
+    return $api.post<ToggleResponse>(`/3/account/account_id/watchlist`, {
         media_id: creationId,
         media_type: mediaType,
-        favorite,
-    })
+        watchlist,
+    }, { params: { session_id: sessionId }})
         .then(({ data }) => {
             return NextResponse.json(data, { status: 200 })
         }).catch((err) => {

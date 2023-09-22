@@ -45,6 +45,10 @@ export type ToggleFavoriteData = {
   favorite: boolean;
 }
 
+export type ToggleRatingData = {
+  value: number;
+}
+
 export type AddRatingData = {
   value: number;
 }
@@ -65,7 +69,14 @@ export type CreationKeywordsResponse = {
   keywords: IKeyword[];
 };
 
-export type ToggleFavoriteResponse = {
+export type ToggleResponse = {
+  success: boolean;
+  status_code: number;
+  status_message: string;
+}
+
+// TEMP: dublicate
+export type RatingResponse = {
   success: boolean;
   status_code: number;
   status_message: string;
