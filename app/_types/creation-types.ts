@@ -85,6 +85,6 @@ export type RatingResponse = {
 export type AccountStatesResponse = {
   id: 346698;
   favorite: boolean;
-  rated: boolean;
+  rated: false | { value: number };
   watchlist: boolean;
 }
