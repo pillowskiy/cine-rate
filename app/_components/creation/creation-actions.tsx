@@ -12,7 +12,7 @@ export function CreationActions({ details, mediaType }: CreationActionsProps) {
   return (
     <div className='flex w-full justify-between gap-4 overflow-x-auto sm:w-fit sm:justify-start'>
       <div className='flex flex-col items-center justify-center space-y-1 text-center'>
-        <span className='text-xs font-semibold uppercase'>TMDB Rating</span>
+        <span className='text-xs font-semibold uppercase truncate'>TMDB Rating</span>
         <CreationReviewsDialog creationId={details.id} mediaType={mediaType}>
           <Button className='text-lg hover:bg-white hover:text-black' variant='ghost' size='sm'>
             <Star className='mr-1.5 h-7 w-7 fill-yellow-400 text-yellow-400' />
@@ -22,7 +22,7 @@ export function CreationActions({ details, mediaType }: CreationActionsProps) {
       </div>
 
       <div className='flex flex-col items-center justify-center space-y-1 text-center'>
-        <span className='text-xs font-semibold uppercase'>Your Rating</span>
+        <span className='text-xs font-semibold uppercase truncate'>Your Rating</span>
         <Button className='text-lg hover:bg-white hover:text-black' variant='ghost' size='sm'>
           <Star className='mr-1.5 h-7 w-7' />
           <span>Rate</span>
@@ -30,7 +30,7 @@ export function CreationActions({ details, mediaType }: CreationActionsProps) {
       </div>
 
       <div className='flex flex-col items-center justify-center space-y-1 text-center'>
-        <span className='text-xs font-semibold uppercase'>Popularity</span>
+        <span className='text-xs font-semibold uppercase truncate'>Popularity</span>
         <Button className='text-lg hover:bg-white hover:text-black' variant='ghost' size='sm'>
           <TrendingUp className='mr-1.5 h-7 w-7' />
           <span>{details.popularity.toFixed(0)}</span>

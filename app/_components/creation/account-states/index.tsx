@@ -47,9 +47,89 @@ export function CreationStates({ creationId, mediaType }: CreationStatesProps) {
   return (
     <StatesContext.Provider value={{ creationId, mediaType }}>
       <div className='absolute bottom-2 right-2 flex gap-2'>
-        <WatchlistButton alreadyInList={states.watchlist} />
-        <RatingButton initialRated={states.rated} />
-        <FavoriteButton initialFavorite={states.favorite} />
+        <WatchlistButton
+          className='h-7 w-7 opacity-60 transition-all hover:opacity-100'
+          size='icon'
+          variant='outline'
+          alreadyInList={states.watchlist}
+        />
+        <RatingButton
+          className='h-7 w-7 opacity-60 transition-all hover:opacity-100'
+          size='icon'
+          variant='outline'
+          initialRated={states.rated}
+        />
+        <FavoriteButton
+          className='h-7 w-7 opacity-60 transition-all hover:opacity-100'
+          size='icon'
+          variant='outline'
+          initialFavorite={states.favorite}
+        />
+      </div>
+    </StatesContext.Provider>
+  );
+}
+
+export function CreationStatesDetailed({
+  creationId,
+  mediaType,
+}: CreationStatesProps) {
+  const { user } = useAuth();
+  const [states, setStates] = useState<AccountStatesResponse | null>(null);
+
+  useEffect(() => {
+    if (!user) return;
+
+    getAccountStates(creationId, mediaType)
+      .then(({ data }) => {
+        setStates(data);
+      })
+      .catch(() => {
+        setStates(null);
+      });
+  }, [creationId, mediaType, user]);
+
+  if (!states) return null;
+
+  return (
+    <StatesContext.Provider value={{ creationId, mediaType }}>
+      <div className='flex w-full justify-between gap-4 overflow-x-auto sm:w-fit sm:justify-start'>
+        <div className='flex flex-col items-center justify-center space-y-1 text-center'>
+          <span className='truncate text-xs font-semibold uppercase'>
+            Favorite
+          </span>
+          <FavoriteButton
+            className='text-lg'
+            size='sm'
+            variant='ghost'
+            initialFavorite={states.favorite}
+          />
+        </div>
+
+        <div className='flex flex-col items-center justify-center space-y-1 text-center'>
+          <span className='truncate text-xs font-semibold uppercase'>
+            Watchlist
+          </span>
+          <WatchlistButton
+            className='text-lg'
+            size='sm'
+            variant='ghost'
+            alreadyInList={states.watchlist}
+          />
+        </div>
+
+        <div className='flex flex-col items-center justify-center space-y-1 text-center'>
+          <span className='truncate text-xs font-semibold uppercase'>
+            Your Rating
+          </span>
+          <RatingButton
+            className='text-lg'
+            size='sm'
+            variant='link'
+            initialRated={states.rated}
+            withText
+          />
+        </div>
       </div>
     </StatesContext.Provider>
   );

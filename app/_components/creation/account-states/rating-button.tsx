@@ -1,4 +1,5 @@
 import type { AccountStatesResponse } from '@app/types/creation-types';
+import type { BaseButtonProps } from './types';
 import { useContext } from 'react';
 import { StatesContext } from '.';
 
@@ -8,11 +9,16 @@ import { Star } from 'lucide-react';
 
 import { CreationRatingDialog } from '@components/dialog/creation-rating-dialog';
 
-interface RatingButtonProps {
+interface RatingButtonProps extends BaseButtonProps {
   initialRated: AccountStatesResponse['rated'];
 }
 
-export function RatingButton({ initialRated }: RatingButtonProps) {
+export function RatingButton({
+  initialRated,
+  withText,
+  size,
+  ...props
+}: RatingButtonProps) {
   const { mediaType, creationId } = useContext(StatesContext);
 
   return (
@@ -21,17 +27,18 @@ export function RatingButton({ initialRated }: RatingButtonProps) {
       mediaType={mediaType}
       creationId={creationId}
     >
-      <Button
-        className='h-7 w-7 opacity-60 transition-all hover:opacity-100'
-        size='icon'
-        variant='outline'
-      >
+      <Button size={size} {...props}>
         <Star
           className={cn(
-            'h-5 w-5',
+            size === 'icon' ? 'h-5 w-5' : 'h-7 w-7',
             initialRated && 'fill-yellow-500 text-yellow-500'
           )}
         />
+        {withText && (
+          <span className='ml-1.5'>
+            {initialRated ? initialRated.value.toFixed(1) : 'Rate'}
+          </span>
+        )}
       </Button>
     </CreationRatingDialog>
   );

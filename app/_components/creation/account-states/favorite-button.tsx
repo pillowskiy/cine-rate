@@ -1,6 +1,7 @@
 'use client';
 
 import type { ToggleResponse } from '@app/types/creation-types';
+import type { BaseButtonProps } from './types';
 import { useContext, useState } from 'react';
 import { StatesContext } from '.';
 import { Button } from '@ui/button';
@@ -8,11 +9,16 @@ import { cn } from '@libs/index';
 import { Heart } from 'lucide-react';
 import axios from 'axios';
 
-interface ToggleFavoriteProps {
+interface ToggleFavoriteProps extends BaseButtonProps {
   initialFavorite: boolean;
 }
 
-export function FavoriteButton({ initialFavorite }: ToggleFavoriteProps) {
+export function FavoriteButton({
+  initialFavorite,
+  withText,
+  size,
+  ...props
+}: ToggleFavoriteProps) {
   const { mediaType, creationId } = useContext(StatesContext);
   const [isFavorite, setIsFavorite] = useState(initialFavorite);
 
@@ -31,15 +37,16 @@ export function FavoriteButton({ initialFavorite }: ToggleFavoriteProps) {
   }
 
   return (
-    <Button
-      className='h-7 w-7 opacity-60 transition-all hover:opacity-100'
-      onClick={toggleFavorite}
-      size='icon'
-      variant='outline'
-    >
+    <Button onClick={toggleFavorite} size={size} {...props}>
       <Heart
-        className={cn('h-5 w-5', isFavorite && 'fill-red-500 text-red-500')}
+        className={cn(
+          size === 'icon' ? 'h-5 w-5' : 'h-7 w-7',
+          isFavorite && 'fill-red-500 text-red-500'
+        )}
       />
+      {withText && (
+        <span className='ml-1.5'>{isFavorite ? 'Remove' : 'Add'}</span>
+      )}
     </Button>
   );
 }
