@@ -4,7 +4,7 @@ import type { MediaType } from '@config/enums';
 import Link from 'next/link';
 
 import { Button } from '@ui/button';
-import { FileImage, FileVideo } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { YoutubePlayer } from '@components/youtube-player';
 import { BaseFigure } from '@components/figure/base-figure';
 import { buildImagePath } from '@libs/tmdb';
@@ -13,6 +13,8 @@ import { getCreationVideos } from '@actions/getCreationVideos';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { getRealesedDate, getTitle } from './common/utils';
 import { CreationActions } from './creation-actions';
+import { CreationReviewsDialog } from './creation-reviews-dialog';
+import { CreationStatesDetailed } from './account-states';
 interface CreationHeaderProps extends CreationDetailsProps {
   mediaType: MediaType;
 }
@@ -57,7 +59,10 @@ export default async function MovieHeader({
                 passHref
                 legacyBehavior
               >
-                <Button className='text-white/70 border-white/70 h-7 text-xs px-2 bg-transparent' variant='outline'>
+                <Button
+                  className='h-7 border-white/70 bg-transparent px-2 text-xs text-white/70'
+                  variant='outline'
+                >
                   {genre.name}
                 </Button>
               </Link>
@@ -65,37 +70,54 @@ export default async function MovieHeader({
           </div>
         </div>
 
-        <CreationActions details={details} mediaType={mediaType} />
+        <CreationStatesDetailed creationId={details.id} mediaType={mediaType} />
       </div>
 
-      <div className='jutisfy-between my-4 flex flex-col flex-wrap gap-4 sm:flex-row lg:flex-wrap'>
-        <BaseFigure
-          className='md:flex-[1 1 260px] hidden w-[260px] sm:block'
-          posterPath={details.poster_path}
-          width={260}
-          height={460}
-          priority
-        />
-        <div className='h-max w-full sm:w-auto sm:flex-grow'>
-          {video?.key && (
-            <YoutubePlayer
-              className='aspect-[16/8] h-full w-full'
-              url={buildURL(video.key)}
-            />
-          )}
+      <div className='jutisfy-between my-4 flex flex-col gap-4 sm:flex-row'>
+        <div className='flex-[25%] overflow-hidden rounded-md'>
+          <ImageFromPath
+            className='hidden h-full w-auto object-cover sm:block'
+            src={buildImagePath({ path: details.poster_path, scale: 'poster' })}
+            alt='Creation Poster'
+            width={260}
+            height={460}
+            priority
+          />
         </div>
+        {video?.key && (
+          <YoutubePlayer
+            className='aspect-[16/9] h-full flex-[70%] sm:w-auto'
+            url={buildURL(video.key)}
+          />
+        )}
 
-        <figure className='lg:flex-[1 1 200px] flex w-full gap-4 overflow-hidden rounded-md lg:w-[200px] lg:flex-col'>
+        <figure className='hidden w-full flex-[20%] gap-4 overflow-hidden md:flex md:flex-col'>
           <div className='backdrop-blur-5 grid h-auto w-full place-items-center rounded-md p-2 backdrop-blur-[25px] md:h-full'>
-            <div className='m-auto flex gap-1 space-y-1 text-center lg:flex-col'>
-              <FileVideo className='m-auto h-5 w-5 md:h-[48px] md:w-[48px]' />
-              <p className='text-sm font-medium uppercase'>videos</p>
-            </div>
+            <CreationReviewsDialog
+              creationId={details.id}
+              mediaType={mediaType}
+            >
+              <div className='m-auto flex cursor-pointer items-center gap-1 space-y-1 text-center md:flex-col'>
+                <div className='relative'>
+                  <Star className='m-auto h-5 w-5 fill-yellow-500 text-yellow-500 md:h-[64px] md:w-[64px]' />
+                  <div className='absolute left-[50%] top-[50%] hidden -translate-x-[50%] -translate-y-[50%] sm:block'>
+                    <span className='select-none text-sm leading-none md:text-base'>
+                      {details.vote_average.toFixed(1)}
+                    </span>
+                  </div>
+                </div>
+                <p className='text-sm font-medium uppercase transition-all hover:underline'>
+                  Reviews
+                </p>
+              </div>
+            </CreationReviewsDialog>
           </div>
           <div className='backdrop-blur-5 grid h-auto w-full place-items-center rounded-md p-2 backdrop-blur-[25px] md:h-full'>
-            <div className='m-auto flex gap-1 space-y-1 text-center lg:flex-col'>
-              <FileImage className='m-auto h-5 w-5 md:h-[48px] md:w-[48px]' />
-              <p className='text-sm font-medium uppercase'>photos</p>
+            <div className='m-auto flex items-center gap-1 space-y-1 text-center md:flex-col'>
+              <h2 className='select-none text-lg font-medium uppercase leading-none md:text-4xl'>
+                {details.popularity.toFixed()}
+              </h2>
+              <span className='text-sm font-medium uppercase'>Popularity</span>
             </div>
           </div>
         </figure>

@@ -1,24 +1,26 @@
-'use client';
-
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { cn } from '../_libs';
-import ReactPlayer, { ReactPlayerProps } from 'react-player';
-import { VolumeX, Volume2, Youtube, Play, Divide } from 'lucide-react';
+import { ReactPlayerProps } from 'react-player';
+import { VolumeX, Volume2, Youtube } from 'lucide-react';
 import { Button } from './ui/button';
 import Link from 'next/link';
+import { getInfo as getVideoInfo, chooseFormat } from 'ytdl-core';
 
 interface YoutubePlayerProps extends ReactPlayerProps {
   url: string;
   className?: string;
 }
 
-export function YoutubePlayer({
+export async function YoutubePlayer({
   url,
   className,
   ...props
 }: YoutubePlayerProps) {
-  const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const info = await getVideoInfo(url).catch((e) => {
+    console.log(e);
+    return e;
+  });
+  const format = chooseFormat(info.formats, { quality: 'highestvideo' });
 
   return (
     <figure
@@ -27,52 +29,14 @@ export function YoutubePlayer({
         className
       )}
     >
-      <div className='absolute right-2 top-2 flex flex-col gap-2 md:right-4 md:top-4'>
-        <Button
-          className='h-7 w-7 md:h-10 md:w-10'
-          size='icon'
-          onClick={() => setIsMuted((prev) => !prev)}
-        >
-          {isMuted ? (
-            <VolumeX className='h-5 w-5' />
-          ) : (
-            <Volume2 className='h-5 w-5' />
-          )}
-        </Button>
-        <Link href={url} target='_blank'>
-          <Button className='h-7 w-7 md:h-10 md:w-10' size='icon'>
-            <Youtube className='h-5 w-5' />
-          </Button>
-        </Link>
-      </div>
-      <ReactPlayer
-        url={url}
-        width='120%'
-        height='130%'
-        muted={isMuted}
-        playing={isPlaying}
-        loop
-        playIcon={<Play className='h-7 w-8 fill-primary-foreground' />}
-        stopOnUnmount
-        config={{
-          youtube: {
-            playerVars: {
-              modestbranding: 1,
-              disablekb: 1,
-              controls: 0,
-              autohide: 1,
-              // autoplay: 1,
-              iv_load_policy: 3,
-              cc_load_policy: 3,
-              fs: 0,
-              showinfo: 0,
-              showsearch: 0,
-              rel: 0,
-            },
-          },
-        }}
-        {...props}
-      />
+      <video
+        className='width-[inherit] absolute w-[inherit] align-top object-cover'
+        src={format.url}
+        controls
+        autoPlay
+      >
+        Your browser does not support the video tag.
+      </video>
     </figure>
   );
 }
