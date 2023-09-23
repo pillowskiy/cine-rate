@@ -13,15 +13,14 @@ import {
 } from '@ui/dropdown-menu';
 
 import { MessageSquare, Mails, Star, BookmarkPlus, LogOut } from 'lucide-react';
-
-import { useAppSelector } from '@/app/_redux/hooks';
+import { useAuth } from '@redux/hooks';
 
 interface ProfileDropdownProps {
   children: ReactNode;
 }
 
 export function ProfileDropdown({ children }: ProfileDropdownProps) {
-  const { user } = useAppSelector((state) => state.user);
+  const { user } = useAuth();
 
   // TEMP
   if (!user) return null;

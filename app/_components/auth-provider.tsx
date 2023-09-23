@@ -1,26 +1,20 @@
 'use client';
 
-import { ReactNode, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { ReactNode, useLayoutEffect } from 'react';
+import { useAppDispatch } from '@redux/hooks';
 import { getUser } from '@redux/user/user-actions';
-import Loader from './loader';
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
+// TEMP: use next-auth for integration with tmdb oAuth;
 export default function AuthProvider({ children }: AuthProviderProps) {
-  const { isLoading } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(getUser());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  if (isLoading) {
-    return <Loader />;
-  }
+  }, [dispatch]);
 
   return children;
 }

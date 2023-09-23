@@ -14,6 +14,7 @@ import Link from 'next/link';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { cn } from '@libs/index';
 import { CreationStates } from '../creation/account-states';
+import { useAuth } from '@/app/_redux/hooks';
 
 interface CreationArticleProps extends Omit<BaseArticleProps, 'src' | 'href'> {
   size?: 'default' | 'sm';
@@ -39,6 +40,7 @@ export const CreationArticle = memo(
 
     const { title, original_title, original_name } = creation;
     const creationTitle = title || original_title || original_name;
+
 
     return (
       <BaseArticle {...props}>

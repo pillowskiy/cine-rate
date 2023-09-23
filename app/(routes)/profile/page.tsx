@@ -1,7 +1,5 @@
-import { getSessionUser } from '@actions/getSessionUser';
-
 export default async function ProfilePage() {
-  const user = await getSessionUser();
+  const user = null;
 
   // TEMP
   if (!user) return <div>Only for authorized users</div>;

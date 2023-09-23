@@ -11,6 +11,8 @@ import { FavoriteButton } from './favorite-button';
 import { RatingButton } from './rating-button';
 import { WatchlistButton } from './watchlist-button';
 
+import { useAuth } from '@redux/hooks';
+
 interface CreationStatesProps extends CreationIdentifierProps {}
 
 function getAccountStates(creationId: number, mediaType: MediaType) {
@@ -25,9 +27,12 @@ export const StatesContext = createContext<CreationIdentifierProps>({
 });
 
 export function CreationStates({ creationId, mediaType }: CreationStatesProps) {
+  const { user } = useAuth();
   const [states, setStates] = useState<AccountStatesResponse | null>(null);
 
   useEffect(() => {
+    if (!user) return;
+
     getAccountStates(creationId, mediaType)
       .then(({ data }) => {
         setStates(data);
@@ -35,7 +40,7 @@ export function CreationStates({ creationId, mediaType }: CreationStatesProps) {
       .catch(() => {
         setStates(null);
       });
-  }, [creationId, mediaType]);
+  }, [creationId, mediaType, user]);
 
   if (!states) return null;
 

@@ -1,12 +1,15 @@
 'use client';
 
 import type { INextPageParams } from '@app/types/index';
-import { useEffect } from 'react';
-import { useAppDispatch } from '@redux/hooks';
+
+import Loader from '@components/loader';
+
 import { approve } from '@redux/user/user-actions';
 import { pipe } from '@libs/common/next';
+
+import { useEffect } from 'react';
+import { useAppDispatch } from '@redux/hooks';
 import { useRouter } from 'next/navigation';
-import Loader from '@components/loader';
 import { useToast } from '@ui/use-toast';
 
 const statusDescription = {

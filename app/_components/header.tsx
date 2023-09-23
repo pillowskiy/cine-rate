@@ -6,7 +6,7 @@ import { SearchDialog } from './dialog/search-dialog';
 import { ToggleTheme } from './toggle-theme';
 import { AuthButton } from './button/auth-button';
 
-export default async function Header() {
+export default function Header() {
   const userAgent = headers().get('user-agent');
   const isMobileView: boolean = !!userAgent?.match(MOBILE_VIEW_REGEXP);
 
