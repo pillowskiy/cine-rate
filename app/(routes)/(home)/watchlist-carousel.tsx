@@ -1,10 +1,16 @@
+'use client';
+
 import { Button } from '@ui/button';
 import { Heading } from '@components/heading';
 import { Separator } from '@ui/separator';
 import { BookmarkPlus, LogIn } from 'lucide-react';
 import Link from 'next/link';
+import { useAuth } from '@/app/_redux/hooks';
 
 export default function WatchlistCarousel() {
+  const { user, isLoading } = useAuth();
+  if (user || isLoading) return null;
+
   return (
     <section className='relative'>
       <Heading
@@ -13,7 +19,7 @@ export default function WatchlistCarousel() {
       />
       <Separator className='my-4' />
 
-      <div className='grid w-full place-items-center gap-4 p-6 mt-6'>
+      <div className='mt-6 grid w-full place-items-center gap-4 p-6'>
         <BookmarkPlus className='h-10 w-10' />
 
         <div className='space-y-1 text-center'>
