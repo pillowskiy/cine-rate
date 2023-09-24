@@ -3,7 +3,14 @@
 import type { AccountStatesResponse } from '@app/types/creation-types';
 import type { CreationIdentifierProps } from '../common/types';
 
-import { createContext, useEffect, useState } from 'react';
+import {
+  ReactNode,
+  Suspense,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { MediaType } from '@config/enums';
 import axios from 'axios';
 
@@ -12,8 +19,11 @@ import { RatingButton } from './rating-button';
 import { WatchlistButton } from './watchlist-button';
 
 import { useAuth } from '@redux/hooks';
+import { Popover, PopoverContent, PopoverTrigger } from '@ui/popover';
 
-interface CreationStatesProps extends CreationIdentifierProps {}
+interface CreationStatesProps extends CreationIdentifierProps {
+  children: ReactNode;
+}
 
 function getAccountStates(creationId: number, mediaType: MediaType) {
   return axios.get<AccountStatesResponse>(
@@ -26,46 +36,65 @@ export const StatesContext = createContext<CreationIdentifierProps>({
   creationId: 0,
 });
 
-export function CreationStates({ creationId, mediaType }: CreationStatesProps) {
+export function StatesPopover({
+  creationId,
+  mediaType,
+  children,
+}: CreationStatesProps) {
   const { user } = useAuth();
   const [states, setStates] = useState<AccountStatesResponse | null>(null);
+  // TEMP: loading state
+  const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    if (!user) return;
-
-    getAccountStates(creationId, mediaType)
-      .then(({ data }) => {
-        setStates(data);
-      })
-      .catch(() => {
-        setStates(null);
-      });
-  }, [creationId, mediaType, user]);
-
-  if (!states) return null;
+  function handleOpen(open: boolean) {
+    if (!user || !open) {
+      setIsOpen(false);
+    } else if (open && states) {
+      setIsOpen(true);
+    } else {
+      getAccountStates(creationId, mediaType)
+        .then(({ data }) => {
+          setStates(data);
+          setIsOpen(true);
+        })
+        .catch(() => {
+          setStates(null);
+        });
+    }
+  }
 
   return (
     <StatesContext.Provider value={{ creationId, mediaType }}>
-      <div className='absolute bottom-2 right-2 flex gap-2'>
-        <WatchlistButton
-          className='h-7 w-7 opacity-60 transition-all hover:opacity-100'
-          size='icon'
-          variant='outline'
-          alreadyInList={states.watchlist}
-        />
-        <RatingButton
-          className='h-7 w-7 opacity-60 transition-all hover:opacity-100'
-          size='icon'
-          variant='outline'
-          initialRated={states.rated}
-        />
-        <FavoriteButton
-          className='h-7 w-7 opacity-60 transition-all hover:opacity-100'
-          size='icon'
-          variant='outline'
-          initialFavorite={states.favorite}
-        />
-      </div>
+      <Popover open={isOpen} onOpenChange={handleOpen}>
+        <PopoverTrigger asChild>{children}</PopoverTrigger>
+        <PopoverContent className='w-fit p-1'>
+          {states && (
+            <div className='flex flex-col text-left'>
+              <WatchlistButton
+                className='justify-start'
+                size='sm'
+                variant='ghost'
+                withText
+                alreadyInList={states.watchlist}
+              />
+              <RatingButton
+                className='justify-start'
+                size='sm'
+                variant='ghost'
+                withText
+                initialRated={states.rated}
+              />
+              <FavoriteButton
+                className='justify-start'
+                size='sm'
+                variant='ghost'
+                withText
+                initialFavorite={states.favorite}
+              />
+            </div>
+          )}
+        </PopoverContent>
+      </Popover>
     </StatesContext.Provider>
   );
 }
@@ -73,7 +102,7 @@ export function CreationStates({ creationId, mediaType }: CreationStatesProps) {
 export function CreationStatesDetailed({
   creationId,
   mediaType,
-}: CreationStatesProps) {
+}: CreationIdentifierProps) {
   const { user } = useAuth();
   const [states, setStates] = useState<AccountStatesResponse | null>(null);
 

@@ -2,7 +2,7 @@ import type { MediaType } from '@config/enums';
 import { memo } from 'react';
 import { buildImagePath } from '@libs/tmdb';
 import { ICreation } from '@app/types/creation-types';
-import { Star } from 'lucide-react';
+import { Info, Star } from 'lucide-react';
 import {
   BaseArticleProps,
   BaseArticle,
@@ -13,8 +13,8 @@ import {
 import Link from 'next/link';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { cn } from '@libs/index';
-import { CreationStates } from '../creation/account-states';
-import { useAuth } from '@/app/_redux/hooks';
+import { Button } from '@ui/button';
+import { StatesPopover } from '../creation/account-states';
 
 interface CreationArticleProps extends Omit<BaseArticleProps, 'src' | 'href'> {
   size?: 'default' | 'sm';
@@ -41,7 +41,6 @@ export const CreationArticle = memo(
     const { title, original_title, original_name } = creation;
     const creationTitle = title || original_title || original_name;
 
-
     return (
       <BaseArticle {...props}>
         <div className='relative'>
@@ -58,7 +57,11 @@ export const CreationArticle = memo(
               alt='Creation Image'
             />
           </Link>
-          <CreationStates creationId={creation.id} mediaType={mediaType} />
+          <StatesPopover creationId={creation.id} mediaType={mediaType}>
+            <Button className='h-7 w-7 absolute top-2 right-2' variant='outline' size='icon'>
+              <Info className='h-5 w-5' />
+            </Button>
+          </StatesPopover>
         </div>
         <BaseArticleContent>
           <h2

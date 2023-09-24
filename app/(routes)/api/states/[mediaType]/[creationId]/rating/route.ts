@@ -53,7 +53,7 @@ export async function POST(request: NextRequest, { params }: INextPageParams) {
         });
 }
 
-export async function Delete(_: NextRequest, { params }: INextPageParams) {
+export async function DELETE(_: NextRequest, { params }: INextPageParams) {
     const parsedParams = paramsDto.safeParse(params);
     if (!parsedParams.success) {
         return generateZodErrorsResponse(parsedParams);

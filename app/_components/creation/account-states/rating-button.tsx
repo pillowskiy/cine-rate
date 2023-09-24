@@ -36,7 +36,7 @@ export function RatingButton({
         />
         {withText && (
           <span className='ml-1.5'>
-            {initialRated ? initialRated.value.toFixed(1) : 'Rate'}
+            Rate
           </span>
         )}
       </Button>

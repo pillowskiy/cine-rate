@@ -6,13 +6,11 @@ import Link from 'next/link';
 import { Button } from '@ui/button';
 import { Star } from 'lucide-react';
 import { YoutubePlayer } from '@components/youtube-player';
-import { BaseFigure } from '@components/figure/base-figure';
 import { buildImagePath } from '@libs/tmdb';
 import { buildURL } from '@libs/ytdl';
 import { getCreationVideos } from '@actions/getCreationVideos';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { getRealesedDate, getTitle } from './common/utils';
-import { CreationActions } from './creation-actions';
 import { CreationReviewsDialog } from './creation-reviews-dialog';
 import { CreationStatesDetailed } from './account-states';
 interface CreationHeaderProps extends CreationDetailsProps {
@@ -41,7 +39,7 @@ export default async function MovieHeader({
               {getTitle(details)}
             </h2>
             <div>
-              <p className='text-xs opacity-70 sm:text-sm'>
+              <p className='text-xs opacity-70 sm:text-sm truncate'>
                 {getRealesedDate(details)}
               </p>
             </div>
