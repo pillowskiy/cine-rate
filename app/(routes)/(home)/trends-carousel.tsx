@@ -15,6 +15,7 @@ export default async function TrendsCarousel() {
       <Heading
         title='Trends now'
         description='The most popular movies and TV series today.'
+        badges={['🔥 The hotest']}
       />
       <Separator className='my-4' />
       <Carousel>
