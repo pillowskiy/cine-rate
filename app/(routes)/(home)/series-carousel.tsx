@@ -6,6 +6,7 @@ import { Carousel } from '@components/carousel';
 import { Heading } from '@components/heading';
 import { getTV } from '@actions/getTV';
 import { capitalize } from '@libs/index';
+import Link from 'next/link';
 
 const emojis: Record<TVSort, string> = {
   [TVSort.AiringToday]: '🍿',
@@ -35,6 +36,21 @@ async function CreationCarousel({ sort }: { sort: TVSort }) {
           height={140}
         />
       ))}
+      {/* TEMP */}
+      <div className='relative grid aspect-[16/9] h-fit w-[260px] place-items-center rounded-md border'>
+        <Link
+          className='z-10 cursor-pointer select-none space-y-1 text-center'
+          href='/tv'
+        >
+          <h2 className='text-4xl shadow-lime-500 drop-shadow-md'>📺</h2>
+          <p className='transition-all hover:text-lime-500 hover:underline'>
+            See more!
+          </p>
+        </Link>
+
+        <div className='absolute -z-10 h-10 w-10 animate-pulse rounded-full bg-lime-500 blur-xl' />
+        <div className='absolute -z-10 h-5 w-5 animate-pulse rounded-full bg-emerald-600 blur-xl' />
+      </div>
     </Carousel>
   );
 }

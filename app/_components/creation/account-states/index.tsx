@@ -5,9 +5,7 @@ import type { CreationIdentifierProps } from '../common/types';
 
 import {
   ReactNode,
-  Suspense,
   createContext,
-  useContext,
   useEffect,
   useState,
 } from 'react';

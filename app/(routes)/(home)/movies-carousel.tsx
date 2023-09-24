@@ -6,6 +6,7 @@ import { Heading } from '@components/heading';
 import { Carousel } from '@components/carousel';
 import { getMovies } from '@actions/getMovies';
 import { capitalize } from '@libs/index';
+import Link from 'next/link';
 
 const emojis: Record<MovieSort, string> = {
   [MovieSort.NowPlaying]: '🎥',
@@ -35,6 +36,18 @@ async function CreationCarousel({ sort }: { sort: MovieSort }) {
           height={140}
         />
       ))}
+      {/* TEMP */}
+      <div className='relative grid aspect-[16/9] h-fit w-[260px] place-items-center rounded-md border'>
+        <Link href='/movie' className='z-10 cursor-pointer select-none space-y-1 text-center'>
+          <h2 className='text-4xl drop-shadow-md shadow-cyan-500'>🎥</h2>
+          <p className='transition-all hover:text-cyan-500 hover:underline'>
+            See more!
+          </p>
+        </Link>
+
+        <div className='absolute -z-10 h-10 w-10 animate-pulse rounded-full bg-cyan-500 blur-xl' />
+        <div className='absolute -z-10 h-5 w-5 animate-pulse rounded-full bg-blue-600 blur-xl' />
+      </div>
     </Carousel>
   );
 }
