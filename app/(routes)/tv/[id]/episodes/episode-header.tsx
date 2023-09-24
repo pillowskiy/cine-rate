@@ -3,7 +3,7 @@ import { MediaType } from '@config/enums';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { buildImagePath } from '@libs/tmdb';
 import Link from 'next/link';
-import { CreationActions } from '@/app/_components/creation/creation-actions';
+import { CreationActions } from '@components/creation/creation-actions';
 import { getTitle } from '@components/creation/common/utils';
 
 interface EpisodeHeaderProps {
