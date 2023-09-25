@@ -40,7 +40,7 @@ export function FavoriteButton({
     <Button onClick={toggleFavorite} size={size} {...props}>
       <Heart
         className={cn(
-          size === 'icon' ? 'h-5 w-5' : 'h-7 w-7',
+          size === 'sm' ? 'h-5 w-5' : 'h-7 w-7',
           isFavorite && 'fill-red-500 text-red-500'
         )}
       />

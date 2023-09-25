@@ -30,7 +30,7 @@ export function RatingButton({
       <Button size={size} {...props}>
         <Star
           className={cn(
-            size === 'icon' ? 'h-5 w-5' : 'h-7 w-7',
+            size === 'sm' ? 'h-5 w-5' : 'h-7 w-7',
             initialRated && 'fill-yellow-500 text-yellow-500'
           )}
         />

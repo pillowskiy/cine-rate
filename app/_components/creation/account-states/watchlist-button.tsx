@@ -38,7 +38,7 @@ export function WatchlistButton({
     <Button size={size} onClick={toggleWatchlist} {...props}>
       <BookmarkPlus
         className={cn(
-          size === 'icon' ? 'h-5 w-5' : 'h-7 w-7',
+          size === 'sm' ? 'h-5 w-5' : 'h-7 w-7',
           inWatchlist && 'fill-foreground'
         )}
       />

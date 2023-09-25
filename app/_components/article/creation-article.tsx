@@ -58,7 +58,11 @@ export const CreationArticle = memo(
             />
           </Link>
           <StatesPopover creationId={creation.id} mediaType={mediaType}>
-            <Button className='h-7 w-7 absolute top-2 right-2' variant='outline' size='icon'>
+            <Button
+              className='absolute right-2 top-2 h-7 w-7'
+              variant='outline'
+              size='icon'
+            >
               <Info className='h-5 w-5' />
             </Button>
           </StatesPopover>

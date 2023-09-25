@@ -65,25 +65,25 @@ export function StatesPopover({
     <StatesContext.Provider value={{ creationId, mediaType }}>
       <Popover open={isOpen} onOpenChange={handleOpen}>
         <PopoverTrigger asChild>{children}</PopoverTrigger>
-        <PopoverContent className='w-fit p-1'>
+        <PopoverContent className='p-1 w-[110px]'>
           {states && (
             <div className='flex flex-col text-left'>
               <WatchlistButton
-                className='justify-start'
+                className='justify-start h-7'
                 size='sm'
                 variant='ghost'
                 withText
                 alreadyInList={states.watchlist}
               />
               <RatingButton
-                className='justify-start'
+                className='justify-start h-7'
                 size='sm'
                 variant='ghost'
                 withText
                 initialRated={states.rated}
               />
               <FavoriteButton
-                className='justify-start'
+                className='justify-start h-7'
                 size='sm'
                 variant='ghost'
                 withText
