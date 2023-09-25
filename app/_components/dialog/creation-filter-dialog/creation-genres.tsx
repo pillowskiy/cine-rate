@@ -1,36 +1,27 @@
 'use client';
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import type { GenresResponse } from '@app/types/genre-types';
 import type { MediaType } from '@config/enums';
 import { Toggle } from '@ui/toggle';
 import { Label } from '@ui/label';
 import { Loader } from 'lucide-react';
 import { FilterContext } from '.';
-import axios from 'axios';
+import { useFetch } from '@hooks/useFetch';
 
 interface CreationGenresProps {
   mediaType: MediaType;
 }
 
 export function CreationGenres({ mediaType }: CreationGenresProps) {
-  const [genres, setGenres] = useState<GenresResponse['genres'] | null>(null);
   const [filter, setFilter] = useContext(FilterContext);
-  const { with_genres } = filter;
-  const genreIds = with_genres?.split(',').map(Number) || [];
+  const genreIds = filter.with_genres?.split(',').map(Number) || [];
 
-  useEffect(() => {
-    axios
-      .get<GenresResponse>('/api/genres/', { params: { mediaType } })
-      .then(({ data }) => {
-        setGenres(data.genres);
-      })
-      .catch(() => {
-        setGenres([]);
-      });
-  }, [mediaType]);
+  const { data, error } = useFetch<GenresResponse>('/api/genres/', {
+    params: { mediaType },
+  });
 
-  if (!genres) {
+  if (!data || !error) {
     return (
       <div className='grid place-items-center'>
         <Loader className='h-8 w-8' />
@@ -38,7 +29,7 @@ export function CreationGenres({ mediaType }: CreationGenresProps) {
     );
   }
 
-  if (!genres.length) return null;
+  if (error) return null;
 
   const removeGenre = (genreId: number) => {
     setFilter((prev) => ({
@@ -58,7 +49,7 @@ export function CreationGenres({ mediaType }: CreationGenresProps) {
     <div className='grid w-full items-center gap-2'>
       <Label>Genres</Label>
       <div className='flex flex-wrap gap-2'>
-        {genres.map((genre) => (
+        {data.genres.map((genre) => (
           <Toggle
             pressed={genreIds.includes(genre.id)}
             onPressedChange={(pressed) =>

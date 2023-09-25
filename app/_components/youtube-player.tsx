@@ -1,10 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { cn } from '../_libs';
+import { cn } from '@libs/index';
 import { videoFormat } from 'ytdl-core';
-import axios from 'axios';
 import { Loader2, Play } from 'lucide-react';
+import { useFetch } from '@hooks/useFetch';
 
 interface YoutubePlayerProps {
   url: string;
@@ -12,14 +11,10 @@ interface YoutubePlayerProps {
 }
 
 export function YoutubePlayer({ url, className }: YoutubePlayerProps) {
-  const [format, setFormat] = useState<videoFormat | null>(null);
-
-  useEffect(() => {
-    axios
-      .get<videoFormat>('/api/stream/video', { params: { url } })
-      .then(({ data }) => setFormat(data))
-      .catch(() => setFormat(null));
-  }, [url]);
+  // TODO: error handling
+  const { data: format, error } = useFetch<videoFormat>('/api/stream/video', {
+    params: { url },
+  });
 
   return (
     <figure

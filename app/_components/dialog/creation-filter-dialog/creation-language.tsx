@@ -12,24 +12,15 @@ import {
 } from '@ui/select';
 import { Label } from '@ui/label';
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { FilterContext } from '.';
-import axios from 'axios';
+import { useFetch } from '@hooks/useFetch';
 
 export function CreationLanguage() {
-  const [languages, setLanguages] = useState<LanguagesResponse | null>(null);
   const [filter, setFilter] = useContext(FilterContext);
-
-  useEffect(() => {
-    axios
-      .get<LanguagesResponse>('/api/configuration/languages')
-      .then(({ data }) => {
-        setLanguages(data);
-      })
-      .catch(() => {
-        setLanguages(null);
-      });
-  }, []);
+  const { data: languages, error } = useFetch<LanguagesResponse>(
+    '/api/configuration/languages'
+  );
 
   return (
     <div className='grid w-full items-center gap-2'>

@@ -14,12 +14,10 @@ export function AuthButton() {
   /*
    * https://stackoverflow.com/questions/71706064/
    * Error when using 'typeof window' in condition
+   * TODO: To independent hook
    */
   const [domLoaded, setDomLoaded] = useState(false);
-
-  useEffect(() => {
-    setDomLoaded(true);
-  }, []);
+  useEffect(() => void setDomLoaded(true), []);
 
   if (isLoading || !domLoaded) {
     return (
