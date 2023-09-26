@@ -26,7 +26,7 @@ export const approve = createAsyncThunk<AccountDetailsResponse, string, AuthThun
     },
 );
 
-export const getUser = createAsyncThunk<AccountDetailsResponse, never, AuthThunkConfig>(
+export const getUser = createAsyncThunk<AccountDetailsResponse, undefined, AuthThunkConfig>(
     'user/',
     async (_, api) => {
         try {
