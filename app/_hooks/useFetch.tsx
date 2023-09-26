@@ -13,14 +13,13 @@ type Cache<T> = { [url: string]: T };
 type State<T> = {
   data: T | null;
   // TEMP;
-  error: Error | null;
+  error: AxiosError<{ message: string }> | null;
 };
 
 type Action<T> =
   | { type: 'loading' }
   | { type: 'data'; payload: T }
   | { type: 'error'; payload: AxiosError };
-
 
 // TODO: invalidate cache, test cache
 export function useFetch<T>(
@@ -52,7 +51,7 @@ export function useFetch<T>(
     const fetchData = async () => {
       dispatch({ type: 'loading' });
       if (cache.current[url]) {
-        console.log('Cached data found')
+        console.log('Cached data found');
         return void dispatch({
           type: 'data',
           payload: cache.current[url],

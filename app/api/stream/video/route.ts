@@ -23,9 +23,9 @@ export async function GET(request: NextRequest) {
         // TEMP: correctly json object
         return NextResponse.json(format, { status: 200 });
     }).catch(err => {
-        if (!isAxiosError(err)) {
+        if (!(err instanceof Error)) {
             return NextResponse.json({ message: 'Unhandled error occurred' }, { status: 500 });
         }
-        return NextResponse.json(err.response?.data, { status: err.status });
+        return NextResponse.json({ message: err.message }, { status: 401 });
     });
 }
