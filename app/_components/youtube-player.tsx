@@ -4,7 +4,8 @@ import { cn } from '@libs/index';
 import { videoFormat } from 'ytdl-core';
 import { Bot, Loader2, Play, Volume2, Youtube } from 'lucide-react';
 import { useFetch } from '@hooks/useFetch';
-import { useRef, useState } from 'react';
+import useOnScreen from '@hooks/useOnScreen';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 interface YoutubePlayerProps {
@@ -22,14 +23,26 @@ export function YoutubePlayer({ url, className }: YoutubePlayerProps) {
   });
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  // TEMP: transition to framer motion InView hook
+  const isVisible = useOnScreen(videoRef);
   const [options, setOptions] = useState<VideoStateOptions>({});
 
-  const handlePlaying = () => {
+  useEffect(() => {
+    console.log("Visible change")
+    playingChange(isVisible);
+  }, [isVisible])
+
+  function playingChange(isPlaying: boolean) {
+    if (!videoRef.current) return;
+    videoRef.current[isPlaying ? 'pause' : 'play']();
+    setOptions((prev) => ({ ...prev, isPlaying: !videoRef.current?.paused }));
+  }
+
+  function handlePlaying() {
     if (!videoRef.current) return;
     const isPaused = videoRef.current.paused;
-    videoRef.current[isPaused ? 'play' : 'pause']();
-    setOptions((prev) => ({ ...prev, isPlaying: isPaused }));
-  };
+    playingChange(!isPaused);
+  }
 
   function handle() {
     if (!format && !error) {

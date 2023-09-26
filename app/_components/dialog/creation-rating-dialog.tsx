@@ -61,6 +61,24 @@ export function CreationRatingDialog({
     );
   }
 
+  async function deleteRating() {
+    return (
+      axios
+        .delete<RatingResponse>(`/api/states/${mediaType}/${creationId}/rating`)
+        .then(() => {
+          setIsRated(false);
+          setRating(0);
+          toast({
+            title: '🗑 Your review has been deleted!',
+            description:
+              'Thank you for helping to improve the quality of our resource.',
+          });
+        })
+        // TEMP
+        .catch(() => {})
+    );
+  }
+
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -76,7 +94,7 @@ export function CreationRatingDialog({
               'h-[72px] w-[72px] fill-blue-500 text-blue-500 transition-all duration-300',
               isRated && 'fill-yellow-500 text-yellow-500'
             )}
-            style={{ transform: `scale(1.${(rating - 1) / 2 * 10})` }}
+            style={{ transform: `scale(1.${((rating - 1) / 2) * 10})` }}
           />
           <h2 className='absolute select-none text-2xl leading-none'>
             {rating}
@@ -110,6 +128,7 @@ export function CreationRatingDialog({
               <Button
                 variant='destructive'
                 size='icon'
+                onClick={() => startTransition(deleteRating)}
                 disabled={!isRated || isLoading}
               >
                 {isLoading ? (
