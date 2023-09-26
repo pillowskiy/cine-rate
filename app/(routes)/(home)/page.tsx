@@ -4,6 +4,8 @@ import CelebrityCarousel from './celebrity-carousel';
 import SeriesCarousel from './series-carousel';
 
 import dynamic from 'next/dynamic';
+import { LoadingCarousel } from '@/app/_components/loading-carousel';
+import { Suspense } from 'react';
 
 // Hydrating suspense boundary
 const WatchlistCarousel = dynamic(() => import('./watchlist-carousel'), {
@@ -13,11 +15,19 @@ const WatchlistCarousel = dynamic(() => import('./watchlist-carousel'), {
 export default async function Home() {
   return (
     <main className='min-h-screen w-full space-y-6'>
-      <TrendsCarousel />
-      <MoviesCarousel />
-      <SeriesCarousel />
+      <Suspense fallback={<LoadingCarousel />}>
+        <TrendsCarousel />
+      </Suspense>
+      <Suspense fallback={<LoadingCarousel className='mt-6' aspect='horizontal' />}>
+        <MoviesCarousel />
+      </Suspense>
+      <Suspense fallback={<LoadingCarousel className='mt-6' aspect='horizontal' />}>
+        <SeriesCarousel />
+      </Suspense>
       <WatchlistCarousel />
-      <CelebrityCarousel />
+      <Suspense fallback={<LoadingCarousel />}>
+        <CelebrityCarousel />
+      </Suspense>
     </main>
   );
 }

@@ -5,7 +5,7 @@ import { Heading } from '@components/heading';
 import { Separator } from '@ui/separator';
 import { BookmarkPlus, LogIn } from 'lucide-react';
 import Link from 'next/link';
-import { useAuth } from '@/app/_redux/hooks';
+import { useAuth } from '@redux/hooks';
 
 export default function WatchlistCarousel() {
   const { user, isLoading } = useAuth();
@@ -19,7 +19,7 @@ export default function WatchlistCarousel() {
       />
       <Separator className='my-4' />
 
-      <div className='mt-6 grid w-full place-items-center gap-4 p-6'>
+      <div className='mt-8 grid w-full place-items-center gap-4 p-8'>
         <BookmarkPlus className='h-10 w-10' />
 
         <div className='space-y-1 text-center'>
@@ -34,7 +34,7 @@ export default function WatchlistCarousel() {
         <Link href='/auth' passHref legacyBehavior>
           <Button variant='outline'>
             <LogIn className='mr-2 h-5 w-5' />
-            <span>Sign in with TMDB</span>
+            <span className='truncate'>Sign in with TMDB</span>
           </Button>
         </Link>
       </div>

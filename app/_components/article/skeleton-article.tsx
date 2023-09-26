@@ -3,7 +3,7 @@ import { Skeleton } from '../ui/skeleton';
 import { BaseArticleFigureProps } from './base-article';
 import { cn } from '@/app/_libs';
 
-interface SkeletonArticleProps extends ComponentProps<'article'> {
+export interface SkeletonArticleProps extends ComponentProps<'article'> {
   aspect?: BaseArticleFigureProps['aspect'];
 }
 
