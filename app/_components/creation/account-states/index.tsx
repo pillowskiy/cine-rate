@@ -3,12 +3,7 @@
 import type { AccountStatesResponse } from '@app/types/creation-types';
 import type { CreationIdentifierProps } from '../common/types';
 
-import {
-  ReactNode,
-  createContext,
-  useEffect,
-  useState,
-} from 'react';
+import { ReactNode, createContext, useEffect, useState } from 'react';
 import { MediaType } from '@config/enums';
 import axios from 'axios';
 
@@ -18,15 +13,11 @@ import { WatchlistButton } from './watchlist-button';
 
 import { useAuth } from '@redux/hooks';
 import { Popover, PopoverContent, PopoverTrigger } from '@ui/popover';
+import { useFetch } from '@/app/_hooks/useFetch';
+import { useToast } from '../../ui/use-toast';
 
 interface CreationStatesProps extends CreationIdentifierProps {
   children: ReactNode;
-}
-
-function getAccountStates(creationId: number, mediaType: MediaType) {
-  return axios.get<AccountStatesResponse>(
-    `/api/creations/${mediaType}/${creationId}/states`
-  );
 }
 
 export const StatesContext = createContext<CreationIdentifierProps>({
@@ -50,7 +41,10 @@ export function StatesPopover({
     } else if (open && states) {
       setIsOpen(true);
     } else {
-      getAccountStates(creationId, mediaType)
+      axios
+        .get<AccountStatesResponse>(
+          `/api/creations/${mediaType}/${creationId}/states`
+        )
         .then(({ data }) => {
           setStates(data);
           setIsOpen(true);
@@ -65,25 +59,25 @@ export function StatesPopover({
     <StatesContext.Provider value={{ creationId, mediaType }}>
       <Popover open={isOpen} onOpenChange={handleOpen}>
         <PopoverTrigger asChild>{children}</PopoverTrigger>
-        <PopoverContent className='p-1 w-[110px]'>
+        <PopoverContent className='w-[110px] p-1'>
           {states && (
             <div className='flex flex-col text-left'>
               <WatchlistButton
-                className='justify-start h-7'
+                className='h-7 justify-start'
                 size='sm'
                 variant='ghost'
                 withText
                 alreadyInList={states.watchlist}
               />
               <RatingButton
-                className='justify-start h-7'
+                className='h-7 justify-start'
                 size='sm'
                 variant='ghost'
                 withText
                 initialRated={states.rated}
               />
               <FavoriteButton
-                className='justify-start h-7'
+                className='h-7 justify-start'
                 size='sm'
                 variant='ghost'
                 withText
@@ -102,19 +96,12 @@ export function CreationStatesDetailed({
   mediaType,
 }: CreationIdentifierProps) {
   const { user } = useAuth();
-  const [states, setStates] = useState<AccountStatesResponse | null>(null);
 
-  useEffect(() => {
-    if (!user) return;
-
-    getAccountStates(creationId, mediaType)
-      .then(({ data }) => {
-        setStates(data);
-      })
-      .catch(() => {
-        setStates(null);
-      });
-  }, [creationId, mediaType, user]);
+  const { data: states } = useFetch<AccountStatesResponse>(
+    `/api/creations/${mediaType}/${creationId}/states`,
+    {},
+    [user]
+  );
 
   if (!states) return null;
 

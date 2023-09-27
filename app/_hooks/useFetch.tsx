@@ -12,7 +12,6 @@ export enum HttpMethod {
 type Cache<T> = { [url: string]: T };
 type State<T> = {
   data: T | null;
-  // TEMP;
   error: AxiosError<{ message: string }> | null;
 };
 
@@ -24,7 +23,8 @@ type Action<T> =
 // TODO: invalidate cache, test cache
 export function useFetch<T>(
   url: string,
-  options?: AxiosRequestConfig
+  options: AxiosRequestConfig = {},
+  dependencies: Array<unknown> = [],
 ): State<T> {
   const cache = useRef<Cache<T>>({});
   const cancelRequest = useRef(false);
@@ -37,7 +37,7 @@ export function useFetch<T>(
   const fetchReducer = (_: State<T>, action: Action<T>): State<T> => {
     const newState = { ...initialState };
     if ('payload' in action) {
-      // @ts-expect-error
+      // @ts-expect-error - TEMP
       newState[action.type] = action.payload;
     }
     return newState;
@@ -46,12 +46,11 @@ export function useFetch<T>(
   const [state, dispatch] = useReducer(fetchReducer, initialState);
 
   useEffect(() => {
-    if (!url) return;
+    if (!url || !dependencies.every(Boolean)) return;
     cancelRequest.current = false;
     const fetchData = async () => {
       dispatch({ type: 'loading' });
       if (cache.current[url]) {
-        console.log('Cached data found');
         return void dispatch({
           type: 'data',
           payload: cache.current[url],
@@ -74,7 +73,7 @@ export function useFetch<T>(
     void fetchData();
     return () => void (cancelRequest.current = true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url]);
+  }, [url, ...dependencies]);
 
   return state;
 }

@@ -18,7 +18,7 @@ import { useFetch } from '@hooks/useFetch';
 
 export function CreationLanguage() {
   const [filter, setFilter] = useContext(FilterContext);
-  const { data: languages, error } = useFetch<LanguagesResponse>(
+  const { data: languages } = useFetch<LanguagesResponse>(
     '/api/configuration/languages'
   );
 

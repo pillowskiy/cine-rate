@@ -20,17 +20,14 @@ interface VideoStateOptions {
 export function YoutubePlayer({ url, className }: YoutubePlayerProps) {
   const { data: format, error } = useFetch<videoFormat>('/api/stream/video', {
     params: { url },
-  });
+  }, [url]);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   // TEMP: transition to framer motion InView hook
   const isVisible = useOnScreen(videoRef);
   const [options, setOptions] = useState<VideoStateOptions>({});
 
-  useEffect(() => {
-    console.log("Visible change")
-    playingChange(isVisible);
-  }, [isVisible])
+  useEffect(() => void playingChange(isVisible), [isVisible])
 
   function playingChange(isPlaying: boolean) {
     if (!videoRef.current) return;
