@@ -6,5 +6,5 @@ export function rejectAxios(err: unknown): IApiReject {
         const { data, status } = err.response;
         return { message: data.message, status };
     }
-    throw err;
+    return { message: 'Unhandled error occurred', status: 500 };;
 }

@@ -1,5 +1,4 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { rejectAxios } from '@libs/axios';
 import { generateZodErrorsResponse } from '@libs/common/next';
 import { getInfo as getVideoInfo, chooseFormat } from 'ytdl-core';
 import zod from 'zod';
@@ -23,6 +22,11 @@ export async function GET(request: NextRequest) {
         // TEMP: correctly json object
         return NextResponse.json(format, { status: 200 });
     }).catch(err => {
-        return NextResponse.json(rejectAxios(err));
+        if (err instanceof Error) {
+            return NextResponse.json({
+                message: err.message
+            }, { status: 400 });
+        }
+        return NextResponse.json({ message: 'Unhandled error occurred!' }, { status: 500 });
     });
 }
