@@ -43,7 +43,7 @@ export function StatesPopover({
     } else {
       axios
         .get<AccountStatesResponse>(
-          `/api/creations/${mediaType}/${creationId}/states`
+          `/api/${mediaType}/${creationId}/states`
         )
         .then(({ data }) => {
           setStates(data);
@@ -98,7 +98,7 @@ export function CreationStatesDetailed({
   const { user } = useAuth();
 
   const { data: states } = useFetch<AccountStatesResponse>(
-    `/api/creations/${mediaType}/${creationId}/states`,
+    `/api/${mediaType}/${creationId}/states`,
     {},
     [user]
   );

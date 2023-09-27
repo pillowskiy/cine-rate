@@ -1,7 +1,8 @@
+import { type NextRequest, NextResponse } from 'next/server';
 import { MediaType } from '@config/enums';
 import { getPopular } from '@actions/getPopular';
-import { isAxiosError } from 'axios';
-import { NextRequest, NextResponse } from 'next/server';
+import { generateZodErrorsResponse } from '@libs/common/next';
+import { rejectAxios } from '@libs/axios';
 import zod from 'zod';
 
 const filterDto = zod.object({
@@ -14,16 +15,7 @@ export function GET(request: NextRequest) {
   const result = filterDto.safeParse(searchParams);
 
   if (!result.success) {
-    if (result.error.issues.length) {
-      return NextResponse.json(
-        { errors: result.error.format() },
-        { status: 400 }
-      );
-    }
-    return NextResponse.json(
-      { message: 'Unhandled zod error' },
-      { status: 500 }
-    );
+    return generateZodErrorsResponse(result);
   }
 
   const { page } = result.data;
@@ -32,9 +24,6 @@ export function GET(request: NextRequest) {
       return NextResponse.json(data, { status: 200 });
     })
     .catch((err) => {
-      if (!isAxiosError(err)) {
-        return NextResponse.json('Unhandled error occurred', { status: 500 });
-      }
-      return NextResponse.json(err.response?.data, { status: err.status });
+      return NextResponse.json(rejectAxios(err));
     });
 }

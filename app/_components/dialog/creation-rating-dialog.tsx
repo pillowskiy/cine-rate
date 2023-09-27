@@ -43,7 +43,7 @@ export function CreationRatingDialog({
   async function upsertRating() {
     return (
       axios
-        .post<RatingResponse>(`/api/states/${mediaType}/${creationId}/rating`, {
+        .post<RatingResponse>(`/api/${mediaType}/${creationId}/rating`, {
           value: rating,
         })
         .then(() => {
@@ -64,7 +64,7 @@ export function CreationRatingDialog({
   async function deleteRating() {
     return (
       axios
-        .delete<RatingResponse>(`/api/states/${mediaType}/${creationId}/rating`)
+        .delete<RatingResponse>(`/api/${mediaType}/${creationId}/rating`)
         .then(() => {
           setIsRated(false);
           setRating(0);

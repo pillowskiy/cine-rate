@@ -1,13 +1,12 @@
-import { getSessionUser } from '@actions/getSessionUser';
-import { $api } from '@/app/_shared/api/api-interceptor';
+import { type NextRequest, NextResponse } from 'next/server';
+import type { RatingResponse } from '@app/types/creation-types';
+import type { INextPageParams } from '@app/types/index';
 import { MediaType } from '@config/enums';
-import { RatingResponse } from '@app/types/creation-types';
-import { isAxiosError } from 'axios';
-import { NextRequest, NextResponse } from 'next/server';
-import zod from 'zod';
+import { generateZodErrorsResponse } from '@libs/common/next';
+import { rejectAxios } from '@libs/axios';
 import { cookies } from 'next/headers';
-import { INextPageParams } from '@/app/_types';
-import { generateZodErrorsResponse } from '@/app/_libs/common/next';
+import { $api } from '@/app/_shared/api/api-interceptor';
+import zod from 'zod';
 
 const bodyDto = zod.object({
     value: zod.number().max(10).min(1)
@@ -42,14 +41,11 @@ export async function POST(request: NextRequest, { params }: INextPageParams) {
 
     return $api.post<RatingResponse>(`/3/${mediaType}/${creationId}/rating`, {
         value: parsedBody.data.value,
-    }, { params: { session_id: sessionId }})
+    }, { params: { session_id: sessionId } })
         .then(({ data }) => {
             return NextResponse.json(data, { status: 200 })
         }).catch((err) => {
-            if (!isAxiosError(err)) {
-                return NextResponse.json('Unhandled error occurred', { status: 500 });
-            }
-            return NextResponse.json(err.response?.data, { status: err.status });
+            return NextResponse.json(rejectAxios(err));
         });
 }
 
@@ -75,9 +71,6 @@ export async function DELETE(_: NextRequest, { params }: INextPageParams) {
         .then(({ data }) => {
             return NextResponse.json(data, { status: 200 })
         }).catch((err) => {
-            if (!isAxiosError(err)) {
-                return NextResponse.json('Unhandled error occurred', { status: 500 });
-            }
-            return NextResponse.json(err.response?.data, { status: err.status });
+            return NextResponse.json(rejectAxios(err));
         });
 }

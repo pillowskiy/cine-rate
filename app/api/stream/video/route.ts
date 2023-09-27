@@ -1,6 +1,6 @@
-import { generateZodErrorsResponse } from '@/app/_libs/common/next';
-import { isAxiosError } from 'axios';
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
+import { rejectAxios } from '@libs/axios';
+import { generateZodErrorsResponse } from '@libs/common/next';
 import { getInfo as getVideoInfo, chooseFormat } from 'ytdl-core';
 import zod from 'zod';
 
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
     const searchParams = requestUrl.searchParams.entries();
     const searchParamsObj = Object.fromEntries(searchParams);
     const parsedQuery = queryDto.safeParse(searchParamsObj);
-    
+
     if (!parsedQuery.success) {
         return generateZodErrorsResponse(parsedQuery);
     }
@@ -23,9 +23,6 @@ export async function GET(request: NextRequest) {
         // TEMP: correctly json object
         return NextResponse.json(format, { status: 200 });
     }).catch(err => {
-        if (!(err instanceof Error)) {
-            return NextResponse.json({ message: 'Unhandled error occurred' }, { status: 500 });
-        }
-        return NextResponse.json({ message: err.message }, { status: 401 });
+        return NextResponse.json(rejectAxios(err));
     });
 }
