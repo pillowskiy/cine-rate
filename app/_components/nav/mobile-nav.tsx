@@ -2,6 +2,7 @@
 
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -26,7 +27,7 @@ export function MobileNav() {
       <SheetContent className='pr-0' side='left'>
         <SheetHeader>
           <SheetTitle>
-            <Logo />
+            <Logo onClick={() => setIsOpen(false)} />
           </SheetTitle>
         </SheetHeader>
         <AppNav
@@ -38,7 +39,7 @@ export function MobileNav() {
         <h2 className='text-lg font-semibold' onClick={() => setIsOpen(false)}>
           Settings
         </h2>
-        <ul className='my-4 space-y-2 pl-6 crusor-pointer'>
+        <ul className='cursor-pointer my-4 space-y-2 pl-6'>
           <li>Language</li>
           <li>Theme</li>
           <li>Privacy</li>
