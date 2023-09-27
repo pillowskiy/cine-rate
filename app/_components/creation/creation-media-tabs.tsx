@@ -1,4 +1,4 @@
-import { MediaType } from '@config/enums';
+import type { MediaType } from '@config/enums';
 import { Carousel } from '@components/carousel';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs';
@@ -8,11 +8,12 @@ import { buildImagePath } from '@libs/tmdb';
 import { cn } from '@libs/index';
 
 interface MediaTabsProps {
+  mediaType: MediaType;
   creationId: number;
 }
 
-export default async function MediaTabs({ creationId }: MediaTabsProps) {
-  const { data: images } = await getCreationImages(creationId, MediaType.Movie);
+export default async function MediaTabs({ creationId, mediaType }: MediaTabsProps) {
+  const { data: images } = await getCreationImages(creationId, mediaType);
 
   if (!images) return null;
 
