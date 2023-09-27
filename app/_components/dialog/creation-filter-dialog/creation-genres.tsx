@@ -5,7 +5,7 @@ import type { GenresResponse } from '@app/types/genre-types';
 import type { MediaType } from '@config/enums';
 import { Toggle } from '@ui/toggle';
 import { Label } from '@ui/label';
-import { Loader } from 'lucide-react';
+import { ChevronDown, Loader } from 'lucide-react';
 import { FilterContext } from '.';
 import { useFetch } from '@hooks/useFetch';
 
@@ -21,15 +21,19 @@ export function CreationGenres({ mediaType }: CreationGenresProps) {
     params: { mediaType },
   });
 
-  if (!data || !error) {
+  if (!data && !error) {
     return (
-      <div className='grid place-items-center'>
-        <Loader className='h-8 w-8' />
+      <div className='flex w-full items-center justify-between rounded-md border py-2 px-3'>
+        <div className='flex items-center'>
+          <Loader className='mr-1.5 h-6 w-6 animate-spin' />
+          <span className='animate-pulse text-sm'>Loading genres..</span>
+        </div>
+        <ChevronDown className='w-4 h-4 text-foreground/50' />
       </div>
     );
   }
 
-  if (error) return null;
+  if (!data?.genres.length) return null;
 
   const removeGenre = (genreId: number) => {
     setFilter((prev) => ({

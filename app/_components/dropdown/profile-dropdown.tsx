@@ -22,7 +22,6 @@ interface ProfileDropdownProps {
 export function ProfileDropdown({ children }: ProfileDropdownProps) {
   const { user } = useAuth();
 
-  // TEMP
   if (!user) return null;
 
   return (

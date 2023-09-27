@@ -4,6 +4,7 @@ import { Carousel } from '@components/carousel';
 import { Separator } from '@ui/separator';
 import { getSimilar } from '@actions/getSimilar';
 import { Heading } from '@components/heading';
+import { NotFound } from '@components/not-found';
 
 export default async function CreationSimilar({
   creationId,
@@ -13,7 +14,7 @@ export default async function CreationSimilar({
     () => ({ data: null })
   );
 
-  if (!creations?.results.length) return null;
+  if (!creations?.results.length) return <NotFound />;
 
   return (
     <section>

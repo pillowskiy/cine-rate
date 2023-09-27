@@ -11,14 +11,11 @@ import SerriesSeasons from './series-seasons';
 import SeriesDetails from './series-details';
 
 import { getCreationDetails } from '@actions/getCreationDetails';
+import { pipe } from '@libs/common/next';
 
 export default async function TVPage({ params }: INextPageParams) {
-  const paramId = +(params?.id.toString() || NaN);
-  if (isNaN(paramId)) return null;
+  const paramId = pipe.strToInt(params?.id);
   const { data: tv } = await getCreationDetails(paramId, MediaType.TV);
-
-  // TEMP
-  if (!tv) return null;
 
   return (
     <main className='min-h-screen w-full space-y-6'>

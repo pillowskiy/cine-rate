@@ -26,9 +26,6 @@ export default async function SeasonPage({ params }: INextPageParams) {
   const seasonNumber = pipe.strToInt(params?.seasonNumber);
   const { data: season } = await getSeasonDetails(seriesId, seasonNumber);
 
-  // TEMP
-  if (!season) return null;
-
   return (
     <main className='min-h-screen w-full space-y-6'>
       {season.episodes.map((episode) => (

@@ -34,8 +34,8 @@ export default function EpisodeFilter({ series }: EpisodeFilterProps) {
   };
 
   return (
-    <section className='flex items-center justify-between gap-2 rounded-md border px-4 py-2'>
-      <div className='flex flex-grow items-center justify-between gap-4 overflow-auto sm:justify-start'>
+    <section className='flex items-center justify-between gap-2 rounded-md border px-2 py-1'>
+      <div className='flex flex-grow items-center justify-between gap-4 overflow-auto sm:justify-start px-2 py-1'>
         <Select
           value={selectValue}
           onValueChange={onValueChange}
@@ -79,7 +79,7 @@ export default function EpisodeFilter({ series }: EpisodeFilterProps) {
         </Select>
       </div>
 
-      <div className='hidden sm:inline-block'>
+      <div className='hidden sm:inline-block mx-2'>
         <Button size='icon' variant='outline'>
           <ArrowDownUp className='h-5 w-5' />
         </Button>

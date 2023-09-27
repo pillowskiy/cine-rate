@@ -10,14 +10,11 @@ import CreationMediaTabs from '@components/creation/creation-media-tabs';
 import MovieDetails from './movie-details';
 
 import { getCreationDetails } from '@actions/getCreationDetails';
+import { pipe } from '@libs/common/next';
 
 export default async function MoviePage({ params }: INextPageParams) {
-  const paramId = +(params?.id.toString() || NaN);
-  if (isNaN(paramId)) return null;
+  const paramId = pipe.strToInt(params?.id);
   const { data: movie } = await getCreationDetails(paramId, MediaType.Movie);
-
-  // TEMP
-  if (!movie) return null;
 
   return (
     <main className='min-h-screen w-full space-y-6'>

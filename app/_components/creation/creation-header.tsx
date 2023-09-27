@@ -74,7 +74,7 @@ export default async function MovieHeader({
       <div className='jutisfy-between my-4 flex flex-col md:flex-row md:gap-4'>
         <div className='flex-[25%] overflow-hidden rounded-md'>
           <ImageFromPath
-            className='hidden h-full w-auto object-cover sm:block'
+            className='hidden h-full w-auto object-cover sm:grid'
             src={buildImagePath({ path: details.poster_path, scale: 'poster' })}
             alt='Creation Poster'
             width={260}

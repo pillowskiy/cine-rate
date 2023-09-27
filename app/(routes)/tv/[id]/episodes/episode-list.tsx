@@ -3,6 +3,7 @@ import type { BaseParams } from '@app/types/index';
 import { MediaType } from '@config/enums';
 import { EpisodeArticle } from './episode-article';
 import { $api } from '@/app/_shared/api/api-interceptor';
+import { NotFound } from '@components/not-found';
 
 async function getSeasonDetails(
   seriesId: number,
@@ -26,18 +27,19 @@ export default async function EpisodeList({
 }: EpisodeListProps) {
   const { data: season } = await getSeasonDetails(seriesId, seasonNumber);
 
-  // TEMP
-  if (!season || !season.episodes?.length) return null;
-
   return (
     <section className='space-y-4'>
-      {season.episodes.map((episode) => (
-        <EpisodeArticle
-          seriesId={seriesId}
-          key={episode.id}
-          episode={episode}
-        />
-      ))}
+      {season?.episodes.length ? (
+        season.episodes.map((episode) => (
+          <EpisodeArticle
+            seriesId={seriesId}
+            key={episode.id}
+            episode={episode}
+          />
+        ))
+      ): (
+        <NotFound />
+      )}
     </section>
   );
 }

@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+import type { CreationIdentifierProps } from './common/types';
 import {
   Dialog,
   DialogContent,
@@ -6,10 +8,9 @@ import {
   DialogTrigger,
   DialogTitle,
 } from '@ui/dialog';
-import { ReactNode } from 'react';
-import type { CreationIdentifierProps } from './common/types';
+import { ReviewCard } from '@components/card/review-card';
+import { NotFound } from '@components/not-found';
 import { getCreationReviews } from '@/app/_shared/actions/getCreationReviews';
-import { ReviewCard } from '../card/review-card';
 
 interface CreationReviewsDialog extends CreationIdentifierProps {
   children: ReactNode;
@@ -33,15 +34,13 @@ export async function CreationReviewsDialog({
           <DialogTitle>Reviews</DialogTitle>
           <DialogDescription>Feedback from our users.</DialogDescription>
         </DialogHeader>
-        <div className='space-y-4 overflow-y-auto md:max-h-[400px] min-h-[300px] px-6'>
-          {!!reviews?.results.length ? reviews.results.map((review) => (
-            <ReviewCard key={review.id} review={review} />
-          )): (
-            <div className='h-full grid place-items-center'>
-              <span className='text-foreground/70'>
-                There are not reviews yet.
-              </span>
-            </div>
+        <div className='min-h-[300px] space-y-4 overflow-y-auto px-6 md:max-h-[400px]'>
+          {!!reviews?.results.length ? (
+            reviews.results.map((review) => (
+              <ReviewCard key={review.id} review={review} />
+            ))
+          ) : (
+            <NotFound />
           )}
         </div>
       </DialogContent>

@@ -15,9 +15,6 @@ export default async function PersonPage({ params }: PersonPageProps) {
   const personId = pipe.strToInt(params?.id);
   const { data: person } = await getPersonDetails(personId);
 
-  // TEMP;
-  if (!person) return null;
-
   return (
     <main className='flex flex-col gap-4 sm:flex-row'>
       <section className='flex-[1 1 260px] space-y-6 sm:min-w-[260px]'>
