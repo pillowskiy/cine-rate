@@ -26,8 +26,8 @@ export function CreationSortSelect({ Sort }: CreationSortSelectProps) {
       }}
       defaultValue={urlSearchParams.get('sort_by') || undefined}
     >
-      <SelectTrigger className='w-[120px] sm:w-[180px]'>
-        <SelectValue className='mr-2' placeholder='Sort results by' />
+      <SelectTrigger className='w-[140px] sm:w-[180px] truncate'>
+        <SelectValue className='mr-4' placeholder='Sort results by' />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>

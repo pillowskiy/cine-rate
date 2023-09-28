@@ -20,7 +20,7 @@ function getMultipleSearch(query: string) {
   });
 }
 
-// TEMP: decomp
+// TEMP: The principle of single responsibility
 export function SearchDialog() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -79,7 +79,7 @@ export function SearchDialog() {
             <X className='h-4 w-4 text-foreground/70 opacity-0' />
           </DialogClose>
         </div>
-        <div className='relative max-h-[90vh] space-y-4 overflow-y-auto px-2 sm:max-h-[400px] sm:min-h-[400px]'>
+        <div className='relative h-[600px] space-y-4 overflow-y-auto px-2 sm:max-h-[400px] sm:min-h-[400px]'>
           {isLoading && (
             <div className='absolute left-0 top-0 grid h-full w-full place-items-center bg-background'>
               <Loader className='m-auto h-16 w-16 animate-spin' />

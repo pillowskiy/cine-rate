@@ -1,5 +1,6 @@
 import { Separator } from '@ui/separator';
 import { getPersonTranslations } from '@actions/getPersonTranslations';
+import { NotFound } from '@components/not-found';
 
 interface PersonBiographyProps {
   personId: number;
@@ -21,27 +22,31 @@ export default async function PersonBiography({
   return (
     <section className='relative text-sm md:text-base'>
       <div>
-        <h2 className='text-lg leading-none font-medium'>Biography</h2>
+        <h2 className='text-lg font-medium leading-none'>Biography</h2>
         <Separator className='my-4' />
       </div>
 
-      <article className='space-y-4'>
-        {fragmentedBio.slice(0, MAX_FRAGMENTS).map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
-        ))}
-        {fragmentedBio.length > MAX_FRAGMENTS && (
-          <details className='space-y-4 pb-6'>
-            <summary className='absolute bottom-0 right-0 cursor-pointer rounded-md p-2 no-underline marker:hidden marker:content-none'>
-              <span className='transtion-all text-sm text-blue-400 hover:underline'>
-                Read more
-              </span>
-            </summary>
-            {fragmentedBio.slice(MAX_FRAGMENTS).map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
-          </details>
-        )}
-      </article>
+      {fragmentedBio.length ? (
+        <article className='space-y-4'>
+          {fragmentedBio.slice(0, MAX_FRAGMENTS).map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
+          {fragmentedBio.length > MAX_FRAGMENTS && (
+            <details className='space-y-4 pb-6'>
+              <summary className='absolute bottom-0 right-0 cursor-pointer rounded-md p-2 no-underline marker:hidden marker:content-none'>
+                <span className='transtion-all text-sm text-blue-400 hover:underline'>
+                  Read more
+                </span>
+              </summary>
+              {fragmentedBio.slice(MAX_FRAGMENTS).map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </details>
+          )}
+        </article>
+      ) : (
+        <NotFound />
+      )}
     </section>
   );
 }

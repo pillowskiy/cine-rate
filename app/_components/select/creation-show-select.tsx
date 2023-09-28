@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import {
   Select,
@@ -12,14 +12,14 @@ import {
 export function CreationShowSelect() {
   return (
     <Select defaultValue='all'>
-      <SelectTrigger className='w-[120px] sm:w-[180px]'>
+      <SelectTrigger className='w-[120px] sm:w-[180px] truncate'>
         <SelectValue placeholder='Show me' />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectItem value='all'>All</SelectItem>
-          <SelectItem value='watched'>Watched Movies</SelectItem>
-          <SelectItem value='unwatched'>Unwatched Movies</SelectItem>
+          <SelectItem value='watched'>Watched</SelectItem>
+          <SelectItem value='unwatched'>Unwatched</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
