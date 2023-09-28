@@ -20,13 +20,16 @@ function getMultipleSearch(query: string) {
   });
 }
 
+// TEMP: decomp
 export function SearchDialog() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
   const [data, setData] = useState<Record<
     MediaType,
     MultiSearchResponse['results']
   > | null>(null);
+
   const [query, setQuery] = useState('');
   const debounceQuery = useDebounce(query);
 

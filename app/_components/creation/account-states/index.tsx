@@ -42,9 +42,7 @@ export function StatesPopover({
       setIsOpen(true);
     } else {
       axios
-        .get<AccountStatesResponse>(
-          `/api/${mediaType}/${creationId}/states`
-        )
+        .get<AccountStatesResponse>(`/api/${mediaType}/${creationId}/states`)
         .then(({ data }) => {
           setStates(data);
           setIsOpen(true);
@@ -108,36 +106,38 @@ export function CreationStatesDetailed({
   return (
     <StatesContext.Provider value={{ creationId, mediaType }}>
       <div className='flex w-full justify-between gap-4 overflow-x-auto sm:w-fit sm:justify-start'>
-        <div className='flex flex-col items-center justify-center space-y-1 text-center'>
+        <div className='flex w-[120px] flex-col items-center justify-center space-y-1 text-center'>
           <span className='truncate text-xs font-semibold uppercase'>
-            Favorite
+            Favorite List
           </span>
           <FavoriteButton
-            className='text-lg'
+            className='h-7 text-lg'
             size='sm'
             variant='ghost'
             initialFavorite={states.favorite}
+            withText
           />
         </div>
 
-        <div className='flex flex-col items-center justify-center space-y-1 text-center'>
+        <div className='flex w-[120px] flex-col items-center justify-center space-y-1 text-center'>
           <span className='truncate text-xs font-semibold uppercase'>
-            Watchlist
+            Your Watchlist
           </span>
           <WatchlistButton
-            className='text-lg'
+            className='h-7 text-lg'
             size='sm'
             variant='ghost'
             alreadyInList={states.watchlist}
+            withText
           />
         </div>
 
-        <div className='flex flex-col items-center justify-center space-y-1 text-center'>
+        <div className='flex w-[120px] flex-col items-center justify-center space-y-1  text-center'>
           <span className='truncate text-xs font-semibold uppercase'>
             Your Rating
           </span>
           <RatingButton
-            className='text-lg'
+            className='h-7 text-lg'
             size='sm'
             variant='link'
             initialRated={states.rated}

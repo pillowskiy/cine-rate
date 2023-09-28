@@ -71,10 +71,10 @@ export default async function MovieHeader({
         <CreationStatesDetailed creationId={details.id} mediaType={mediaType} />
       </div>
 
-      <div className='jutisfy-between my-4 flex flex-col md:flex-row md:gap-4'>
+      <div className='jutisfy-between my-4 flex flex-col sm:flex-row sm:gap-4'>
         <div className='flex-[25%] overflow-hidden rounded-md'>
           <ImageFromPath
-            className='hidden h-full w-auto object-cover sm:grid'
+            className='hidden h-full w-auto object-cover sm:block'
             src={buildImagePath({ path: details.poster_path, scale: 'poster' })}
             alt='Creation Poster'
             width={260}
@@ -88,17 +88,17 @@ export default async function MovieHeader({
           url={buildURL(video?.key || '')}
         />
 
-        <figure className='flex w-full flex-[20%] gap-4 overflow-hidden md:flex-col'>
-          <div className='backdrop-blur-5 grid h-auto w-full place-items-center rounded-b-md p-2 backdrop-blur-[25px] md:h-full md:rounded-md'>
+        <figure className='flex w-full flex-[20%] gap-4 overflow-hidden sm:flex-col'>
+          <div className='backdrop-blur-5 grid h-auto w-full place-items-center rounded-b-md p-2 backdrop-blur-[25px] sm:h-full sm:rounded-md'>
             <CreationReviewsDialog
               creationId={details.id}
               mediaType={mediaType}
             >
-              <div className='m-auto flex cursor-pointer items-center gap-1 text-center md:flex-col'>
+              <div className='m-auto flex cursor-pointer items-center gap-1 text-center sm:flex-col'>
                 <div className='relative'>
-                  <Star className='m-auto h-5 w-5 fill-yellow-500 text-yellow-500 md:h-[64px] md:w-[64px]' />
+                  <Star className='m-auto h-5 w-5 fill-yellow-500 text-yellow-500 sm:h-[48px] sm:w-[48px] md:w-[64px] md:h-[64px]' />
                   <div className='absolute left-[50%] top-[50%] hidden -translate-x-[50%] -translate-y-[50%] sm:block'>
-                    <span className='select-none text-sm leading-none md:text-base'>
+                    <span className='select-none text-sm leading-none sm:text-base'>
                       {details.vote_average.toFixed(1)}
                     </span>
                   </div>
@@ -109,9 +109,9 @@ export default async function MovieHeader({
               </div>
             </CreationReviewsDialog>
           </div>
-          <div className='backdrop-blur-5 grid h-auto w-full place-items-center rounded-b-md p-2 backdrop-blur-[25px] md:h-full md:rounded-md'>
-            <div className='m-auto flex items-center gap-1 text-center md:flex-col'>
-              <h2 className='select-none text-lg font-medium uppercase leading-none md:text-4xl'>
+          <div className='backdrop-blur-5 grid h-auto w-full place-items-center rounded-b-md p-2 backdrop-blur-[25px] sm:h-full sm:rounded-md'>
+            <div className='m-auto flex items-center gap-1 text-center sm:flex-col'>
+              <h2 className='select-none text-lg font-medium uppercase leading-none sm:text-3xl md:text-4xl'>
                 {details.popularity.toFixed()}
               </h2>
               <span className='text-sm font-medium uppercase'>Popularity</span>
