@@ -14,6 +14,7 @@ interface LoadingCarouselProps extends SkeletonArticleProps {
 export function LoadingCarousel({
   withHeading = true,
   className,
+  aspect,
   ...props
 }: LoadingCarouselProps) {
   return (
@@ -31,8 +32,11 @@ export function LoadingCarousel({
         <section className={cn('flex snap-x space-x-4 pb-4', className)}>
           {Array.from({ length: 10 }, (_, index) => (
             <SkeletonArticle
-              className='w-[260px]'
+              className={cn(
+                aspect === 'horizontal' ? 'w-[260px]' : 'w-[160px] sm:w-[260px]'
+              )}
               key={index}
+              aspect={aspect}
               {...props}
             />
           ))}

@@ -26,11 +26,11 @@ export default async function CelebrityCarousel() {
             <PersonArticle
               key={celebrity.id}
               celebrity={celebrity}
-              className='w-[260px]'
+              className='w-[160px] sm:w-[260px]'
             />
           ))}
           {/* TEMP */}
-          <div className='relative grid aspect-[2/3] h-fit w-[260px] place-items-center rounded-md border'>
+          <div className='relative grid aspect-[2/3] h-fit w-[160px] sm:w-[260px] place-items-center rounded-md border'>
             <Link
               href='/celebrities'
               className='z-10 cursor-pointer select-none space-y-1 text-center'

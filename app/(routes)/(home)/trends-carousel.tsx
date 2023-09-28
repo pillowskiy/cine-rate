@@ -22,7 +22,7 @@ export default async function TrendsCarousel() {
             <CreationArticle
               key={creation.id}
               creation={creation}
-              className='w-[260px]'
+              className='w-[160px] sm:w-[260px]'
               width={260}
               height={390}
             />
