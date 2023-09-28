@@ -40,9 +40,9 @@ export function NotFound({
       </div>
 
       <div className='absolute inset-0 -z-10 h-full w-full'>
-        <div className='absolute left-[47%] top-[20%] h-[16px] w-[16px] -translate-x-[50%] animate-pulse rounded-full bg-orange-400 blur-xl sm:h-[32px] sm:w-[32px]' />
-        <div className='absolute left-[50%] top-[10%] h-[24px] w-[24px] -translate-x-[50%] animate-pulse rounded-full bg-red-600 blur-xl sm:h-[64px] sm:w-[64px]' />
-        <div className='absolute left-[52%] top-[15%] h-[18px] w-[18px] -translate-x-[50%] animate-pulse rounded-full bg-yellow-500 blur-xl sm:h-[48px] sm:w-[48px]' />
+        <div className='absolute left-[47%] top-[25%] h-[24px] w-[24px] -translate-x-[50%] animate-pulse rounded-full bg-orange-400 blur-xl sm:h-[32px] sm:w-[32px]' />
+        <div className='absolute left-[50%] top-[15%] h-[48px] w-[48px] -translate-x-[50%] animate-pulse rounded-full bg-red-600 blur-xl sm:h-[64px] sm:w-[64px]' />
+        <div className='absolute left-[52%] top-[20%] h-[32px] w-[32px] -translate-x-[50%] animate-pulse rounded-full bg-yellow-500 blur-xl sm:h-[48px] sm:w-[48px]' />
       </div>
     </div>
   );

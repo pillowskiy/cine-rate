@@ -37,10 +37,11 @@ export function CreationRatingDialog({
 }: CreationRatingDialogProps) {
   const [isRated, setIsRated] = useState(!!initialRated);
   const [rating, setRating] = useState(initialRated ? initialRated.value : 1);
-  const [isLoading, startTransition] = useTransition();
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   async function upsertRating() {
+    setIsLoading(true);
     return (
       axios
         .post<RatingResponse>(`/api/${mediaType}/${creationId}/rating`, {
@@ -58,10 +59,12 @@ export function CreationRatingDialog({
         })
         // TEMP
         .catch(() => {})
+        .finally(() => setIsLoading(false))
     );
   }
 
   async function deleteRating() {
+    setIsLoading(true);
     return (
       axios
         .delete<RatingResponse>(`/api/${mediaType}/${creationId}/rating`)
@@ -76,6 +79,7 @@ export function CreationRatingDialog({
         })
         // TEMP
         .catch(() => {})
+        .finally(() => setIsLoading(false))
     );
   }
 
@@ -128,7 +132,7 @@ export function CreationRatingDialog({
               <Button
                 variant='destructive'
                 size='icon'
-                onClick={() => startTransition(deleteRating)}
+                onClick={deleteRating}
                 disabled={!isRated || isLoading}
               >
                 {isLoading ? (
@@ -138,7 +142,7 @@ export function CreationRatingDialog({
                 )}
               </Button>
               <Button
-                onClick={() => startTransition(upsertRating)}
+                onClick={upsertRating}
                 className='flex-grow'
                 type='submit'
                 disabled={!rating || isLoading}

@@ -14,25 +14,27 @@ export default async function CreationSimilar({
     () => ({ data: null })
   );
 
-  if (!creations?.results.length) return <NotFound />;
-
   return (
     <section>
       <Heading title='Similar' description='More like this.' />
       <Separator className='my-4' />
       <Carousel>
-        {creations.results.map((creation) => (
-          <CreationArticle
-            defaultMediaType={mediaType}
-            aspect='horizontal'
-            key={creation.id}
-            creation={creation}
-            className='w-[260px]'
-            size='sm'
-            width={720}
-            height={480}
-          />
-        ))}
+        {!!creations?.results.length ? (
+          creations.results.map((creation) => (
+            <CreationArticle
+              defaultMediaType={mediaType}
+              aspect='horizontal'
+              key={creation.id}
+              creation={creation}
+              className='w-[260px]'
+              size='sm'
+              width={720}
+              height={480}
+            />
+          ))
+        ) : (
+          <NotFound />
+        )}
       </Carousel>
     </section>
   );

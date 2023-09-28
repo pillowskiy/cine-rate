@@ -17,6 +17,7 @@ const CelebrityCarousel = dynamic(() => import('./celebrity-carousel'), {
 // Hydrating suspense boundary
 const WatchlistCarousel = dynamic(() => import('./watchlist-carousel'), {
   ssr: false,
+  loading: () => <LoadingCarousel className='mt-6' aspect='horizontal' />,
 });
 
 export default async function Home() {

@@ -6,6 +6,7 @@ import type { IPagination } from '@app/types/index';
 import type { MediaType } from '@config/enums';
 import { CreationArticle } from '@components/article/creation-article';
 import { CatalogSkeletonGroup } from '@components/catalog-skeleton-group';
+import { NotFound } from '@components/not-found';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import { cn } from '@libs/index';
 import axios from 'axios';
@@ -54,6 +55,7 @@ export default function CreationCatalog({
 
   function handleItems() {
     if (!items) return <CatalogSkeletonGroup itemsCount={20} />;
+    if (!items.length) return <NotFound />;
 
     return items.map((movie) => (
       <CreationArticle
@@ -70,7 +72,7 @@ export default function CreationCatalog({
   return (
     <section className={cn('flex flex-wrap gap-4', className)} {...props}>
       {handleItems()}
-      {!canScroll && <CatalogSkeletonGroup />}
+      {!!items?.length && !canScroll && <CatalogSkeletonGroup />}
     </section>
   );
 }

@@ -35,6 +35,8 @@ export function StatesPopover({
   // TEMP: loading state
   const [isOpen, setIsOpen] = useState(false);
 
+  if (!user) return null;
+
   function handleOpen(open: boolean) {
     if (!user || !open) {
       setIsOpen(false);
