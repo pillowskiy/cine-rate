@@ -53,11 +53,10 @@ export default function ApprovePage({ searchParams }: INextPageParams) {
           description:
             'You have successfully authorized us to receive and modify your data through the TMDB service.',
         });
-      } else if (result.payload) {
-        const { message, status } = result.payload;
+      } else {
         toast({
-          title: message,
-          description: getStatusDescription(status),
+          title: result.payload?.message || 'Uh, Oh! Something went wrong.',
+          description: getStatusDescription(result.payload?.status || 500),
         });
       }
     }
