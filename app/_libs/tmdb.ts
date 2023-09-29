@@ -1,3 +1,5 @@
+import type { CreationVideosResponse } from "@app/types/creation-types";
+
 export const TMDB_IMAGE_URL = 'https://image.tmdb.org/t/p/';
 
 interface TMDBImagePathProps {
@@ -19,4 +21,11 @@ export function buildImagePath({ path, scale }: TMDBImagePathProps) {
 
 export function buildGravatarPath(hash: string) {
   return `https://secure.gravatar.com/avatar/${hash}?s=90`;
+}
+
+export function inferOfficialTrailer({ results }: CreationVideosResponse) {
+  const officialTrailer = results.find(
+    (video) => video.official && video.type === 'Trailer'
+  );
+  return results.length ? officialTrailer || results[0] : null;
 }

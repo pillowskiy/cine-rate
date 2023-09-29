@@ -6,12 +6,9 @@ import { INextPageParams } from "@/app/_types";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { $api } from "@/app/_shared/api/api-interceptor";
-import zod from 'zod';
 
-const paramsDto = zod.object({
-    creationId: zod.string().regex(/^\d+$/).transform(Number),
-    mediaType: zod.nativeEnum(MediaType),
-})
+import { paramsDto } from "../dto";
+import zod from 'zod';
 
 export function GET(_: unknown, { params }: INextPageParams) {
     const sessionCookie = cookies().get('session_id')?.value;

@@ -1,15 +1,17 @@
 'use client';
 
-import { cn } from '@libs/index';
-import { videoFormat } from 'ytdl-core';
-import { Bot, Loader2, Play, Volume2, Youtube } from 'lucide-react';
-import { useFetch } from '@hooks/useFetch';
-import useOnScreen from '@hooks/useOnScreen';
+import type { MediaType } from '@config/enums';
+import type { videoFormat } from 'ytdl-core';
 import { useEffect, useRef, useState } from 'react';
+import { Bot, Loader2, Play, Volume2, Youtube } from 'lucide-react';
+import { cn } from '@libs/index';
+import useFetch from '@hooks/useFetch';
+import useOnScreen from '@hooks/useOnScreen';
 import Link from 'next/link';
 
-interface YoutubePlayerProps {
-  url: string;
+interface CreationTrailerProps {
+  mediaType: MediaType;
+  creationId: number;
   className?: string;
 }
 
@@ -17,17 +19,21 @@ interface VideoStateOptions {
   isPlaying?: boolean;
 }
 
-export function YoutubePlayer({ url, className }: YoutubePlayerProps) {
-  const { data: format, error } = useFetch<videoFormat>('/api/stream/video', {
-    params: { url },
-  }, [url]);
+export function CreationTrailer({
+  mediaType,
+  creationId,
+  className,
+}: CreationTrailerProps) {
+  const { data: format, error } = useFetch<videoFormat>(
+    `/api/${mediaType}/${creationId}/trailer`
+  );
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   // TEMP: transition to framer motion InView hook
   const isVisible = useOnScreen(videoRef);
   const [options, setOptions] = useState<VideoStateOptions>({});
 
-  useEffect(() => void playingChange(isVisible), [isVisible])
+  useEffect(() => void playingChange(isVisible), [isVisible]);
 
   function playingChange(isPlaying: boolean) {
     if (!videoRef.current) return;
@@ -46,7 +52,7 @@ export function YoutubePlayer({ url, className }: YoutubePlayerProps) {
       return (
         <div className='grid h-full w-full place-items-center text-center'>
           <div className='flex flex-col items-center justify-center space-y-1'>
-            <Loader2 className='h-[64px] w-[64px] animate-spin' />
+            <Loader2 className='h-[48px] w-[48px] animate-spin sm:h-[64px] sm:w-[64px]' />
             <span className='text-sm text-foreground/70'>
               Processing data...
             </span>
@@ -82,10 +88,7 @@ export function YoutubePlayer({ url, className }: YoutubePlayerProps) {
             </div>
 
             <div className='ml-auto flex items-center gap-2'>
-              <Volume2 className='h-5 w-5 cursor-pointer transition-all sm:h-8 sm:w-8 md:hover:-translate-y-[8px] md:hover:scale-110' />
-              <Link href={url} target='_blank'>
-                <Youtube className='h-5 w-5 cursor-pointer transition-all sm:h-8 sm:w-8 md:hover:-translate-y-[8px] md:hover:scale-110' />
-              </Link>
+              {/* TODO video trailer actions */}
             </div>
           </div>
           <div className='absolute bottom-0 z-10 h-full w-full bg-gradient-to-t from-black' />
@@ -95,10 +98,10 @@ export function YoutubePlayer({ url, className }: YoutubePlayerProps) {
 
     return (
       <div className='grid h-full w-full place-items-center text-center'>
-        <div className='flex flex-col items-center justify-center space-y-1'>
+        <div className='flex flex-col items-center justify-center space-y-1 p-6'>
           <Bot className='h-[64px] w-[64px] animate-pulse shadow-yellow-500 ' />
           <span className='text-sm text-foreground/70'>
-            {error?.response?.data.message || 'Oops! Something went wrong..'}
+            {error?.response?.data.message || 'O-ops! Something went wrong..'}
           </span>
         </div>
       </div>

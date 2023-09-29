@@ -7,14 +7,10 @@ import { rejectAxios } from '@libs/axios';
 import { cookies } from 'next/headers';
 import { $api } from '@/app/_shared/api/api-interceptor';
 import zod from 'zod';
+import { paramsDto } from '../dto';
 
 const bodyDto = zod.object({
     value: zod.number().max(10).min(1)
-});
-
-const paramsDto = zod.object({
-    creationId: zod.string().regex(/^\d+$/).transform(Number),
-    mediaType: zod.nativeEnum(MediaType),
 });
 
 export async function POST(request: NextRequest, { params }: INextPageParams) {

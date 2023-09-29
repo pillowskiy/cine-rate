@@ -2,10 +2,8 @@ import type { CreationDetailsProps } from './common/types';
 import type { MediaType } from '@config/enums';
 
 import { Star } from 'lucide-react';
-import { YoutubePlayer } from '@components/youtube-player';
+import { CreationTrailer } from '@components/creation/creation-trailer';
 import { buildImagePath } from '@libs/tmdb';
-import { buildURL } from '@libs/ytdl';
-import { getCreationVideos } from '@actions/getCreationVideos';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { getRealesedDate, getTitle } from './common/utils';
 import { CreationReviewsDialog } from './creation-reviews-dialog';
@@ -19,15 +17,6 @@ export default async function MovieHeader({
   details,
   mediaType,
 }: CreationHeaderProps) {
-  // TEMP: to tmdb utils
-  const { data: videos } = await getCreationVideos(details.id, mediaType);
-  const officialTrailer = videos.results.find(
-    (video) => video.official && video.type === 'Trailer'
-  );
-  const video = videos.results.length
-    ? officialTrailer || videos.results[0]
-    : null;
-
   return (
     <header className='relative py-4 text-white sm:px-4'>
       <div className='flex flex-col justify-between gap-4 sm:flex-row'>
@@ -55,7 +44,7 @@ export default async function MovieHeader({
       <div className='jutisfy-between my-4 flex flex-col sm:flex-row sm:gap-4'>
         <div className='flex-[25%] overflow-hidden rounded-md'>
           <ImageFromPath
-            className='hidden h-full w-auto select-none object-cover sm:block'
+            className='hidden h-full w-auto select-none object-cover sm:grid'
             src={buildImagePath({ path: details.poster_path, scale: 'poster' })}
             alt='Creation Poster'
             width={260}
@@ -63,10 +52,10 @@ export default async function MovieHeader({
             priority
           />
         </div>
-        <YoutubePlayer
+        <CreationTrailer
           className='aspect-[16/9] h-full flex-[70%] rounded-t-md sm:w-auto sm:rounded-md'
-          // TEMP
-          url={buildURL(video?.key || '')}
+          creationId={details.id}
+          mediaType={mediaType}
         />
 
         <figure className='flex w-full flex-[20%] gap-4 overflow-hidden sm:flex-col'>
