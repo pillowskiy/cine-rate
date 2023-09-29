@@ -1,9 +1,6 @@
 import type { CreationDetailsProps } from './common/types';
 import type { MediaType } from '@config/enums';
 
-import Link from 'next/link';
-
-import { Button } from '@ui/button';
 import { Star } from 'lucide-react';
 import { YoutubePlayer } from '@components/youtube-player';
 import { buildImagePath } from '@libs/tmdb';
@@ -13,6 +10,7 @@ import { ImageFromPath } from '@components/image/image-from-path';
 import { getRealesedDate, getTitle } from './common/utils';
 import { CreationReviewsDialog } from './creation-reviews-dialog';
 import { CreationStatesDetailed } from './account-states';
+import { CreationGenres } from './creation-genres';
 interface CreationHeaderProps extends CreationDetailsProps {
   mediaType: MediaType;
 }
@@ -31,10 +29,10 @@ export default async function MovieHeader({
     : null;
 
   return (
-    <header className='relative mb-4 py-4 sm:px-4 text-white'>
+    <header className='relative py-4 text-white sm:px-4'>
       <div className='flex flex-col justify-between gap-4 sm:flex-row'>
         <div className='space-y-1'>
-          <div className='flex items-center space-x-2'>
+          <div className='flex flex-col sm:flex-row sm:items-center sm:gap-2'>
             <h2 className='max-w-[600px] truncate text-2xl font-semibold tracking-tight'>
               {getTitle(details)}
             </h2>
@@ -44,28 +42,11 @@ export default async function MovieHeader({
               </p>
             </div>
           </div>
-          <div className='flex items-center space-x-1.5 overflow-auto truncate text-sm opacity-70'>
-            {details.genres.map((genre) => (
-              <Link
-                key={genre.id}
-                href={{
-                  pathname: `/${mediaType}`,
-                  query: {
-                    with_genres: genre.id,
-                  },
-                }}
-                passHref
-                legacyBehavior
-              >
-                <Button
-                  className='h-7 border-white/70 bg-transparent px-2 text-xs text-white/70'
-                  variant='outline'
-                >
-                  {genre.name}
-                </Button>
-              </Link>
-            ))}
-          </div>
+          <CreationGenres
+            className='hidden truncate sm:flex'
+            genres={details.genres}
+            mediaType={mediaType}
+          />
         </div>
 
         <CreationStatesDetailed creationId={details.id} mediaType={mediaType} />
@@ -74,7 +55,7 @@ export default async function MovieHeader({
       <div className='jutisfy-between my-4 flex flex-col sm:flex-row sm:gap-4'>
         <div className='flex-[25%] overflow-hidden rounded-md'>
           <ImageFromPath
-            className='hidden h-full w-auto object-cover sm:block'
+            className='hidden h-full w-auto select-none object-cover sm:block'
             src={buildImagePath({ path: details.poster_path, scale: 'poster' })}
             alt='Creation Poster'
             width={260}
@@ -96,7 +77,7 @@ export default async function MovieHeader({
             >
               <div className='m-auto flex cursor-pointer items-center gap-1 text-center sm:flex-col'>
                 <div className='relative'>
-                  <Star className='m-auto h-5 w-5 fill-yellow-500 text-yellow-500 sm:h-[48px] sm:w-[48px] md:w-[64px] md:h-[64px]' />
+                  <Star className='m-auto h-5 w-5 fill-yellow-500 text-yellow-500 sm:h-[48px] sm:w-[48px] md:h-[64px] md:w-[64px]' />
                   <div className='absolute left-[50%] top-[50%] hidden -translate-x-[50%] -translate-y-[50%] sm:block'>
                     <span className='select-none text-sm leading-none sm:text-base'>
                       {details.vote_average.toFixed(1)}
@@ -120,10 +101,10 @@ export default async function MovieHeader({
         </figure>
       </div>
 
-      <div className='absolute sm:left-0 top-0 -z-20 h-full w-screen -left-4 sm:w-full overflow-hidden sm:rounded-md bg-black'>
+      <div className='absolute -left-4 top-0 -z-20 h-full w-screen overflow-hidden bg-black sm:left-0 sm:w-full sm:rounded-md'>
         <ImageFromPath
           className={
-            'aspect-[16/9] h-full w-full scale-110 object-cover object-top'
+            'aspect-[16/9] h-full w-full scale-110 select-none object-cover object-top'
           }
           src={buildImagePath({
             path: details.backdrop_path,

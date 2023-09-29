@@ -45,7 +45,7 @@ export function FavoriteButton({
         )}
       />
       {withText && (
-        <span className='ml-1.5'>{isFavorite ? 'Remove' : 'Add'}</span>
+        <span className='ml-1.5'>{isFavorite ? 'Unlist' : 'Add'}</span>
       )}
     </Button>
   );

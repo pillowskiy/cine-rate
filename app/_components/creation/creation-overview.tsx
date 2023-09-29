@@ -2,6 +2,7 @@ import type { CreationDetailsProps } from './common/types';
 import { BaseFigure } from '@components/figure/base-figure';
 import { Separator } from '@ui/separator';
 import { getTitle } from './common/utils';
+import { CreationGenres } from './creation-genres';
 
 export default function CreationOverview({ details }: CreationDetailsProps) {
   return (
@@ -24,9 +25,12 @@ export default function CreationOverview({ details }: CreationDetailsProps) {
             height={550}
           />
         </div>
-        <span className='flex-grow text-sm md:text-base'>
-          {details.overview}
-        </span>
+        <div className='space-y-2 flex-grow overflow-hidden'>
+          <CreationGenres className='sm:hidden w-full' genres={details.genres.slice(0, 3)} />
+          <p className='flex-grow text-sm md:text-base break-words'>
+            {details.overview}
+          </p>
+        </div>
       </div>
     </section>
   );

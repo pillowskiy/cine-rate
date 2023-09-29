@@ -115,7 +115,7 @@ export function CreationStatesDetailed({
           <FavoriteButton
             className='h-7 text-lg'
             size='sm'
-            variant='ghost'
+            variant='link'
             initialFavorite={states.favorite}
             withText
           />
@@ -128,7 +128,7 @@ export function CreationStatesDetailed({
           <WatchlistButton
             className='h-7 text-lg'
             size='sm'
-            variant='ghost'
+            variant='link'
             alreadyInList={states.watchlist}
             withText
           />

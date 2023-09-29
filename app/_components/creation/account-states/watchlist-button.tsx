@@ -43,7 +43,7 @@ export function WatchlistButton({
         )}
       />
       {withText && (
-        <span className='ml-1.5'>{inWatchlist ? 'Delete' : 'Add'}</span>
+        <span className='ml-1.5'>{inWatchlist ? 'Unlist' : 'Add'}</span>
       )}
     </Button>
   );
