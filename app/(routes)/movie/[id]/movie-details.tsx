@@ -1,11 +1,11 @@
 import type { IMovieDetails } from '@app/types/movies-types';
+import type { ComponentProps } from 'react';
 import { MediaType } from '@config/enums';
 import CreationKeywords from '@components/creation/creation-keywords';
 import { getTitle } from '@components/creation/common/utils';
 import { Separator } from '@ui/separator';
-import { HTMLAttributes } from 'react';
 
-interface MovieDetailsProps extends HTMLAttributes<HTMLDivElement> {
+interface MovieDetailsProps extends ComponentProps<'div'> {
   details: IMovieDetails;
 }
 

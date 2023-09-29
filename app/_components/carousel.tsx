@@ -1,8 +1,8 @@
-import { HTMLAttributes } from 'react';
-import { ScrollArea, ScrollBar } from './ui/scroll-area';
-import { cn } from '../_libs';
+import type { ComponentProps } from 'react';
+import { ScrollArea, ScrollBar } from '@ui/scroll-area';
+import { cn } from '@libs/index';
 
-interface CarouselProps extends HTMLAttributes<HTMLDivElement> {}
+interface CarouselProps extends ComponentProps<'div'> {}
 
 export function Carousel({ children, className, ...props }: CarouselProps) {
   return (

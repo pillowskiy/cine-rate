@@ -1,6 +1,6 @@
 'use client';
 
-import { type HTMLAttributes, useEffect, useState, useMemo } from 'react';
+import { type ComponentProps, useEffect, useState, useMemo } from 'react';
 import type { CreationsResponse } from '@app/types/creation-types';
 import type { IPagination } from '@app/types/index';
 import type { MediaType } from '@config/enums';
@@ -13,7 +13,7 @@ import axios from 'axios';
 import { initialPagination } from '@config/pagination';
 import { useSearchParams } from 'next/navigation';
 
-interface CreationCatalogProps extends HTMLAttributes<HTMLDivElement> {
+interface CreationCatalogProps extends ComponentProps<'div'> {
   mediaType: MediaType;
 }
 

@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import { buildImagePath } from '@libs/tmdb';
 import type { ICredit } from '@app/types/person-types';
 import {
@@ -7,9 +8,8 @@ import {
   BaseArticleFigureProps,
 } from './base-article';
 import Link from 'next/link';
-import { HTMLAttributes } from 'react';
 
-interface CreditArticleProps extends HTMLAttributes<HTMLDivElement> {
+interface CreditArticleProps extends ComponentProps<'div'> {
   credit: ICredit;
   aspect?: BaseArticleFigureProps['aspect'];
   figureClassName?: string;

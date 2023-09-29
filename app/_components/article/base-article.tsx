@@ -1,9 +1,9 @@
-import type { HTMLAttributes, ReactNode } from 'react';
+import type { ComponentProps } from 'react';
 import { cn } from '@libs/index';
 import { Button } from '@ui/button';
 import { ImageFromPath } from '../image/image-from-path';
 
-export interface BaseArticleProps extends HTMLAttributes<HTMLDivElement> {}
+export interface BaseArticleProps extends ComponentProps<'div'> {}
 
 export function BaseArticle({
   className,
@@ -23,7 +23,7 @@ export function BaseArticle({
   );
 }
 
-interface BaseArticleContentProps extends HTMLAttributes<HTMLDivElement> {}
+interface BaseArticleContentProps extends ComponentProps<'div'> {}
 
 export function BaseArticleContent({
   children,
@@ -34,10 +34,6 @@ export function BaseArticleContent({
       {children}
     </div>
   );
-}
-
-interface ActionButton {
-  Image: ReactNode;
 }
 
 export interface BaseArticleFigureProps {

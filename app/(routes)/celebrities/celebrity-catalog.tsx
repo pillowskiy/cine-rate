@@ -1,6 +1,6 @@
 'use client';
 
-import { type HTMLAttributes, useEffect, useState } from 'react';
+import { type ComponentProps, useEffect, useState } from 'react';
 import type { IPagination } from '@app/types/index';
 import type { CelebritiesResponse } from '@app/types/person-types';
 import { PersonArticle } from '@components/article/person-article';
@@ -12,7 +12,7 @@ import axios from 'axios';
 
 type Celebrities = CelebritiesResponse['results'];
 
-interface CreationCatalogProps extends HTMLAttributes<HTMLDivElement> {}
+interface CreationCatalogProps extends ComponentProps<'div'> {}
 
 export function CelebrityCatalog({
   className,

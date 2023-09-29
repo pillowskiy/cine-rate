@@ -1,11 +1,11 @@
 import type { ITVDetails } from '@app/types/tv-types';
+import type { ComponentProps } from 'react';
 import { MediaType } from '@config/enums';
 import CreationKeywords from '@components/creation/creation-keywords';
 import { getTitle } from '@components/creation/common/utils';
 import { Separator } from '@ui/separator';
-import { HTMLAttributes } from 'react';
 
-interface SeriesDetailsProps extends HTMLAttributes<HTMLDivElement> {
+interface SeriesDetailsProps extends ComponentProps<'div'> {
   details: ITVDetails;
 }
 
