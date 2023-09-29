@@ -14,7 +14,7 @@ import { Label } from '@ui/label';
 
 import { useContext } from 'react';
 import { FilterContext } from '.';
-import { useFetch } from '@hooks/useFetch';
+import useFetch from '@hooks/useFetch';
 
 export function CreationLanguage() {
   const [filter, setFilter] = useContext(FilterContext);

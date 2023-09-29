@@ -7,7 +7,7 @@ import { Toggle } from '@ui/toggle';
 import { Label } from '@ui/label';
 import { ChevronDown, Loader } from 'lucide-react';
 import { FilterContext } from '.';
-import { useFetch } from '@hooks/useFetch';
+import useFetch from '@hooks/useFetch';
 
 interface CreationGenresProps {
   mediaType: MediaType;

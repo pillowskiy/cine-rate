@@ -1,14 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { useEffect, useReducer, useRef } from 'react';
 
-export enum HttpMethod {
-  GET = 'get',
-  POST = 'post',
-  DELETE = 'delete',
-  PATCH = 'patch',
-  PUT = 'put',
-}
-
 type Cache<T> = { [url: string]: T };
 type State<T> = {
   data: T | null;
@@ -21,7 +13,7 @@ type Action<T> =
   | { type: 'error'; payload: AxiosError };
 
 // TODO: invalidate cache, test cache
-export function useFetch<T>(
+export default function useFetch<T>(
   url: string,
   options: AxiosRequestConfig = {},
   dependencies: Array<unknown> = [],

@@ -13,8 +13,7 @@ import { WatchlistButton } from './watchlist-button';
 
 import { useAuth } from '@redux/hooks';
 import { Popover, PopoverContent, PopoverTrigger } from '@ui/popover';
-import { useFetch } from '@/app/_hooks/useFetch';
-import { useToast } from '../../ui/use-toast';
+import useFetch from '@hooks/useFetch';
 
 interface CreationStatesProps extends CreationIdentifierProps {
   children: ReactNode;
