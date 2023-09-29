@@ -5,7 +5,7 @@ import {
   type ReactNode,
   type Dispatch,
   type SetStateAction,
-  createContext
+  createContext,
 } from 'react';
 import type { MediaType } from '@config/enums';
 import { Button } from '@ui/button';
@@ -37,7 +37,10 @@ export const FilterContext = createContext<
   [GetDiscoverParams, Dispatch<SetStateAction<GetDiscoverParams>>]
 >([{}, () => null]);
 
-const toISO = (date: Date) => date.toISOString().split('T')[0];
+function toISO(stringDate: string) {
+  if (!stringDate) return undefined;
+  return new Date(stringDate).toISOString().split('T')[0];
+}
 
 export function CreationFilterDialog({
   mediaType,
@@ -72,7 +75,7 @@ export function CreationFilterDialog({
                     defaultValue={filter['primary_release_date.gte']}
                     onChange={({ target }) =>
                       updateFilter({
-                        'primary_release_date.gte': toISO(new Date(target.value)),
+                        'primary_release_date.gte': toISO(target.value),
                       })
                     }
                     id='realese_from'
@@ -85,7 +88,7 @@ export function CreationFilterDialog({
                     defaultValue={filter['primary_release_date.lte']}
                     onChange={({ target }) =>
                       updateFilter({
-                        'primary_release_date.lte': toISO(new Date(target.value)),
+                        'primary_release_date.lte': toISO(target.value),
                       })
                     }
                     id='realese_to'
