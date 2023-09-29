@@ -34,7 +34,7 @@ export async function CreationReviewsDialog({
           <DialogTitle>Reviews</DialogTitle>
           <DialogDescription>Feedback from our users.</DialogDescription>
         </DialogHeader>
-        <div className='min-h-[300px] space-y-4 overflow-y-auto px-6 md:max-h-[400px]'>
+        <div className='max-h-[90vh] min-h-[300px] space-y-4 overflow-y-auto px-6 sm:max-h-[600px] md:max-h-[400px]'>
           {!!reviews?.results.length ? (
             reviews.results.map((review) => (
               <ReviewCard key={review.id} review={review} />

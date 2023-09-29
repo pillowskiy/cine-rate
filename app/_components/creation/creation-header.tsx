@@ -31,7 +31,7 @@ export default async function MovieHeader({
     : null;
 
   return (
-    <header className='relative my-4 p-4 text-white'>
+    <header className='relative mb-4 py-4 sm:px-4 text-white'>
       <div className='flex flex-col justify-between gap-4 sm:flex-row'>
         <div className='space-y-1'>
           <div className='flex items-center space-x-2'>
@@ -120,7 +120,7 @@ export default async function MovieHeader({
         </figure>
       </div>
 
-      <div className='absolute left-0 top-0 -z-20 h-full w-full overflow-hidden rounded-md bg-black'>
+      <div className='absolute sm:left-0 top-0 -z-20 h-full w-screen -left-4 sm:w-full overflow-hidden sm:rounded-md bg-black'>
         <ImageFromPath
           className={
             'aspect-[16/9] h-full w-full scale-110 object-cover object-top'

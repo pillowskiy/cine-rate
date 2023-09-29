@@ -17,7 +17,7 @@ export function ReviewCard({ review }: ReviewCardProps) {
           path={review.author_details.avatar_path}
           username={review.author}
         />
-        <div className='space-y-1'>
+        <div className='space-y-1 overflow-hidden'>
           <div>
             <h4 className='text-sm font-semibold leading-none'>
               {review.author}
@@ -26,7 +26,7 @@ export function ReviewCard({ review }: ReviewCardProps) {
               {review.author_details.username}
             </span>
           </div>
-          <p className='text-sm'>
+          <p className='break-words text-sm'>
             {review.content.split(' ').slice(0, 30).join(' ')}
           </p>
 
