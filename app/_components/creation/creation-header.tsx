@@ -41,7 +41,7 @@ export default async function MovieHeader({
         <CreationStatesDetailed creationId={details.id} mediaType={mediaType} />
       </div>
 
-      <div className='jutisfy-between my-4 flex flex-col sm:flex-row sm:gap-4'>
+      <div className='my-4 flex flex-col sm:flex-row sm:gap-4'>
         <div className='flex-[25%] overflow-hidden rounded-md'>
           <ImageFromPath
             className='hidden h-full w-auto select-none object-cover sm:grid'

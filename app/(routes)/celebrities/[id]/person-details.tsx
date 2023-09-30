@@ -1,4 +1,3 @@
-import { Separator } from '@ui/separator';
 import type { IPersonDetails } from '@app/types/person-types';
 
 interface PersonDetailsProps {

@@ -1,5 +1,7 @@
-import { ISeason } from '@/app/_types/tv-types';
-import { Button } from '../ui/button';
+import type { ISeason } from '@app/types/tv-types';
+import { SeasonArticle } from '@components/article/season-article';
+import { Button } from '@ui/button';
+import { ScrollArea, ScrollBar } from '@ui/scroll-area';
 import {
   Dialog,
   DialogClose,
@@ -8,10 +10,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../ui/dialog';
-import { SeasonCard } from '../article/season-article';
+} from '@ui/dialog';
 import Link from 'next/link';
-import { ScrollArea, ScrollBar } from '../ui/scroll-area';
 
 interface SeasonsDialogProps {
   seriesId: number;
@@ -32,7 +32,7 @@ export function SeasonsDialog({ seasons, seriesId }: SeasonsDialogProps) {
         <ScrollArea>
           <div className='mr-4 max-h-[460px] space-y-4'>
             {seasons.map((season) => (
-              <SeasonCard
+              <SeasonArticle
                 key={season.id}
                 season={season}
                 action={

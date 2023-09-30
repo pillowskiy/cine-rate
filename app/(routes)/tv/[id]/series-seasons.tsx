@@ -1,8 +1,9 @@
 import type { ITVDetails } from '@app/types/tv-types';
 import { Separator } from '@ui/separator';
+import { Button } from '@ui/button';
 import { SeasonsDialog } from '@components/dialog/seasons-dialog';
-import { SeasonCard } from '@components/article/season-article';
-import { Button } from '@/app/_components/ui/button';
+import { SeasonArticle } from '@components/article/season-article';
+import { Heading } from '@components/heading';
 import Link from 'next/link';
 
 interface SerriesSeasonsProps {
@@ -16,17 +17,10 @@ export default async function SerriesSeasons({ details }: SerriesSeasonsProps) {
 
   return (
     <section>
-      <div className='flex items-center justify-between'>
-        <div className='space-y-1'>
-          <h2 className='text-2xl font-semibold tracking-tight'>Seasons</h2>
-          <p className='text-sm text-muted-foreground'>
-            Seasons of the {title} series
-          </p>
-        </div>
-      </div>
+      <Heading title='Seasons' description={`Seasons of the ${title} series`} />
       <Separator className='my-4' />
 
-      <SeasonCard
+      <SeasonArticle
         className='rounded-md border p-4'
         season={currentSeason}
         action={
@@ -39,9 +33,7 @@ export default async function SerriesSeasons({ details }: SerriesSeasonsProps) {
               passHref
               legacyBehavior
             >
-              <Button>
-                More info about {currentSeason.name}
-              </Button>
+              <Button>More info about {currentSeason.name}</Button>
             </Link>
             <SeasonsDialog seriesId={details.id} seasons={details.seasons} />
           </div>

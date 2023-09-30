@@ -1,3 +1,5 @@
+import type { INextPageParams } from '@app/types/index';
+
 import { BaseFigure } from '@components/figure/base-figure';
 import PersonBiography from './person-biography';
 import CombinedCredits from './combined-credits';
@@ -7,11 +9,7 @@ import PersonDetails from './person-details';
 import { getPersonDetails } from '@actions/getPersonDetails';
 import { pipe } from '@libs/common/next';
 
-interface PersonPageProps {
-  params: { id?: string | undefined };
-}
-
-export default async function PersonPage({ params }: PersonPageProps) {
+export default async function PersonPage({ params }: INextPageParams) {
   const personId = pipe.strToInt(params?.id);
   const { data: person } = await getPersonDetails(personId);
 

@@ -1,31 +1,28 @@
 import type { ISeason } from '@app/types/tv-types';
 import type { ReactNode } from 'react';
-import { buildImagePath } from '@/app/_libs/tmdb';
+import { buildImagePath } from '@libs/tmdb';
+import { cn } from '@libs/index';
 import { Star } from 'lucide-react';
 import {
   BaseArticle,
   BaseArticleFigure,
   type BaseArticleProps,
 } from './base-article';
-import { cn } from '@/app/_libs';
 
-interface SeasonCardProps extends BaseArticleProps {
+interface SeasonArticleProps extends BaseArticleProps {
   action?: ReactNode;
   season: ISeason;
 }
 
-export function SeasonCard({
+export function SeasonArticle({
   season,
   action,
   className,
   ...props
-}: SeasonCardProps) {
+}: SeasonArticleProps) {
   return (
     <BaseArticle
-      className={cn(
-        'flex w-full items-center sm:gap-4',
-        className
-      )}
+      className={cn('flex w-full items-center sm:gap-4', className)}
       {...props}
     >
       <div>
@@ -41,7 +38,7 @@ export function SeasonCard({
           alt='Season Poster'
         />
       </div>
-      <div className='w-full sm:w-max'>
+      <div className='w-full sm:w-max space-y-4'>
         <div>
           <h2 className='text-2xl font-semibold tracking-tight'>
             {season.name}
@@ -55,12 +52,10 @@ export function SeasonCard({
           </div>
         </div>
 
-        <div className='my-4'>
-          <p className='text-sm tracking-tight sm:text-base'>
-            Season {season.season_number} premiered on{' '}
-            {new Date(season.air_date).toDateString()}
-          </p>
-        </div>
+        <p className='text-sm tracking-tight sm:text-base'>
+          Season {season.season_number} premiered on{' '}
+          {new Date(season.air_date).toDateString()}
+        </p>
 
         {!!action && action}
       </div>
