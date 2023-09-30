@@ -6,6 +6,7 @@ import CreationHeader from '@components/creation/creation-header';
 import CreationOverview from '@components/creation/creation-overview';
 import CreationSimilar from '@components/creation/creation-similar';
 import CreationMediaTabs from '@components/creation/creation-media-tabs';
+import CreationCollection from '@components/creation/creation-collection';
 
 import MovieDetails from './movie-details';
 
@@ -23,10 +24,19 @@ export default async function MoviePage({ params }: INextPageParams) {
         <div className='flex-grow space-y-6 overflow-hidden'>
           <CreationOverview details={movie} />
           <CreationCast creationId={movie.id} mediaType={MediaType.Movie} />
-          <CreationMediaTabs creationId={movie.id} mediaType={MediaType.Movie} />
+          {movie.belongs_to_collection && (
+            <CreationCollection collectionId={movie.belongs_to_collection.id} />
+          )}
+          <CreationMediaTabs
+            creationId={movie.id}
+            mediaType={MediaType.Movie}
+          />
           <CreationSimilar creationId={movie.id} mediaType={MediaType.Movie} />
         </div>
-        <MovieDetails className='min-w-[260px] w-full sm:w-[260px] space-y-6' details={movie} />
+        <MovieDetails
+          className='w-full min-w-[260px] space-y-6 sm:w-[260px]'
+          details={movie}
+        />
       </section>
     </main>
   );

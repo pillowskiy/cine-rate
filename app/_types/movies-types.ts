@@ -1,11 +1,12 @@
-import { ICreationLanguage, IProductionCountry } from '.';
-import { IPartialCompany } from './company-types';
+import type { ICreationLanguage, IProductionCountry } from '.';
+import type { ICollection } from './collection-types';
+import type { IPartialCompany } from './company-types';
 import type { IPartialGenre } from './genre-types';
 
 export interface IMovieDetails {
   adult: boolean;
   backdrop_path: string;
-  belongs_to_collection: null | number;
+  belongs_to_collection: null | ICollection;
   budget: number;
   genres: IPartialGenre[];
   homepage: string;
