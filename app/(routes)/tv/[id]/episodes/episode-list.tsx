@@ -19,25 +19,33 @@ async function getSeasonDetails(
 interface EpisodeListProps {
   seriesId: number;
   seasonNumber: number;
+  sort?: string;
 }
 
 export default async function EpisodeList({
   seriesId,
   seasonNumber,
+  sort,
 }: EpisodeListProps) {
   const { data: season } = await getSeasonDetails(seriesId, seasonNumber);
+
+  const sortBy = (a: number, b: number) => {
+    return sort === 'asc' ? a - b : b - a;
+  };
 
   return (
     <section className='space-y-4'>
       {season?.episodes.length ? (
-        season.episodes.map((episode) => (
-          <EpisodeArticle
-            seriesId={seriesId}
-            key={episode.id}
-            episode={episode}
-          />
-        ))
-      ): (
+        season.episodes
+          .sort((a, b) => sortBy(a.episode_number, b.episode_number))
+          .map((episode) => (
+            <EpisodeArticle
+              seriesId={seriesId}
+              key={episode.id}
+              episode={episode}
+            />
+          ))
+      ) : (
         <NotFound />
       )}
     </section>

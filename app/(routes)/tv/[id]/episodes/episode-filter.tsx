@@ -11,34 +11,43 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@ui/select';
-import { ArrowDownUp } from 'lucide-react';
-import { startTransition } from 'react';
+import { ArrowDownUp, Loader } from 'lucide-react';
+import { useTransition } from 'react';
 
 interface EpisodeFilterProps {
   series: ITVDetails;
 }
 
 interface SeasonFilter {
-  year?: string | undefined;
   season?: string | undefined;
+  sort: 'asc' | 'desc';
 }
 
 export default function EpisodeFilter({ series }: EpisodeFilterProps) {
-  const { urlSearchParams, setQueryParams } = useQueryParams<SeasonFilter>();
+  const { urlSearchParams, appendQueryParams } = useQueryParams<SeasonFilter>();
+  const [isLoading, startTransition] = useTransition();
 
-  const selectValue = urlSearchParams.get('season') || undefined;
+  const sorted = urlSearchParams.get('sort') || 'desc';
+  const onSortChange = () => {
+    startTransition(() => {
+      appendQueryParams({ sort: sorted === 'desc' ? 'asc' : 'desc' });
+    });
+  };
+
+  const selectedValue = urlSearchParams.get('season') || undefined;
   const onValueChange = (newValue: string) => {
     startTransition(() => {
-      setQueryParams({ season: newValue });
+      appendQueryParams({ season: newValue });
     });
   };
 
   return (
     <section className='flex items-center justify-between gap-2 rounded-md border px-2 py-1'>
-      <div className='flex flex-grow items-center justify-between gap-4 overflow-auto sm:justify-start px-2 py-1'>
+      <div className='flex flex-grow items-center justify-between gap-4 overflow-auto px-2 py-1 sm:justify-start'>
         <Select
-          value={selectValue}
+          value={selectedValue}
           onValueChange={onValueChange}
+          disabled={isLoading}
         >
           <SelectTrigger className='w-[160px] truncate'>
             <SelectValue placeholder='Season' />
@@ -58,8 +67,9 @@ export default function EpisodeFilter({ series }: EpisodeFilterProps) {
         </Select>
         <h2>OR</h2>
         <Select
-          value={selectValue}
+          value={selectedValue}
           onValueChange={onValueChange}
+          disabled={isLoading}
         >
           <SelectTrigger className='w-[160px] truncate'>
             <SelectValue placeholder='Year' />
@@ -79,9 +89,13 @@ export default function EpisodeFilter({ series }: EpisodeFilterProps) {
         </Select>
       </div>
 
-      <div className='hidden sm:inline-block mx-2'>
-        <Button size='icon' variant='outline'>
-          <ArrowDownUp className='h-5 w-5' />
+      <div className='mx-2 hidden sm:inline-block'>
+        <Button size='icon' variant='outline' onClick={onSortChange}>
+          {isLoading ? (
+            <Loader className='h-5 w-5 animate-spin' />
+          ) : (
+            <ArrowDownUp className='h-5 w-5' />
+          )}
         </Button>
       </div>
     </section>

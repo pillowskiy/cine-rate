@@ -13,6 +13,7 @@ export default async function EpisodesPage({
 }: INextPageParams) {
   const seriesId = pipe.strToInt(params?.id);
   const seasonNumber = parseInt(searchParams?.season || '1');
+  const sort = searchParams?.sort;
   const { data: series } = await getCreationDetails(seriesId, MediaType.TV);
 
   // TEMP
@@ -22,7 +23,7 @@ export default async function EpisodesPage({
     <main className='min-h-screen w-full space-y-6'>
       <EpisodeHeader series={series} />
       <EpisodeFilter series={series} />
-      <EpisodeList seriesId={seriesId} seasonNumber={seasonNumber} />
+      <EpisodeList seriesId={seriesId} seasonNumber={seasonNumber} sort={sort} />
     </main>
   );
 }
