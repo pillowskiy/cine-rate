@@ -1,21 +1,22 @@
 import type { ITVDetails } from '@app/types/tv-types';
+import { memo } from 'react';
 import { MediaType } from '@config/enums';
 import { ImageFromPath } from '@components/image/image-from-path';
-import { buildImagePath } from '@libs/tmdb';
-import Link from 'next/link';
 import { CreationActions } from '@components/creation/creation-actions';
 import { getTitle } from '@components/creation/common/utils';
+import { buildImagePath } from '@libs/tmdb';
+import Link from 'next/link';
 
 interface EpisodeHeaderProps {
   series: ITVDetails;
 }
 
-export default function EpisodeHeader({ series }: EpisodeHeaderProps) {
+const EpisodeHeader = memo(({ series }: EpisodeHeaderProps) => {
   return (
     <header className='flex w-full flex-col items-center gap-4 overflow-hidden rounded-md border p-4 sm:flex-row'>
       <div className='w-full sm:w-fit'>
         <ImageFromPath
-          className='block w-full rounded-md sm:w-[160px]'
+          className='block aspect-[16/9] w-full min-w-[160px] rounded-md sm:w-[160px]'
           alt='Series Poster'
           src={buildImagePath({
             path: series.backdrop_path,
@@ -44,4 +45,8 @@ export default function EpisodeHeader({ series }: EpisodeHeaderProps) {
       </div>
     </header>
   );
-}
+});
+
+EpisodeHeader.displayName = 'EpisodeHeader';
+
+export default EpisodeHeader;
