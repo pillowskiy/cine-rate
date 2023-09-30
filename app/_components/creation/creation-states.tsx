@@ -5,11 +5,11 @@ import type { CreationDetailsProps } from './common/types';
 import { CreationReviewsDialog } from './creation-reviews-dialog';
 import { cn } from '@/app/_libs';
 
-interface CreationActionsProps extends CreationDetailsProps {
+interface CreationStatesProps extends CreationDetailsProps {
   mediaType: MediaType;
 }
 
-export function CreationActions({ details, mediaType }: CreationActionsProps) {
+export function CreationStates({ details, mediaType }: CreationStatesProps) {
   return (
     <div className='flex w-full justify-between gap-4 overflow-x-auto sm:w-fit sm:justify-start'>
       <div className='flex flex-col items-center justify-center space-y-1 text-center'>

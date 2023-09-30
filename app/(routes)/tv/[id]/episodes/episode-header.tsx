@@ -2,7 +2,7 @@ import type { ITVDetails } from '@app/types/tv-types';
 import { memo } from 'react';
 import { MediaType } from '@config/enums';
 import { ImageFromPath } from '@components/image/image-from-path';
-import { CreationActions } from '@components/creation/creation-actions';
+import { CreationStates } from '@components/creation/creation-states';
 import { getTitle } from '@components/creation/common/utils';
 import { buildImagePath } from '@libs/tmdb';
 import Link from 'next/link';
@@ -41,7 +41,7 @@ const EpisodeHeader = memo(({ series }: EpisodeHeaderProps) => {
           </div>
           <h2 className='text-2xl font-semibold'>Episode List</h2>
         </div>
-        <CreationActions details={series} mediaType={MediaType.TV} />
+        <CreationStates details={series} mediaType={MediaType.TV} />
       </div>
     </header>
   );
