@@ -2,7 +2,7 @@ import type { BaseParams } from '@app/types/index';
 import type { CreationImagesResponse } from '@app/types/creation-types';
 import { Heading } from '@components/heading';
 import { MediaTabs } from '@components/media-tabs';
-import { Separator } from '@ui/separator';
+import { MSeparator } from '@ui/separator';
 import { $api } from '@/app/_shared/api/api-interceptor';
 
 interface CollectionMediaTabsProps {
@@ -31,7 +31,7 @@ export default async function CollectionMediaTabs({
         title='Collection Images'
         description="Capturing Creation's Random Moments in Pixel Perfection!"
       />
-      <Separator className='my-4' />
+      <MSeparator className='my-4' />
       <MediaTabs images={images} />
     </section>
   );

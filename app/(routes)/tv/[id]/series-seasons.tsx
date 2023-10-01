@@ -1,5 +1,5 @@
 import type { ITVDetails } from '@app/types/tv-types';
-import { Separator } from '@ui/separator';
+import { MSeparator } from '@ui/separator';
 import { Button } from '@ui/button';
 import { SeasonsDialog } from '@components/dialog/seasons-dialog';
 import { SeasonArticle } from '@components/article/season-article';
@@ -18,7 +18,7 @@ export default async function SerriesSeasons({ details }: SerriesSeasonsProps) {
   return (
     <section>
       <Heading title='Seasons' description={`Seasons of the ${title} series`} />
-      <Separator className='my-4' />
+      <MSeparator className='my-4' />
 
       <SeasonArticle
         className='rounded-md border p-4'

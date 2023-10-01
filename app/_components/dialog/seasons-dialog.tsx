@@ -31,8 +31,9 @@ export function SeasonsDialog({ seasons, seriesId }: SeasonsDialogProps) {
         </DialogHeader>
         <ScrollArea>
           <div className='mr-4 max-h-[460px] space-y-4'>
-            {seasons.map((season) => (
+            {seasons.map((season, i) => (
               <SeasonArticle
+                custom={i}
                 key={season.id}
                 season={season}
                 action={

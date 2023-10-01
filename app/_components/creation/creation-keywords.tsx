@@ -1,6 +1,6 @@
 import type { CreationDetailsProps } from './common/types';
 import type { MediaType } from '@config/enums';
-import { Separator } from '@ui/separator';
+import { MSeparator } from '@ui/separator';
 import { Button } from '@ui/button';
 import { getTitle } from './common/utils';
 import { getCreationKeywords } from '@actions/getCreationKeywords';
@@ -27,7 +27,7 @@ export default async function CreationKeywords({
         title='Keywords'
         description={`Keywords of ${getTitle(details)}.`}
       />
-      <Separator className='my-4' />
+      <MSeparator className='my-4' />
 
       <div className='flex flex-wrap gap-2'>
         {data.keywords.map((keyword) => (

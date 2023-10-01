@@ -41,8 +41,9 @@ export function CelebrityCatalog({
   function handleItems() {
     if (!items) return <CatalogSkeletonGroup itemsCount={20} />;
 
-    return items.map((celebrity) => (
+    return items.map((celebrity, i) => (
       <PersonArticle
+        custom={i}
         key={celebrity.id}
         celebrity={celebrity}
         className='mb-4 w-[40%] flex-grow md:w-[260px]'

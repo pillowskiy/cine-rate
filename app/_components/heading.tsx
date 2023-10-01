@@ -1,4 +1,7 @@
+'use client';
+
 import { Badge } from '@ui/badge';
+import { motion } from 'framer-motion';
 
 interface HeadingProps {
   title: string;
@@ -6,12 +9,29 @@ interface HeadingProps {
   badges?: string[];
 }
 
+const headingAnimation = {
+  hidden: {
+    y: 100,
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
+
 export function Heading({ title, description, badges }: HeadingProps) {
   return (
-    <div className='space-y-1'>
-      <div className='flex gap-2 items-start'>
+    <motion.div
+      viewport={{ once: true }}
+      initial='hidden'
+      whileInView='visible'
+      variants={headingAnimation}
+      className='space-y-1'
+    >
+      <div className='flex items-start gap-2'>
         <h2 className='text-2xl font-semibold tracking-tight'>{title}</h2>
-        <div className='flex flex-wrap select-none'>
+        <div className='flex select-none flex-wrap'>
           {!!badges &&
             badges.map((badge, index) => (
               <Badge variant='secondary' key={index}>
@@ -21,6 +41,6 @@ export function Heading({ title, description, badges }: HeadingProps) {
         </div>
       </div>
       <p className='text-sm text-muted-foreground'>{description}</p>
-    </div>
+    </motion.div>
   );
 }

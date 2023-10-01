@@ -1,5 +1,5 @@
 import type { MediaType } from '@config/enums';
-import { memo } from 'react';
+import { type ComponentProps, memo } from 'react';
 import { buildImagePath } from '@libs/tmdb';
 import { ICreation } from '@app/types/creation-types';
 import { Info, Star } from 'lucide-react';
@@ -14,7 +14,7 @@ import Link from 'next/link';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { cn } from '@libs/index';
 import { Button } from '@ui/button';
-import { StatesPopover } from '../creation/account-states';
+import { StatesPopover } from '@components/creation/account-states';
 
 interface CreationArticleProps extends Omit<BaseArticleProps, 'src' | 'href'> {
   size?: 'default' | 'sm';
@@ -89,8 +89,7 @@ export const CreationArticle = memo(
 
 CreationArticle.displayName = 'CreationArticle';
 
-interface HorizontalCreationArticle
-  extends Omit<BaseArticleProps, 'src' | 'href'> {
+interface HorizontalCreationArticle extends ComponentProps<'article'> {
   alt: string;
   width: number;
   height: number;

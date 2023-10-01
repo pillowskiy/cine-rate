@@ -1,4 +1,4 @@
-import { Separator } from '@ui/separator';
+import { MSeparator } from '@ui/separator';
 import { getPersonTranslations } from '@actions/getPersonTranslations';
 import { NotFound } from '@components/not-found';
 
@@ -23,7 +23,7 @@ export default async function PersonBiography({
     <section className='relative text-sm md:text-base'>
       <div>
         <h2 className='text-lg font-medium leading-none'>Biography</h2>
-        <Separator className='my-4' />
+        <MSeparator className='my-4' />
       </div>
 
       {fragmentedBio.length ? (

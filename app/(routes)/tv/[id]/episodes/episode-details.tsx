@@ -1,5 +1,5 @@
 import type { IEpisode } from '@app/types/tv-types';
-import { Separator } from '@ui/separator';
+import { MSeparator } from '@ui/separator';
 
 import {
   Accordion,
@@ -51,15 +51,15 @@ export async function EpisodeDetails({
       <AccordionItem className='border-b-0' value='item-1'>
         <AccordionTrigger className='p-0'>Expand</AccordionTrigger>
         <AccordionContent>
-          <section className='mt-4 flex flex-col sm:flex-row gap-4'>
+          <section className='mt-4 flex flex-col gap-4 sm:flex-row'>
             <div className='w-full min-w-[260px] sm:w-[260px]'>
               <Heading
                 title={`Crew (${details.crew.length})`}
                 description='Crew of episode.'
               />
-              <Separator className='my-4' />
+              <MSeparator className='my-4' />
 
-              <ul className='max-h-[200px] sm:max-h-[600px] space-y-4 overflow-y-auto'>
+              <ul className='max-h-[200px] space-y-4 overflow-y-auto sm:max-h-[600px]'>
                 {details.crew.map((crew) => (
                   <li key={crew.id}>
                     <span className='font-semibold'>{crew.original_name}</span>
@@ -79,11 +79,12 @@ export async function EpisodeDetails({
                   </p>
                 </div>
               </div>
-              <Separator className='my-4' />
+              <MSeparator className='my-4' />
 
-              <section className='grid max-h-[400px] sm:max-h-[600px] md:grid-cols-2 gap-4 overflow-y-auto'>
-                {details.guest_stars.map((star) => (
+              <section className='grid max-h-[400px] gap-4 overflow-y-auto sm:max-h-[600px] md:grid-cols-2'>
+                {details.guest_stars.map((star, i) => (
                   <CreditArticle
+                    custom={i}
                     aspect='vertical'
                     figureClassName='w-[80px] h-auto object-cover object-top'
                     className='flex gap-4'

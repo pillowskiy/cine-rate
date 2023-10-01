@@ -1,21 +1,18 @@
 import type { CreationDetailsProps } from './common/types';
 import { BaseFigure } from '@components/figure/base-figure';
-import { Separator } from '@ui/separator';
+import { MSeparator } from '@ui/separator';
 import { getTitle } from './common/utils';
 import { CreationGenres } from './creation-genres';
+import { Heading } from '../heading';
 
 export default function CreationOverview({ details }: CreationDetailsProps) {
   return (
     <section>
-      <div className='flex max-w-full items-center justify-between'>
-        <div className='space-y-1'>
-          <h2 className='text-2xl font-semibold tracking-tight'>About</h2>
-          <p className='text-sm text-muted-foreground'>
-            {details.tagline || `About ${getTitle(details)}`}.
-          </p>
-        </div>
-      </div>
-      <Separator className='my-4' />
+      <Heading
+        title='About'
+        description={(details.tagline || `About ${getTitle(details)}`) + '.'}
+      />
+      <MSeparator className='my-4' />
       <div className='flex space-x-4 sm:space-x-0'>
         <div>
           <BaseFigure
@@ -25,9 +22,12 @@ export default function CreationOverview({ details }: CreationDetailsProps) {
             height={550}
           />
         </div>
-        <div className='space-y-2 flex-grow overflow-hidden'>
-          <CreationGenres className='sm:hidden w-full' genres={details.genres.slice(0, 3)} />
-          <p className='flex-grow text-sm md:text-base break-words'>
+        <div className='flex-grow space-y-2 overflow-hidden'>
+          <CreationGenres
+            className='w-full sm:hidden'
+            genres={details.genres.slice(0, 3)}
+          />
+          <p className='flex-grow break-words text-sm md:text-base'>
             {details.overview}
           </p>
         </div>

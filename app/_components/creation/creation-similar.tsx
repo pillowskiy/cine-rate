@@ -1,7 +1,7 @@
 import type { CreationIdentifierProps } from './common/types';
 import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
-import { Separator } from '@ui/separator';
+import { MSeparator } from '@ui/separator';
 import { getSimilar } from '@actions/getSimilar';
 import { Heading } from '@components/heading';
 import { NotFound } from '@components/not-found';
@@ -17,11 +17,12 @@ export default async function CreationSimilar({
   return (
     <section>
       <Heading title='Similar' description='More like this.' />
-      <Separator className='my-4' />
+      <MSeparator className='my-4' />
       <Carousel>
         {!!creations?.results.length ? (
-          creations.results.map((creation) => (
+          creations.results.map((creation, i) => (
             <CreationArticle
+              custom={i}
               defaultMediaType={mediaType}
               aspect='horizontal'
               key={creation.id}

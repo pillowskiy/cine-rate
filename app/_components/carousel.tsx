@@ -8,7 +8,7 @@ export function Carousel({ children, className, ...props }: CarouselProps) {
   return (
     <ScrollArea>
       <section
-        className={cn('flex snap-x space-x-4 pb-4', className)}
+        className={cn('flex snap-x space-x-4 pb-4 overflow-y-hidden', className)}
         {...props}
       >
         {children}

@@ -2,7 +2,7 @@ import { CreationArticle } from '@/app/_components/article/creation-article';
 import { Carousel } from '@/app/_components/carousel';
 import { Heading } from '@/app/_components/heading';
 import { NotFound } from '@/app/_components/not-found';
-import { Separator } from '@/app/_components/ui/separator';
+import { MSeparator } from '@/app/_components/ui/separator';
 import { IDetailedCollection } from '@/app/_types/collection-types';
 
 interface CollectionCreationsProps {
@@ -18,7 +18,7 @@ export default async function CollectionCreations({
         title='Collection Creations'
         description='Where Clutter Becomes Art!'
       />
-      <Separator className='my-4' />
+      <MSeparator className='my-4' />
 
       {!!parts.length ? (
         <Carousel>

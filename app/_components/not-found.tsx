@@ -1,8 +1,11 @@
-import { ComponentProps } from 'react';
-import { cn } from '../_libs';
-import { SearchX } from 'lucide-react';
+'use client';
 
-interface NotFoundProps extends Omit<ComponentProps<'div'>, 'children'> {
+import { cn } from '@libs/index';
+import { SearchX } from 'lucide-react';
+import { type HTMLMotionProps, motion } from 'framer-motion';
+import { Target, opacityAnimations } from '@config/animations';
+
+interface NotFoundProps extends Omit<HTMLMotionProps<'div'>, 'children'> {
   title?: string;
   description?: string;
 }
@@ -22,7 +25,11 @@ export function NotFound({
   ...props
 }: NotFoundProps) {
   return (
-    <div
+    <motion.div
+      viewport={{ once: true }}
+      initial={Target.HIDDEN}
+      whileInView={Target.VISIBLE}
+      variants={opacityAnimations}
       className={cn(
         'relative mt-8 grid w-full select-none place-items-center gap-4 rounded-md p-8',
         className
@@ -44,6 +51,6 @@ export function NotFound({
         <div className='absolute left-[50%] top-[15%] h-[48px] w-[48px] -translate-x-[50%] animate-pulse rounded-full bg-red-600 blur-xl sm:h-[64px] sm:w-[64px]' />
         <div className='absolute left-[52%] top-[20%] h-[32px] w-[32px] -translate-x-[50%] animate-pulse rounded-full bg-yellow-500 blur-xl sm:h-[48px] sm:w-[48px]' />
       </div>
-    </div>
+    </motion.div>
   );
 }

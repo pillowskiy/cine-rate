@@ -94,7 +94,7 @@ export function SearchDialog() {
               <Carousel className='space-x-0'>
                 {data.person
                   .sort((a, b) => b.popularity - a.popularity)
-                  .map((person) => {
+                  .map((person, i) => {
                     if (!('known_for' in person)) return null;
 
                     return (
@@ -104,10 +104,13 @@ export function SearchDialog() {
                         passHref
                         legacyBehavior
                       >
-                        <div className='flex cursor-pointer gap-2 rounded-md p-2 transition-all hover:bg-accent'>
+                        <div
+                          onClick={() => setIsDialogOpen(false)}
+                          className='flex cursor-pointer gap-2 rounded-md p-2 transition-all hover:bg-accent'
+                        >
                           <PersonArticle
+                            custom={i}
                             className='w-[120px] min-w-[120px]'
-                            onClick={() => setIsDialogOpen(false)}
                             celebrity={person}
                           />
                         </div>
@@ -126,7 +129,7 @@ export function SearchDialog() {
               {data.movie
                 .sort((a, b) => b.popularity - a.popularity)
                 .slice(0, 3)
-                .map((movie) => {
+                .map((movie, i) => {
                   if ('known_for' in movie) return null;
                   return (
                     <Link
@@ -156,7 +159,7 @@ export function SearchDialog() {
               {data.tv
                 .sort((a, b) => b.popularity - a.popularity)
                 .slice(0, 3)
-                .map((tv) => {
+                .map((tv, i) => {
                   if ('known_for' in tv) return null;
                   return (
                     <Link

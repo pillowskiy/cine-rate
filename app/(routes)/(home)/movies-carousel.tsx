@@ -1,5 +1,5 @@
 import { MediaType, MovieSort } from '@config/enums';
-import { Separator } from '@ui/separator';
+import { MSeparator } from '@ui/separator';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@ui/tabs';
 import { CreationArticle } from '@components/article/creation-article';
 import { Heading } from '@components/heading';
@@ -24,8 +24,9 @@ async function CreationCarousel({ sort }: { sort: MovieSort }) {
 
   return (
     <Carousel>
-      {data.results.map((creation) => (
+      {data.results.map((creation, i) => (
         <CreationArticle
+          custom={i}
           defaultMediaType={MediaType.Movie}
           aspect='horizontal'
           key={creation.id}
@@ -38,8 +39,11 @@ async function CreationCarousel({ sort }: { sort: MovieSort }) {
       ))}
       {/* TEMP */}
       <div className='relative grid aspect-[16/9] h-fit w-[260px] place-items-center rounded-md border'>
-        <Link href='/movie' className='z-10 cursor-pointer select-none space-y-1 text-center'>
-          <h2 className='text-4xl drop-shadow-md shadow-cyan-500'>🎥</h2>
+        <Link
+          href='/movie'
+          className='z-10 cursor-pointer select-none space-y-1 text-center'
+        >
+          <h2 className='text-4xl shadow-cyan-500 drop-shadow-md'>🎥</h2>
           <p className='transition-all hover:text-cyan-500 hover:underline'>
             See more!
           </p>
@@ -59,7 +63,7 @@ export default function MoviesCarousel() {
         title='Movies that Conquer the World!'
         description='The most popular blockbusters and unforgettable masterpieces.'
       />
-      <Separator className='my-4' />
+      <MSeparator className='my-4' />
       <Tabs defaultValue={MovieSort.Popular}>
         <TabsList>
           {Object.values(MovieSort).map((value) => (

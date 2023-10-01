@@ -12,6 +12,7 @@ import { cn } from '@libs/index';
 import axios from 'axios';
 import { initialPagination } from '@config/pagination';
 import { useSearchParams } from 'next/navigation';
+import { opacityAnimations } from '@config/animations';
 
 interface CreationCatalogProps extends ComponentProps<'div'> {
   mediaType: MediaType;
@@ -59,6 +60,7 @@ export default function CreationCatalog({
 
     return items.map((movie) => (
       <CreationArticle
+        variants={opacityAnimations}
         defaultMediaType={mediaType}
         key={movie.id}
         creation={movie}

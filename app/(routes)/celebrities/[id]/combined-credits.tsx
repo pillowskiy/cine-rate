@@ -2,7 +2,7 @@ import type { CombinedCreditsResponse } from '@app/types/person-types';
 import type { BaseParams } from '@app/types/index';
 import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
-import { Separator } from '@ui/separator';
+import { MSeparator } from '@ui/separator';
 import { $api } from '@/app/_shared/api/api-interceptor';
 import { MediaType } from '@config/enums';
 import { NotFound } from '@/app/_components/not-found';
@@ -33,7 +33,7 @@ export default async function CombinedCredits({
     <section>
       <div>
         <h2 className='text-lg font-medium leading-none'>Known for</h2>
-        <Separator className='my-4' />
+        <MSeparator className='my-4' />
       </div>
 
       <Carousel>
@@ -41,8 +41,9 @@ export default async function CombinedCredits({
           credits.cast
             .sort((a, b) => b.vote_count - a.vote_count)
             .slice(0, 20)
-            .map((credit) => (
+            .map((credit, i) => (
               <CreationArticle
+                custom={i}
                 aspect='horizontal'
                 key={credit.id}
                 creation={credit}

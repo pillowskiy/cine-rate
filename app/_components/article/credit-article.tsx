@@ -6,10 +6,11 @@ import {
   BaseArticleContent,
   BaseArticleFigure,
   BaseArticleFigureProps,
+  type BaseArticleProps,
 } from './base-article';
 import Link from 'next/link';
 
-interface CreditArticleProps extends ComponentProps<'div'> {
+interface CreditArticleProps extends BaseArticleProps {
   credit: ICredit;
   aspect?: BaseArticleFigureProps['aspect'];
   figureClassName?: string;

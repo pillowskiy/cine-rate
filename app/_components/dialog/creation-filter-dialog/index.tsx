@@ -23,7 +23,7 @@ import type { GetDiscoverParams } from '@actions/getDiscover';
 import { ScrollArea, ScrollBar } from '@ui/scroll-area';
 import { Label } from '@ui/label';
 import { Input } from '@ui/input';
-import { Separator } from '@ui/separator';
+import { MSeparator } from '@ui/separator';
 import { CreationGenres } from './creation-genres';
 import { CreationLanguage } from './creation-language';
 import useQueryParams from '@hooks/useQueryParams';
@@ -96,7 +96,7 @@ export function CreationFilterDialog({
                   />
                 </div>
               </div>
-              <Separator className='my-4' />
+              <MSeparator className='my-4' />
 
               <CreationLanguage />
               <CreationGenres mediaType={mediaType} />

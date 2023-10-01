@@ -2,7 +2,7 @@ import { MediaType } from '@config/enums';
 import { PersonArticle } from '@components/article/person-article';
 import { Carousel } from '@components/carousel';
 import { getPopular } from '@actions/getPopular';
-import { Separator } from '@ui/separator';
+import { MSeparator } from '@ui/separator';
 import { NotFound } from '@components/not-found';
 import { Heading } from '@components/heading';
 import Link from 'next/link';
@@ -19,18 +19,19 @@ export default async function CelebrityCarousel() {
         description='The most popular celebrities.'
         badges={['👑 Iconic Idols']}
       />
-      <Separator className='my-4' />
+      <MSeparator className='my-4' />
       {celebrities?.results.length ? (
         <Carousel>
-          {celebrities.results.map((celebrity) => (
+          {celebrities.results.map((celebrity, i) => (
             <PersonArticle
+              custom={i}
               key={celebrity.id}
               celebrity={celebrity}
               className='w-[160px] sm:w-[260px]'
             />
           ))}
           {/* TEMP */}
-          <div className='relative grid aspect-[2/3] h-fit w-[160px] sm:w-[260px] place-items-center rounded-md border'>
+          <div className='relative grid aspect-[2/3] h-fit w-[160px] place-items-center rounded-md border sm:w-[260px]'>
             <Link
               href='/celebrities'
               className='z-10 cursor-pointer select-none space-y-1 text-center'

@@ -38,8 +38,9 @@ export default async function EpisodeList({
       {season?.episodes.length ? (
         season.episodes
           .sort((a, b) => sortBy(a.episode_number, b.episode_number))
-          .map((episode) => (
+          .map((episode, i) => (
             <EpisodeArticle
+              custom={i}
               seriesId={seriesId}
               key={episode.id}
               episode={episode}

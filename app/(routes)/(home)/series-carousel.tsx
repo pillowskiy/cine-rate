@@ -1,5 +1,5 @@
 import { MediaType, TVSort } from '@config/enums';
-import { Separator } from '@ui/separator';
+import { MSeparator } from '@ui/separator';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@ui/tabs';
 import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
@@ -24,8 +24,9 @@ async function CreationCarousel({ sort }: { sort: TVSort }) {
 
   return (
     <Carousel>
-      {data.results.map((creation) => (
+      {data.results.map((creation, i) => (
         <CreationArticle
+          custom={i}
           defaultMediaType={MediaType.TV}
           aspect='horizontal'
           key={creation.id}
@@ -62,7 +63,7 @@ export default function SeriesCarousel() {
         title='Captivating Series'
         description='The most popular and widely known TV series.'
       />
-      <Separator className='my-4' />
+      <MSeparator className='my-4' />
       <Tabs defaultValue={TVSort.TopRated}>
         <TabsList>
           {Object.values(TVSort).map((value) => (

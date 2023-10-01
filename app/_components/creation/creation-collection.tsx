@@ -1,7 +1,7 @@
 import type { CollectionDetailsResponse } from '@app/types/collection-types';
 import { $api } from '@/app/_shared/api/api-interceptor';
 import { Heading } from '@components/heading';
-import { Separator } from '@ui/separator';
+import { MSeparator } from '@ui/separator';
 import { CollectionArticle } from '../article/collection-article';
 
 interface CreationCollectionProps {
@@ -30,7 +30,7 @@ export default async function CreationCollection({
         title='Creation Collection'
         description='The Ultimate Showcase of Unintentional Accumulation!'
       />
-      <Separator className='my-4' />
+      <MSeparator className='my-4' />
 
       <CollectionArticle
         className='rounded-md border p-4'

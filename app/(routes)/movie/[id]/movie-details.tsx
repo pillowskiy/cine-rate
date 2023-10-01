@@ -3,7 +3,8 @@ import type { ComponentProps } from 'react';
 import { MediaType } from '@config/enums';
 import CreationKeywords from '@components/creation/creation-keywords';
 import { getTitle } from '@components/creation/common/utils';
-import { Separator } from '@ui/separator';
+import { MSeparator } from '@ui/separator';
+import { Heading } from '@/app/_components/heading';
 
 interface MovieDetailsProps extends ComponentProps<'div'> {
   details: IMovieDetails;
@@ -16,15 +17,11 @@ export default async function MovieDetails({
   return (
     <div {...props}>
       <section>
-        <div className='flex items-center justify-between'>
-          <div className='space-y-1 max-w-full'>
-            <h2 className='text-2xl font-semibold tracking-tight'>Details</h2>
-            <p className='text-sm text-muted-foreground truncate'>
-              Interesting about {getTitle(details)}.
-            </p>
-          </div>
-        </div>
-        <Separator className='my-4' />
+        <Heading
+          title='Details'
+          description={`Interesting about ${getTitle(details)}.`}
+        />
+        <MSeparator className='my-4' />
 
         <ul className='space-y-6'>
           <li>

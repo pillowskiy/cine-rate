@@ -3,20 +3,21 @@ import { memo } from 'react';
 import {
   BaseArticle,
   BaseArticleFigure,
+  type BaseArticleProps,
 } from '@components/article/base-article';
 import { buildImagePath } from '@libs/tmdb';
 import { Star } from 'lucide-react';
 import { EpisodeDetails } from './episode-details';
 
-interface EpisodeArticleProps {
+interface EpisodeArticleProps extends BaseArticleProps {
   seriesId: number;
   episode: IEpisode;
 }
 
 export const EpisodeArticle = memo(
-  ({ seriesId, episode }: EpisodeArticleProps) => {
+  ({ seriesId, episode, ...props }: EpisodeArticleProps) => {
     return (
-      <BaseArticle className='space-y-4 rounded-md border p-4' key={episode.id}>
+      <BaseArticle className='space-y-4 rounded-md border p-4' key={episode.id} {...props}>
         <section className='flex w-full flex-col items-start gap-4 sm:flex-row'>
           <div className='w-full sm:w-fit'>
             <BaseArticleFigure

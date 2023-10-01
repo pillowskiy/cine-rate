@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import { MediaType } from '@config/enums';
 import CreationKeywords from '@components/creation/creation-keywords';
 import { getTitle } from '@components/creation/common/utils';
-import { Separator } from '@ui/separator';
+import { MSeparator } from '@ui/separator';
 
 interface SeriesDetailsProps extends ComponentProps<'div'> {
   details: ITVDetails;
@@ -24,7 +24,7 @@ export default async function SeriesDetails({
             </p>
           </div>
         </div>
-        <Separator className='my-4' />
+        <MSeparator className='my-4' />
 
         <ul className='space-y-6'>
           <li>

@@ -1,17 +1,28 @@
-import type { ComponentProps } from 'react';
+'use client';
+
+import type { ComponentProps, ReactNode } from 'react';
 import { cn } from '@libs/index';
 import { Button } from '@ui/button';
-import { ImageFromPath } from '../image/image-from-path';
+import { ImageFromPath } from '@components/image/image-from-path';
+import { type Variants, motion, HTMLMotionProps } from 'framer-motion';
+import { xTransitionAnimations, yTransitionAnimations, Target } from '@config/animations';
 
-export interface BaseArticleProps extends ComponentProps<'div'> {}
+export interface BaseArticleProps extends HTMLMotionProps<'article'> {}
 
 export function BaseArticle({
+  custom,
   className,
   children,
+  variants = xTransitionAnimations,
   ...props
 }: BaseArticleProps) {
   return (
-    <article
+    <motion.article
+      custom={custom}
+      viewport={{ once: true }}
+      initial={Target.HIDDEN}
+      whileInView={Target.VISIBLE}
+      variants={variants}
       className={cn(
         'relative snap-center space-y-2 group-hover:opacity-0',
         className
@@ -19,20 +30,23 @@ export function BaseArticle({
       {...props}
     >
       {children}
-    </article>
+    </motion.article>
   );
 }
 
-interface BaseArticleContentProps extends ComponentProps<'div'> {}
+interface BaseArticleContentProps {
+  children?: ReactNode;
+  className?: string;
+}
 
 export function BaseArticleContent({
   children,
   ...props
 }: BaseArticleContentProps) {
   return (
-    <div className='space-y-1' {...props}>
+    <motion.div variants={yTransitionAnimations} className='space-y-1' {...props}>
       {children}
-    </div>
+    </motion.div>
   );
 }
 
@@ -68,7 +82,7 @@ export function BaseArticleFigure({
       >
         <ImageFromPath
           className={cn(
-            'h-full w-auto object-cover transition-all ease-in-out hover:scale-105',
+            'h-full w-auto object-cover transition-all ease-in-out hover:scale-105'
           )}
           height={height}
           width={width}
