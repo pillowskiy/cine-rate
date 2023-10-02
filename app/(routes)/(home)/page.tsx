@@ -3,15 +3,19 @@ import { LoadingCarousel } from '@components/loading-carousel';
 
 const TrendsCarousel = dynamic(() => import('./trends-carousel'), {
   loading: () => <LoadingCarousel />,
+  ssr: false,
 });
 const MoviesCarousel = dynamic(() => import('./movies-carousel'), {
   loading: () => <LoadingCarousel className='mt-6' aspect='horizontal' />,
+  ssr: false,
 });
 const SeriesCarousel = dynamic(() => import('./series-carousel'), {
   loading: () => <LoadingCarousel className='mt-6' aspect='horizontal' />,
+  ssr: false,
 });
 const CelebrityCarousel = dynamic(() => import('./celebrity-carousel'), {
   loading: () => <LoadingCarousel />,
+  ssr: false,
 });
 
 // Hydrating suspense boundary
@@ -26,8 +30,8 @@ export default async function Home() {
       <TrendsCarousel />
       <MoviesCarousel />
       <SeriesCarousel />
-      <WatchlistCarousel />
       <CelebrityCarousel />
+      <WatchlistCarousel />
     </main>
   );
 }
