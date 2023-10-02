@@ -5,21 +5,14 @@ import { Loader2, LogIn } from 'lucide-react';
 import { Button } from '@ui/button';
 import { ProfileDropdown } from '@components/dropdown/profile-dropdown';
 import { UserAvatar } from '@components/user-avatar';
+import { useClientReady } from '@hooks/useClientReady';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
 
 export function AuthButton() {
   const { user, isLoading } = useAuth();
+  const isClientReady = useClientReady();
 
-  /*
-   * https://stackoverflow.com/questions/71706064/
-   * Error when using 'typeof window' in condition
-   * TODO: To independent hook
-   */
-  const [domLoaded, setDomLoaded] = useState(false);
-  useEffect(() => void setDomLoaded(true), []);
-
-  if (isLoading || !domLoaded) {
+  if (isLoading || !isClientReady) {
     return (
       <Button className='aspect-square' variant='outline' size='icon'>
         <Loader2 className='h-5 w-5 animate-spin' />
