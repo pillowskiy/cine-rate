@@ -1,6 +1,7 @@
 'use client';
 
 import { Badge } from '@ui/badge';
+import { Target, yTransitionAnimations } from '@config/animations';
 import { motion } from 'framer-motion';
 
 interface HeadingProps {
@@ -24,9 +25,9 @@ export function Heading({ title, description, badges }: HeadingProps) {
   return (
     <motion.div
       viewport={{ once: true }}
-      initial='hidden'
-      whileInView='visible'
-      variants={headingAnimation}
+      initial={Target.HIDDEN}
+      whileInView={Target.VISIBLE}
+      variants={yTransitionAnimations}
       className='space-y-1'
     >
       <div className='flex items-start gap-2'>

@@ -11,14 +11,16 @@ export enum Target {
 export const xTransitionAnimations: Variants = {
     [Target.HIDDEN]: {
         opacity: 0,
+        scale: 0.6,
         x: -100,
     },
     [Target.VISIBLE]: (custom: number = 0) => ({
         opacity: 1,
+        scale: 1,
         x: 0,
         transition: {
             duration: 0.2,
-            delay: 0.1 * (custom % 5),
+            delay: 0.1 * (custom),
         },
     })
 }
@@ -31,10 +33,6 @@ export const yTransitionAnimations: Variants = {
     [Target.VISIBLE]: {
         opacity: 1,
         y: 0,
-        transition: {
-            duration: 0.4,
-            delay: 0.6,
-        },
     }
 }
 

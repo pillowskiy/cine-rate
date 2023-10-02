@@ -4,8 +4,12 @@ import type { ComponentProps, ReactNode } from 'react';
 import { cn } from '@libs/index';
 import { Button } from '@ui/button';
 import { ImageFromPath } from '@components/image/image-from-path';
-import { type Variants, motion, HTMLMotionProps } from 'framer-motion';
-import { xTransitionAnimations, yTransitionAnimations, Target } from '@config/animations';
+import { motion, HTMLMotionProps } from 'framer-motion';
+import {
+  xTransitionAnimations,
+  yTransitionAnimations,
+  Target,
+} from '@config/animations';
 
 export interface BaseArticleProps extends HTMLMotionProps<'article'> {}
 
@@ -34,19 +38,16 @@ export function BaseArticle({
   );
 }
 
-interface BaseArticleContentProps {
-  children?: ReactNode;
-  className?: string;
-}
+interface BaseArticleContentProps extends ComponentProps<'div'> {}
 
 export function BaseArticleContent({
   children,
   ...props
 }: BaseArticleContentProps) {
   return (
-    <motion.div variants={yTransitionAnimations} className='space-y-1' {...props}>
+    <div className='space-y-1' {...props}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
