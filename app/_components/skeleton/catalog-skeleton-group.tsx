@@ -1,4 +1,4 @@
-import { SkeletonArticle } from './article/skeleton-article';
+import { SkeletonArticle } from './skeleton-article';
 
 interface CatalogSkeletonGroupProps {
   itemsCount?: number;

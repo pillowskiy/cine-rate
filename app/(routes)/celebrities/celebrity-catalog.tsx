@@ -4,7 +4,7 @@ import { type ComponentProps, useEffect, useState } from 'react';
 import type { IPagination } from '@app/types/index';
 import type { CelebritiesResponse } from '@app/types/person-types';
 import { PersonArticle } from '@components/article/person-article';
-import { CatalogSkeletonGroup } from '@components/catalog-skeleton-group';
+import { CatalogSkeletonGroup } from '@/app/_components/skeleton/catalog-skeleton-group';
 import { initialPagination } from '@config/pagination';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import { cn } from '@libs/index';

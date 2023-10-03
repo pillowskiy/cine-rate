@@ -1,6 +1,6 @@
 import { ComponentProps } from 'react';
 import { Skeleton } from '../ui/skeleton';
-import { BaseArticleFigureProps } from './base-article';
+import { BaseArticleFigureProps } from '../article/base-article';
 import { cn } from '@/app/_libs';
 
 export interface SkeletonArticleProps extends ComponentProps<'article'> {
