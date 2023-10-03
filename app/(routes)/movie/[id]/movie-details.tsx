@@ -3,11 +3,22 @@ import type { ComponentProps } from 'react';
 import { MediaType } from '@config/enums';
 import CreationKeywords from '@components/creation/creation-keywords';
 import { getTitle } from '@components/creation/common/utils';
+import { List, ListItem } from '@ui/list';
 import { MSeparator } from '@ui/separator';
 import { Heading } from '@/app/_components/heading';
 
 interface MovieDetailsProps extends ComponentProps<'div'> {
   details: IMovieDetails;
+}
+
+// TEMP: to tmdb utils
+function getLocaleCurrency(amount?: number | null) {
+  return amount
+    ? amount.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      })
+    : 'Unknown';
 }
 
 export default async function MovieDetails({
@@ -23,52 +34,27 @@ export default async function MovieDetails({
         />
         <MSeparator className='my-4' />
 
-        <ul className='space-y-6'>
-          <li>
-            <span className='font-semibold'>Status</span>
-            <p className='text-foreground/70'>{details.status}</p>
-          </li>
-
-          <li>
-            <span className='font-semibold'>Original Language</span>
-            <p className='text-foreground/70'>
-              {details.original_language.toUpperCase()}
-            </p>
-          </li>
-
-          <li>
-            <span className='font-semibold'>Budget</span>
-            <p className='text-foreground/70'>
-              {details.budget
-                ? details.budget.toLocaleString('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                  })
-                : 'Unknown'}
-            </p>
-          </li>
-
-          <li>
-            <span className='font-semibold'>Revenue</span>
-            <p className='text-foreground/70'>
-              {details.revenue
-                ? details.revenue.toLocaleString('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                  })
-                : 'Unknown'}
-            </p>
-          </li>
-
-          <li>
-            <span className='font-semibold'>Production Companies</span>
-            <p className='text-foreground/70'>
-              {details.production_companies
-                .map((company) => company.name)
-                .join(', ')}
-            </p>
-          </li>
-        </ul>
+        <List>
+          <ListItem title='Status:' description={details.status} />
+          <ListItem
+            title='Original Language:'
+            description={details.original_language.toUpperCase()}
+          />
+          <ListItem
+            title='Budget:'
+            description={getLocaleCurrency(details.budget)}
+          />
+          <ListItem
+            title='Revenue:'
+            description={getLocaleCurrency(details.revenue)}
+          />
+          <ListItem
+            title='Production Companies:'
+            description={details.production_companies
+              .map((company) => company.name)
+              .join(', ')}
+          />
+        </List>
       </section>
 
       <CreationKeywords mediaType={MediaType.Movie} details={details} />

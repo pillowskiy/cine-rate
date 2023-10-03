@@ -4,6 +4,7 @@ import { MediaType } from '@config/enums';
 import CreationKeywords from '@components/creation/creation-keywords';
 import { getTitle } from '@components/creation/common/utils';
 import { MSeparator } from '@ui/separator';
+import { List, ListItem } from '@ui/list';
 
 interface SeriesDetailsProps extends ComponentProps<'div'> {
   details: ITVDetails;
@@ -26,57 +27,39 @@ export default async function SeriesDetails({
         </div>
         <MSeparator className='my-4' />
 
-        <ul className='space-y-6'>
-          <li>
-            <span className='font-semibold'>Status</span>
-            <p className='text-foreground/70'>{details.status}</p>
-          </li>
-
-          <li>
-            <span className='font-semibold'>Original Language</span>
-            <p className='text-foreground/70'>
-              {details.original_language.toUpperCase()}
-            </p>
-          </li>
-
-          <li>
-            <span className='font-semibold'>Created By</span>
-            <p className='text-foreground/70'>
-              {details.created_by.map((celebrity) => celebrity.name).join(', ')}
-            </p>
-          </li>
-
-          <li>
-            <span className='font-semibold'>Number of Seasons</span>
-            <p className='text-foreground/70'>
-              {details.number_of_seasons} seasons ({details.number_of_episodes}{' '}
-              episodes)
-            </p>
-          </li>
-
-          <li>
-            <span className='font-semibold'>First Air Date</span>
-            <p className='text-foreground/70'>
-              {new Date(details.first_air_date).toDateString()}
-            </p>
-          </li>
-
+        <List>
+          <ListItem title='Status:' description={details.status} />
+          <ListItem
+            title='Original Language:'
+            description={details.original_language.toUpperCase()}
+          />
+          <ListItem
+            title='Created By:'
+            description={details.created_by
+              .map((celebrity) => celebrity.name)
+              .join(', ')}
+          />
+          <ListItem
+            title='Number of Seasons:'
+            description={`${details.number_of_seasons} seasons (${details.number_of_episodes} episodes)`}
+          />
+          <ListItem
+            title='First Air Date:'
+            description={new Date(details.first_air_date).toDateString()}
+          />
           {details.runtime && (
-            <li>
-              <span className='font-semibold'>Runtime</span>
-              <p className='text-foreground/70'>{details.runtime}</p>
-            </li>
+            <ListItem
+              title='Runtime:'
+              description={details.runtime.toString()}
+            />
           )}
-
-          <li>
-            <span className='font-semibold'>Production Companies</span>
-            <p className='text-foreground/70'>
-              {details.production_companies
-                .map((company) => company.name)
-                .join(', ')}
-            </p>
-          </li>
-        </ul>
+          <ListItem
+            title='Production Companies:'
+            description={details.production_companies
+              .map((company) => company.name)
+              .join(', ')}
+          />
+        </List>
       </section>
 
       <CreationKeywords mediaType={MediaType.TV} details={details} />
