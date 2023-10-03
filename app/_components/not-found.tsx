@@ -35,7 +35,7 @@ export function NotFound({
 
   return (
       <motion.div
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.2 }}
         initial={Target.HIDDEN}
         whileInView={Target.VISIBLE}
         variants={opacityAnimations}

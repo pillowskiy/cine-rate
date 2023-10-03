@@ -5,11 +5,7 @@ import { cn } from '@libs/index';
 import { Button } from '@ui/button';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { motion, HTMLMotionProps } from 'framer-motion';
-import {
-  xTransitionAnimations,
-  yTransitionAnimations,
-  Target,
-} from '@config/animations';
+import { xTransitionAnimations, Target } from '@config/animations';
 
 export interface BaseArticleProps extends HTMLMotionProps<'article'> {}
 
@@ -22,7 +18,6 @@ export function BaseArticle({
 }: BaseArticleProps) {
   return (
     <motion.article
-      custom={custom}
       viewport={{ once: true }}
       initial={Target.HIDDEN}
       whileInView={Target.VISIBLE}

@@ -12,7 +12,7 @@ export const xTransitionAnimations: Variants = {
     [Target.HIDDEN]: {
         opacity: 0,
         scale: 0.6,
-        x: -100,
+        x: -50,
     },
     [Target.VISIBLE]: (custom: number = 0) => ({
         opacity: 1,
@@ -28,7 +28,7 @@ export const xTransitionAnimations: Variants = {
 export const yTransitionAnimations: Variants = {
     [Target.HIDDEN]: {
         opacity: 0,
-        y: 100,
+        y: 50,
     },
     [Target.VISIBLE]: {
         opacity: 1,

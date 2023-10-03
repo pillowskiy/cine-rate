@@ -5,7 +5,7 @@ import type { CreationsResponse } from '@app/types/creation-types';
 import type { IPagination } from '@app/types/index';
 import type { MediaType } from '@config/enums';
 import { CreationArticle } from '@components/article/creation-article';
-import { CatalogSkeletonGroup } from '@components/catalog-skeleton-group';
+import { CatalogSkeletonGroup } from '@/app/_components/skeleton/catalog-skeleton-group';
 import { NotFound } from '@components/not-found';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import { cn } from '@libs/index';
@@ -60,6 +60,7 @@ export default function CreationCatalog({
 
     return items.map((movie) => (
       <CreationArticle
+        custom={0.4}
         variants={opacityAnimations}
         defaultMediaType={mediaType}
         key={movie.id}

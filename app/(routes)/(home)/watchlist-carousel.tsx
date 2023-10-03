@@ -15,7 +15,7 @@ export default function WatchlistCarousel() {
 
   return (
     <motion.section
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0.4 }}
       initial={Target.HIDDEN}
       whileInView={Target.VISIBLE}
       className='relative'
