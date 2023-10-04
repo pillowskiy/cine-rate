@@ -10,6 +10,7 @@ import StoreProvider from '@components/store-provider';
 import AuthProvider from '@components/auth-provider';
 
 import { Toaster } from '@components/ui/toaster';
+import NoInternetConnection from '../_components/no-internet-connection';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
+        <NoInternetConnection />
         <Toaster />
         <StoreProvider>
           <AuthProvider>

@@ -12,7 +12,7 @@ export default function Header() {
   const isMobileView: boolean = !!userAgent?.match(MOBILE_VIEW_REGEXP);
 
   return (
-    <header className='supports-backdrop-blur:bg-background/60 sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur'>
+    <header className='supports-backdrop-blur:bg-background/60 sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur'>
       <div className='container flex h-14 w-full items-center justify-between gap-2'>
         {isMobileView ? (
           <div className='flex gap-2'>
