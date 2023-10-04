@@ -58,13 +58,15 @@ export function SearchDialog() {
           variant='outline'
           onClick={() => setIsDialogOpen(true)}
           className={cn(
-            'relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64'
+            'relative justify-start text-sm sm:text-muted-foreground sm:pr-12 md:w-40 lg:w-64',
+            'p-2 aspect-square'
           )}
         >
           <span className='hidden lg:inline-flex'>
             Search for a creation...
           </span>
-          <span className='inline-flex lg:hidden'>Search...</span>
+          <span className='hidden sm:inline-flex lg:hidden'>Search...</span>
+          <Search className='w-5 h-5 inline-flex sm:hidden' />
         </Button>
       </DialogTrigger>
       <DialogContent className='gap-0 p-0'>

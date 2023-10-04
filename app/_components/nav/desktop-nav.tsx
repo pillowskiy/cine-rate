@@ -3,9 +3,9 @@ import { AppNav } from './app-nav';
 
 export function DesktopNav() {
   return (
-    <div className='mr-4 hidden md:flex'>
+    <div className='hidden md:flex'>
       <Logo />
-      <AppNav className='flex items-center space-x-6' />
+      <AppNav className='flex items-center space-x-6 px-6' />
     </div>
   );
 }
