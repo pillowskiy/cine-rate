@@ -3,14 +3,14 @@ import type { CreationImagesResponse } from '@app/types/creation-types';
 import { Heading } from '@components/heading';
 import { MediaTabs } from '@components/media-tabs';
 import { MSeparator } from '@ui/separator';
-import { $api } from '@/app/_shared/api/api-interceptor';
+import { $api } from '@api/api-interceptor';
 
 interface CollectionMediaTabsProps {
   collectionId: number;
 }
 
 function getCollectionImages(collectionId: number, params?: BaseParams) {
-  return $api.get<CreationImagesResponse>(
+  return $api.fetch<CreationImagesResponse>(
     `/3/collection/${collectionId}/images`,
     { params }
   );
@@ -19,11 +19,7 @@ function getCollectionImages(collectionId: number, params?: BaseParams) {
 export default async function CollectionMediaTabs({
   collectionId,
 }: CollectionMediaTabsProps) {
-  const { data: images } = await getCollectionImages(collectionId).catch(
-    () => ({
-      data: null,
-    })
-  );
+  const [images] = await getCollectionImages(collectionId);
 
   return (
     <section>

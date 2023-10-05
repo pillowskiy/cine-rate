@@ -15,11 +15,9 @@ export default async function CreationKeywords({
   mediaType,
   details,
 }: CreationKeywordsProps) {
-  const { data } = await getCreationKeywords(details.id, mediaType).catch(
-    () => ({ data: null })
-  );
+  const [data, error] = await getCreationKeywords(details.id, mediaType);
 
-  if (!data?.keywords?.length) return null;
+  if (error || !data?.keywords?.length) return null;
 
   return (
     <div>

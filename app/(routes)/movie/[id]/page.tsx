@@ -12,10 +12,13 @@ import MovieDetails from './movie-details';
 
 import { getCreationDetails } from '@actions/getCreationDetails';
 import { pipe } from '@libs/common/next';
+import { notFound } from 'next/navigation';
 
 export default async function MoviePage({ params }: INextPageParams) {
   const paramId = pipe.strToInt(params?.id);
-  const { data: movie } = await getCreationDetails(paramId, MediaType.Movie);
+  const [movie, error] = await getCreationDetails(paramId, MediaType.Movie);
+
+  if (error) return notFound();
 
   return (
     <main className='min-h-screen w-full space-y-6'>

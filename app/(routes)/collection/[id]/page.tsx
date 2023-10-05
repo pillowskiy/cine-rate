@@ -5,6 +5,7 @@ import { LoadingCarousel } from '@/app/_components/skeleton/loading-carousel';
 import dynamic from 'next/dynamic';
 
 import CollectionHeader from './collection-header';
+import { notFound } from 'next/navigation';
 
 const CollectionCreations = dynamic(() => import('./collection-creations'), {
   ssr: false,
@@ -17,7 +18,9 @@ const CollectionMediaTabs = dynamic(() => import('./collection-media-tabs'), {
 
 export default async function CollectionPage({ params }: INextPageParams) {
   const collectionId = pipe.strToInt(params?.id);
-  const { data: collection } = await getCollection(collectionId);
+  const [collection, error] = await getCollection(collectionId);
+
+  if (error) return notFound();
 
   return (
     <main className='min-h-screen w-full space-y-6'>

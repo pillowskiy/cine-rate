@@ -14,7 +14,14 @@ export async function GET(_: unknown, { params }: INextPageParams) {
     }
 
     const { mediaType, creationId } = parsedParams.data;
-    const { data: videos } = await getCreationVideos(creationId, mediaType);
+    const [videos, error] = await getCreationVideos(creationId, mediaType);
+
+    if (error) {
+        return NextResponse.json({
+            message: "Uh, Oh! Something went wrong."
+        }, { status: error.status });
+    }
+
     const officialTrailer = inferOfficialTrailer(videos);
 
     if (!officialTrailer) {

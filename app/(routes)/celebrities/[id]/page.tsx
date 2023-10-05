@@ -8,10 +8,13 @@ import PersonDetails from './person-details';
 
 import { getPersonDetails } from '@actions/getPersonDetails';
 import { pipe } from '@libs/common/next';
+import { notFound } from 'next/navigation';
 
 export default async function PersonPage({ params }: INextPageParams) {
   const personId = pipe.strToInt(params?.id);
-  const { data: person } = await getPersonDetails(personId);
+  const [person, error] = await getPersonDetails(personId);
+
+  if (error) return notFound();
 
   return (
     <main className='flex flex-col gap-4 sm:flex-row'>

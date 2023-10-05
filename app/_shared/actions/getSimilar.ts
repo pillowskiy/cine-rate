@@ -1,8 +1,9 @@
 import type { CreationsResponse } from '@app/types/creation-types';
-import { $api } from '../api/api-interceptor';
-import { MediaType } from '@config/enums';
+import type { MediaType } from '@config/enums';
+import type { BaseParams } from '@app/types/index';
+import { $api } from '@api/api-interceptor';
 
-interface GetSimilarOptions {
+interface GetSimilarOptions extends BaseParams {
   language?: string;
   page?: string;
 }
@@ -12,7 +13,7 @@ export const getSimilar = (
   mediaType: MediaType,
   params?: GetSimilarOptions
 ) => {
-  return $api.get<CreationsResponse>(`/3/${mediaType}/${movieId}/similar`, {
+  return $api.fetch<CreationsResponse>(`/3/${mediaType}/${movieId}/similar`, {
     params,
   });
 };

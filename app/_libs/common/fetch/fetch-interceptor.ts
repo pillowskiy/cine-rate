@@ -19,7 +19,10 @@ export function createFetchInterceptor(baseUrl?: string, config: RequestIntercep
         const fetchConfig = Object.assign(clonedConfig, init);
         const url = new URL(input, baseUrl);
         if (params) {
-            url.search = (new URLSearchParams(params)).toString();
+            const paramsArray = Object.entries(params).map(([key, value]) => (
+                [key, value?.toString() || 'undefined']
+            ));
+            url.search = (new URLSearchParams(paramsArray)).toString();
         }
 
         const result = await nextFetch(url.href, fetchConfig);
@@ -28,8 +31,8 @@ export function createFetchInterceptor(baseUrl?: string, config: RequestIntercep
             return [null, result];
         }
 
-        const data: Data = await result.json();
         response.intercept(result);
+        const data: Data = await result.json();
         return [data, null];
     }
 

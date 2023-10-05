@@ -12,7 +12,7 @@ import { Heading } from '@components/heading';
 
 import type { BaseParams } from '@app/types/index';
 import type { IEpisodeDetails } from '@app/types/tv-types';
-import { $api } from '@/app/_shared/api/api-interceptor';
+import { $api } from '@api/api-interceptor';
 
 export function getEpisodeDetails(
   seriesId: number,
@@ -20,7 +20,7 @@ export function getEpisodeDetails(
   episodeNumber: number,
   params?: BaseParams
 ) {
-  return $api.get<IEpisodeDetails>(
+  return $api.fetch<IEpisodeDetails>(
     `/3/tv/${seriesId}` +
       `/season/${seasonNumber}` +
       `/episode/${episodeNumber}`,
@@ -38,11 +38,11 @@ export async function EpisodeDetails({
   seriesId,
 }: EpisodeDetailsProps) {
   const { season_number, episode_number } = episode;
-  const { data: details } = await getEpisodeDetails(
+  const [details] = await getEpisodeDetails(
     seriesId,
     season_number,
     episode_number
-  ).catch(() => ({ data: null }));
+  );
 
   if (!details) return null;
 

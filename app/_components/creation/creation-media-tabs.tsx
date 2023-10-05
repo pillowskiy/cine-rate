@@ -13,9 +13,9 @@ export default async function CreationMediaTabs({
   creationId,
   mediaType,
 }: MediaTabsProps) {
-  const { data: images } = await getCreationImages(creationId, mediaType).catch(
-    () => ({ data: null })
-  );
+  const [images, error] = await getCreationImages(creationId, mediaType);
+
+  if (error) return null;
 
   return (
     <section>

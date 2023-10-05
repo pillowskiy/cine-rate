@@ -1,8 +1,8 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { generateZodErrorsResponse } from '@libs/common/next';
-import { rejectAxios } from '@libs/axios';
-import { $api } from '@/app/_shared/api/api-interceptor';
+import { $api } from '@api/api-interceptor';
+import { rejectFetch } from '@libs/common/fetch';
 import { MediaType } from '@config/enums';
 import type { ToggleResponse } from '@app/types/creation-types';
 import zod from 'zod';
@@ -30,15 +30,18 @@ export async function POST(request: NextRequest) {
 
     const { creationId, favorite, mediaType } = result.data;
 
-    return $api.post<ToggleResponse>(`/3/account/account_id/favorite`, {
-        media_id: creationId,
-        media_type: mediaType,
-        favorite,
-    }, { params: { session_id: sessionId } })
-        .then(({ data }) => {
-            return NextResponse.json(data, { status: 200 })
-        })
-        .catch((err) => {
-            return NextResponse.json(rejectAxios(err));
-        });
+    const [data, error] = await $api.fetch<ToggleResponse>(`/3/account/account_id/favorite`, {
+        params: { session_id: sessionId },
+        body: JSON.stringify({
+            media_id: creationId,
+            media_type: mediaType,
+            favorite,
+        }),
+        method: 'POST',
+    });
+
+    if (error) {
+        return NextResponse.json(rejectFetch(error));
+    }
+    return NextResponse.json(data, { status: 201 })
 }

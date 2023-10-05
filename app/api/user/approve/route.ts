@@ -24,21 +24,25 @@ export async function GET({
     }
 
     try {
-        const { data } = await postSession(parsedToken.data);
-        const { data: user } = await getSessionUser(data.session_id);
+        // TEMP: use default fetch instead of safe fetch
+        const [session, error] = await postSession(parsedToken.data);
+        if (error) throw error;
+        const [user, userError] = await getSessionUser(session.session_id);
+        if (userError) throw userError;
         const response = NextResponse.json(
             user,
             { status: 200 }
         );
 
-        response.cookies.set('session_id', data.session_id, {
+        response.cookies.set('session_id', session.session_id, {
             httpOnly: true,
             sameSite: 'lax',
         });
 
         return response;
     } catch (err) {
-        if (!isAxiosError(err)) {
+        // TEMP
+        if (!(err instanceof Response)) {
             return NextResponse.json(
                 {
                     message: 'Unhandled error occurred!',
@@ -47,7 +51,7 @@ export async function GET({
             );
         }
 
-        if (err.response?.status === 401) {
+        if (err.status === 401) {
             return NextResponse.json(
                 {
                     message: 'The approval was denied.',
@@ -58,9 +62,9 @@ export async function GET({
 
         return NextResponse.json(
             {
-                message: err.message,
+                message: err.statusText,
             },
-            { status: err.response?.status }
+            { status: err.status }
         );
     }
 }

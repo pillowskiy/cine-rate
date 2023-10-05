@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { rejectAxios } from '@libs/axios';
 import { generateZodErrorsResponse } from '@libs/common/next';
 import { getDiscover } from '@actions/getDiscover';
+import { rejectFetch } from '@libs/common/fetch';
 import { MediaType, TVSort, MovieSort } from '@config/enums';
 import zod from 'zod';
 
@@ -41,11 +41,9 @@ export async function GET(request: NextRequest) {
   }
   const { mediaType, ...params } = result.data;
 
-  return getDiscover(mediaType, params)
-    .then(({ data }) => {
-      return NextResponse.json(data, { status: 200 });
-    })
-    .catch((err) => {
-      return NextResponse.json(rejectAxios(err));
-    });
+  const [data, error] = await getDiscover(mediaType, params);
+  if (error) {
+    return NextResponse.json(rejectFetch(error));
+  }
+  return NextResponse.json(data, { status: 200 });
 }

@@ -10,7 +10,7 @@ import {
 } from '@ui/dialog';
 import { ReviewCard } from '@components/card/review-card';
 import { NotFound } from '@components/not-found';
-import { getCreationReviews } from '@/app/_shared/actions/getCreationReviews';
+import { getCreationReviews } from '@actions/getCreationReviews';
 
 interface CreationReviewsDialog extends CreationIdentifierProps {
   children: ReactNode;
@@ -21,10 +21,10 @@ export async function CreationReviewsDialog({
   creationId,
   mediaType,
 }: CreationReviewsDialog) {
-  const { data: reviews } = await getCreationReviews(
+  const [data] = await getCreationReviews(
     creationId,
     mediaType
-  ).catch(() => ({ data: null }));
+  );
 
   return (
     <Dialog>
@@ -35,8 +35,8 @@ export async function CreationReviewsDialog({
           <DialogDescription>Feedback from our users.</DialogDescription>
         </DialogHeader>
         <div className='max-h-[90vh] min-h-[300px] space-y-4 overflow-y-auto px-6 sm:max-h-[600px] md:max-h-[400px]'>
-          {!!reviews?.results.length ? (
-            reviews.results.map((review) => (
+          {!!data?.results.length ? (
+            data.results.map((review) => (
               <ReviewCard key={review.id} review={review} />
             ))
           ) : (

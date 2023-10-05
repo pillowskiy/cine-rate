@@ -10,10 +10,12 @@ export default async function CreationCast({
   creationId,
   mediaType,
 }: CreationIdentifierProps) {
-  const { data: credits } = await getCreationCredits(
+  const [credits, error] = await getCreationCredits(
     creationId,
     mediaType
-  ).catch(() => ({ data: null }));
+  );
+
+  if (error) return null;
 
   return (
     <section>

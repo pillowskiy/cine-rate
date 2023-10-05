@@ -1,11 +1,10 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import type { RatingResponse } from '@app/types/creation-types';
 import type { INextPageParams } from '@app/types/index';
-import { MediaType } from '@config/enums';
 import { generateZodErrorsResponse } from '@libs/common/next';
-import { rejectAxios } from '@libs/axios';
 import { cookies } from 'next/headers';
-import { $api } from '@/app/_shared/api/api-interceptor';
+import { $api } from '@api/api-interceptor';
+import { rejectFetch } from '@libs/common/fetch';
 import zod from 'zod';
 import { paramsDto } from '../dto';
 
@@ -35,14 +34,18 @@ export async function POST(request: NextRequest, { params }: INextPageParams) {
 
     const { mediaType, creationId } = parsedParams.data;
 
-    return $api.post<RatingResponse>(`/3/${mediaType}/${creationId}/rating`, {
-        value: parsedBody.data.value,
-    }, { params: { session_id: sessionId } })
-        .then(({ data }) => {
-            return NextResponse.json(data, { status: 200 })
-        }).catch((err) => {
-            return NextResponse.json(rejectAxios(err));
-        });
+    const [data, error] = await $api.fetch<RatingResponse>(`/3/${mediaType}/${creationId}/rating`, {
+        method: 'POST',
+        body: JSON.stringify({
+            value: parsedBody.data.value,
+        }),
+        params: { session_id: sessionId }
+    });
+
+    if (error) {
+        return NextResponse.json(rejectFetch(error));
+    }
+    return NextResponse.json(data, { status: 200 });
 }
 
 export async function DELETE(_: NextRequest, { params }: INextPageParams) {
@@ -61,12 +64,13 @@ export async function DELETE(_: NextRequest, { params }: INextPageParams) {
 
     const { mediaType, creationId } = parsedParams.data;
 
-    return $api.delete<RatingResponse>(`/3/${mediaType}/${creationId}/rating`, {
+    const [data, error] = await $api.fetch<RatingResponse>(`/3/${mediaType}/${creationId}/rating`, {
+        method: 'DELETE',
         params: { sesson_id: sessionId }
     })
-        .then(({ data }) => {
-            return NextResponse.json(data, { status: 200 })
-        }).catch((err) => {
-            return NextResponse.json(rejectAxios(err));
-        });
+
+    if (error) {
+        return NextResponse.json(rejectFetch(error));
+    }
+    return NextResponse.json(data, { status: 200 });
 }

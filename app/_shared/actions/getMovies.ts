@@ -1,8 +1,8 @@
 import type { BaseParams } from '@app/types/index';
 import type { CreationsResponse } from '@app/types/creation-types';
-import { $api } from '../api/api-interceptor';
-import { MovieSort } from '@config/enums';
+import type { MovieSort } from '@config/enums';
+import { $api } from '@api/api-interceptor';
 
 export function getMovies(sort: MovieSort, params?: BaseParams) {
-  return $api.get<CreationsResponse>(`/3/movie/${sort}`, { params });
+  return $api.fetch<CreationsResponse>(`/3/movie/${sort}`, { params });
 }

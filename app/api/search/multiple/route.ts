@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { rejectAxios } from '@libs/axios';
 import { generateZodErrorsResponse } from '@libs/common/next';
+import { rejectFetch } from '@libs/common/fetch';
 import { getMultiSearch } from '@actions/getMultiSearch';
 import zod from 'zod';
 
@@ -8,7 +8,7 @@ const queryDto = zod.object({
   query: zod.string(),
 });
 
-export function GET(request: NextRequest) {
+export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const searchParams = Object.fromEntries(requestUrl.searchParams.entries());
   const result = queryDto.safeParse(searchParams);
@@ -17,11 +17,9 @@ export function GET(request: NextRequest) {
     return generateZodErrorsResponse(result);
   }
 
-  return getMultiSearch(result.data.query)
-    .then(({ data }) => {
-      return NextResponse.json(data, { status: 200 });
-    })
-    .catch((err) => {
-      return NextResponse.json(rejectAxios(err));
-    });
+  const [data, error] = await getMultiSearch(result.data.query);
+  if (error) {
+    return NextResponse.json(rejectFetch(error));
+  }
+  return NextResponse.json(data, { status: 200 });
 }

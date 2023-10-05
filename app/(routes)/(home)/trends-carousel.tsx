@@ -6,7 +6,9 @@ import { MSeparator } from '@ui/separator';
 import { NotFound } from '@components/not-found';
 
 export default async function TrendsCarousel() {
-  const { data: creations } = await getTrending().catch(() => ({ data: null }));
+  const [creations, error] = await getTrending();
+
+  if (error) return null;
 
   return (
     <section>
@@ -16,7 +18,7 @@ export default async function TrendsCarousel() {
         badges={['🔥 The hotest']}
       />
       <MSeparator className='my-4' />
-      {creations?.results.length ? (
+      {creations.results.length ? (
         <Carousel>
           {creations.results.map((creation, i) => (
             <CreationArticle

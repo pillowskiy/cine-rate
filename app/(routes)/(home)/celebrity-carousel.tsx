@@ -8,9 +8,9 @@ import { Heading } from '@components/heading';
 import Link from 'next/link';
 
 export default async function CelebrityCarousel() {
-  const { data: celebrities } = await getPopular(MediaType.Person).catch(
-    () => ({ data: null })
-  );
+  const [celebrities, error] = await getPopular(MediaType.Person);
+
+  if (error) return null;
 
   return (
     <section>
@@ -20,7 +20,7 @@ export default async function CelebrityCarousel() {
         badges={['👑 Iconic Idols']}
       />
       <MSeparator className='my-4' />
-      {celebrities?.results.length ? (
+      {celebrities.results.length ? (
         <Carousel>
           {celebrities.results.map((celebrity, i) => (
             <PersonArticle

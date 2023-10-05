@@ -1,7 +1,8 @@
 import type { MediaType, TVSort, MovieSort } from '@config/enums';
 import type { CreationsResponse } from '@app/types/creation-types';
+import type { BaseParams } from '@app/types/index';
 
-import { $api } from '../api/api-interceptor';
+import { $api } from '@api/api-interceptor';
 
 /*
  * Movie discover:
@@ -12,7 +13,7 @@ import { $api } from '../api/api-interceptor';
  *  Reference: https://developer.themoviedb.org/reference/discover-tv
  *  Docs: https://themoviedb.api-docs.io/3/discover/tv-discover
  */
-export interface GetDiscoverParams {
+export interface GetDiscoverParams extends BaseParams {
   region?: string;
 
   // use in conjunction with region
@@ -53,5 +54,5 @@ export function getDiscover<T extends MediaType>(
   mediaType: T,
   params?: GetDiscoverParams
 ) {
-  return $api.get<CreationsResponse>(`/3/discover/${mediaType}/`, { params });
+  return $api.fetch<CreationsResponse>(`/3/discover/${mediaType}/`, { params });
 }

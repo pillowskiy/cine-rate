@@ -1,16 +1,15 @@
 import type { AccountStatesResponse } from "@app/types/creation-types";
-import { MediaType } from "@config/enums";
-import { rejectAxios } from "@libs/axios";
 import { generateZodErrorsResponse } from "@libs/common/next";
 import { INextPageParams } from "@/app/_types";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { $api } from "@/app/_shared/api/api-interceptor";
+import { $api } from "@api/api-interceptor";
+import { rejectFetch } from "@libs/common/fetch";
 
 import { paramsDto } from "../dto";
 import zod from 'zod';
 
-export function GET(_: unknown, { params }: INextPageParams) {
+export async function GET(_: unknown, { params }: INextPageParams) {
     const sessionCookie = cookies().get('session_id')?.value;
     const parsedSessionId = zod.string().safeParse(sessionCookie);
 
@@ -27,10 +26,9 @@ export function GET(_: unknown, { params }: INextPageParams) {
 
     const { creationId, mediaType } = parsedParams.data
 
-    return $api.get<AccountStatesResponse>(`/3/${mediaType}/${creationId}/account_states`)
-        .then(({ data }) => {
-            return NextResponse.json(data, { status: 200 });
-        }).catch((err) => {
-            return NextResponse.json(rejectAxios(err));
-        });
+    const [data, error] = await $api.fetch<AccountStatesResponse>(`/3/${mediaType}/${creationId}/account_states`);
+    if (error) {
+        return NextResponse.json(rejectFetch(error));
+    }
+    return NextResponse.json(data, { status: 200 });
 }

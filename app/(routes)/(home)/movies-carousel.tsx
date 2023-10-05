@@ -16,11 +16,9 @@ const emojis: Record<MovieSort, string> = {
 };
 
 async function CreationCarousel({ sort }: { sort: MovieSort }) {
-  const { data } = await getMovies(sort).catch(() => ({
-    data: null,
-  }));
+  const [data, error] = await getMovies(sort);
 
-  if (!data) return;
+  if (error) return null;
 
   return (
     <Carousel>

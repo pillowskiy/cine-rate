@@ -16,11 +16,9 @@ const emojis: Record<TVSort, string> = {
 };
 
 async function CreationCarousel({ sort }: { sort: TVSort }) {
-  const { data } = await getTV(sort).catch(() => ({
-    data: null,
-  }));
+  const [data, error] = await getTV(sort);
 
-  if (!data) return;
+  if (error) return;
 
   return (
     <Carousel>

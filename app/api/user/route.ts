@@ -1,3 +1,4 @@
+import { rejectFetch } from "@/app/_libs/common/fetch";
 import { getSessionUser } from "@actions/getSessionUser";
 import { isAxiosError } from "axios";
 import { cookies } from "next/headers";
@@ -13,24 +14,10 @@ export async function GET() {
         }, { status: 403 })
     }
 
-    return getSessionUser(sessionId)
-        .then(({ data: user }) => {
-            return NextResponse.json(user, { status: 200 });
-        }).catch((err) => {
-            if (!isAxiosError(err)) {
-                return NextResponse.json(
-                    {
-                        message: 'Unhandled error occurred!',
-                    },
-                    { status: 500 }
-                );
-            }
+    const [user, error] = await getSessionUser(sessionId);
 
-            return NextResponse.json(
-                {
-                    message: err.message,
-                },
-                { status: err.response?.status }
-            );
-        })
+    if (error) {
+        return NextResponse.json(rejectFetch(error))
+    }
+    return NextResponse.json(user, { status: 200 });
 }

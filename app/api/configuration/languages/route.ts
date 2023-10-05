@@ -1,13 +1,11 @@
 import { NextResponse } from "next/server";
 import { getLanguages } from "@actions/getLanguages";
-import { rejectAxios } from "@libs/axios";
+import { rejectFetch } from "@libs/common/fetch";
 
 export async function GET() {
-    return getLanguages()
-        .then(({ data }) => {
-            return NextResponse.json(data, { status: 200 });
-        })
-        .catch((err) => {
-            return NextResponse.json(rejectAxios(err));
-        });
+    const [data, error] = await getLanguages();
+    if (error) {
+        return NextResponse.json(rejectFetch(error));
+    }
+    return NextResponse.json(data, { status: 200 });
 }

@@ -11,10 +11,10 @@ const MAX_FRAGMENTS = 2;
 export default async function PersonBiography({
   personId,
 }: PersonBiographyProps) {
-  const { data } = await getPersonTranslations(personId);
+  const [data, error] = await getPersonTranslations(personId);
 
   // TEMP
-  if (!data?.translations.length) return null;
+  if (error || !data?.translations.length) return null;
 
   const [translation] = data.translations;
   const fragmentedBio = translation.data.biography.split('\n').filter(Boolean);
