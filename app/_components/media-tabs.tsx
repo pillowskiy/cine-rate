@@ -10,6 +10,18 @@ interface MediaTabsProps {
   images: CreationImagesResponse | null;
 }
 
+function OpenOriginalImage({ path }: { path: string }) {
+  return (
+    <Link
+      className='text-xs text-foreground/50 transition-all hover:text-foreground hover:underline'
+      href={TMDB_IMAGE_URL + 'original' + path}
+      target='_blank'
+    >
+      Open original
+    </Link>
+  );
+}
+
 export function MediaTabs({ images }: MediaTabsProps) {
   const isEmpty = !images?.backdrops.length && !images?.posters.length;
 
@@ -30,7 +42,7 @@ export function MediaTabs({ images }: MediaTabsProps) {
         <TabsContent value='backdrops'>
           <Carousel>
             {images.backdrops.slice(0, 20).map((image, index) => (
-              <div className='relative' key={image.file_path}>
+              <div key={image.file_path}>
                 <div className='aspect-[16/9] h-[150px] overflow-hidden rounded-md lg:h-[300px]'>
                   <ImageFromPath
                     className='h-full w-auto object-cover'
@@ -43,13 +55,7 @@ export function MediaTabs({ images }: MediaTabsProps) {
                     height={480}
                   />
                 </div>
-                <Link
-                  className='absolute bottom-2 left-2 text-xs text-foreground/70 transition-all hover:text-foreground hover:underline'
-                  href={TMDB_IMAGE_URL + 'original' + image.file_path}
-                  target='_blank'
-                >
-                  Open original (high resolution)
-                </Link>
+                <OpenOriginalImage path={image.file_path} />
               </div>
             ))}
           </Carousel>
@@ -57,20 +63,23 @@ export function MediaTabs({ images }: MediaTabsProps) {
         <TabsContent value='posters'>
           <Carousel>
             {images.posters.slice(0, 20).map((image, index) => (
-              <div
-                className='aspect-[2/3] h-[150px] overflow-hidden rounded-md md:h-[300px]'
-                key={image.file_path}
-              >
-                <ImageFromPath
-                  className='h-full w-auto object-cover'
-                  src={buildImagePath({
-                    path: image.file_path,
-                    scale: 'poster',
-                  })}
-                  alt={`Image #${index}`}
-                  width={260}
-                  height={390}
-                />
+              <div key={image.file_path}>
+                <div
+                  className='aspect-[2/3] h-[150px] overflow-hidden rounded-md md:h-[300px]'
+                  key={image.file_path}
+                >
+                  <ImageFromPath
+                    className='h-full w-auto object-cover'
+                    src={buildImagePath({
+                      path: image.file_path,
+                      scale: 'poster',
+                    })}
+                    alt={`Image #${index}`}
+                    width={260}
+                    height={390}
+                  />
+                </div>
+                <OpenOriginalImage path={image.file_path} />
               </div>
             ))}
           </Carousel>

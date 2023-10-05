@@ -37,7 +37,7 @@ export function CreationGenres({
           legacyBehavior
         >
           <Button
-            className='h-full border-white/70 bg-transparent px-2 text-xs text-white/70 truncate'
+            className='h-full bg-transparent px-2 text-xs truncate'
             variant='outline'
           >
             {genre.name}

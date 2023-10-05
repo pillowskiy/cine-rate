@@ -20,6 +20,11 @@ function getMultipleSearch(query: string) {
   });
 }
 
+interface SearchDialogContentProps {
+  isLoading: boolean;
+  data: Record<MediaType, MultiSearchResponse['results']> | null;
+}
+
 // TEMP: The principle of single responsibility
 export function SearchDialog() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -58,19 +63,19 @@ export function SearchDialog() {
           variant='outline'
           onClick={() => setIsDialogOpen(true)}
           className={cn(
-            'relative justify-start text-sm sm:text-muted-foreground sm:pr-12 md:w-40 lg:w-64',
-            'p-2 aspect-square'
+            'relative justify-start text-sm sm:pr-12 sm:text-muted-foreground md:w-40 lg:w-64',
+            'aspect-square px-4 py-2'
           )}
         >
           <span className='hidden lg:inline-flex'>
             Search for a creation...
           </span>
           <span className='hidden sm:inline-flex lg:hidden'>Search...</span>
-          <Search className='w-5 h-5 inline-flex sm:hidden' />
+          <Search className='inline-flex h-5 w-5 sm:hidden' />
         </Button>
       </DialogTrigger>
       <DialogContent className='gap-0 p-0'>
-        <div className='mt-1 flex w-full items-center justify-between gap-2 border-b px-2 pb-1'>
+        <div className='mt-1 flex w-full items-center justify-between gap-2 border-b px-2 pb-1 z-10'>
           <Search className='h-4 w-4 text-foreground/70' />
           <input
             onChange={({ target }) => setQuery(target.value.toLowerCase())}
@@ -83,12 +88,12 @@ export function SearchDialog() {
         </div>
         <div className='relative h-[600px] space-y-4 overflow-y-auto px-2 sm:max-h-[400px] sm:min-h-[400px]'>
           {isLoading && (
-            <div className='absolute left-0 top-0 grid h-full w-full place-items-center bg-background'>
+            <div className='fixed inset-0 grid h-full w-full place-items-center bg-background rounded-md'>
               <Loader className='m-auto h-16 w-16 animate-spin' />
             </div>
           )}
 
-          {!!data?.person && (
+          {!isLoading && !!data?.person && (
             <div>
               <span className='px-2 text-sm font-semibold text-foreground/70'>
                 Most Popular Celebrities
@@ -96,7 +101,7 @@ export function SearchDialog() {
               <Carousel className='space-x-0'>
                 {data.person
                   .sort((a, b) => b.popularity - a.popularity)
-                  .map((person, i) => {
+                  .map((person) => {
                     if (!('known_for' in person)) return null;
 
                     return (
@@ -111,7 +116,6 @@ export function SearchDialog() {
                           className='flex cursor-pointer gap-2 rounded-md p-2 transition-all hover:bg-accent'
                         >
                           <PersonArticle
-                            custom={i}
                             className='w-[120px] min-w-[120px]'
                             celebrity={person}
                           />
@@ -123,7 +127,7 @@ export function SearchDialog() {
             </div>
           )}
 
-          {!!data?.movie && (
+          {!isLoading && !!data?.movie && (
             <div>
               <span className='px-2 text-sm font-semibold text-foreground/70'>
                 Most Popular Movies
@@ -131,7 +135,7 @@ export function SearchDialog() {
               {data.movie
                 .sort((a, b) => b.popularity - a.popularity)
                 .slice(0, 3)
-                .map((movie, i) => {
+                .map((movie) => {
                   if ('known_for' in movie) return null;
                   return (
                     <Link
@@ -153,7 +157,7 @@ export function SearchDialog() {
             </div>
           )}
 
-          {!!data?.tv && (
+          {!isLoading && !!data?.tv && (
             <div>
               <span className='px-2 text-sm font-semibold text-foreground/70'>
                 Most Popular Series and Shows
@@ -161,7 +165,7 @@ export function SearchDialog() {
               {data.tv
                 .sort((a, b) => b.popularity - a.popularity)
                 .slice(0, 3)
-                .map((tv, i) => {
+                .map((tv) => {
                   if ('known_for' in tv) return null;
                   return (
                     <Link
