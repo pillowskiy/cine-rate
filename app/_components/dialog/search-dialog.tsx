@@ -3,48 +3,42 @@
 import { cn, groupBy } from '@libs/index';
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@ui/dialog';
 import { Button } from '@ui/button';
-import { Loader, Search, Star, X } from 'lucide-react';
+import { Loader, Search, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import type { MultiSearchResponse } from '@app/types/search-types';
-import { MediaType } from '@config/enums';
+import type { MediaType } from '@config/enums';
 import Link from 'next/link';
 import { Carousel } from '../carousel';
 import { PersonArticle } from '../article/person-article';
 import { useDebounce } from '@hooks/useDebounce';
 import { HorizontalCreationArticle } from '../article/creation-article';
+import { fetch } from '@libs/common/fetch';
 
 function getMultipleSearch(query: string) {
-  return axios.get<MultiSearchResponse>('/api/search/multiple', {
+  return fetch<MultiSearchResponse>('/api/search/multiple', {
     params: { query },
   });
 }
 
-interface SearchDialogContentProps {
-  isLoading: boolean;
-  data: Record<MediaType, MultiSearchResponse['results']> | null;
-}
+type SearchedData = Record<MediaType, MultiSearchResponse['results']> | null;
 
 // TEMP: The principle of single responsibility
 export function SearchDialog() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  const [data, setData] = useState<Record<
-    MediaType,
-    MultiSearchResponse['results']
-  > | null>(null);
+  const [data, setData] = useState<SearchedData | null>(null);
 
   const [query, setQuery] = useState('');
   const debounceQuery = useDebounce(query);
 
   useEffect(() => {
+    if (!debounceQuery) return setData(null);
     setIsLoading(true);
     getMultipleSearch(debounceQuery)
-      .then(({ data }) => {
+      .then((data) => {
         setData(groupBy(data.results, 'media_type'));
       })
-      .catch(() => {
+      .catch((err) => {
         setData(null);
       })
       .finally(() => setIsLoading(false));
@@ -63,19 +57,18 @@ export function SearchDialog() {
           variant='outline'
           onClick={() => setIsDialogOpen(true)}
           className={cn(
-            'relative justify-start text-sm sm:pr-12 sm:text-muted-foreground md:w-40 lg:w-64',
-            'aspect-square px-4 py-2'
+            'justify-start text-sm sm:w-[260px] sm:text-muted-foreground',
+            'aspect-square p-0 sm:px-4 sm:py-4 sm:pr-12'
           )}
         >
-          <span className='hidden lg:inline-flex'>
+          <span className='hidden sm:inline-flex'>
             Search for a creation...
           </span>
-          <span className='hidden sm:inline-flex lg:hidden'>Search...</span>
-          <Search className='inline-flex h-5 w-5 sm:hidden' />
+          <Search className='m-auto h-5 w-5 sm:hidden' />
         </Button>
       </DialogTrigger>
-      <DialogContent className='gap-0 p-0'>
-        <div className='mt-1 flex w-full items-center justify-between gap-2 border-b px-2 pb-1 z-10'>
+      <DialogContent className='gap-0 rounded-md p-0'>
+        <div className='z-10 mt-1 flex w-full items-center justify-between gap-2 border-b px-2 pb-1'>
           <Search className='h-4 w-4 text-foreground/70' />
           <input
             onChange={({ target }) => setQuery(target.value.toLowerCase())}
@@ -86,9 +79,9 @@ export function SearchDialog() {
             <X className='h-4 w-4 text-foreground/70 opacity-0' />
           </DialogClose>
         </div>
-        <div className='relative h-[600px] space-y-4 overflow-y-auto px-2 sm:max-h-[400px] sm:min-h-[400px]'>
+        <div className='relative h-[600px] space-y-4 overflow-y-auto p-2 sm:max-h-[400px] sm:min-h-[400px]'>
           {isLoading && (
-            <div className='fixed inset-0 grid h-full w-full place-items-center bg-background rounded-md'>
+            <div className='fixed inset-0 grid h-full w-full place-items-center rounded-md bg-background'>
               <Loader className='m-auto h-16 w-16 animate-spin' />
             </div>
           )}

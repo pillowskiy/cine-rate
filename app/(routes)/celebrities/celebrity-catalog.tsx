@@ -4,11 +4,11 @@ import { type ComponentProps, useEffect, useState } from 'react';
 import type { IPagination } from '@app/types/index';
 import type { CelebritiesResponse } from '@app/types/person-types';
 import { PersonArticle } from '@components/article/person-article';
-import { CatalogSkeletonGroup } from '@/app/_components/skeleton/catalog-skeleton-group';
+import { CatalogSkeletonGroup } from '@components/skeleton/catalog-skeleton-group';
 import { initialPagination } from '@config/pagination';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import { cn } from '@libs/index';
-import axios from 'axios';
+import { fetch } from '@libs/common/fetch';
 
 type Celebrities = CelebritiesResponse['results'];
 
@@ -22,21 +22,20 @@ export function CelebrityCatalog({
   const [{ currentPage }, setPagination] =
     useState<IPagination>(initialPagination);
 
-  const fetch = async () => {
+  const getData = async () => {
     const params = {
       page: currentPage + 1,
     };
-    return axios
-      .get<CelebritiesResponse>('api/celebrities', { params })
-      .then(({ data }) => {
+    return fetch<CelebritiesResponse>('api/celebrities', { params })
+      .then((data) => {
         setItems((prev) => [...(prev || []), ...data.results]);
         setPagination((prev) => ({ ...prev, currentPage: data.page }));
       })
       .catch(() => setItems(null));
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => void fetch(), []);
-  const { canScroll } = useInfiniteScroll(fetch, currentPage);
+  useEffect(() => void getData(), []);
+  const { canScroll } = useInfiniteScroll(getData, currentPage);
 
   function handleItems() {
     if (!items) return <CatalogSkeletonGroup itemsCount={20} />;
