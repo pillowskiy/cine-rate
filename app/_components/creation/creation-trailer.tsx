@@ -7,7 +7,6 @@ import { Bot, Loader2, Play, Volume2, Youtube } from 'lucide-react';
 import { cn } from '@libs/index';
 import useFetch from '@hooks/useFetch';
 import useOnScreen from '@hooks/useOnScreen';
-import Link from 'next/link';
 
 interface CreationTrailerProps {
   mediaType: MediaType;
@@ -101,7 +100,8 @@ export function CreationTrailer({
         <div className='flex flex-col items-center justify-center space-y-1 p-6'>
           <Bot className='h-[64px] w-[64px] animate-pulse shadow-yellow-500 ' />
           <span className='text-sm text-foreground/70'>
-            {error?.response?.data.message || 'O-ops! Something went wrong..'}
+            {/* TEMP */}
+            {error?.statusText || 'O-ops! Something went wrong..'}
           </span>
         </div>
       </div>

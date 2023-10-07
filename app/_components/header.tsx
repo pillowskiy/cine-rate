@@ -22,7 +22,7 @@ export default function Header() {
         ) : (
           <DesktopNav />
         )}
-        <section className='flex w-full space-x-2 sm:w-max justify-end'>
+        <section className='flex w-full space-x-2 md:w-max justify-end'>
           <SearchDialog />
           { !isMobileView && <ToggleTheme /> }
           <AuthButton />

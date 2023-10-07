@@ -71,7 +71,7 @@ export function BaseArticleFigure({
     <figure className='relative overflow-hidden rounded-md'>
       <div
         className={cn(
-          'w-full',
+          'w-full h-auto',
           aspect === 'vertical' ? 'aspect-[2/3]' : 'aspect-[16/9]',
           className
         )}
