@@ -10,19 +10,15 @@ interface CreationCollectionProps {
 
 async function getCollection(collectionId: number) {
   return $api
-    .get<CollectionDetailsResponse>(`/3/collection/${collectionId}`)
-    .catch((e) => {
-      console.log(e.response);
-      return { data: null };
-    });
+    .safeFetch<CollectionDetailsResponse>(`/3/collection/${collectionId}`);
 }
 
 export default async function CreationCollection({
   collectionId,
 }: CreationCollectionProps) {
-  const { data: collection } = await getCollection(collectionId);
+  const [collection, error] = await getCollection(collectionId);
 
-  if (!collection) return null;
+  if (error) return null;
 
   return (
     <section>

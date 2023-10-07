@@ -6,6 +6,7 @@ import { pipe } from '@libs/common/next';
 import EpisodeFilter from './episode-filter';
 import EpisodeList from './episode-list';
 import EpisodeHeader from './episode-header';
+import { notFound } from 'next/navigation';
 
 export default async function EpisodesPage({
   params,
@@ -14,10 +15,10 @@ export default async function EpisodesPage({
   const seriesId = pipe.strToInt(params?.id);
   const seasonNumber = parseInt(searchParams?.season || '1');
   const sort = searchParams?.sort;
-  const { data: series } = await getCreationDetails(seriesId, MediaType.TV);
 
-  // TEMP
-  if (!series) return null;
+  const [series, error] = await getCreationDetails(seriesId, MediaType.TV);
+
+  if (error) return notFound();
 
   return (
     <main className='min-h-screen w-full space-y-6'>

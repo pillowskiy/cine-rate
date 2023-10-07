@@ -8,7 +8,7 @@ export async function getPopular<T extends MediaType>(
   mediaType: T,
   params?: BaseParams
 ) {
-  return $api.fetch<
+  return $api.safeFetch<
     T extends MediaType.Person ? CelebritiesResponse : CreationsResponse
   >(`/3/${mediaType}/popular`, { params });
 }

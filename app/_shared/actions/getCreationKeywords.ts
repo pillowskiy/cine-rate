@@ -8,7 +8,7 @@ export function getCreationKeywords(
   mediaType: MediaType,
   params?: BaseParams
 ) {
-  return $api.fetch<CreationKeywordsResponse>(
+  return $api.safeFetch<CreationKeywordsResponse>(
     `/3/${mediaType}/${creationId}/keywords`,
     {
       params,

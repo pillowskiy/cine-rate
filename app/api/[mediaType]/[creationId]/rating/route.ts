@@ -4,7 +4,7 @@ import type { INextPageParams } from '@app/types/index';
 import { generateZodErrorsResponse } from '@libs/common/next';
 import { cookies } from 'next/headers';
 import { $api } from '@api/api-interceptor';
-import { rejectFetch } from '@libs/common/fetch';
+import { fetchErrorResponse } from '@libs/common/fetch';
 import zod from 'zod';
 import { paramsDto } from '../dto';
 
@@ -34,18 +34,15 @@ export async function POST(request: NextRequest, { params }: INextPageParams) {
 
     const { mediaType, creationId } = parsedParams.data;
 
-    const [data, error] = await $api.fetch<RatingResponse>(`/3/${mediaType}/${creationId}/rating`, {
+    return $api.fetch<RatingResponse>(`/3/${mediaType}/${creationId}/rating`, {
         method: 'POST',
-        body: JSON.stringify({
-            value: parsedBody.data.value,
-        }),
+        body: JSON.stringify(parsedBody.data),
         params: { session_id: sessionId }
+    }).then((data) => {
+        return NextResponse.json(data, { status: 200 });
+    }).catch((error) => {
+        return fetchErrorResponse(error);
     });
-
-    if (error) {
-        return NextResponse.json(rejectFetch(error));
-    }
-    return NextResponse.json(data, { status: 200 });
 }
 
 export async function DELETE(_: NextRequest, { params }: INextPageParams) {
@@ -64,13 +61,13 @@ export async function DELETE(_: NextRequest, { params }: INextPageParams) {
 
     const { mediaType, creationId } = parsedParams.data;
 
-    const [data, error] = await $api.fetch<RatingResponse>(`/3/${mediaType}/${creationId}/rating`, {
+    const [data, error] = await $api.safeFetch<RatingResponse>(`/3/${mediaType}/${creationId}/rating`, {
         method: 'DELETE',
         params: { sesson_id: sessionId }
     })
 
     if (error) {
-        return NextResponse.json(rejectFetch(error));
+        return fetchErrorResponse(error);
     }
     return NextResponse.json(data, { status: 200 });
 }

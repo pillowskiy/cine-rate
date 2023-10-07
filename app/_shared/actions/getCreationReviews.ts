@@ -8,7 +8,7 @@ export function getCreationReviews(
   mediaType: MediaType,
   params?: BaseParams
 ) {
-  return $api.fetch<ReviewResponse>(`/3/${mediaType}/${creationId}/reviews`, {
+  return $api.safeFetch<ReviewResponse>(`/3/${mediaType}/${creationId}/reviews`, {
     params,
   });
 }

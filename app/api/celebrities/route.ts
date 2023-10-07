@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { MediaType } from '@config/enums';
 import { getPopular } from '@actions/getPopular';
-import { rejectFetch } from '@libs/common/fetch';
+import { fetchErrorResponse } from '@libs/common/fetch';
 import { generateZodErrorsResponse } from '@libs/common/next';
 import zod from 'zod';
 
@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
   });
 
   if(error) {
-    return NextResponse.json(rejectFetch(error));
+    return fetchErrorResponse(error);
   }
   return NextResponse.json(data, { status: 200 });
 }

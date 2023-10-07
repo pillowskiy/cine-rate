@@ -8,7 +8,7 @@ export const getCreationCredits = (
   mediaType: MediaType,
   params?: BaseParams
 ) => {
-  return $api.fetch<CreditsResponse>(`/3/${mediaType}/${creationId}/credits`, {
+  return $api.safeFetch<CreditsResponse>(`/3/${mediaType}/${creationId}/credits`, {
     params,
   });
 };

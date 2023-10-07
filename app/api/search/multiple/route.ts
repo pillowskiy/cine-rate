@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { generateZodErrorsResponse } from '@libs/common/next';
-import { rejectFetch } from '@libs/common/fetch';
+import { fetchErrorResponse } from '@libs/common/fetch';
 import { getMultiSearch } from '@actions/getMultiSearch';
 import zod from 'zod';
 
@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
 
   const [data, error] = await getMultiSearch(result.data.query);
   if (error) {
-    return NextResponse.json(rejectFetch(error));
+    return fetchErrorResponse(error);
   }
   return NextResponse.json(data, { status: 200 });
 }

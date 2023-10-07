@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { generateZodErrorsResponse } from '@libs/common/next';
 import { getDiscover } from '@actions/getDiscover';
-import { rejectFetch } from '@libs/common/fetch';
+import { fetchErrorResponse } from '@libs/common/fetch';
 import { MediaType, TVSort, MovieSort } from '@config/enums';
 import zod from 'zod';
 
@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
 
   const [data, error] = await getDiscover(mediaType, params);
   if (error) {
-    return NextResponse.json(rejectFetch(error));
+    return fetchErrorResponse(error);
   }
   return NextResponse.json(data, { status: 200 });
 }

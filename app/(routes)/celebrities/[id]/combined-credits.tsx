@@ -1,18 +1,14 @@
 import type { CombinedCreditsResponse } from '@app/types/person-types';
-import type { BaseParams } from '@app/types/index';
 import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
 import { MSeparator } from '@ui/separator';
-import { $api } from '@/app/_shared/api/api-interceptor';
+import { $api } from '@api/api-interceptor';
 import { MediaType } from '@config/enums';
-import { NotFound } from '@/app/_components/not-found';
+import { NotFound } from '@components/not-found';
 
-export function getCombinedCredits(personId: number, params?: BaseParams) {
-  return $api.get<CombinedCreditsResponse>(
-    `/3/${MediaType.Person}/${personId}/combined_credits`,
-    {
-      params,
-    }
+export function getCombinedCredits(personId: number) {
+  return $api.safeFetch<CombinedCreditsResponse>(
+    `/3/${MediaType.Person}/${personId}/combined_credits`
   );
 }
 
@@ -23,11 +19,9 @@ interface CombinedCreditsProps {
 export default async function CombinedCredits({
   personId,
 }: CombinedCreditsProps) {
-  const { data: credits } = await getCombinedCredits(personId).catch(() => ({
-    data: null,
-  }));
+  const [credits, error] = await getCombinedCredits(personId);
 
-  if (!credits) return null;
+  if (error) return null;
 
   return (
     <section>

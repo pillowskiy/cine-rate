@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { generateZodErrorsResponse } from "@libs/common/next";
 import { getGenres } from "@actions/getGenres";
-import { rejectFetch } from "@libs/common/fetch";
+import { fetchErrorResponse } from "@libs/common/fetch";
 import { MediaType } from "@config/enums";
 import zod from 'zod';
 
@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
     const { mediaType, ...params } = result.data;
     const [genres, error] = await getGenres(mediaType, params);
     if (error) {
-        return NextResponse.json(rejectFetch(error));
+        return fetchErrorResponse(error);
     }
     return NextResponse.json(genres, { status: 200 });
 }

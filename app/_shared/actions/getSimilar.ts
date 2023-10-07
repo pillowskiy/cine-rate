@@ -13,7 +13,7 @@ export const getSimilar = (
   mediaType: MediaType,
   params?: GetSimilarOptions
 ) => {
-  return $api.fetch<CreationsResponse>(`/3/${mediaType}/${movieId}/similar`, {
+  return $api.safeFetch<CreationsResponse>(`/3/${mediaType}/${movieId}/similar`, {
     params,
   });
 };

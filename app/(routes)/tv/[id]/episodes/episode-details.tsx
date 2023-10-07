@@ -20,7 +20,7 @@ export function getEpisodeDetails(
   episodeNumber: number,
   params?: BaseParams
 ) {
-  return $api.fetch<IEpisodeDetails>(
+  return $api.safeFetch<IEpisodeDetails>(
     `/3/tv/${seriesId}` +
       `/season/${seasonNumber}` +
       `/episode/${episodeNumber}`,
@@ -38,13 +38,13 @@ export async function EpisodeDetails({
   seriesId,
 }: EpisodeDetailsProps) {
   const { season_number, episode_number } = episode;
-  const [details] = await getEpisodeDetails(
+  const [details, error] = await getEpisodeDetails(
     seriesId,
     season_number,
     episode_number
   );
 
-  if (!details) return null;
+  if (error) return null;
 
   return (
     <Accordion type='single' collapsible className='w-full'>

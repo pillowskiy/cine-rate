@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { generateZodErrorsResponse } from '@libs/common/next';
 import { $api } from '@api/api-interceptor';
-import { rejectFetch } from '@libs/common/fetch';
+import { fetchErrorResponse } from '@libs/common/fetch';
 import { MediaType } from '@config/enums';
 import type { ToggleResponse } from '@app/types/creation-types';
 import zod from 'zod';
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
 
     const { creationId, favorite, mediaType } = result.data;
 
-    const [data, error] = await $api.fetch<ToggleResponse>(`/3/account/account_id/favorite`, {
+    const [data, error] = await $api.safeFetch<ToggleResponse>(`/3/account/account_id/favorite`, {
         params: { session_id: sessionId },
         body: JSON.stringify({
             media_id: creationId,
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (error) {
-        return NextResponse.json(rejectFetch(error));
+        return fetchErrorResponse(error);
     }
     return NextResponse.json(data, { status: 201 })
 }

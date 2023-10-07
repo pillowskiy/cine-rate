@@ -3,7 +3,7 @@ import type { ToggleResponse } from '@app/types/creation-types';
 import { generateZodErrorsResponse } from '@libs/common/next';
 import { cookies } from 'next/headers';
 import { $api } from '@api/api-interceptor';
-import { rejectFetch } from '@libs/common/fetch';
+import { fetchErrorResponse } from '@libs/common/fetch';
 import { MediaType } from '@config/enums';
 import zod from 'zod';
 
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
 
     const { creationId, watchlist, mediaType } = result.data;
 
-    const [data, error] = await $api.fetch<ToggleResponse>(`/3/account/account_id/watchlist`, {
+    const [data, error] = await $api.safeFetch<ToggleResponse>(`/3/account/account_id/watchlist`, {
         body: JSON.stringify({
             media_id: creationId,
             media_type: mediaType,
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (error) {
-        return NextResponse.json(rejectFetch(error))
+        return fetchErrorResponse(error);
     }
     return NextResponse.json(data, { status: 201 })
 }

@@ -4,5 +4,5 @@ import type { MovieSort } from '@config/enums';
 import { $api } from '@api/api-interceptor';
 
 export function getMovies(sort: MovieSort, params?: BaseParams) {
-  return $api.fetch<CreationsResponse>(`/3/movie/${sort}`, { params });
+  return $api.safeFetch<CreationsResponse>(`/3/movie/${sort}`, { params });
 }

@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { postSession } from '@actions/postSession';
-import { isAxiosError } from 'axios';
 import { getSessionUser } from '@actions/getSessionUser';
 import zod from 'zod';
+import { fetchErrorResponse } from '@libs/common/fetch';
 
 /*
  * https://github.com/vercel/next.js/issues/52799#issuecomment-1645124081
@@ -24,11 +24,8 @@ export async function GET({
     }
 
     try {
-        // TEMP: use default fetch instead of safe fetch
-        const [session, error] = await postSession(parsedToken.data);
-        if (error) throw error;
-        const [user, userError] = await getSessionUser(session.session_id);
-        if (userError) throw userError;
+        const session = await postSession(parsedToken.data);
+        const user = await getSessionUser(session.session_id);
         const response = NextResponse.json(
             user,
             { status: 200 }
@@ -42,29 +39,6 @@ export async function GET({
         return response;
     } catch (err) {
         // TEMP
-        if (!(err instanceof Response)) {
-            return NextResponse.json(
-                {
-                    message: 'Unhandled error occurred!',
-                },
-                { status: 500 }
-            );
-        }
-
-        if (err.status === 401) {
-            return NextResponse.json(
-                {
-                    message: 'The approval was denied.',
-                },
-                { status: 401 }
-            );
-        }
-
-        return NextResponse.json(
-            {
-                message: err.statusText,
-            },
-            { status: err.status }
-        );
+        return fetchErrorResponse(err);
     }
 }

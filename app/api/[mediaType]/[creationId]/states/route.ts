@@ -4,7 +4,7 @@ import { INextPageParams } from "@/app/_types";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { $api } from "@api/api-interceptor";
-import { rejectFetch } from "@libs/common/fetch";
+import { fetchErrorResponse } from "@libs/common/fetch";
 
 import { paramsDto } from "../dto";
 import zod from 'zod';
@@ -26,9 +26,9 @@ export async function GET(_: unknown, { params }: INextPageParams) {
 
     const { creationId, mediaType } = parsedParams.data
 
-    const [data, error] = await $api.fetch<AccountStatesResponse>(`/3/${mediaType}/${creationId}/account_states`);
+    const [data, error] = await $api.safeFetch<AccountStatesResponse>(`/3/${mediaType}/${creationId}/account_states`);
     if (error) {
-        return NextResponse.json(rejectFetch(error));
+        return fetchErrorResponse(error);
     }
     return NextResponse.json(data, { status: 200 });
 }

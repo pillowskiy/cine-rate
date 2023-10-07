@@ -1,21 +1,22 @@
-import { pipe } from '@libs/common/next';
 import type { INextPageParams, BaseParams } from '@app/types/index';
 import type { SeasonDetailsResponse } from '@app/types/tv-types';
 import { MediaType } from '@config/enums';
-import { $api } from '@/app/_shared/api/api-interceptor';
 import { Star } from 'lucide-react';
 import {
   BaseArticle,
   BaseArticleFigure,
-} from '@/app/_components/article/base-article';
-import { buildImagePath } from '@/app/_libs/tmdb';
+} from '@components/article/base-article';
+import { pipe } from '@libs/common/next';
+import { buildImagePath } from '@libs/tmdb';
+import { $api } from '@api/api-interceptor';
+import { notFound } from 'next/navigation';
 
 async function getSeasonDetails(
   seriesId: number,
   seasonNumber: number,
   params?: BaseParams
 ) {
-  return $api.get<SeasonDetailsResponse>(
+  return $api.safeFetch<SeasonDetailsResponse>(
     `/3/${MediaType.TV}/${seriesId}/season/${seasonNumber}`,
     { params }
   );
@@ -24,7 +25,9 @@ async function getSeasonDetails(
 export default async function SeasonPage({ params }: INextPageParams) {
   const seriesId = pipe.strToInt(params?.id);
   const seasonNumber = pipe.strToInt(params?.seasonNumber);
-  const { data: season } = await getSeasonDetails(seriesId, seasonNumber);
+  const [season] = await getSeasonDetails(seriesId, seasonNumber);
+
+  if (!season) return notFound();
 
   return (
     <main className='min-h-screen w-full space-y-6'>

@@ -16,9 +16,7 @@ export async function GET({ url }: NextRequest) {
     if (cookies().get('session_id')) {
       throw new Error('You are already authorized');
     }
-    const [data, error] = await getRequestToken();
-    // TEMP
-    if (error) throw error;
+    const data = await getRequestToken();
     return NextResponse.redirect(getTokenApproveURL(data.request_token));
   } catch (err) {
     return NextResponse.redirect(new URL('/', url));

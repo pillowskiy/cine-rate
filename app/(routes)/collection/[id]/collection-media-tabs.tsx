@@ -10,7 +10,7 @@ interface CollectionMediaTabsProps {
 }
 
 function getCollectionImages(collectionId: number, params?: BaseParams) {
-  return $api.fetch<CreationImagesResponse>(
+  return $api.safeFetch<CreationImagesResponse>(
     `/3/collection/${collectionId}/images`,
     { params }
   );

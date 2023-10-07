@@ -8,7 +8,7 @@ export function getCreationImages(
   mediaType: MediaType,
   params?: BaseParams
 ) {
-  return $api.fetch<CreationImagesResponse>(
+  return $api.safeFetch<CreationImagesResponse>(
     `/3/${mediaType}/${creationId}/images`,
     { params }
   );

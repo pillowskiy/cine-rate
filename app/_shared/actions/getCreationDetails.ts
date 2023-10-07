@@ -9,7 +9,7 @@ export function getCreationDetails<T extends MediaType>(
   mediaType: T,
   params?: BaseParams
 ) {
-  return $api.fetch<T extends MediaType.Movie ? IMovieDetails : ITVDetails>(
+  return $api.safeFetch<T extends MediaType.Movie ? IMovieDetails : ITVDetails>(
     `/3/${mediaType}/${creationId}`,
     {
       params,
