@@ -1,19 +1,24 @@
-import { IApiReject } from '@app/types/index';
+import type { BaseParams, IApiReject } from '@app/types/index';
+import { NextResponse } from 'next/server';
+import { FetchError } from './next-fetch';
 
-export type FetchedData<T> = [T, null] | [null, Response];
-const { fetch: nextFetch } = global;
+export type SafeFetchedData<T> = [T, null] | [null, Response];
 
-export async function fetch<Data = unknown>(input: RequestInfo | URL, init?: RequestInit): Promise<FetchedData<Data>> {
-    const result = await nextFetch(input, init);
-    if (!result.ok) {
-        return [null, result];
-    }
-    return [await result.json(), null]
+export interface RequestConfig<Params extends BaseParams = BaseParams> extends RequestInit {
+    params?: Params;
 }
 
-export function rejectFetch(err: Response): IApiReject {
-    const { statusText, status } = err;
-    return { message: statusText, status };
+export function rejectFetch(err: unknown): IApiReject {
+    if (err instanceof FetchError) {
+        return err.json();
+    }
+    return { message: 'Unhandled error occurred', status: 500 };;
+}
+
+export function fetchErrorResponse(err: unknown): NextResponse<IApiReject> {
+    const { message, status } = rejectFetch(err);
+    return NextResponse.json({ message, status }, { status });
 }
 
 export * from './fetch-interceptor';
+export { fetch, safeFetch } from './next-fetch';

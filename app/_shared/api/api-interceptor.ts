@@ -1,15 +1,19 @@
-import axios from 'axios';
-
+import { createFetchInterceptor } from '@libs/common/fetch';
 const { TMDB_API_URL, TMDB_ACCESS_TOKEN } = process.env;
-export const $api = axios.create({
-  baseURL: TMDB_API_URL,
-  withCredentials: true,
+
+export const $api = createFetchInterceptor(TMDB_API_URL, {
+  credentials: 'include',
+  mode: 'cors',
+  next: { revalidate: 1200 }
 });
 
-$api.interceptors.request.use((config) => {
-  const { headers } = config;
-  if (headers && TMDB_ACCESS_TOKEN) {
-    headers.Authorization = `Bearer ${TMDB_ACCESS_TOKEN}`;
+$api.request.use((config) => {
+  const newHeaders = new Headers(config.headers);
+  newHeaders.set('Accept', 'application/json');
+  newHeaders.set('Content-Type', 'application/json');
+  if (TMDB_ACCESS_TOKEN) {
+    newHeaders.set('Authorization', `Bearer ${TMDB_ACCESS_TOKEN}`);
   }
+  config.headers = newHeaders;
   return config;
 });
