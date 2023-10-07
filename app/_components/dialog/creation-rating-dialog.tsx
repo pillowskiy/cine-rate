@@ -5,7 +5,7 @@ import type {
   RatingResponse,
 } from '@app/types/creation-types';
 import type { MediaType } from '@config/enums';
-import { ReactNode, useState, useTransition } from 'react';
+import { ReactNode, useState } from 'react';
 
 import { Button } from '@ui/button';
 import { useToast } from '@ui/use-toast';
@@ -17,10 +17,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@ui/dialog';
-import { cn } from '@libs/index';
 import { Loader, Star, Trash } from 'lucide-react';
-
-import axios from 'axios';
+import { cn } from '@libs/index';
+import { fetch } from '@libs/common/fetch';
 
 interface CreationRatingDialogProps {
   mediaType: MediaType;
@@ -42,32 +41,38 @@ export function CreationRatingDialog({
 
   async function upsertRating() {
     setIsLoading(true);
-    return (
-      axios
-        .post<RatingResponse>(`/api/${mediaType}/${creationId}/rating`, {
-          value: rating,
-        })
-        .then(() => {
-          setIsRated((prev) => {
-            return prev || !prev;
-          });
-          toast({
-            title: '✅ Your review has been sent!',
-            description:
-              'Thank you for helping to improve the quality of our resource.',
-          });
-        })
-        // TEMP
-        .catch(() => {})
-        .finally(() => setIsLoading(false))
-    );
+    return fetch<RatingResponse>(`/api/${mediaType}/${creationId}/rating`, {
+      method: 'POST',
+      body: JSON.stringify({
+        value: rating,
+      }),
+    })
+      .then(() => {
+        setIsRated((prev) => {
+          return prev || !prev;
+        });
+        toast({
+          title: '✅ Your review has been sent!',
+          description:
+            'Thank you for helping to improve the quality of our resource.',
+        });
+      })
+      .catch((error) => {
+        return toast({
+          title: 'Uh Oh! Something went wrong!',
+          description: error.statusText,
+          variant: 'destructive',
+        });
+      })
+      .finally(() => setIsLoading(false));
   }
 
   async function deleteRating() {
     setIsLoading(true);
     return (
-      axios
-        .delete<RatingResponse>(`/api/${mediaType}/${creationId}/rating`)
+      fetch<RatingResponse>(`/api/${mediaType}/${creationId}/rating`, {
+        method: 'DELETE',
+      })
         .then(() => {
           setIsRated(false);
           setRating(0);
@@ -77,8 +82,13 @@ export function CreationRatingDialog({
               'Thank you for helping to improve the quality of our resource.',
           });
         })
-        // TEMP
-        .catch(() => {})
+        .catch((error) => {
+          return toast({
+            title: 'Uh Oh! Something went wrong!',
+            description: error.statusText,
+            variant: 'destructive',
+          });
+        })
         .finally(() => setIsLoading(false))
     );
   }

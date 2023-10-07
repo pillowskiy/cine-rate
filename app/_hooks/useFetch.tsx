@@ -1,21 +1,21 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { useEffect, useReducer, useRef } from 'react';
+import { type RequestConfig, fetch } from '@libs/common/fetch';
 
 type Cache<T> = { [url: string]: T };
 type State<T> = {
   data: T | null;
-  error: AxiosError<{ message: string }> | null;
+  error: Response | null;
 };
 
 type Action<T> =
   | { type: 'loading' }
   | { type: 'data'; payload: T }
-  | { type: 'error'; payload: AxiosError };
+  | { type: 'error'; payload: Response };
 
 // TODO: invalidate cache, test cache
 export default function useFetch<T>(
   url: string,
-  options: AxiosRequestConfig = {},
+  options: RequestConfig = {},
   dependencies: Array<unknown> = [],
 ): State<T> {
   const cache = useRef<Cache<T>>({});
@@ -49,16 +49,15 @@ export default function useFetch<T>(
         });
       }
 
-      axios
-        .get<T>(url, options)
-        .then(({ data }) => {
+      fetch<T>(url, options)
+        .then((data) => {
           cache.current[url] = data;
           if (cancelRequest.current) return;
           dispatch({ type: 'data', payload: data });
         })
         .catch((err) => {
           if (cancelRequest.current) return;
-          dispatch({ type: 'error', payload: err as AxiosError });
+          dispatch({ type: 'error', payload: err as Response });
         });
     };
 

@@ -5,14 +5,14 @@ import type { CreationsResponse } from '@app/types/creation-types';
 import type { IPagination } from '@app/types/index';
 import type { MediaType } from '@config/enums';
 import { CreationArticle } from '@components/article/creation-article';
-import { CatalogSkeletonGroup } from '@/app/_components/skeleton/catalog-skeleton-group';
+import { CatalogSkeletonGroup } from '@components/skeleton/catalog-skeleton-group';
 import { NotFound } from '@components/not-found';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import { cn } from '@libs/index';
-import axios from 'axios';
 import { initialPagination } from '@config/pagination';
 import { useSearchParams } from 'next/navigation';
 import { opacityAnimations } from '@config/animations';
+import { fetch } from '@libs/common/fetch';
 
 interface CreationCatalogProps extends ComponentProps<'div'> {
   mediaType: MediaType;
@@ -32,27 +32,27 @@ export default function CreationCatalog({
     [searchParams]
   );
 
-  const fetch = async (page: number = currentPage + 1) => {
+  const getData = async (page: number = currentPage + 1) => {
     const params = {
       mediaType,
       page,
       ...searchParamsObj,
     };
-    return axios
-      .get<CreationsResponse>('api/discover', { params })
-      .then(({ data }) => {
+    return fetch<CreationsResponse>('api/discover', { params }).then(
+      (data) => {
         setItems((prev) => [...(prev || []), ...data.results]);
         setPagination((prev) => ({ ...prev, currentPage: data.page }));
-      });
+      }
+    );
   };
 
   useEffect(() => {
     setItems(null);
-    void fetch(1);
+    void getData(1);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParamsObj]);
-  const { canScroll } = useInfiniteScroll(fetch, currentPage);
+  const { canScroll } = useInfiniteScroll(getData, currentPage);
 
   function handleItems() {
     if (!items) return <CatalogSkeletonGroup itemsCount={20} />;

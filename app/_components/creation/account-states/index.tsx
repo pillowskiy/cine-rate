@@ -3,9 +3,8 @@
 import type { AccountStatesResponse } from '@app/types/creation-types';
 import type { CreationIdentifierProps } from '../common/types';
 
-import { ReactNode, createContext, useEffect, useState } from 'react';
+import { ReactNode, createContext, useState } from 'react';
 import { MediaType } from '@config/enums';
-import axios from 'axios';
 
 import { FavoriteButton } from './favorite-button';
 import { RatingButton } from './rating-button';
@@ -14,6 +13,7 @@ import { WatchlistButton } from './watchlist-button';
 import { useAuth } from '@redux/hooks';
 import { Popover, PopoverContent, PopoverTrigger } from '@ui/popover';
 import useFetch from '@hooks/useFetch';
+import { fetch } from '@libs/common/fetch';
 
 interface CreationStatesProps extends CreationIdentifierProps {
   children: ReactNode;
@@ -42,10 +42,9 @@ export function StatesPopover({
     } else if (open && states) {
       setIsOpen(true);
     } else {
-      axios
-        .get<AccountStatesResponse>(`/api/${mediaType}/${creationId}/states`)
-        .then(({ data }) => {
-          setStates(data);
+      fetch<AccountStatesResponse>(`/api/${mediaType}/${creationId}/states`)
+        .then((states) => {
+          setStates(states);
           setIsOpen(true);
         })
         .catch(() => {

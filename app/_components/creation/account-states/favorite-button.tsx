@@ -7,7 +7,8 @@ import { StatesContext } from '.';
 import { Button } from '@ui/button';
 import { cn } from '@libs/index';
 import { Heart } from 'lucide-react';
-import axios from 'axios';
+import { useToast } from '@ui/use-toast';
+import { fetch } from '@libs/common/fetch';
 
 interface ToggleFavoriteProps extends BaseButtonProps {
   initialFavorite: boolean;
@@ -21,19 +22,27 @@ export function FavoriteButton({
 }: ToggleFavoriteProps) {
   const { mediaType, creationId } = useContext(StatesContext);
   const [isFavorite, setIsFavorite] = useState(initialFavorite);
+  const { toast } = useToast();
 
   async function toggleFavorite() {
-    return (
-      axios
-        .post<ToggleResponse>('/api/states/favorites', {
-          mediaType,
-          creationId,
-          favorite: !isFavorite,
-        })
-        .then(() => setIsFavorite(!isFavorite))
-        // TEMP
-        .catch(() => {})
-    );
+    fetch<ToggleResponse>('/api/states/favorites', {
+      body: JSON.stringify({
+        mediaType,
+        creationId,
+        favorite: !isFavorite,
+      }),
+      method: 'POST',
+    })
+      .then(() => {
+        setIsFavorite(!isFavorite);
+      })
+      .catch((error) => {
+        toast({
+          title: 'Uh Oh! Something went wrong!',
+          description: error.statusText,
+          variant: 'destructive',
+        });
+      });
   }
 
   return (

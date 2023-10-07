@@ -5,7 +5,8 @@ import { StatesContext } from '.';
 import { Button } from '@ui/button';
 import { BookmarkPlus } from 'lucide-react';
 import { cn } from '@libs/index';
-import axios from 'axios';
+import { useToast } from '@ui/use-toast';
+import { fetch } from '@libs/common/fetch';
 
 interface RatingButtonProps extends BaseButtonProps {
   alreadyInList: boolean;
@@ -19,19 +20,28 @@ export function WatchlistButton({
 }: RatingButtonProps) {
   const { mediaType, creationId } = useContext(StatesContext);
   const [inWatchlist, setInWatchlist] = useState(alreadyInList);
+  const { toast } = useToast();
 
   async function toggleWatchlist() {
-    return (
-      axios
-        .post<ToggleResponse>('/api/states/watchlist', {
+    fetch<ToggleResponse>(
+      '/api/states/watchlist',
+      {
+        body: JSON.stringify({
           mediaType,
           creationId,
           watchlist: !inWatchlist,
-        })
-        .then(() => setInWatchlist(!inWatchlist))
-        // TEMP
-        .catch(() => {})
-    );
+        }),
+        method: 'POST',
+      }
+    ).then(() => {
+      setInWatchlist(!inWatchlist)
+    }).catch((error) => {
+      toast({
+        title: 'Uh Oh! Something went wrong!',
+        description: error.statusText,
+        variant: 'destructive',
+      });
+    });
   }
 
   return (

@@ -2,10 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import type { AppDispatch, RootState } from "@redux/store";
 import type { IApiReject } from '@app/types/index';
-
-import { rejectAxios } from "@libs/axios";
-import axios from "axios";
-import { AccountDetailsResponse } from '@/app/_types/account-types';
+import type { AccountDetailsResponse } from '@app/types/account-types';
+import { fetch, rejectFetch } from '@libs/common/fetch';
 
 type AuthThunkConfig = {
     state: RootState,
@@ -17,11 +15,11 @@ export const approve = createAsyncThunk<AccountDetailsResponse, string, AuthThun
     'user/approve',
     async (request_token, api) => {
         try {
-            return axios.get('/api/user/approve', {
+            return fetch<AccountDetailsResponse>('/api/user/approve', {
                 params: { request_token }
-            }).then(({ data }) => data);
+            });
         } catch (err) {
-            return api.rejectWithValue(rejectAxios(err));
+            return api.rejectWithValue(rejectFetch(err));
         }
     },
 );
@@ -30,9 +28,9 @@ export const getUser = createAsyncThunk<AccountDetailsResponse, undefined, AuthT
     'user/',
     async (_, api) => {
         try {
-            return axios.get<AccountDetailsResponse>('/api/user/').then(({ data }) => data);
+            return fetch<AccountDetailsResponse>('/api/user/');
         } catch (err) {
-            return api.rejectWithValue(rejectAxios(err));
+            return api.rejectWithValue(rejectFetch(err));
         }
     },
 );
