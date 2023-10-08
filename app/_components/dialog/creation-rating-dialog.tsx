@@ -20,6 +20,8 @@ import {
 import { Loader, Star, Trash } from 'lucide-react';
 import { cn } from '@libs/index';
 import { fetch } from '@libs/common/fetch';
+import { rejectKy } from '@libs/ky';
+import ky from 'ky';
 
 interface CreationRatingDialogProps {
   mediaType: MediaType;
@@ -41,18 +43,44 @@ export function CreationRatingDialog({
 
   async function upsertRating() {
     setIsLoading(true);
-    return fetch<RatingResponse>(`/api/${mediaType}/${creationId}/rating`, {
-      method: 'POST',
-      body: JSON.stringify({
-        value: rating,
-      }),
-    })
-      .then(() => {
+    return ky
+      .post(`/api/${mediaType}/${creationId}/rating`, {
+        method: 'POST',
+        body: JSON.stringify({
+          value: rating,
+        }),
+      })
+      .then((res) => res.json<RatingResponse>())
+      .then((data) => {
         setIsRated((prev) => {
           return prev || !prev;
         });
         toast({
           title: '✅ Your review has been sent!',
+          description: data.status_message,
+        });
+      })
+      .catch(async (error) => {
+        const { message } = await rejectKy(error);
+        return toast({
+          title: 'Uh Oh! Something went wrong!',
+          description: message,
+          variant: 'destructive',
+        });
+      })
+      .finally(() => setIsLoading(false));
+  }
+
+  async function deleteRating() {
+    setIsLoading(true);
+    return fetch<RatingResponse>(`/api/${mediaType}/${creationId}/rating`, {
+      method: 'DELETE',
+    })
+      .then(() => {
+        setIsRated(false);
+        setRating(0);
+        toast({
+          title: '🗑 Your review has been deleted!',
           description:
             'Thank you for helping to improve the quality of our resource.',
         });
@@ -65,32 +93,6 @@ export function CreationRatingDialog({
         });
       })
       .finally(() => setIsLoading(false));
-  }
-
-  async function deleteRating() {
-    setIsLoading(true);
-    return (
-      fetch<RatingResponse>(`/api/${mediaType}/${creationId}/rating`, {
-        method: 'DELETE',
-      })
-        .then(() => {
-          setIsRated(false);
-          setRating(0);
-          toast({
-            title: '🗑 Your review has been deleted!',
-            description:
-              'Thank you for helping to improve the quality of our resource.',
-          });
-        })
-        .catch((error) => {
-          return toast({
-            title: 'Uh Oh! Something went wrong!',
-            description: error.statusText,
-            variant: 'destructive',
-          });
-        })
-        .finally(() => setIsLoading(false))
-    );
   }
 
   return (

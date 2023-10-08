@@ -1,6 +1,5 @@
 'use client';
 
-import type { ToggleResponse } from '@app/types/creation-types';
 import type { BaseButtonProps } from './types';
 import { useContext, useState } from 'react';
 import { StatesContext } from '.';
@@ -8,7 +7,8 @@ import { Button } from '@ui/button';
 import { cn } from '@libs/index';
 import { Heart } from 'lucide-react';
 import { useToast } from '@ui/use-toast';
-import { fetch } from '@libs/common/fetch';
+import ky from 'ky';
+import { rejectKy } from '@libs/ky';
 
 interface ToggleFavoriteProps extends BaseButtonProps {
   initialFavorite: boolean;
@@ -25,24 +25,24 @@ export function FavoriteButton({
   const { toast } = useToast();
 
   async function toggleFavorite() {
-    fetch<ToggleResponse>('/api/states/favorites', {
+    ky.post('/api/states/favorites', {
       body: JSON.stringify({
         mediaType,
         creationId,
         favorite: !isFavorite,
       }),
       method: 'POST',
-    })
-      .then(() => {
-        setIsFavorite(!isFavorite);
-      })
-      .catch((error) => {
-        toast({
+    }).then(async (res) => {
+      if (!res.ok) {
+        const { message } = await rejectKy(res);
+        return toast({
           title: 'Uh Oh! Something went wrong!',
-          description: error.statusText,
+          description: message,
           variant: 'destructive',
         });
-      });
+      }
+      setIsFavorite(!isFavorite);
+    });
   }
 
   return (

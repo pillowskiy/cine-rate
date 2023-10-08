@@ -1,4 +1,3 @@
-import type { ToggleResponse } from '@app/types/creation-types';
 import type { BaseButtonProps } from './types';
 import { useContext, useState } from 'react';
 import { StatesContext } from '.';
@@ -6,7 +5,8 @@ import { Button } from '@ui/button';
 import { BookmarkPlus } from 'lucide-react';
 import { cn } from '@libs/index';
 import { useToast } from '@ui/use-toast';
-import { fetch } from '@libs/common/fetch';
+import ky from 'ky';
+import { rejectKy } from '@libs/ky';
 
 interface RatingButtonProps extends BaseButtonProps {
   alreadyInList: boolean;
@@ -23,24 +23,23 @@ export function WatchlistButton({
   const { toast } = useToast();
 
   async function toggleWatchlist() {
-    fetch<ToggleResponse>(
-      '/api/states/watchlist',
-      {
-        body: JSON.stringify({
-          mediaType,
-          creationId,
-          watchlist: !inWatchlist,
-        }),
-        method: 'POST',
+    ky.post('/api/states/watchlist', {
+      body: JSON.stringify({
+        mediaType,
+        creationId,
+        watchlist: !inWatchlist,
+      }),
+      method: 'POST',
+    }).then(async (res) => {
+      if (!res.ok) {
+        const { message } = await rejectKy(res);
+        return toast({
+          title: 'Uh Oh! Something went wrong!',
+          description: message,
+          variant: 'destructive',
+        });
       }
-    ).then(() => {
-      setInWatchlist(!inWatchlist)
-    }).catch((error) => {
-      toast({
-        title: 'Uh Oh! Something went wrong!',
-        description: error.statusText,
-        variant: 'destructive',
-      });
+      setInWatchlist(!inWatchlist);
     });
   }
 

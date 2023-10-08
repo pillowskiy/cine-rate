@@ -1,22 +1,22 @@
 import { useEffect, useReducer, useRef } from 'react';
-import { type RequestConfig, fetch } from '@libs/common/fetch';
+import ky, { type KyResponse, Options } from 'ky';
 
 type Cache<T> = { [url: string]: T };
 type State<T> = {
   data: T | null;
-  error: Response | null;
+  error: KyResponse | null;
 };
 
 type Action<T> =
   | { type: 'loading' }
   | { type: 'data'; payload: T }
-  | { type: 'error'; payload: Response };
+  | { type: 'error'; payload: KyResponse };
 
 // TODO: invalidate cache, test cache
 export default function useFetch<T>(
   url: string,
-  options: RequestConfig = {},
-  dependencies: Array<unknown> = [],
+  options: Options = {},
+  dependencies: Array<unknown> = []
 ): State<T> {
   const cache = useRef<Cache<T>>({});
   const cancelRequest = useRef(false);
@@ -49,7 +49,8 @@ export default function useFetch<T>(
         });
       }
 
-      fetch<T>(url, options)
+      ky.get(url, options)
+        .then((res) => res.json<T>())
         .then((data) => {
           cache.current[url] = data;
           if (cancelRequest.current) return;
@@ -57,7 +58,8 @@ export default function useFetch<T>(
         })
         .catch((err) => {
           if (cancelRequest.current) return;
-          dispatch({ type: 'error', payload: err as Response });
+          if (!err.response) throw err;
+          dispatch({ type: 'error', payload: err.response });
         });
     };
 

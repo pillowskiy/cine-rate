@@ -9,6 +9,7 @@ import { initialPagination } from '@config/pagination';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import { cn } from '@libs/index';
 import { fetch } from '@libs/common/fetch';
+import ky from 'ky';
 
 type Celebrities = CelebritiesResponse['results'];
 
@@ -23,10 +24,12 @@ export function CelebrityCatalog({
     useState<IPagination>(initialPagination);
 
   const getData = async () => {
-    const params = {
+    const searchParams = {
       page: currentPage + 1,
     };
-    return fetch<CelebritiesResponse>('api/celebrities', { params })
+    return ky
+      .get('api/celebrities', { searchParams, cache: 'force-cache' })
+      .then((res) => res.json<CelebritiesResponse>())
       .then((data) => {
         setItems((prev) => [...(prev || []), ...data.results]);
         setPagination((prev) => ({ ...prev, currentPage: data.page }));

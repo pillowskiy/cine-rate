@@ -12,7 +12,7 @@ import { cn } from '@libs/index';
 import { initialPagination } from '@config/pagination';
 import { useSearchParams } from 'next/navigation';
 import { opacityAnimations } from '@config/animations';
-import { fetch } from '@libs/common/fetch';
+import ky from 'ky';
 
 interface CreationCatalogProps extends ComponentProps<'div'> {
   mediaType: MediaType;
@@ -26,24 +26,25 @@ export default function CreationCatalog({
   const [items, setItems] = useState<CreationsResponse['results'] | null>(null);
   const [{ currentPage }, setPagination] =
     useState<IPagination>(initialPagination);
-  const searchParams = useSearchParams();
+  const searchParamsMap = useSearchParams();
   const searchParamsObj = useMemo(
-    () => Object.fromEntries(searchParams.entries()),
-    [searchParams]
+    () => Object.fromEntries(searchParamsMap.entries()),
+    [searchParamsMap]
   );
 
   const getData = async (page: number = currentPage + 1) => {
-    const params = {
+    const searchParams = {
       mediaType,
       page,
       ...searchParamsObj,
     };
-    return fetch<CreationsResponse>('api/discover', { params }).then(
-      (data) => {
+    return ky
+      .get('api/discover', { searchParams, cache: 'force-cache' })
+      .then((res) => res.json<CreationsResponse>())
+      .then((data) => {
         setItems((prev) => [...(prev || []), ...data.results]);
         setPagination((prev) => ({ ...prev, currentPage: data.page }));
-      }
-    );
+      });
   };
 
   useEffect(() => {

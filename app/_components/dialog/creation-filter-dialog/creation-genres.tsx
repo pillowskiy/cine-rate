@@ -17,9 +17,7 @@ export function CreationGenres({ mediaType }: CreationGenresProps) {
   const [filter, setFilter] = useContext(FilterContext);
   const genreIds = filter.with_genres?.split(',').map(Number) || [];
 
-  const { data, error } = useFetch<GenresResponse>('/api/genres/', {
-    params: { mediaType },
-  });
+  const { data, error } = useFetch<GenresResponse>(`/api/${mediaType}/genres/`);
 
   if (!data && !error) {
     return (
