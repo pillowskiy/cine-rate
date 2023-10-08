@@ -14,7 +14,13 @@ export function AuthButton() {
 
   if (isLoading || !isClientReady) {
     return (
-      <Button className='aspect-square' variant='outline' size='icon'>
+      <Button
+        className='aspect-square'
+        variant='outline'
+        size='icon'
+        aria-label='log in'
+        disabled
+      >
         <Loader2 className='h-5 w-5 animate-spin' />
       </Button>
     );
@@ -36,7 +42,12 @@ export function AuthButton() {
 
   return (
     <Link href='/auth' passHref legacyBehavior>
-      <Button className='aspect-square' variant='outline' size='icon'>
+      <Button
+        className='aspect-square'
+        variant='outline'
+        aria-label='log in'
+        size='icon'
+      >
         <LogIn className='h-5 w-5' />
       </Button>
     </Link>

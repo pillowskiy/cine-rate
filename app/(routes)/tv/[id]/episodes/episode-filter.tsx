@@ -90,7 +90,7 @@ export default function EpisodeFilter({ series }: EpisodeFilterProps) {
       </div>
 
       <div className='mx-2 hidden sm:inline-block'>
-        <Button size='icon' variant='outline' onClick={onSortChange}>
+        <Button size='icon' variant='outline' aria-label='episode filter' onClick={onSortChange}>
           {isLoading ? (
             <Loader className='h-5 w-5 animate-spin' />
           ) : (

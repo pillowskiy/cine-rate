@@ -62,6 +62,7 @@ export const CreationArticle = memo(
               className='absolute right-2 top-2 h-7 w-7'
               variant='outline'
               size='icon'
+              aria-label='creation info'
             >
               <Info className='h-5 w-5' />
             </Button>

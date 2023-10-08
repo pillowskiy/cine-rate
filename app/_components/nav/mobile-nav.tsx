@@ -20,7 +20,7 @@ export function MobileNav() {
   return (
     <Sheet open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
       <SheetTrigger asChild>
-        <Button className='aspect-square' variant='outline' size='icon'>
+        <Button className='aspect-square' variant='outline' aria-label='menu' size='icon'>
           <Menu className='h-5 w-5' />
         </Button>
       </SheetTrigger>

@@ -144,6 +144,7 @@ export function CreationRatingDialog({
               <Button
                 variant='destructive'
                 size='icon'
+                aria-label='delete review'
                 onClick={deleteRating}
                 disabled={!isRated || isLoading}
               >

@@ -19,6 +19,7 @@ export function UserAvatar({ username, path, gravatarHash }: UserAvatarProps) {
                 scale: 'avatar',
               }) || undefined
         }
+        alt='User Avatar'
         loading='lazy'
       />
       <AvatarFallback>
