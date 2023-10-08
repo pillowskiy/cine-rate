@@ -55,7 +55,7 @@ export default function ApprovePage({ searchParams }: INextPageParams) {
         });
       } else {
         toast({
-          title: result.payload?.message || 'Uh, Oh! Something went wrong.',
+          title: result.error.message || 'Uh, Oh! Something went wrong.',
           description: getStatusDescription(result.payload?.status || 500),
         });
       }
