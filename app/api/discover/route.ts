@@ -41,9 +41,9 @@ export async function GET(request: NextRequest) {
   }
   const { mediaType, ...params } = result.data;
 
-  const [data, error] = await getDiscover(mediaType, params);
-  if (error) {
+  return getDiscover(mediaType, params).then(data => {
+    return NextResponse.json(data, { status: 200 });
+  }).catch((error) => {
     return fetchErrorResponse(error);
-  }
-  return NextResponse.json(data, { status: 200 });
+  });
 }
