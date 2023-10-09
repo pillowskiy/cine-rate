@@ -30,7 +30,7 @@ export function SeasonsDialog({ seasons, seriesId }: SeasonsDialogProps) {
           <DialogDescription>All seasons of the series</DialogDescription>
         </DialogHeader>
         <ScrollArea>
-          <div className='mr-4 max-h-[460px] space-y-4'>
+          <div className='max-h-[460px] space-y-4'>
             {seasons.map((season, i) => (
               <SeasonArticle
                 custom={i}
@@ -46,7 +46,7 @@ export function SeasonsDialog({ seasons, seriesId }: SeasonsDialogProps) {
                     legacyBehavior
                   >
                     <DialogClose asChild>
-                      <Button>Read more</Button>
+                      <Button className='w-full sm:w-fit'>Read more</Button>
                     </DialogClose>
                   </Link>
                 }

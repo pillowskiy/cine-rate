@@ -49,7 +49,7 @@ export default function ApprovePage({ searchParams }: INextPageParams) {
 
       if (approve.fulfilled.match(result)) {
         toast({
-          title: 'Successfully approval!',
+          title: '✅ Successfully approval!',
           description:
             'You have successfully authorized us to receive and modify your data through the TMDB service.',
         });

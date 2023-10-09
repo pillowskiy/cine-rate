@@ -13,7 +13,7 @@ import { WatchlistButton } from './watchlist-button';
 import { useAuth } from '@redux/hooks';
 import { Popover, PopoverContent, PopoverTrigger } from '@ui/popover';
 import useFetch from '@hooks/useFetch';
-import { fetch } from '@libs/common/fetch';
+import ky from 'ky';
 
 interface CreationStatesProps extends CreationIdentifierProps {
   children: ReactNode;
@@ -42,7 +42,8 @@ export function StatesPopover({
     } else if (open && states) {
       setIsOpen(true);
     } else {
-      fetch<AccountStatesResponse>(`/api/${mediaType}/${creationId}/states`)
+      ky.get(`/api/${mediaType}/${creationId}/states`)
+        .then((res) => res.json<AccountStatesResponse>())
         .then((states) => {
           setStates(states);
           setIsOpen(true);

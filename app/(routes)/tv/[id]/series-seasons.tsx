@@ -33,7 +33,7 @@ export default async function SerriesSeasons({ details }: SerriesSeasonsProps) {
               passHref
               legacyBehavior
             >
-              <Button>More info about {currentSeason.name}</Button>
+              <Button>More about Season {currentSeason.season_number}</Button>
             </Link>
             <SeasonsDialog seriesId={details.id} seasons={details.seasons} />
           </div>
