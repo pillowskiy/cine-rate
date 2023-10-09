@@ -12,12 +12,12 @@ import { Carousel } from '../carousel';
 import { PersonArticle } from '../article/person-article';
 import { useDebounce } from '@hooks/useDebounce';
 import { HorizontalCreationArticle } from '../article/creation-article';
-import { fetch } from '@libs/common/fetch';
+import ky from 'ky';
 
-function getMultipleSearch(query: string) {
-  return fetch<MultiSearchResponse>('/api/search/multiple', {
-    params: { query },
-  });
+async function getMultipleSearch(query: string) {
+  return ky.get('/api/search/multiple', {
+    searchParams: { query },
+  }).then(res => res.json<MultiSearchResponse>());
 }
 
 type SearchedData = Record<MediaType, MultiSearchResponse['results']> | null;
