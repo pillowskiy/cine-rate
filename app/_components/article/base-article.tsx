@@ -71,14 +71,14 @@ export function BaseArticleFigure({
     <figure className='relative overflow-hidden rounded-md'>
       <div
         className={cn(
-          'w-full h-auto',
+          'h-auto w-full',
           aspect === 'vertical' ? 'aspect-[2/3]' : 'aspect-[16/9]',
           className
         )}
       >
         <ImageFromPath
           className={cn(
-            'h-full w-auto object-cover transition-all ease-in-out hover:scale-105'
+            'h-auto w-full object-cover transition-all ease-in-out hover:scale-105'
           )}
           height={height}
           width={width}

@@ -22,25 +22,23 @@ export function SeasonArticle({
 }: SeasonArticleProps) {
   return (
     <BaseArticle
-      className={cn('flex w-full items-center sm:gap-4', className)}
+      className={cn('flex flex-col sm:flex-row w-full items-center sm:gap-4', className)}
       {...props}
     >
-      <div>
-        <BaseArticleFigure
-          className='hidden w-[120px] min-w-[120px] sm:block'
-          src={buildImagePath({
-            path: season.poster_path,
-            scale: 'poster',
-          })}
-          aspect='vertical'
-          width={320}
-          height={550}
-          alt='Season Poster'
-        />
-      </div>
-      <div className='w-full sm:w-max space-y-4'>
+      <BaseArticleFigure
+        className='hidden min-w-[120px] sm:w-[120px] sm:block'
+        src={buildImagePath({
+          path: season.poster_path,
+          scale: 'poster',
+        })}
+        aspect='vertical'
+        width={320}
+        height={550}
+        alt='Season Poster'
+      />
+      <div className='w-full space-y-4 sm:w-max'>
         <div>
-          <h2 className='text-2xl font-semibold tracking-tight'>
+          <h2 className='text-xl sm:text-2xl font-semibold tracking-tight'>
             {season.name}
           </h2>
           <div className='flex items-center justify-between gap-2 text-xs'>
