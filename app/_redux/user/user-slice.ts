@@ -41,5 +41,18 @@ export const userSlice = createSlice({
         state.isLoading = false;
         state.user = null;
       });
+
+    builder
+      .addCase(actions.logout.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(actions.logout.fulfilled, (state, action) => {
+        state.user = null;
+        state.isLoading = false;
+      })
+      .addCase(actions.logout.rejected, (state) => {
+        state.isLoading = false;
+      });
+
   }
 });

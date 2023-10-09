@@ -37,3 +37,15 @@ export const getUser = createAsyncThunk<AccountDetailsResponse, undefined, AuthT
             });
     },
 );
+
+export const logout = createAsyncThunk<boolean, undefined, AuthThunkConfig>(
+    'users/logout',
+    async (_, api) => {
+        return ky.delete('/api/user')
+            .then(res => res.json<boolean>())
+            .catch(async (error) => {
+                const apiReject = await rejectKy(error);
+                return api.rejectWithValue(apiReject);
+            });
+    }
+)

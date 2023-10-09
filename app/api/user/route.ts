@@ -19,3 +19,18 @@ export async function GET() {
         return fetchErrorResponse(error);
     });
 }
+
+export async function DELETE() {
+    const sessionCookie = cookies().get('session_id');
+    const sessionId = sessionCookie?.value;
+
+    if (!sessionId) {
+        return NextResponse.json({
+            message: 'You must be logged in'
+        }, { status: 403 })
+    }
+
+    cookies().delete('session_id');
+    const success = !cookies().get('session_id')?.value
+    return NextResponse.json(success, { status: 200 });
+}

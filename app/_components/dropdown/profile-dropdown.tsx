@@ -11,9 +11,11 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@ui/dropdown-menu';
+import { useToast } from '@ui/use-toast';
 
 import { MessageSquare, Mails, Star, BookmarkPlus, LogOut } from 'lucide-react';
-import { useAuth } from '@redux/hooks';
+import { useAppDispatch, useAuth } from '@redux/hooks';
+import { logout as logoutAction } from '@redux/user/user-actions';
 
 interface ProfileDropdownProps {
   children: ReactNode;
@@ -21,8 +23,26 @@ interface ProfileDropdownProps {
 
 export function ProfileDropdown({ children }: ProfileDropdownProps) {
   const { user } = useAuth();
+  const dispatch = useAppDispatch();
+  const { toast } = useToast();
 
   if (!user) return null;
+
+  async function logout() {
+    const result = await dispatch(logoutAction());
+
+    if (logoutAction.fulfilled.match(result)) {
+      toast({
+        title: '✅ You are logged out',
+        description: 'You have successfully logged out of your account',
+      });
+    } else {
+      toast({
+        title: result.error.message || 'Uh, Oh! Something went wrong.',
+        description: getStatusDescription(result.payload?.status || 500),
+      });
+    }
+  }
 
   return (
     <DropdownMenu>
@@ -51,7 +71,7 @@ export function ProfileDropdown({ children }: ProfileDropdownProps) {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={logout}>
           <LogOut className='mr-2 h-4 w-4' />
           <span>Log Out</span>
           <DropdownMenuShortcut>⇧+Q</DropdownMenuShortcut>
@@ -59,4 +79,7 @@ export function ProfileDropdown({ children }: ProfileDropdownProps) {
       </DropdownMenuContent>
     </DropdownMenu>
   );
+}
+function getStatusDescription(arg0: number): ReactNode {
+  throw new Error('Function not implemented.');
 }
