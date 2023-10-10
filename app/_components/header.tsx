@@ -5,6 +5,7 @@ import { SearchDialog } from './dialog/search-dialog';
 import { ToggleTheme } from './toggle-theme';
 import { AuthButton } from './button/auth-button';
 import { Logo } from './logo';
+import { Sun, Moon } from 'lucide-react';
 
 export default function Header() {
   const isMobile = isMobileView();
@@ -20,9 +21,15 @@ export default function Header() {
         ) : (
           <DesktopNav />
         )}
-        <section className='flex w-full space-x-2 md:w-max justify-end'>
+        <section className='flex w-full justify-end space-x-2 md:w-max'>
           <SearchDialog />
-          { !isMobile && <ToggleTheme /> }
+          {!isMobile && (
+            <ToggleTheme className='aspect-square'>
+              <Sun className='h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
+              <Moon className='absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
+              <span className='sr-only'>Toggle theme</span>
+            </ToggleTheme>
+          )}
           <AuthButton />
         </section>
       </div>

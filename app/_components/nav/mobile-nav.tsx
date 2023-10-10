@@ -13,6 +13,7 @@ import { Button } from '@ui/button';
 import { Menu } from 'lucide-react';
 import { Logo } from '@components/logo';
 import { AppNav } from '@components/nav/app-nav';
+import { ToggleTheme } from '@components/toggle-theme';
 import { useState } from 'react';
 
 export function MobileNav() {
@@ -20,7 +21,12 @@ export function MobileNav() {
   return (
     <Sheet open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
       <SheetTrigger asChild>
-        <Button className='aspect-square' variant='outline' aria-label='menu' size='icon'>
+        <Button
+          className='aspect-square'
+          variant='outline'
+          aria-label='menu'
+          size='icon'
+        >
           <Menu className='h-5 w-5' />
         </Button>
       </SheetTrigger>
@@ -39,9 +45,11 @@ export function MobileNav() {
         <h2 className='text-lg font-semibold' onClick={() => setIsOpen(false)}>
           Settings
         </h2>
-        <ul className='cursor-pointer my-4 space-y-2 pl-6'>
+        <ul className='my-4 cursor-pointer space-y-2 pl-6'>
           <li>Language</li>
-          <li>Theme</li>
+          <li>
+            <ToggleTheme className='text-base' variant='link'>Theme</ToggleTheme>
+          </li>
           <li>Privacy</li>
         </ul>
       </SheetContent>
