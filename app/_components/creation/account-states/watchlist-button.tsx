@@ -7,6 +7,7 @@ import { cn } from '@libs/index';
 import { useToast } from '@ui/use-toast';
 import ky from 'ky';
 import { rejectKy } from '@libs/ky';
+import { useOptimistic } from '@/app/_hooks/useOptimistic';
 
 interface RatingButtonProps extends BaseButtonProps {
   alreadyInList: boolean;
@@ -19,32 +20,49 @@ export function WatchlistButton({
   ...props
 }: RatingButtonProps) {
   const { mediaType, creationId } = useContext(StatesContext);
-  const [inWatchlist, setInWatchlist] = useState(alreadyInList);
   const { toast } = useToast();
 
+  const {
+    action,
+    state: inWatchlist,
+    isLoading,
+  } = useOptimistic(alreadyInList, (state) => !state);
+
   async function toggleWatchlist() {
-    ky.post('/api/states/watchlist', {
-      body: JSON.stringify({
-        mediaType,
-        creationId,
-        watchlist: !inWatchlist,
-      }),
-      method: 'POST',
-    }).then(async (res) => {
-      if (!res.ok) {
-        const { message } = await rejectKy(res);
-        return toast({
-          title: 'Uh Oh! Something went wrong!',
-          description: message,
-          variant: 'destructive',
-        });
+    action(
+      async () => {
+        return ky
+          .post('/api/states/watchlist', {
+            body: JSON.stringify({
+              mediaType,
+              creationId,
+              watchlist: !inWatchlist,
+            }),
+            method: 'POST',
+          })
+          .then((res) => res.json());
+      },
+      {
+        onReject: async (error) => {
+          const { message } = await rejectKy(error);
+          return toast({
+            title: 'Uh Oh! Something went wrong!',
+            description: message,
+            variant: 'destructive',
+          });
+        },
       }
-      setInWatchlist(!inWatchlist);
-    });
+    );
   }
 
   return (
-    <Button size={size} onClick={toggleWatchlist} {...props}>
+    <Button
+      className={cn(isLoading && 'opacity-50')}
+      size={size}
+      onClick={toggleWatchlist}
+      disabled={isLoading}
+      {...props}
+    >
       <BookmarkPlus
         className={cn(
           size === 'sm' ? 'h-5 w-5' : 'h-7 w-7',
