@@ -10,7 +10,7 @@ export default function Footer() {
           <Link href='https://nextjs.org/'>
             <Image
               className='h-4 w-auto'
-              src='next.svg'
+              src='/next.svg'
               alt='Next Logo'
               width={96}
               height={96}
