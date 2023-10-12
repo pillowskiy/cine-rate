@@ -1,6 +1,6 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import { useState, type ReactNode, useCallback } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,15 +16,21 @@ import { useToast } from '@ui/use-toast';
 import { MessageSquare, Mails, Star, BookmarkPlus, LogOut } from 'lucide-react';
 import { useAppDispatch, useAuth } from '@redux/hooks';
 import { logout as logoutAction } from '@redux/user/user-actions';
+import Link from 'next/link';
 
 interface ProfileDropdownProps {
   children: ReactNode;
 }
 
 export function ProfileDropdown({ children }: ProfileDropdownProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth();
   const dispatch = useAppDispatch();
   const { toast } = useToast();
+
+  const closeDropdown = useCallback(() => {
+    return setIsOpen(false);
+  }, []);
 
   if (!user) return null;
 
@@ -38,14 +44,16 @@ export function ProfileDropdown({ children }: ProfileDropdownProps) {
       });
     } else {
       toast({
-        title: result.error.message || 'Uh, Oh! Something went wrong.',
-        description: getStatusDescription(result.payload?.status || 500),
+        title: 'Uh, Oh! Something went wrong.',
+        description: result.error.message || 'Unhandled error occurred!',
       });
     }
+
+    closeDropdown();
   }
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
       <DropdownMenuTrigger className='cursor-pointer' asChild>
         {children}
       </DropdownMenuTrigger>
@@ -65,10 +73,15 @@ export function ProfileDropdown({ children }: ProfileDropdownProps) {
             <Star className='mr-2 h-4 w-4' />
             <span>Rating</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <BookmarkPlus className='mr-2 h-4 w-4' />
-            <span>Watch List</span>
-          </DropdownMenuItem>
+          <Link href='/account/watchlist' passHref legacyBehavior>
+            <DropdownMenuItem
+              onClick={closeDropdown}
+              className='cursor-pointer'
+            >
+              <BookmarkPlus className='mr-2 h-4 w-4' />
+              <span>Watch List</span>
+            </DropdownMenuItem>
+          </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={logout}>
@@ -79,7 +92,4 @@ export function ProfileDropdown({ children }: ProfileDropdownProps) {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
-function getStatusDescription(arg0: number): ReactNode {
-  throw new Error('Function not implemented.');
 }

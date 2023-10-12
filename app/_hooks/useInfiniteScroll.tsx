@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 export default function useInfiniteScroll<
   T extends (...args: any[]) => void,
->(callback: T, dependency: unknown) {
+>(callback: T, dependency: unknown, stopped?: boolean) {
   const [canScroll, setCanScroll] = useState(true);
 
   useEffect(() => {
@@ -19,10 +19,14 @@ export default function useInfiniteScroll<
 
     window.addEventListener('scroll', handleScroll);
 
+    if (stopped) {
+      window.removeEventListener('scroll', handleScroll);
+    }
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [canScroll, callback]);
+  }, [canScroll, callback, stopped]);
 
   useEffect(() => {
     setCanScroll(true);

@@ -1,11 +1,10 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
 export const config = {
-  matcher: ['/profile'],
+  matcher: ['/account'],
 };
 
 export async function middleware(request: NextRequest) {
-  // TEMP: handle server side user store instead of request
   const sessionCookie = request.cookies.get('session_id');
 
   if (!sessionCookie) {

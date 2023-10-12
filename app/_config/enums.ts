@@ -18,6 +18,11 @@ export enum MediaType {
     Person = 'person',
 }
 
+export enum ResourceType {
+    Movie = 'movies',
+    TV = 'tv',
+}
+
 export enum Gender {
     Unknown = 0,
     Woman = 1,
