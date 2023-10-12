@@ -3,16 +3,12 @@ import { MediaType } from '@config/enums';
 import { getPopular } from '@actions/getPopular';
 import { fetchErrorResponse } from '@libs/common/fetch';
 import { generateZodErrorsResponse } from '@libs/common/next';
-import zod from 'zod';
-
-const filterDto = zod.object({
-  page: zod.string().regex(/^\d+$/).transform(Number),
-});
+import { paginationDto } from '../dto';
 
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const searchParams = Object.fromEntries(requestUrl.searchParams.entries());
-  const result = filterDto.safeParse(searchParams);
+  const result = paginationDto.safeParse(searchParams);
 
   if (!result.success) {
     return generateZodErrorsResponse(result);

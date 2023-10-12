@@ -61,8 +61,7 @@ export default function CreationCatalog({
 
     return items.map((movie) => (
       <CreationArticle
-        custom={0.4}
-        variants={opacityAnimations}
+        variants={{}}
         defaultMediaType={mediaType}
         key={movie.id}
         creation={movie}

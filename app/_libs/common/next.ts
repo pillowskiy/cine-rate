@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import { SafeParseError, ZodAny } from "zod";
 import zod from 'zod';
 
-// TEMP: error handling
 export const pipe = {
   string: (value: unknown) => zod.string().parse(value),
   int: (value: unknown) => zod.number().int().parse(value),
@@ -12,7 +11,7 @@ export const pipe = {
 export function generateZodErrorsResponse(result: SafeParseError<zod.infer<ZodAny>>) {
   if (result.error.issues.length) {
     return NextResponse.json(
-      { errors: result.error.format() },
+      { errors: result.error.format()._errors },
       { status: 400 }
     );
   }
