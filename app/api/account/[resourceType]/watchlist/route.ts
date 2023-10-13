@@ -10,7 +10,7 @@ import { fetchErrorResponse } from "@libs/common/fetch";
 import { ResourceType } from '@config/enums';
 import zod from 'zod';
 
-export const paramsDto = zod.object({
+const paramsDto = zod.object({
     resourceType: zod.nativeEnum(ResourceType),
 })
 
