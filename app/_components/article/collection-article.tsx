@@ -38,7 +38,7 @@ export function CollectionArticle({
         />
       </div>
       <div className='w-full space-y-4 sm:w-max'>
-        <h2 className='text-2xl font-semibold tracking-tight'>
+        <h2 className='text-xl sm:text-2xl font-semibold tracking-tight truncate'>
           {collection.name}
         </h2>
         <p className='break-words text-sm md:text-base'>

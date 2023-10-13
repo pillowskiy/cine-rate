@@ -3,7 +3,6 @@
 import Image, { type ImageProps } from 'next/image';
 import { Image as FallbackIcon } from 'lucide-react';
 import { cn } from '@libs/index';
-import { Skeleton } from '@ui/skeleton';
 import { useState } from 'react';
 
 type ImageFromPathProps = Omit<ImageProps, 'src'> & {
@@ -34,8 +33,8 @@ export function ImageFromPath({
   return (
     <Image
       className={cn(
-        isLoading && 'animate-pulse rounded-md bg-muted',
-        className
+        className,
+        isLoading && 'h-full w-full animate-pulse rounded-md bg-muted'
       )}
       alt={alt}
       src={src}

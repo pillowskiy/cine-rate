@@ -42,7 +42,7 @@ export function CreditArticle({
         <h2 className='truncate font-semibold tracking-tight'>
           {credit.original_name}
         </h2>
-        <span className='text-xs'>{credit.character}</span>
+        <p className='text-xs truncate'>{credit.character}</p>
       </BaseArticleContent>
     </BaseArticle>
   );

@@ -14,7 +14,10 @@ import Link from 'next/link';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { cn } from '@libs/index';
 import { Button } from '@ui/button';
-import { StatesPopover } from '@components/creation/account-states';
+import {
+  CreationStatesDetailed,
+  StatesPopover,
+} from '@components/creation/account-states';
 
 interface CreationArticleProps extends Omit<BaseArticleProps, 'src' | 'href'> {
   size?: 'default' | 'sm';
@@ -95,6 +98,8 @@ interface HorizontalCreationArticle extends ComponentProps<'article'> {
   width: number;
   height: number;
   creation: ICreation;
+  defaultMediaType: MediaType;
+  withStates?: boolean;
 }
 
 export const HorizontalCreationArticle = memo(
@@ -104,8 +109,13 @@ export const HorizontalCreationArticle = memo(
     height,
     alt,
     className,
+    withStates,
+    defaultMediaType,
     ...props
   }: HorizontalCreationArticle) => {
+    const mediaType = defaultMediaType || creation.media_type;
+    if (!mediaType) return null;
+
     const { title, original_title, original_name } = creation;
     const displayTitle = title || original_title || original_name;
     return (
@@ -142,6 +152,14 @@ export const HorizontalCreationArticle = memo(
             Realese Date: {new Date(creation.release_date).toDateString()}
           </span>
         </div>
+
+        {withStates && (
+          <CreationStatesDetailed
+            className='hidden md:flex ml-auto'
+            creationId={creation.id}
+            mediaType={mediaType}
+          />
+        )}
       </article>
     );
   }

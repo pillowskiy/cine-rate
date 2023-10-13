@@ -4,18 +4,18 @@ import { useEffect, useMemo, useState } from 'react';
 
 import type { IPagination } from '@app/types/index';
 import type { CreationsResponse } from '@app/types/creation-types';
-import type { ResourceType } from '@config/enums';
+import { MediaType, ResourceType } from '@config/enums';
 
 import { TabsContent } from '@ui/tabs';
 import { HorizontalCreationArticle } from '@components/article/creation-article';
 import { CatalogSkeletonGroup } from '@components/skeleton/catalog-skeleton-group';
 import { NotFound } from '@components/not-found';
 
-
 import { getWatchlist } from './action';
 import { useSearchParams } from 'next/navigation';
 import { initialPagination } from '@config/pagination';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
+import Link from 'next/link';
 
 type Items = CreationsResponse['results'] | null;
 
@@ -23,21 +23,43 @@ interface WatchlistTabsContentProps {
   resourceType: ResourceType;
 }
 
+const mediaTypes = {
+  [ResourceType.Movie]: MediaType.Movie,
+  [ResourceType.TV]: MediaType.TV,
+} as const;
+
 // TEMP
-function HandleItems({ items }: { items: Items }) {
+function HandleItems({
+  items,
+  defaultMediaType,
+}: {
+  items: Items;
+  defaultMediaType: MediaType;
+}) {
   if (!items) return <CatalogSkeletonGroup itemsCount={20} />;
   if (!items.length) return <NotFound />;
 
-  return items.map((movie) => (
-    <HorizontalCreationArticle
-      className='border'
-      key={movie.id}
-      creation={movie}
-      alt='Series Backdrop'
-      width={260}
-      height={190}
-    />
-  ));
+  return items.map(
+    (creation) =>
+      defaultMediaType && (
+        <Link
+          key={creation.id}
+          href={`/${defaultMediaType}/${creation.id}`}
+          legacyBehavior
+          passHref
+        >
+          <HorizontalCreationArticle
+            defaultMediaType={defaultMediaType}
+            className='border'
+            creation={creation}
+            alt='Series Backdrop'
+            width={260}
+            height={190}
+            withStates
+          />
+        </Link>
+      )
+  );
 }
 
 export default function WatchlistTabsContent({
@@ -71,7 +93,7 @@ export default function WatchlistTabsContent({
 
   return (
     <TabsContent className='flex flex-wrap gap-4' value={resourceType}>
-      <HandleItems items={items} />
+      <HandleItems defaultMediaType={mediaTypes[resourceType]} items={items} />
       {!!items?.length && !canScroll && <CatalogSkeletonGroup />}
     </TabsContent>
   );

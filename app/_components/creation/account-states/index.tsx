@@ -3,7 +3,7 @@
 import type { AccountStatesResponse } from '@app/types/creation-types';
 import type { CreationIdentifierProps } from '../common/types';
 
-import { ReactNode, createContext, useState } from 'react';
+import { ComponentProps, ReactNode, createContext, useState } from 'react';
 import { MediaType } from '@config/enums';
 
 import { FavoriteButton } from './favorite-button';
@@ -14,6 +14,7 @@ import { useAuth } from '@redux/hooks';
 import { Popover, PopoverContent, PopoverTrigger } from '@ui/popover';
 import useFetch from '@hooks/useFetch';
 import ky from 'ky';
+import { cn } from '@/app/_libs';
 
 interface CreationStatesProps extends CreationIdentifierProps {
   children: ReactNode;
@@ -90,10 +91,16 @@ export function StatesPopover({
   );
 }
 
+interface StatesDetailedProps
+  extends CreationIdentifierProps,
+    ComponentProps<'div'> {}
+
 export function CreationStatesDetailed({
   creationId,
   mediaType,
-}: CreationIdentifierProps) {
+  className,
+  ...props
+}: StatesDetailedProps) {
   const { user } = useAuth();
 
   const { data: states } = useFetch<AccountStatesResponse>(
@@ -106,7 +113,13 @@ export function CreationStatesDetailed({
 
   return (
     <StatesContext.Provider value={{ creationId, mediaType }}>
-      <div className='flex w-full justify-between gap-4 overflow-x-auto sm:w-fit sm:justify-start'>
+      <div
+        className={cn(
+          'flex w-full justify-between gap-4 overflow-x-auto sm:w-fit sm:justify-start',
+          className
+        )}
+        {...props}
+      >
         <div className='flex w-[120px] flex-col items-center justify-center space-y-1 text-center'>
           <span className='truncate text-xs font-semibold uppercase'>
             Favorite List
