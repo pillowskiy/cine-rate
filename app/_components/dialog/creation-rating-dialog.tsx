@@ -17,9 +17,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@ui/dialog';
-import { Loader, Star, Trash } from 'lucide-react';
+import { Loader2, Star, Trash } from 'lucide-react';
 import { cn } from '@libs/index';
-import { fetch } from '@libs/common/fetch';
 import { rejectKy } from '@libs/ky';
 import ky from 'ky';
 
@@ -73,23 +72,26 @@ export function CreationRatingDialog({
 
   async function deleteRating() {
     setIsLoading(true);
-    return fetch<RatingResponse>(`/api/${mediaType}/${creationId}/rating`, {
-      method: 'DELETE',
-    })
-      .then(() => {
+    return ky
+      .delete(`/api/${mediaType}/${creationId}/rating`, {
+        method: 'DELETE',
+      })
+      .then(async (res) => {
+        if (!res.ok) {
+          const { message } = await rejectKy(res);
+          return toast({
+            title: 'Uh Oh! Something went wrong!',
+            description: message,
+            variant: 'destructive',
+          });
+        }
+
         setIsRated(false);
         setRating(0);
         toast({
           title: '🗑 Your review has been deleted!',
           description:
             'Thank you for helping to improve the quality of our resource.',
-        });
-      })
-      .catch((error) => {
-        return toast({
-          title: 'Uh Oh! Something went wrong!',
-          description: error.statusText,
-          variant: 'destructive',
         });
       })
       .finally(() => setIsLoading(false));
@@ -149,7 +151,7 @@ export function CreationRatingDialog({
                 disabled={!isRated || isLoading}
               >
                 {isLoading ? (
-                  <Loader className='h-5 w-5 animate-spin' />
+                  <Loader2 className='h-5 w-5 animate-spin' />
                 ) : (
                   <Trash className='h-5 w-5' />
                 )}
@@ -161,7 +163,7 @@ export function CreationRatingDialog({
                 disabled={!rating || isLoading}
               >
                 {isLoading ? (
-                  <Loader className='h-5 w-5 animate-spin' />
+                  <Loader2 className='h-5 w-5 animate-spin' />
                 ) : (
                   'Submit'
                 )}
