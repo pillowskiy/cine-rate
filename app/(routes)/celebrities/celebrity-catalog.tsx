@@ -8,7 +8,6 @@ import { CatalogSkeletonGroup } from '@components/skeleton/catalog-skeleton-grou
 import { initialPagination } from '@config/pagination';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import { cn } from '@libs/index';
-import { fetch } from '@libs/common/fetch';
 import ky from 'ky';
 
 type Celebrities = CelebritiesResponse['results'];

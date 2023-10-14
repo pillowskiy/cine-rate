@@ -35,7 +35,7 @@ export function FavoriteButton({
         body: JSON.stringify({
           mediaType,
           creationId,
-          favorite,
+          favorite: !favorite,
         }),
         method: 'POST',
       }).then(res => res.json())

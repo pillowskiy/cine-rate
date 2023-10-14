@@ -7,11 +7,10 @@ import type { MediaType } from '@config/enums';
 import { CreationArticle } from '@components/article/creation-article';
 import { CatalogSkeletonGroup } from '@components/skeleton/catalog-skeleton-group';
 import { NotFound } from '@components/not-found';
-import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import { cn } from '@libs/index';
 import { initialPagination } from '@config/pagination';
 import { useSearchParams } from 'next/navigation';
-import { opacityAnimations } from '@config/animations';
+import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import ky from 'ky';
 
 interface CreationCatalogProps extends ComponentProps<'div'> {
@@ -47,12 +46,8 @@ export default function CreationCatalog({
       });
   };
 
-  useEffect(() => {
-    setItems(null);
-    void getData(1);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParamsObj]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => void getData(), [searchParamsObj]);
   const { canScroll } = useInfiniteScroll(getData, currentPage);
 
   function handleItems() {

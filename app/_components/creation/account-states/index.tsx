@@ -43,7 +43,7 @@ export function StatesPopover({
     } else if (open && states) {
       setIsOpen(true);
     } else {
-      ky.get(`/api/${mediaType}/${creationId}/states`)
+      ky.get(`/api/${mediaType}/${creationId}/states`, { cache: 'no-cache' })
         .then((res) => res.json<AccountStatesResponse>())
         .then((states) => {
           setStates(states);
@@ -105,7 +105,7 @@ export function CreationStatesDetailed({
 
   const { data: states } = useFetch<AccountStatesResponse>(
     `/api/${mediaType}/${creationId}/states`,
-    {},
+    { cache: 'no-cache' },
     [user]
   );
 
