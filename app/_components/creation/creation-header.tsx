@@ -1,7 +1,7 @@
 import type { CreationDetailsProps } from './common/types';
 import type { MediaType } from '@config/enums';
 
-import { Star } from 'lucide-react';
+import { Expand, Star } from 'lucide-react';
 import { CreationTrailer } from '@components/creation/creation-trailer';
 import { buildImagePath } from '@libs/tmdb';
 import { ImageFromPath } from '@components/image/image-from-path';
@@ -9,6 +9,7 @@ import { getRealesedDate, getTitle } from './common/utils';
 import { CreationReviewsDialog } from './creation-reviews-dialog';
 import { CreationStatesDetailed } from './account-states';
 import { CreationGenres } from './creation-genres';
+import { ExpandImageDialog } from '../dialog/expand-image-dialog';
 interface CreationHeaderProps extends CreationDetailsProps {
   mediaType: MediaType;
 }
@@ -42,16 +43,30 @@ export default async function MovieHeader({
       </div>
 
       <div className='my-4 flex flex-col sm:flex-row sm:gap-4'>
-        <div className='hidden flex-[25%] overflow-hidden rounded-md sm:block'>
-          <ImageFromPath
-            className='h-full w-auto select-none object-cover'
-            src={buildImagePath({ path: details.poster_path, scale: 'poster' })}
-            alt='Creation Poster'
-            width={260}
-            height={460}
-            priority
-          />
-        </div>
+        <ExpandImageDialog
+          path={details.poster_path}
+          alt={`${getTitle(details)} posters`}
+        >
+          <div className='relative hidden flex-[25%] cursor-pointer overflow-hidden rounded-md sm:block'>
+            <ImageFromPath
+              className='h-full w-auto select-none object-cover'
+              src={buildImagePath({
+                path: details.poster_path,
+                scale: 'poster',
+              })}
+              alt='Creation Poster'
+              width={260}
+              height={460}
+              priority
+            />
+            <div className='absolute inset-0 grid h-full w-full place-items-center bg-black/30 opacity-0 backdrop-blur-sm transition-all hover:opacity-100'>
+              <div className='m-auto w-fit text-center'>
+                <Expand className='sm:h-[48px] sm:w-[48px] md:h-[64px] md:w-[64px]' />
+                <p className='font-semibold'>Expand</p>
+              </div>
+            </div>
+          </div>
+        </ExpandImageDialog>
         <CreationTrailer
           className='aspect-[16/9] h-full flex-[70%] rounded-t-md sm:w-auto sm:rounded-md'
           creationId={details.id}
@@ -59,7 +74,7 @@ export default async function MovieHeader({
         />
 
         <figure className='flex w-full flex-[20%] gap-4 overflow-hidden sm:flex-col'>
-          <div className='backdrop-blur-5 grid h-auto w-full place-items-center rounded-b-md p-2 backdrop-blur-[25px] sm:h-full sm:rounded-md'>
+          <div className='grid h-auto w-full place-items-center rounded-b-md p-2 backdrop-blur-[25px] sm:h-full sm:rounded-md'>
             <CreationReviewsDialog
               creationId={details.id}
               mediaType={mediaType}
@@ -79,7 +94,7 @@ export default async function MovieHeader({
               </div>
             </CreationReviewsDialog>
           </div>
-          <div className='backdrop-blur-5 grid h-auto w-full place-items-center rounded-b-md p-2 backdrop-blur-[25px] sm:h-full sm:rounded-md'>
+          <div className='grid h-auto w-full place-items-center rounded-b-md p-2 backdrop-blur-[25px] sm:h-full sm:rounded-md'>
             <div className='m-auto flex items-center gap-1 text-center sm:flex-col'>
               <h2 className='select-none text-lg font-medium uppercase leading-none sm:text-3xl md:text-4xl'>
                 {details.popularity.toFixed()}

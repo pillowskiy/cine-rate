@@ -3,23 +3,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { Carousel } from '@components/carousel';
 import { NotFound } from '@components/not-found';
-import Link from 'next/link';
-import { TMDB_IMAGE_URL, buildImagePath } from '@libs/tmdb';
+import { buildImagePath } from '@libs/tmdb';
+import { OpenOriginalImage } from './open-original-image';
 
 interface MediaTabsProps {
   images: CreationImagesResponse | null;
-}
-
-function OpenOriginalImage({ path }: { path: string }) {
-  return (
-    <Link
-      className='text-xs text-foreground/50 transition-all hover:text-foreground hover:underline'
-      href={TMDB_IMAGE_URL + 'original' + path}
-      target='_blank'
-    >
-      Open original
-    </Link>
-  );
 }
 
 export function MediaTabs({ images }: MediaTabsProps) {
