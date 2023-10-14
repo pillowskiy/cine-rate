@@ -27,7 +27,7 @@ export default function EpisodeFilter({ series }: EpisodeFilterProps) {
   const { urlSearchParams, appendQueryParams } = useQueryParams<SeasonFilter>();
   const [isLoading, startTransition] = useTransition();
 
-  const sorted = urlSearchParams.get('sort') || 'desc';
+  const sorted = urlSearchParams.get('sort') || 'asc';
   const onSortChange = () => {
     startTransition(() => {
       appendQueryParams({ sort: sorted === 'desc' ? 'asc' : 'desc' });

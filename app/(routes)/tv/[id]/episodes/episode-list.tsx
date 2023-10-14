@@ -30,7 +30,7 @@ export default async function EpisodeList({
   const [season] = await getSeasonDetails(seriesId, seasonNumber);
 
   const sortBy = (a: number, b: number) => {
-    return sort === 'asc' ? a - b : b - a;
+    return sort === 'desc' ? b - a : a - b;
   };
 
   return (
