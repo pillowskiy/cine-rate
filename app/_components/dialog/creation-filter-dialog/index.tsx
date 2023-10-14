@@ -6,6 +6,7 @@ import {
   type Dispatch,
   type SetStateAction,
   createContext,
+  ChangeEvent,
 } from 'react';
 import type { MediaType } from '@config/enums';
 import { Button } from '@ui/button';
@@ -33,8 +34,10 @@ interface CreationFilterDialogProps {
   children: ReactNode;
 }
 
+type FilterDiscoverParams = Partial<GetDiscoverParams>;
+
 export const FilterContext = createContext<
-  [GetDiscoverParams, Dispatch<SetStateAction<GetDiscoverParams>>]
+  [FilterDiscoverParams, Dispatch<SetStateAction<FilterDiscoverParams>>]
 >([{}, () => null]);
 
 function toISO(stringDate: string) {
@@ -48,9 +51,9 @@ export function CreationFilterDialog({
 }: CreationFilterDialogProps) {
   const { setQueryParams, urlSearchParams } = useQueryParams();
   const searchParamsObj = Object.fromEntries(urlSearchParams.entries());
-  const [filter, setFilter] = useState<GetDiscoverParams>(searchParamsObj);
+  const [filter, setFilter] = useState<FilterDiscoverParams>(searchParamsObj);
 
-  const updateFilter = (params: GetDiscoverParams) => {
+  const updateFilter = (params: FilterDiscoverParams) => {
     return setFilter((prev) => ({ ...prev, ...params }));
   };
 

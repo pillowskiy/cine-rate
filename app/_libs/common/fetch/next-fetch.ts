@@ -8,9 +8,9 @@ export async function nextFetch<Params extends BaseParams = BaseParams>(
 ): Promise<Response> {
     const url = new URL(input, 'http://localhost:3000/');
     if (params) {
-        const paramsArray = Object.entries(params).map(([key, value]) => (
-            [key, value?.toString() || 'undefined']
-        ));
+        const paramsArray = Object.entries(params)
+            .filter(([key, value]) => key && value)
+            .map(([key, value]) => [key, value!.toString()]);
         url.search = (new URLSearchParams(paramsArray)).toString();
     }
 

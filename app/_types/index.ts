@@ -1,4 +1,4 @@
-export type BaseParams = Record<string, string | number | boolean>;
+export type BaseParams = Record<string, string | number | boolean | undefined>;
 
 export type BaseResponse<T extends unknown> = {
   page: number;

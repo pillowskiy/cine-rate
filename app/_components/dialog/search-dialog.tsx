@@ -6,7 +6,7 @@ import { Button } from '@ui/button';
 import { Loader, Search, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import type { MultiSearchResponse } from '@app/types/search-types';
-import type { MediaType } from '@config/enums';
+import { MediaType } from '@config/enums';
 import Link from 'next/link';
 import { Carousel } from '../carousel';
 import { PersonArticle } from '../article/person-article';
@@ -15,9 +15,11 @@ import { HorizontalCreationArticle } from '../article/creation-article';
 import ky from 'ky';
 
 async function getMultipleSearch(query: string) {
-  return ky.get('/api/search/multiple', {
-    searchParams: { query },
-  }).then(res => res.json<MultiSearchResponse>());
+  return ky
+    .get('/api/search/multiple', {
+      searchParams: { query },
+    })
+    .then((res) => res.json<MultiSearchResponse>());
 }
 
 type SearchedData = Record<MediaType, MultiSearchResponse['results']> | null;
@@ -138,6 +140,7 @@ export function SearchDialog() {
                       legacyBehavior
                     >
                       <HorizontalCreationArticle
+                        defaultMediaType={MediaType.Movie}
                         creation={movie}
                         alt='Series Backdrop'
                         onClick={() => setIsDialogOpen(false)}
@@ -168,6 +171,7 @@ export function SearchDialog() {
                       legacyBehavior
                     >
                       <HorizontalCreationArticle
+                        defaultMediaType={MediaType.TV}
                         creation={tv}
                         onClick={() => setIsDialogOpen(false)}
                         alt='Series Backdrop'
