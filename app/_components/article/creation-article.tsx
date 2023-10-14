@@ -127,7 +127,7 @@ export const HorizontalCreationArticle = memo(
         {...props}
       >
         <ImageFromPath
-          className='aspect-[16/9] w-[120px] min-w-[120px] rounded-md'
+          className='aspect-[16/9] max-w-[120px] min-w-[120px] rounded-md'
           src={buildImagePath({
             path: creation.backdrop_path,
             scale: 'backdrop',

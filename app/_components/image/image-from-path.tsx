@@ -22,7 +22,7 @@ export function ImageFromPath({
       <div
         className={cn(
           className,
-          'grid h-full w-full place-items-center bg-secondary'
+          'grid h-full w-full place-items-center bg-secondary',
         )}
       >
         <FallbackIcon className='m-auto h-12 w-12 text-primary/70' />
@@ -34,7 +34,7 @@ export function ImageFromPath({
     <Image
       className={cn(
         className,
-        isLoading && 'h-full w-full animate-pulse rounded-md bg-muted'
+        isLoading && 'h-full w-full animate-pulse rounded-md bg-muted',
       )}
       alt={alt}
       src={src}

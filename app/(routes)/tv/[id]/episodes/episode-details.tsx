@@ -90,8 +90,8 @@ export async function EpisodeDetails({
                     className='flex gap-4'
                     key={star.id}
                     credit={star}
-                    width={256}
-                    height={256}
+                    width={80}
+                    height={80}
                   />
                 ))}
               </section>

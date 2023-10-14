@@ -42,9 +42,9 @@ export default async function MovieHeader({
       </div>
 
       <div className='my-4 flex flex-col sm:flex-row sm:gap-4'>
-        <div className='flex-[25%] overflow-hidden rounded-md'>
+        <div className='hidden flex-[25%] overflow-hidden rounded-md sm:block'>
           <ImageFromPath
-            className='hidden h-full w-auto select-none object-cover sm:grid'
+            className='h-full w-auto select-none object-cover'
             src={buildImagePath({ path: details.poster_path, scale: 'poster' })}
             alt='Creation Poster'
             width={260}

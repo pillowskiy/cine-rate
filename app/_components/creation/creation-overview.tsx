@@ -14,14 +14,12 @@ export default function CreationOverview({ details }: CreationDetailsProps) {
       />
       <MSeparator className='my-4' />
       <div className='flex space-x-4 sm:space-x-0'>
-        <div>
-          <BaseFigure
-            className='block w-[120px] min-w-[120px] sm:hidden'
-            posterPath={details.poster_path}
-            width={320}
-            height={550}
-          />
-        </div>
+        <BaseFigure
+          className='block w-[120px] min-w-[120px] aspect-[2/3] h-fit sm:hidden'
+          posterPath={details.poster_path}
+          width={320}
+          height={550}
+        />
         <div className='flex-grow space-y-2 overflow-hidden'>
           <CreationGenres
             className='w-full sm:hidden'
