@@ -1,9 +1,8 @@
 import type { CreationsResponse } from "@app/types/creation-types";
-import type { BaseParams } from "@app/types/index";
 import { ResourceType } from "@config/enums";
 import ky from "ky";
 
-interface WatchlistParams extends BaseParams {
+interface WatchlistParams extends Record<string, string | number | boolean> {
     page: number;
 }
 
