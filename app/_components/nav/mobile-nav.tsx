@@ -15,6 +15,12 @@ import { Logo } from '@components/logo';
 import { AppNav } from '@components/nav/app-nav';
 import { ToggleTheme } from '@components/toggle-theme';
 import { useState } from 'react';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '../ui/accordion';
 
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,17 +47,39 @@ export function MobileNav() {
           onClick={() => setIsOpen(false)}
         />
 
-        {/* TEMP */}
-        <h2 className='text-lg font-semibold' onClick={() => setIsOpen(false)}>
-          Settings
-        </h2>
-        <ul className='my-4 cursor-pointer space-y-2 pl-6'>
-          <li>Language</li>
-          <li>
-            <ToggleTheme className='text-base' variant='link'>Theme</ToggleTheme>
-          </li>
-          <li>Privacy</li>
-        </ul>
+        <Accordion type='multiple'>
+          <AccordionItem className='border-b-0' value='language'>
+            <AccordionTrigger className='pr-4 pt-0'>Language</AccordionTrigger>
+            <AccordionContent asChild>
+              <ul className='space-y-2 pl-6 text-base text-foreground/70'>
+                <li>English</li>
+                <li>Ukrainian</li>
+                <li>Polland</li>
+                <li>Meow-Maw-Miw</li>
+              </ul>
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem className='border-b-0' value='theme'>
+            <AccordionTrigger className='pr-4 pt-0'>Theme</AccordionTrigger>
+            <AccordionContent asChild>
+              <ul className='space-y-2 pl-6 text-base text-foreground/70'>
+                <li>Dark</li>
+                <li>White</li>
+                <li>System</li>
+              </ul>
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem className='border-b-0' value='privacy'>
+            <AccordionTrigger className='pr-4 pt-0'>Privacy</AccordionTrigger>
+            <AccordionContent asChild>
+              <ul className='space-y-2 pl-6 text-base text-foreground/70'>
+                <li>Cookies</li>
+              </ul>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </SheetContent>
     </Sheet>
   );

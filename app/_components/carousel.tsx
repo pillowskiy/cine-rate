@@ -15,7 +15,7 @@ export function Carousel({ children, className, ...props }: CarouselProps) {
         initial={Target.HIDDEN}
         whileInView={Target.VISIBLE}
         className={cn(
-          'flex snap-x space-x-4 pb-4',
+          'flex snap-x space-x-4 pb-4 pt-1',
           className
         )}
         {...props}
