@@ -1,6 +1,8 @@
 import type { BaseParams } from "@app/types/index";
 import type { SafeFetchedData, RequestConfig } from ".";
 import { handleData, nextFetch } from "./next-fetch";
+import 'server-only';
+
 type Callback<T> = (value: T) => void;
 
 export function createFetchInterceptor(baseUrl?: string, config: RequestConfig = {}) {
