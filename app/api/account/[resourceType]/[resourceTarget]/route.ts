@@ -7,11 +7,12 @@ import { cookies } from "next/headers";
 import { $api } from "@api/api-interceptor";
 import { fetchErrorResponse } from "@libs/common/fetch";
 
-import { ResourceType } from '@config/enums';
+import { ResourceTarget, ResourceType } from '@config/enums';
 import zod from 'zod';
 
 const paramsDto = zod.object({
     resourceType: zod.nativeEnum(ResourceType),
+    resourceTarget: zod.nativeEnum(ResourceTarget),
 })
 
 export function GET(request: NextRequest, { params }: INextPageParams) {
@@ -25,9 +26,8 @@ export function GET(request: NextRequest, { params }: INextPageParams) {
     }
 
     const paramsParsed = paramsDto.safeParse(params);
-    
+
     if (!paramsParsed.success) {
-        console.log(paramsParsed.error);
         return generateZodErrorsResponse(paramsParsed);
     }
 
@@ -39,11 +39,11 @@ export function GET(request: NextRequest, { params }: INextPageParams) {
         return generateZodErrorsResponse(pagination);
     }
 
-    const { resourceType } = paramsParsed.data;
+    const { resourceTarget, resourceType } = paramsParsed.data;
 
     return $api.fetch<
         CreationsResponse, Pagination
-    >(`/3/account/account_id/watchlist/${resourceType}`, {
+    >(`/3/account/account_id/${resourceTarget}/${resourceType}`, {
         params: pagination.data
     }).then(data => {
         return NextResponse.json(data, { status: 200 });

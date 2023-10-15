@@ -23,6 +23,12 @@ export enum ResourceType {
     TV = 'tv',
 }
 
+export enum ResourceTarget {
+    Rated = 'rated',
+    Watchlist = 'watchlist',
+    Favorite = 'favorite',
+}
+
 export enum Gender {
     Unknown = 0,
     Woman = 1,

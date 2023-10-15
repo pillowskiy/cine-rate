@@ -13,7 +13,14 @@ import {
 } from '@ui/dropdown-menu';
 import { useToast } from '@ui/use-toast';
 
-import { MessageSquare, Mails, Star, BookmarkPlus, LogOut } from 'lucide-react';
+import {
+  MessageSquare,
+  Mails,
+  Star,
+  BookmarkPlus,
+  LogOut,
+  Heart,
+} from 'lucide-react';
 import { useAppDispatch, useAuth } from '@redux/hooks';
 import { logout as logoutAction } from '@redux/user/user-actions';
 import Link from 'next/link';
@@ -65,14 +72,28 @@ export function ProfileDropdown({ children }: ProfileDropdownProps) {
             <MessageSquare className='mr-2 h-4 w-4' />
             <span>Discussions</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem disabled>
             <Mails className='mr-2 h-4 w-4' />
             <span>Lists</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Star className='mr-2 h-4 w-4' />
-            <span>Rating</span>
-          </DropdownMenuItem>
+          <Link href='/account/favorite' passHref legacyBehavior>
+            <DropdownMenuItem
+              onClick={closeDropdown}
+              className='cursor-pointer'
+            >
+              <Heart className='mr-2 h-4 w-4' />
+              <span>Favorite</span>
+            </DropdownMenuItem>
+          </Link>
+          <Link href='/account/rated' passHref legacyBehavior>
+            <DropdownMenuItem
+              onClick={closeDropdown}
+              className='cursor-pointer'
+            >
+              <Star className='mr-2 h-4 w-4' />
+              <span>Rated</span>
+            </DropdownMenuItem>
+          </Link>
           <Link href='/account/watchlist' passHref legacyBehavior>
             <DropdownMenuItem
               onClick={closeDropdown}

@@ -4,14 +4,14 @@ import { useEffect, useMemo, useState } from 'react';
 
 import type { IPagination } from '@app/types/index';
 import type { CreationsResponse } from '@app/types/creation-types';
-import { MediaType, ResourceType } from '@config/enums';
+import { MediaType, ResourceTarget, ResourceType } from '@config/enums';
 
 import { TabsContent } from '@ui/tabs';
 import { HorizontalCreationArticle } from '@components/article/creation-article';
 import { CatalogSkeletonGroup } from '@components/skeleton/catalog-skeleton-group';
 import { NotFound } from '@components/not-found';
 
-import { getWatchlist } from './action';
+import { getResources } from './action';
 import { useSearchParams } from 'next/navigation';
 import { initialPagination } from '@config/pagination';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
@@ -19,8 +19,9 @@ import Link from 'next/link';
 
 type Items = CreationsResponse['results'] | null;
 
-interface WatchlistTabsContentProps {
+interface ResourcesTabsContentProps {
   resourceType: ResourceType;
+  target: ResourceTarget;
 }
 
 const mediaTypes = {
@@ -62,9 +63,10 @@ function HandleItems({
   );
 }
 
-export default function WatchlistTabsContent({
+export default function ResourcesTabsContent({
   resourceType,
-}: WatchlistTabsContentProps) {
+  target,
+}: ResourcesTabsContentProps) {
   const [items, setItems] = useState<Items>(null);
   const [{ currentPage, totalPages }, setPagination] =
     useState<IPagination>(initialPagination);
@@ -76,7 +78,7 @@ export default function WatchlistTabsContent({
   );
 
   const fetch = async (page: number = currentPage) => {
-    return getWatchlist(resourceType, {
+    return getResources(resourceType, target, {
       page: page + 1,
       ...searchParamsObj,
     }).then((data) => {
@@ -94,7 +96,7 @@ export default function WatchlistTabsContent({
   return (
     <TabsContent className='flex flex-wrap gap-4' value={resourceType}>
       <HandleItems defaultMediaType={mediaTypes[resourceType]} items={items} />
-      {!!items?.length && !canScroll && <CatalogSkeletonGroup />}
+      {(!!items?.length && !canScroll) && <CatalogSkeletonGroup />}
     </TabsContent>
   );
 }
