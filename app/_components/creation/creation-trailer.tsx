@@ -3,10 +3,10 @@
 import type { MediaType } from '@config/enums';
 import type { videoFormat } from 'ytdl-core';
 import { useEffect, useRef, useState } from 'react';
-import { Bot, Loader2, Play, Volume2, Youtube } from 'lucide-react';
+import { Bot, Loader2, Play } from 'lucide-react';
 import { cn } from '@libs/index';
 import useFetch from '@hooks/useFetch';
-import useOnScreen from '@hooks/useOnScreen';
+import { useInView } from 'framer-motion';
 
 interface CreationTrailerProps {
   mediaType: MediaType;
@@ -28,8 +28,7 @@ export function CreationTrailer({
   );
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  // TEMP: transition to framer motion InView hook
-  const isVisible = useOnScreen(videoRef);
+  const isVisible = useInView(videoRef);
   const [options, setOptions] = useState<VideoStateOptions>({});
 
   useEffect(() => void playingChange(isVisible), [isVisible]);
