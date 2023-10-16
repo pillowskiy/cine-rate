@@ -27,6 +27,7 @@ interface CreationRatingDialogProps {
   creationId: number;
   initialRated: AccountStatesResponse['rated'];
   children: ReactNode;
+  onUpdate?: (data: { rating: number | null }) => void
 }
 
 export function CreationRatingDialog({
@@ -34,6 +35,7 @@ export function CreationRatingDialog({
   mediaType,
   creationId,
   children,
+  onUpdate,
 }: CreationRatingDialogProps) {
   const [isRated, setIsRated] = useState(!!initialRated);
   const [rating, setRating] = useState(initialRated ? initialRated.value : 1);
@@ -51,6 +53,7 @@ export function CreationRatingDialog({
       })
       .then((res) => res.json<RatingResponse>())
       .then((data) => {
+        if(onUpdate) onUpdate({ rating: isRated ? null : rating });
         setIsRated((prev) => {
           return prev || !prev;
         });
@@ -86,6 +89,7 @@ export function CreationRatingDialog({
           });
         }
 
+        if(onUpdate) onUpdate({ rating: null });
         setIsRated(false);
         setRating(0);
         toast({

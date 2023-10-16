@@ -1,6 +1,6 @@
 import type { BaseButtonProps } from './types';
-import { useContext, useState } from 'react';
-import { StatesContext } from '.';
+import { useContext } from 'react';
+import { StatesAction, StatesContext } from './utils';
 import { Button } from '@ui/button';
 import { BookmarkPlus } from 'lucide-react';
 import { cn } from '@libs/index';
@@ -9,24 +9,23 @@ import ky from 'ky';
 import { rejectKy } from '@libs/ky';
 import { useOptimistic } from '@/app/_hooks/useOptimistic';
 
-interface RatingButtonProps extends BaseButtonProps {
-  alreadyInList: boolean;
-}
+interface RatingButtonProps extends BaseButtonProps {}
 
 export function WatchlistButton({
-  alreadyInList,
   withText,
   size,
   ...props
 }: RatingButtonProps) {
-  const { mediaType, creationId } = useContext(StatesContext);
+  const [states, dispatch] = useContext(StatesContext);
   const { toast } = useToast();
 
   const {
     action,
     state: inWatchlist,
     isLoading,
-  } = useOptimistic(alreadyInList, (state) => !state);
+  } = useOptimistic(states?.watchlist, (state) => !state);
+
+  if (!states) return null;
 
   async function toggleWatchlist() {
     action(
@@ -34,8 +33,8 @@ export function WatchlistButton({
         return ky
           .post('/api/states/watchlist', {
             body: JSON.stringify({
-              mediaType,
-              creationId,
+              mediaType: states?.mediaType,
+              creationId: states?.id,
               watchlist: !inWatchlist,
             }),
             method: 'POST',
@@ -51,6 +50,9 @@ export function WatchlistButton({
             variant: 'destructive',
           });
         },
+        onResolve: () => {
+          return dispatch({ type: StatesAction.WATCHLIST });
+        }
       }
     );
   }

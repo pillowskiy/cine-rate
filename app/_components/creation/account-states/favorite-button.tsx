@@ -2,7 +2,7 @@
 
 import type { BaseButtonProps } from './types';
 import { useContext } from 'react';
-import { StatesContext } from '.';
+import { StatesAction, StatesContext } from './utils';
 import { Button } from '@ui/button';
 import { cn } from '@libs/index';
 import { Heart } from 'lucide-react';
@@ -11,44 +11,51 @@ import ky from 'ky';
 import { rejectKy } from '@libs/ky';
 import { useOptimistic } from '@hooks/useOptimistic';
 
-interface ToggleFavoriteProps extends BaseButtonProps {
-  initialFavorite: boolean;
-}
+interface ToggleFavoriteProps extends BaseButtonProps {}
 
 export function FavoriteButton({
-  initialFavorite,
   withText,
   size,
   ...props
 }: ToggleFavoriteProps) {
-  const { mediaType, creationId } = useContext(StatesContext);
+  const [states, dispatch] = useContext(StatesContext);
   const { toast } = useToast();
   const {
     action,
     state: favorite,
     isLoading,
-  } = useOptimistic(initialFavorite, (state) => !state);
+  } = useOptimistic(states?.favorite, (state) => !state);
+
+  if (!states) return null;
 
   async function toggleFavorite() {
-    action(async () => {
-      return ky.post('/api/states/favorites', {
-        body: JSON.stringify({
-          mediaType,
-          creationId,
-          favorite: !favorite,
-        }),
-        method: 'POST',
-      }).then(res => res.json())
-    }, {
-      onReject: async (error) => {
-        const { message } = await rejectKy(error);
-        return toast({
-          title: 'Uh Oh! Something went wrong!',
-          description: message,
-          variant: 'destructive',
-        });
+    action(
+      async () => {
+        return ky
+          .post('/api/states/favorites', {
+            body: JSON.stringify({
+              mediaType: states?.mediaType,
+              creationId: states?.id,
+              favorite: !favorite,
+            }),
+            method: 'POST',
+          })
+          .then((res) => res.json());
+      },
+      {
+        onReject: async (error) => {
+          const { message } = await rejectKy(error);
+          return toast({
+            title: 'Uh Oh! Something went wrong!',
+            description: message,
+            variant: 'destructive',
+          });
+        },
+        onResolve: () => {
+          return dispatch({ type: StatesAction.FAVORITE });
+        }
       }
-    });
+    );
   }
 
   return (
