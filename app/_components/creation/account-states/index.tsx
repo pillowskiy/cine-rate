@@ -3,7 +3,7 @@
 import type { AccountStatesResponse } from '@app/types/creation-types';
 import type { CreationIdentifierProps } from '../common/types';
 
-import { ComponentProps, ReactNode, useState } from 'react';
+import { ComponentProps, ReactNode, useEffect, useState } from 'react';
 import { StatesContext, useStatesReducer, StatesAction } from './utils';
 
 import { FavoriteButton } from './favorite-button';
@@ -104,10 +104,13 @@ export function CreationStatesDetailed({
     [user]
   );
 
-  dispatch({
-    type: StatesAction.SET_STATE,
-    payload: data ? { ...data, mediaType } : null,
-  });
+  useEffect(() => {
+    dispatch({
+      type: StatesAction.SET_STATE,
+      payload: data ? { ...data, mediaType } : null,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   if (!states) return null;
 
