@@ -1,6 +1,6 @@
-import { IUser } from '@/app/_types/account-types';
+import type { IUser } from '@app/types/account-types';
 import * as actions from './user-actions';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isFulfilled, isPending, isRejected } from '@reduxjs/toolkit';
 
 interface IUserState {
   user: IUser | null;
@@ -17,42 +17,36 @@ export const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // Approve
     builder
-      .addCase(actions.approve.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(actions.approve.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.isLoading = false;
       })
-      .addCase(actions.approve.rejected, (state) => {
-        state.isLoading = false;
-      });
 
+    // Get User
     builder
-      .addCase(actions.getUser.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(actions.getUser.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.isLoading = false;
       })
       .addCase(actions.getUser.rejected, (state) => {
-        state.isLoading = false;
         state.user = null;
       });
+
+    // Logout
+    builder
+      .addCase(actions.logout.fulfilled, (state) => {
+        state.user = null;
+      })
 
     builder
-      .addCase(actions.logout.pending, (state) => {
+      .addMatcher(isPending, (state) => {
         state.isLoading = true;
       })
-      .addCase(actions.logout.fulfilled, (state, action) => {
-        state.user = null;
+      .addMatcher(isFulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(actions.logout.rejected, (state) => {
+      .addMatcher(isRejected, (state) => {
         state.isLoading = false;
-      });
-
+      })
   }
 });
