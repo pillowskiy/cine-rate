@@ -34,7 +34,7 @@ export async function GET(_: unknown, { params }: INextPageParams) {
     return getVideoInfo(videoURL).then(info => {
         const format = chooseFormat(info.formats, { quality: 'highestvideo' });
         // TEMP: correctly json object
-        return NextResponse.json(format, { status: 200 });
+        return NextResponse.json({ details: info.videoDetails, format }, { status: 200 });
     }).catch(err => {
         if (err instanceof Error) {
             return NextResponse.json({

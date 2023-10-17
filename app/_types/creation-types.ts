@@ -1,6 +1,7 @@
 import type { BaseResponse } from '.';
 import type { MediaType, CreationVideoSite } from '@config/enums';
 import type { IMediaResource } from './media-types';
+import type { videoFormat, MoreVideoDetails } from 'ytdl-core';
 
 export interface IKeyword {
   id: number;
@@ -87,4 +88,9 @@ export type AccountStatesResponse = {
   favorite: boolean;
   rated: false | { value: number };
   watchlist: boolean;
+}
+
+export type CreationTrailerResponse = {
+  details: MoreVideoDetails,
+  format: videoFormat,
 }

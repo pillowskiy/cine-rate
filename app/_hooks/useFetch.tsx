@@ -1,16 +1,17 @@
 import { useEffect, useReducer, useRef } from 'react';
-import ky, { type KyResponse, Options } from 'ky';
+import ky, { type Options, HTTPError } from 'ky';
+import type { IApiReject } from '@app/types/index';
 
 type Cache<T> = { [url: string]: T };
 type State<T> = {
   data: T | null;
-  error: KyResponse | null;
+  error: IApiReject | null;
 };
 
 type Action<T> =
   | { type: 'loading' }
   | { type: 'data'; payload: T }
-  | { type: 'error'; payload: KyResponse };
+  | { type: 'error'; payload: IApiReject };
 
 // TODO: invalidate cache, test cache
 export default function useFetch<T>(
@@ -56,10 +57,10 @@ export default function useFetch<T>(
           if (cancelRequest.current) return;
           dispatch({ type: 'data', payload: data });
         })
-        .catch((err) => {
+        .catch(async (error) => {
           if (cancelRequest.current) return;
-          if (!err.response) throw err;
-          dispatch({ type: 'error', payload: err.response });
+          if (!(error instanceof HTTPError)) throw error;
+          dispatch({ type: 'error', payload: await error.response.json() as IApiReject });
         });
     };
 
