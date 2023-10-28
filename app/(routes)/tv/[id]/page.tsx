@@ -11,7 +11,8 @@ import SerriesSeasons from './series-seasons';
 import SeriesDetails from './series-details';
 
 import { getCreationDetails } from '@actions/getCreationDetails';
-import { generateCreationMetadata, pipe } from '@libs/common/next';
+import { pipe } from '@libs/common/next';
+import { generateCreationMetadata } from '@libs/common/metadata';
 import { notFound } from 'next/navigation';
 
 export const generateMetadata = generateCreationMetadata(MediaType.TV);

@@ -11,7 +11,7 @@ import AuthProvider from '@components/auth-provider';
 
 import { Toaster } from '@components/ui/toaster';
 import NoInternetConnection from '@components/no-internet-connection';
-import { APP_URL } from '@libs/common/next';
+import { APP_URL } from '@libs/common/metadata';
 
 const inter = Inter({ subsets: ['latin'] });
 

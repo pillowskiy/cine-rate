@@ -11,7 +11,8 @@ import CreationCollection from '@components/creation/creation-collection';
 import MovieDetails from './movie-details';
 
 import { getCreationDetails } from '@actions/getCreationDetails';
-import { generateCreationMetadata, pipe } from '@libs/common/next';
+import { pipe } from '@libs/common/next';
+import { generateCreationMetadata } from '@libs/common/metadata';
 import { notFound } from 'next/navigation';
 
 export const generateMetadata = generateCreationMetadata(MediaType.Movie);
