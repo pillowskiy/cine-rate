@@ -10,13 +10,55 @@ import StoreProvider from '@components/store-provider';
 import AuthProvider from '@components/auth-provider';
 
 import { Toaster } from '@components/ui/toaster';
-import NoInternetConnection from '../_components/no-internet-connection';
+import NoInternetConnection from '@components/no-internet-connection';
+import { APP_URL } from '@libs/common/next';
 
 const inter = Inter({ subsets: ['latin'] });
 
+const keywords = [
+  'Movies',
+  'TV Shows',
+  'Film Database',
+  'Movie Ratings',
+  'TV Show Ratings',
+  'Film Reviews',
+  'Movie Recommendations',
+  'Top Rated Movies',
+  'Latest Releases',
+  'Actor Profiles',
+  'Director Profiles',
+  'Genre Search',
+  'Watchlist',
+  'Film History',
+  'Cinephile Community',
+  'Movie News',
+  'TV Show Updates',
+  'Hollywood',
+  'IMDB Alternative',
+  'TMDB Alternative',
+  'Cinephile Hub',
+];
+
 export const metadata: Metadata = {
+  metadataBase: new URL(APP_URL),
   title: 'CineRate',
-  description: 'CineRate: Rating, Reviews and more with IMDb',
+  applicationName: 'CineRate',
+  generator: 'Next.js',
+  keywords,
+  authors: [
+    {
+      name: 'Pillow',
+      url: 'https://github.com/PillowPowa',
+    },
+  ],
+  openGraph: {
+    type: 'website',
+    title: 'CineRate',
+    url: APP_URL,
+    description:
+      '🎥 CineRate - your personal cinematic guide in the world of movies and TV shows!',
+    images: APP_URL + 'og-image.png',
+  },
 };
 
 export default function RootLayout({

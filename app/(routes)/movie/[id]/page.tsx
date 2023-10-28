@@ -11,8 +11,10 @@ import CreationCollection from '@components/creation/creation-collection';
 import MovieDetails from './movie-details';
 
 import { getCreationDetails } from '@actions/getCreationDetails';
-import { pipe } from '@libs/common/next';
+import { generateCreationMetadata, pipe } from '@libs/common/next';
 import { notFound } from 'next/navigation';
+
+export const generateMetadata = generateCreationMetadata(MediaType.Movie);
 
 export default async function MoviePage({ params }: INextPageParams) {
   const paramId = pipe.strToInt(params?.id);

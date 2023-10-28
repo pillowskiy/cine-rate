@@ -11,8 +11,6 @@ export default async function PersonBiography({
   personId,
 }: PersonBiographyProps) {
   const [data, error] = await getPersonTranslations(personId);
-
-  // TEMP
   if (error || !data?.translations.length) return null;
 
   const [translation] = data.translations;

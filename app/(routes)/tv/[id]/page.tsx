@@ -11,8 +11,10 @@ import SerriesSeasons from './series-seasons';
 import SeriesDetails from './series-details';
 
 import { getCreationDetails } from '@actions/getCreationDetails';
-import { pipe } from '@libs/common/next';
+import { generateCreationMetadata, pipe } from '@libs/common/next';
 import { notFound } from 'next/navigation';
+
+export const generateMetadata = generateCreationMetadata(MediaType.TV);
 
 export default async function TVPage({ params }: INextPageParams) {
   const paramId = pipe.strToInt(params?.id);

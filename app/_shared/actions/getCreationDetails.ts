@@ -13,6 +13,7 @@ export function getCreationDetails<T extends MediaType>(
     `/3/${mediaType}/${creationId}`,
     {
       params,
+      cache: 'force-cache',
     }
   );
 }
