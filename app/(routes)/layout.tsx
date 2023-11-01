@@ -8,6 +8,7 @@ import Footer from '@components/footer';
 import ThemeProvider from '@components/theme-provider';
 import StoreProvider from '@components/store-provider';
 import AuthProvider from '@components/auth-provider';
+import ScrollTopProvider from '@components/scroll-top-provider';
 
 import { Toaster } from '@components/ui/toaster';
 import NoInternetConnection from '@components/no-internet-connection';
@@ -72,15 +73,21 @@ export default function RootLayout({
         <NoInternetConnection />
         <Toaster />
         <StoreProvider>
-          <AuthProvider>
-            <ThemeProvider attribute='class' defaultTheme='light' enableSystem>
-              <div className='flex min-h-screen flex-col'>
-                <Header />
-                <Main>{children}</Main>
-              </div>
-              <Footer />
-            </ThemeProvider>
-          </AuthProvider>
+          <ScrollTopProvider>
+            <AuthProvider>
+              <ThemeProvider
+                attribute='class'
+                defaultTheme='light'
+                enableSystem
+              >
+                <div className='flex min-h-screen flex-col'>
+                  <Header />
+                  <Main>{children}</Main>
+                </div>
+                <Footer />
+              </ThemeProvider>
+            </AuthProvider>
+          </ScrollTopProvider>
         </StoreProvider>
       </body>
     </html>
