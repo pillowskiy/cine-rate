@@ -9,7 +9,7 @@ export function getCreationVideos(
   params?: BaseParams
 ) {
   return $api.safeFetch<CreationVideosResponse>(
-    `/3/${mediaType}/${creationId}/videos`,
+    `/${mediaType}/${creationId}/videos`,
     { params }
   );
 }

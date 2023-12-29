@@ -8,7 +8,7 @@ import { NotFound } from '@components/not-found';
 
 export function getCombinedCredits(personId: number) {
   return $api.safeFetch<CombinedCreditsResponse>(
-    `/3/${MediaType.Person}/${personId}/combined_credits`
+    `/${MediaType.Person}/${personId}/combined_credits`
   );
 }
 

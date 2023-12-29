@@ -26,7 +26,7 @@ export async function GET(_: unknown, { params }: INextPageParams) {
 
     const { creationId, mediaType } = parsedParams.data
 
-    const [data, error] = await $api.safeFetch<AccountStatesResponse>(`/3/${mediaType}/${creationId}/account_states`);
+    const [data, error] = await $api.safeFetch<AccountStatesResponse>(`/${mediaType}/${creationId}/account_states`);
     if (error) {
         return fetchErrorResponse(error);
     }

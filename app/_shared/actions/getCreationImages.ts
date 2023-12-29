@@ -9,7 +9,7 @@ export function getCreationImages(
   params?: BaseParams
 ) {
   return $api.safeFetch<CreationImagesResponse>(
-    `/3/${mediaType}/${creationId}/images`,
+    `/${mediaType}/${creationId}/images`,
     { params }
   );
 }

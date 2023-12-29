@@ -43,7 +43,7 @@ export function GET(request: NextRequest, { params }: INextPageParams) {
 
     return $api.fetch<
         CreationsResponse, Pagination
-    >(`/3/account/account_id/${resourceTarget}/${resourceType}`, {
+    >(`/account/account_id/${resourceTarget}/${resourceType}`, {
         params: pagination.data
     }).then(data => {
         return NextResponse.json(data, { status: 200 });

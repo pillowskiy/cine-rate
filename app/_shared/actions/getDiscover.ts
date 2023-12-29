@@ -54,5 +54,5 @@ export function getDiscover<T extends MediaType>(
   mediaType: T,
   params?: GetDiscoverParams
 ) {
-  return $api.fetch<CreationsResponse>(`/3/discover/${mediaType}/`, { params });
+  return $api.fetch<CreationsResponse>(`/discover/${mediaType}/`, { params });
 }

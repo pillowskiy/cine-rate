@@ -21,7 +21,7 @@ export function getEpisodeDetails(
   params?: BaseParams
 ) {
   return $api.safeFetch<IEpisodeDetails>(
-    `/3/tv/${seriesId}` +
+    `/tv/${seriesId}` +
       `/season/${seasonNumber}` +
       `/episode/${episodeNumber}`,
     { params }

@@ -4,6 +4,6 @@ import { $api } from '@api/api-interceptor';
 
 export function getPersonTranslations(personId: number) {
   return $api.safeFetch<TranslationsResponse>(
-    `/3/${MediaType.Person}/${personId}/translations`
+    `/${MediaType.Person}/${personId}/translations`
   );
 }

@@ -34,7 +34,7 @@ export async function POST(request: NextRequest, { params }: INextPageParams) {
 
     const { mediaType, creationId } = parsedParams.data;
 
-    return $api.fetch<RatingResponse>(`/3/${mediaType}/${creationId}/rating`, {
+    return $api.fetch<RatingResponse>(`/${mediaType}/${creationId}/rating`, {
         method: 'POST',
         body: JSON.stringify(parsedBody.data),
         params: { session_id: sessionId }
@@ -61,7 +61,7 @@ export async function DELETE(_: NextRequest, { params }: INextPageParams) {
 
     const { mediaType, creationId } = parsedParams.data;
 
-    const [data, error] = await $api.safeFetch<RatingResponse>(`/3/${mediaType}/${creationId}/rating`, {
+    const [data, error] = await $api.safeFetch<RatingResponse>(`/${mediaType}/${creationId}/rating`, {
         method: 'DELETE',
         params: { sesson_id: sessionId }
     })

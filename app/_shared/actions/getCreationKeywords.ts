@@ -9,7 +9,7 @@ export function getCreationKeywords(
   params?: BaseParams
 ) {
   return $api.safeFetch<CreationKeywordsResponse>(
-    `/3/${mediaType}/${creationId}/keywords`,
+    `/${mediaType}/${creationId}/keywords`,
     {
       params,
     }

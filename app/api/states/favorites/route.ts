@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
 
     const { creationId, favorite, mediaType } = result.data;
 
-    const [data, error] = await $api.safeFetch<ToggleResponse>(`/3/account/account_id/favorite`, {
+    const [data, error] = await $api.safeFetch<ToggleResponse>(`/account/account_id/favorite`, {
         params: { session_id: sessionId },
         body: JSON.stringify({
             media_id: creationId,

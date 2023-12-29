@@ -17,7 +17,7 @@ async function getSeasonDetails(
   params?: BaseParams
 ) {
   return $api.safeFetch<SeasonDetailsResponse>(
-    `/3/${MediaType.TV}/${seriesId}/season/${seasonNumber}`,
+    `/${MediaType.TV}/${seriesId}/season/${seasonNumber}`,
     { params }
   );
 }

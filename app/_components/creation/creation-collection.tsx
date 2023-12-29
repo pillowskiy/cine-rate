@@ -10,7 +10,7 @@ interface CreationCollectionProps {
 
 async function getCollection(collectionId: number) {
   return $api
-    .safeFetch<CollectionDetailsResponse>(`/3/collection/${collectionId}`);
+    .safeFetch<CollectionDetailsResponse>(`/collection/${collectionId}`);
 }
 
 export default async function CreationCollection({

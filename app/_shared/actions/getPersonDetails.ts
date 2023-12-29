@@ -4,7 +4,7 @@ import { MediaType } from '@config/enums';
 import { $api } from '@api/api-interceptor';
 
 export function getPersonDetails(personId: number, params?: BaseParams) {
-  return $api.safeFetch<IPersonDetails>(`/3/${MediaType.Person}/${personId}`, {
+  return $api.safeFetch<IPersonDetails>(`/${MediaType.Person}/${personId}`, {
     params,
   });
 }
