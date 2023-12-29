@@ -6,17 +6,18 @@ import { handleData, nextFetch } from "./next-fetch";
 
 type Callback<T> = (value: T) => void;
 
-export function createFetchInterceptor(baseUrl?: string, config: RequestConfig = {}) {
+export function createFetchInterceptor(baseUrl?: string | URL, config: RequestConfig = {}) {
     const request = interceptor<RequestConfig>();
     const response = interceptor<Response>();
+    const { assignPathname } = createConfigURL(baseUrl);
 
     async function safeFetch<Data = unknown, Params extends BaseParams = BaseParams>(
-        input: URL | string, config: RequestConfig<Params> = {}
+        input: URL | string, init: RequestConfig<Params> = {}
     ): Promise<SafeFetchedData<Data>> {
-        const fetchConfig = Object.assign(structuredClone(config), config);
+        const fetchConfig = Object.assign(init, config);
         request.intercept(fetchConfig);
-        const url = new URL(input, baseUrl);
-        const result = await nextFetch(url.href, fetchConfig);
+        const url = assignPathname(input);
+        const result = await nextFetch(url, fetchConfig);
 
         if (!result.ok) {
             return [null, result];
@@ -30,10 +31,10 @@ export function createFetchInterceptor(baseUrl?: string, config: RequestConfig =
     async function fetch<Data = unknown, Params extends BaseParams = BaseParams>(
         input: URL | string, init: RequestConfig<Params> = {}
     ): Promise<Data> {
-        const fetchConfig = Object.assign(structuredClone(config), init);
+        const fetchConfig = Object.assign(init, config);
         request.intercept(fetchConfig);
-        const url = new URL(input, baseUrl);
-        const result = await nextFetch(url.href, fetchConfig);
+        const url = assignPathname(input);
+        const result = await nextFetch(url, fetchConfig);
         return handleData<Data>(result);
     }
 
@@ -56,4 +57,15 @@ function interceptor<T>(initial?: T) {
     }
 
     return { intercept, use };
+}
+
+function createConfigURL(url?: string | URL) {
+    const assignPathname = (input: string | URL) => {
+        const stringifyPathname = input.toString();
+        if (!url) return stringifyPathname;
+        return new URL(configUrl.pathname + stringifyPathname, configUrl.origin);
+    }
+    if (!url) return { url: '', assignPathname }
+    const configUrl = url instanceof URL ? url : new URL(url);
+    return { url: configUrl.toString(), assignPathname };
 }

@@ -1,10 +1,9 @@
 import { createFetchInterceptor } from '@libs/common/fetch';
-const { TMDB_API_URL, TMDB_ACCESS_TOKEN } = process.env;
+const { TMDB_API_URL, TMDB_ACCESS_TOKEN, TMDB_API_VERSION = '3' } = process.env;
 
-export const $api = createFetchInterceptor(TMDB_API_URL, {
+export const $api = createFetchInterceptor(new URL(TMDB_API_VERSION, TMDB_API_URL), {
   credentials: 'include',
   mode: 'cors',
-  next: { revalidate: 1200 }
 });
 
 $api.request.use((config) => {
