@@ -53,6 +53,9 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
   );
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  /* TEMP: It's possible to use `useInView` hook here, but it's not working properly
+   * look https://forum.freecodecamp.org/t/nextjs-and-framer-motion/456236
+   */
   const isVisible = useInView(videoRef);
   const [options, setOptions] = useState<VideoStateOptions>({});
 
@@ -134,7 +137,10 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
             </HoverCard>
             <HoverCard>
               <HoverCardTrigger asChild>
-                <YoutubeEmbedDialog details={data.details}>
+                <YoutubeEmbedDialog
+                  details={data.details}
+                  onOpenChange={(open) => open && playingChange(false)}
+                >
                   <Expand className='h-5 w-5 cursor-pointer transition-all hover:-translate-y-[4px] hover:scale-105 sm:h-6 sm:w-6' />
                 </YoutubeEmbedDialog>
               </HoverCardTrigger>
