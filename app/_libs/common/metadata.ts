@@ -27,10 +27,10 @@ export function generateCreationMetadata(mediaType: MediaType) {
       const creationTitle = title || original_title || assignTitleException
   
       return {
-        title: creationTitle,
+        title: `${creationTitle} — CineRate`,
         openGraph: {
           type: 'website',
-          title: `CineRate - ${creationTitle}`,
+          title: `${creationTitle} — CineRate`,
           images: buildImagePath({ path: creation.backdrop_path }) || '/og-image.png',
           url,
           description: creation.overview,
@@ -41,10 +41,10 @@ export function generateCreationMetadata(mediaType: MediaType) {
   
   export function generateNotFoundMetadata({ url, ...ogMetadata }: NonNullable<Metadata['openGraph']> = {}): Metadata {
     return {
-      title: `CineRate - Not Found`,
+      title: `Not Found — CineRate`,
       openGraph: {
         type: 'website',
-        title: 'CineRate',
+        title: 'Not Found — CineRate',
         url: url || APP_URL,
         images: APP_URL + 'og-not-found.png',
         ...ogMetadata

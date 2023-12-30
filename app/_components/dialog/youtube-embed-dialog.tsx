@@ -9,8 +9,9 @@ import {
 } from '@ui/dialog';
 import { Eye, ThumbsDown, ThumbsUp } from 'lucide-react';
 import { formatTimeAgo } from '@libs/time';
+import type { DialogProps } from '@radix-ui/react-dialog';
 
-interface YoutubeEmbedDialogProps {
+interface YoutubeEmbedDialogProps extends DialogProps {
   details: MoreVideoDetails;
   children: ReactNode;
 }
@@ -18,16 +19,20 @@ interface YoutubeEmbedDialogProps {
 export function YoutubeEmbedDialog({
   details,
   children,
+  ...props
 }: YoutubeEmbedDialogProps) {
+  const url = new URL(details.embed.iframeUrl);
+  url.searchParams.set('autoplay', '1');
+
   return (
-    <Dialog>
+    <Dialog {...props}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className='max-w-3xl overflow-hidden px-4'>
         <DialogHeader className='mr-4'>
           <DialogTitle>{details.title}</DialogTitle>
         </DialogHeader>
         <div className='relative aspect-[16/9] w-full overflow-hidden rounded-md'>
-          <iframe src={details.embed.iframeUrl} width='100%' height='100%'></iframe>
+          <iframe src={url.toString()} width='100%' height='100%' allowFullScreen></iframe>
         </div>
         <div className='flex w-full flex-row gap-2'>
           <div className='flex items-center gap-2'>
