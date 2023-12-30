@@ -27,6 +27,7 @@ export function generateCreationMetadata(mediaType: MediaType) {
       const creationTitle = title || original_title || assignTitleException
   
       return {
+        themeColor: '#F59E0B',
         title: `${creationTitle} — CineRate`,
         openGraph: {
           type: 'website',
@@ -35,12 +36,16 @@ export function generateCreationMetadata(mediaType: MediaType) {
           url,
           description: creation.overview,
         },
+        twitter: {
+          card: 'summary_large_image',
+        }
       }
     })
   }
   
   export function generateNotFoundMetadata({ url, ...ogMetadata }: NonNullable<Metadata['openGraph']> = {}): Metadata {
     return {
+      themeColor: '#F59E0B',
       title: `Not Found — CineRate`,
       openGraph: {
         type: 'website',
@@ -49,5 +54,8 @@ export function generateCreationMetadata(mediaType: MediaType) {
         images: APP_URL + 'og-not-found.png',
         ...ogMetadata
       },
+      twitter: {
+        card: 'summary_large_image',
+      }
     }
   }
