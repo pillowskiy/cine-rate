@@ -10,5 +10,6 @@ export function getCreationReviews(
 ) {
   return $api.safeFetch<ReviewResponse>(`/${mediaType}/${creationId}/reviews`, {
     params,
+    cache: 'force-cache',
   });
 }

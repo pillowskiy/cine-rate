@@ -1,8 +1,6 @@
 import type { IReview } from '@app/types/review-types';
 import { Card, CardContent } from '../ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { CalendarDays } from 'lucide-react';
-import { buildImagePath } from '@/app/_libs/tmdb';
 import { UserAvatar } from '../user-avatar';
 
 interface ReviewCardProps {
