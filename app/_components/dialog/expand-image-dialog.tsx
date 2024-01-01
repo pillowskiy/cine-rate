@@ -3,7 +3,6 @@
 import {
   useState,
   useEffect,
-  useCallback,
   useMemo,
   type ReactNode,
   type MouseEvent,
@@ -17,7 +16,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@ui/dialog';
-import { useToast } from '@ui/use-toast';
 import { buildImagePath } from '@libs/tmdb';
 import { OpenOriginalImage } from '@components/open-original-image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -35,25 +33,10 @@ export function ExpandImageDialog({
   children,
 }: ExpandImageDialogProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { toast } = useToast();
-
   const imageSrc = useMemo(() => buildImagePath({ path }), [path]);
-  const handleError = useCallback(() => {
-    if (!imageSrc) {
-      setIsOpen(false);
-      toast({
-        title: 'Uh, Oh! Something went wrong!',
-        description: 'An error occurred while the image was loading',
-        variant: 'destructive',
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [imageSrc]);
+  useEffect(() => void setIsOpen(false), [imageSrc]);
 
-  useEffect(() => {
-    if (!imageSrc) handleError();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [imageSrc]);
+  if (!imageSrc) return children;
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>

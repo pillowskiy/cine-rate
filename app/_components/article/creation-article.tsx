@@ -81,7 +81,7 @@ export const CreationArticle = memo(
           <div className='flex items-center justify-between text-xs'>
             <div className='flex items-center space-x-1.5'>
               <Star className='h-4 w-4 fill-yellow-300 text-yellow-400' />
-              <span>{creation.vote_average.toFixed(1)}</span>
+              <span>{(creation.vote_average ?? 0).toFixed(1)}</span>
             </div>
             <span>({creation.vote_count} reviews)</span>
           </div>

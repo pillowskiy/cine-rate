@@ -18,6 +18,11 @@ export default async function MovieHeader({
   details,
   mediaType,
 }: CreationHeaderProps) {
+  const posterPath = buildImagePath({
+    path: details.poster_path,
+    scale: 'poster',
+  });
+
   return (
     <header className='relative py-4 text-white sm:px-4'>
       <div className='flex flex-col justify-between gap-4 sm:flex-row'>
@@ -50,21 +55,21 @@ export default async function MovieHeader({
           <div className='relative hidden flex-[25%] cursor-pointer overflow-hidden rounded-md sm:block'>
             <ImageFromPath
               className='h-full w-auto select-none object-cover'
-              src={buildImagePath({
-                path: details.poster_path,
-                scale: 'poster',
-              })}
+              src={posterPath}
               alt='Creation Poster'
               width={260}
               height={460}
+              loading='eager'
               priority
             />
-            <div className='absolute inset-0 grid h-full w-full place-items-center bg-black/30 opacity-0 backdrop-blur-sm transition-all hover:opacity-100'>
-              <div className='m-auto w-fit text-center'>
-                <Expand className='sm:h-[48px] sm:w-[48px] md:h-[64px] md:w-[64px]' />
-                <p className='font-semibold'>Expand</p>
+            {!!posterPath && (
+              <div className='absolute inset-0 grid h-full w-full place-items-center bg-black/30 opacity-0 backdrop-blur-sm transition-all hover:opacity-100'>
+                <div className='m-auto w-fit text-center'>
+                  <Expand className='sm:h-[48px] sm:w-[48px] md:h-[64px] md:w-[64px]' />
+                  <p className='font-semibold'>Expand</p>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </ExpandImageDialog>
         <CreationTrailer
@@ -114,10 +119,11 @@ export default async function MovieHeader({
             path: details.backdrop_path,
             scale: 'large_backdrop',
           })}
-          alt='Movie Image'
+          alt='Movie Backdrop'
           width={1000}
           height={450}
           priority
+          loading='eager'
         />
         <div
           className={

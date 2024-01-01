@@ -26,7 +26,7 @@ export default function CreationOverview({ details }: CreationDetailsProps) {
             genres={details.genres.slice(0, 3)}
           />
           <p className='flex-grow break-words text-sm md:text-base'>
-            {details.overview}
+            {details.overview || 'No overview found.'}
           </p>
         </div>
       </div>
