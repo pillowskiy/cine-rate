@@ -2,7 +2,9 @@ import type { ITVDetails } from '@app/types/tv-types';
 import type { ComponentProps } from 'react';
 import { MediaType } from '@config/enums';
 import CreationKeywords from '@components/creation/creation-keywords';
+import CreationExternalLinks from '@components/creation/creation-external-links';
 import { getTitle } from '@components/creation/common/utils';
+import { Heading } from '@components/heading';
 import { MSeparator } from '@ui/separator';
 import { List, ListItem } from '@ui/list';
 
@@ -17,14 +19,10 @@ export default async function SeriesDetails({
   return (
     <div {...props}>
       <section>
-        <div className='flex items-center justify-between'>
-          <div className='max-w-full space-y-1'>
-            <h2 className='text-2xl font-semibold tracking-tight'>Details</h2>
-            <p className='truncate text-sm text-muted-foreground'>
-              Interesting about {getTitle(details)}.
-            </p>
-          </div>
-        </div>
+        <Heading
+          title='Details'
+          description={`Interesting about ${getTitle(details)}.`}
+        />
         <MSeparator className='my-4' />
 
         <List>
@@ -61,6 +59,8 @@ export default async function SeriesDetails({
           />
         </List>
       </section>
+
+      <CreationExternalLinks externalIds={details.external_ids} />
 
       <CreationKeywords mediaType={MediaType.TV} details={details} />
     </div>

@@ -1,9 +1,10 @@
-import { ICreationLanguage, IProductionCountry } from '.';
-import { IPartialCompany } from './company-types';
+import type { ICreationLanguage, IProductionCountry } from '.';
+import type { IPartialCompany } from './company-types';
+import type { ICreationExternalIds } from './creation-types';
 import type { IPartialGenre } from './genre-types';
-import { ICelebrity, ICredit, ICrew } from './person-types';
+import type { ICelebrity, ICredit, ICrew } from './person-types';
 
-export interface ITVDetails {
+export interface ITVDetails extends ICreationExternalIds {
   created_by: ICelebrity[];
   episode_run_time: number[];
   first_air_date: string;

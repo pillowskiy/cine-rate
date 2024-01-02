@@ -1,9 +1,10 @@
 import type { ICreationLanguage, IProductionCountry } from '.';
 import type { ICollection } from './collection-types';
 import type { IPartialCompany } from './company-types';
+import type { ICreationExternalIds } from './creation-types';
 import type { IPartialGenre } from './genre-types';
 
-export interface IMovieDetails {
+export interface IMovieDetails extends ICreationExternalIds {
   adult: boolean;
   backdrop_path: string;
   belongs_to_collection: null | ICollection;

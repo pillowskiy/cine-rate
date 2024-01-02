@@ -94,3 +94,14 @@ export type CreationTrailerResponse = {
   details: MoreVideoDetails,
   format: videoFormat,
 }
+
+export type CreationExternalIds = {
+  imdb_id?: string | null;
+  facebook_id?: string | null;
+  instagram_id?: string | null;
+  twitter_id?: string | null;
+}
+
+export interface ICreationExternalIds {
+  external_ids: CreationExternalIds;
+}
