@@ -77,7 +77,10 @@ export default async function MovieHeader({
           path={details.poster_path}
           alt={`${getTitle(details)} posters`}
         >
-          <div className='relative hidden flex-[25%] cursor-pointer overflow-hidden rounded-md sm:block'>
+          <button
+            aria-label='Expand Creation Poster'
+            className='relative hidden flex-[25%] cursor-pointer overflow-hidden rounded-md sm:block'
+          >
             <ImageFromPath
               className='h-full w-auto select-none object-cover'
               src={posterPath}
@@ -100,7 +103,7 @@ export default async function MovieHeader({
                 </div>
               </div>
             )}
-          </div>
+          </button>
         </ExpandImageDialog>
         <CreationTrailer
           className='aspect-[16/9] h-full flex-[70%] rounded-t-md sm:w-auto sm:rounded-md'
@@ -114,7 +117,11 @@ export default async function MovieHeader({
               creationId={details.id}
               mediaType={mediaType}
             >
-              <div className='m-auto flex cursor-pointer items-center gap-1 text-center sm:flex-col'>
+              {/* TEMP: worse accessibility */}
+              <button
+                className='m-auto flex cursor-pointer items-center gap-1 text-center sm:flex-col'
+                aria-label='REVIEWS'
+              >
                 <div className='relative'>
                   <Star className='m-auto h-5 w-5 fill-yellow-500 text-yellow-500 sm:h-[48px] sm:w-[48px] md:h-[64px] md:w-[64px]' />
                   <div className='absolute left-[50%] top-[50%] hidden -translate-x-[50%] -translate-y-[50%] sm:block'>
@@ -126,7 +133,7 @@ export default async function MovieHeader({
                 <p className='text-sm font-medium uppercase transition-all hover:underline'>
                   Reviews
                 </p>
-              </div>
+              </button>
             </CreationReviewsDialog>
           </div>
           <div className='grid h-auto w-full place-items-center rounded-b-md p-2 backdrop-blur-[25px] sm:h-full sm:rounded-md'>

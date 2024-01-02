@@ -11,7 +11,6 @@ import {
   Play,
   Youtube,
 } from 'lucide-react';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@ui/hover-card';
 import { Button } from '@ui/button';
 import { YoutubeEmbedDialog } from '@components/dialog/youtube-embed-dialog';
 import Link from 'next/link';
@@ -93,6 +92,7 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
             disabled
           >
             <MoreHorizontal className='h-5 w-5' />
+            <span className="sr-only">Trailer Options Menu</span>
           </Button>
         </div>
         <video
@@ -108,8 +108,8 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
           Your browser does not support the video tag.
         </video>
         <div className='absolute bottom-0 left-0 z-10 flex w-full justify-between p-4'>
-          <div
-            className='flex cursor-pointer items-center transition-all hover:underline'
+          <button
+            className='flex cursor-pointer items-center transition-all hover:underline px-1'
             onClick={() => playingChange()}
           >
             <Play className='mr-2 h-5 w-5 sm:h-8 sm:w-8' />
@@ -119,18 +119,21 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
                 {minutesFormat(+data.details.lengthSeconds)}
               </i>
             </span>
-          </div>
+          </button>
 
           <div className='ml-auto flex items-center gap-2'>
             <Link href={data.details.video_url} target='_blank'>
               <Youtube className='h-5 w-5 cursor-pointer transition-all sm:h-8 sm:w-8' />
+              <span className="sr-only">Open Original Video</span>
             </Link>
 
             <YoutubeEmbedDialog
               details={data.details}
               onOpenChange={(open) => open && playingChange(false)}
             >
-              <Expand className='h-5 w-5 cursor-pointer transition-all sm:h-6 sm:w-6' />
+              <button className='p-1' aria-label='Open Youtube Embed Video'>
+                <Expand className='h-5 w-5 cursor-pointer transition-all sm:h-6 sm:w-6' />
+              </button>
             </YoutubeEmbedDialog>
             {/* TODO video trailer actions */}
           </div>

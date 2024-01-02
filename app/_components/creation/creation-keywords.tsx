@@ -40,7 +40,7 @@ export default async function CreationKeywords({
             passHref
             legacyBehavior
           >
-            <Button className='h-7 text-sm' variant='outline'>
+            <Button className='h-7 text-sm truncate' variant='outline'>
               {keyword.name}
             </Button>
           </Link>

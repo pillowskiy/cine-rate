@@ -29,13 +29,13 @@ export function AuthButton() {
   if (user) {
     return (
       <ProfileDropdown>
-        <div>
+        <button className='rounded-full' aria-label='Profile Dropdown'>
           <UserAvatar
             path={user.avatar.tmdb.avatar_path}
             gravatarHash={user.avatar.gravatar.hash}
             username={user.username}
           />
-        </div>
+        </button>
       </ProfileDropdown>
     );
   }

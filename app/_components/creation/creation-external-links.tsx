@@ -32,16 +32,16 @@ export default function CreationExternalLinks({
       />
       <MSeparator className='my-4' />
 
-      <div className='flex w-full space-x-4 overflow-x-auto'>
+      <div className='flex w-full gap-4 overflow-x-auto'>
         {urls.map(([icon, url]) => (
           <Link
-            className='aspect-square w-[36px] opacity-70 transition-opacity hover:opacity-100'
-            aria-label={icon.split('_')[0]}
+            className='[&>svg]:h-[36px] first:w-auto opacity-70 transition-opacity hover:opacity-100 px-1'
             href={url}
             target='_blank'
             key={url}
           >
             {icons[icon as keyof typeof icons]}
+            <span className="sr-only">{icon}</span>
           </Link>
         ))}
       </div>
