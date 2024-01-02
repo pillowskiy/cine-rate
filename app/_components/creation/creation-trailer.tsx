@@ -84,8 +84,8 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
 
   if (data) {
     return (
-      <div className='relative h-full w-full'>
-        <div className='absolute left-0 top-0 z-20 flex w-full flex-row-reverse p-4'>
+      <div className='relative h-full w-full after:absolute after:inset-0 after:bg-gradient-to-t after:from-black'>
+        <div className='absolute left-0 top-0 z-10 flex w-full flex-row-reverse p-4'>
           <Button
             className='h-7 w-7 sm:h-8 sm:w-8'
             variant='outline'
@@ -107,7 +107,7 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
         >
           Your browser does not support the video tag.
         </video>
-        <div className='absolute bottom-0 left-0 z-20 flex w-full justify-between p-4'>
+        <div className='absolute bottom-0 left-0 z-10 flex w-full justify-between p-4'>
           <div
             className='flex cursor-pointer items-center transition-all hover:underline'
             onClick={() => playingChange()}
@@ -122,39 +122,19 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
           </div>
 
           <div className='ml-auto flex items-center gap-2'>
-            <HoverCard>
-              <HoverCardTrigger asChild>
-                <Link href={data.details.video_url} target='_blank'>
-                  <Youtube className='h-5 w-5 cursor-pointer transition-all hover:-translate-y-[4px] hover:scale-105 sm:h-8 sm:w-8' />
-                </Link>
-              </HoverCardTrigger>
-              <HoverCardContent
-                className='w-fit px-2 py-1 text-center text-sm'
-                side='top'
-              >
-                <span>Watch on YouTube</span>
-              </HoverCardContent>
-            </HoverCard>
-            <HoverCard>
-              <HoverCardTrigger asChild>
-                <YoutubeEmbedDialog
-                  details={data.details}
-                  onOpenChange={(open) => open && playingChange(false)}
-                >
-                  <Expand className='h-5 w-5 cursor-pointer transition-all hover:-translate-y-[4px] hover:scale-105 sm:h-6 sm:w-6' />
-                </YoutubeEmbedDialog>
-              </HoverCardTrigger>
-              <HoverCardContent
-                className='w-fit px-2 py-1 text-center text-sm'
-                side='top'
-              >
-                <span>Watch with sound</span>
-              </HoverCardContent>
-            </HoverCard>
+            <Link href={data.details.video_url} target='_blank'>
+              <Youtube className='h-5 w-5 cursor-pointer transition-all sm:h-8 sm:w-8' />
+            </Link>
+
+            <YoutubeEmbedDialog
+              details={data.details}
+              onOpenChange={(open) => open && playingChange(false)}
+            >
+              <Expand className='h-5 w-5 cursor-pointer transition-all sm:h-6 sm:w-6' />
+            </YoutubeEmbedDialog>
             {/* TODO video trailer actions */}
           </div>
         </div>
-        <div className='absolute bottom-0 z-10 h-full w-full bg-gradient-to-t from-black' />
       </div>
     );
   }

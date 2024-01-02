@@ -10,6 +10,9 @@ import { CreationReviewsDialog } from './creation-reviews-dialog';
 import { CreationStatesDetailed } from './account-states';
 import { CreationGenres } from './creation-genres';
 import { ExpandImageDialog } from '../dialog/expand-image-dialog';
+
+import { cn } from '@libs/index';
+
 interface CreationHeaderProps extends CreationDetailsProps {
   mediaType: MediaType;
 }
@@ -25,6 +28,28 @@ export default async function MovieHeader({
 
   return (
     <header className='relative py-4 text-white sm:px-4'>
+      <div
+        className={cn(
+          'absolute -left-4 top-0 -z-50 h-full w-screen overflow-hidden bg-black sm:left-0 sm:w-full sm:rounded-md',
+          'after:absolute after:inset-0 after:bg-gradient-to-r after:from-black'
+        )}
+      >
+        <ImageFromPath
+          className={
+            'aspect-[16/9] h-full w-full scale-110 select-none object-cover object-top blur-sm'
+          }
+          src={buildImagePath({
+            path: details.backdrop_path,
+            scale: 'large_backdrop',
+          })}
+          alt='Movie Backdrop'
+          width={1000}
+          height={450}
+          priority
+          loading='eager'
+        />
+      </div>
+
       <div className='flex flex-col justify-between gap-4 sm:flex-row'>
         <div className='space-y-1'>
           <div className='flex flex-col sm:flex-row sm:items-center sm:gap-2'>
@@ -63,7 +88,12 @@ export default async function MovieHeader({
               priority
             />
             {!!posterPath && (
-              <div className='absolute inset-0 grid h-full w-full place-items-center bg-black/30 opacity-0 backdrop-blur-sm transition-all hover:opacity-100'>
+              <div
+                className={cn(
+                  'absolute inset-0 grid h-full w-full place-items-center bg-black/30 opacity-0',
+                  'backdrop-blur-sm transition-opacity duration-300 hover:opacity-100'
+                )}
+              >
                 <div className='m-auto w-fit text-center'>
                   <Expand className='sm:h-[48px] sm:w-[48px] md:h-[64px] md:w-[64px]' />
                   <p className='font-semibold'>Expand</p>
@@ -108,28 +138,6 @@ export default async function MovieHeader({
             </div>
           </div>
         </figure>
-      </div>
-
-      <div className='absolute -left-4 top-0 -z-20 h-full w-screen overflow-hidden bg-black sm:left-0 sm:w-full sm:rounded-md'>
-        <ImageFromPath
-          className={
-            'aspect-[16/9] h-full w-full scale-110 select-none object-cover object-top'
-          }
-          src={buildImagePath({
-            path: details.backdrop_path,
-            scale: 'large_backdrop',
-          })}
-          alt='Movie Backdrop'
-          width={1000}
-          height={450}
-          priority
-          loading='eager'
-        />
-        <div
-          className={
-            'absolute left-0 top-0 h-full w-full bg-black/20 bg-gradient-to-r backdrop-blur-[6px]'
-          }
-        />
       </div>
     </header>
   );
