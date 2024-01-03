@@ -5,7 +5,7 @@ import type { CreationIdentifierProps } from '../common/types';
 import { Heading } from '@components/heading';
 import { MSeparator } from '@ui/separator';
 import { CreationReviewsPagination } from './creation-reviews-pagination';
-import { CreationReviewsCatalog } from './creation-reviews.catalog';
+import { CreationReviewsCatalog } from './creation-reviews-catalog';
 import {
   PaginationContext,
   initialPaginationState,

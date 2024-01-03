@@ -1,12 +1,11 @@
+import dynamic from 'next/dynamic';
 import { MediaType } from '@config/enums';
 import type { INextPageParams } from '@app/types/index';
-
 import CreationCast from '@components/creation/creation-cast';
 import CreationHeader from '@components/creation/creation-header';
 import CreationSimilar from '@components/creation/creation-similar';
 import CreationOverview from '@components/creation/creation-overview';
 import CreationMediaTabs from '@components/creation/creation-media-tabs';
-import CreationReviews from '@components/creation/creation-reviews';
 
 import SerriesSeasons from './series-seasons';
 import SeriesDetails from './series-details';
@@ -15,6 +14,11 @@ import { getCreationDetails } from '@actions/getCreationDetails';
 import { pipe } from '@libs/common/next';
 import { generateCreationMetadata } from '@libs/common/metadata';
 import { notFound } from 'next/navigation';
+
+const CreationReviews = dynamic(
+  () => import('@components/creation/creation-reviews'),
+  { ssr: false }
+);
 
 export const generateMetadata = generateCreationMetadata(MediaType.TV);
 

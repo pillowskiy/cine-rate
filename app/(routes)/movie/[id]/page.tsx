@@ -1,5 +1,6 @@
 import type { INextPageParams } from '@app/types/index';
 import { MediaType } from '@config/enums';
+import dynamic from 'next/dynamic';
 
 import CreationCast from '@components/creation/creation-cast';
 import CreationHeader from '@components/creation/creation-header';
@@ -7,7 +8,11 @@ import CreationOverview from '@components/creation/creation-overview';
 import CreationSimilar from '@components/creation/creation-similar';
 import CreationMediaTabs from '@components/creation/creation-media-tabs';
 import CreationCollection from '@components/creation/creation-collection';
-import CreationReviews from '@components/creation/creation-reviews';
+
+const CreationReviews = dynamic(
+  () => import('@components/creation/creation-reviews'),
+  { ssr: false }
+);
 
 import MovieDetails from './movie-details';
 
