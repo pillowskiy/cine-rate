@@ -6,7 +6,6 @@ import { CreationTrailer } from '@components/creation/creation-trailer';
 import { buildImagePath } from '@libs/tmdb';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { getRealesedDate, getTitle } from './common/utils';
-import { CreationReviewsDialog } from './creation-reviews-dialog';
 import { CreationStatesDetailed } from './account-states';
 import { CreationGenres } from './creation-genres';
 import { ExpandImageDialog } from '../dialog/expand-image-dialog';
@@ -113,28 +112,22 @@ export default async function MovieHeader({
 
         <figure className='flex w-full flex-[20%] gap-4 overflow-hidden sm:flex-col'>
           <div className='grid h-auto w-full place-items-center rounded-b-md p-2 backdrop-blur-[25px] sm:h-full sm:rounded-md'>
-            <CreationReviewsDialog
-              creationId={details.id}
-              mediaType={mediaType}
+            <div
+              className='m-auto flex cursor-pointer items-center gap-1 text-center sm:flex-col'
+              aria-label='REVIEWS'
             >
-              {/* TEMP: worse accessibility */}
-              <button
-                className='m-auto flex cursor-pointer items-center gap-1 text-center sm:flex-col'
-                aria-label='REVIEWS'
-              >
-                <div className='relative'>
-                  <Star className='m-auto h-5 w-5 fill-yellow-500 text-yellow-500 sm:h-[48px] sm:w-[48px] md:h-[64px] md:w-[64px]' />
-                  <div className='absolute left-[50%] top-[50%] hidden -translate-x-[50%] -translate-y-[50%] sm:block'>
-                    <span className='select-none text-sm leading-none sm:text-base'>
-                      {details.vote_average.toFixed(1)}
-                    </span>
-                  </div>
+              <div className='relative'>
+                <Star className='m-auto h-5 w-5 fill-yellow-500 text-yellow-500 sm:h-[48px] sm:w-[48px] md:h-[64px] md:w-[64px]' />
+                <div className='absolute left-[50%] top-[50%] hidden -translate-x-[50%] -translate-y-[40%] sm:block'>
+                  <span className='select-none text-sm sm:text-base'>
+                    {details.vote_average.toFixed(1)}
+                  </span>
                 </div>
-                <p className='text-sm font-medium uppercase transition-all hover:underline'>
-                  Reviews
-                </p>
-              </button>
-            </CreationReviewsDialog>
+              </div>
+              <p className='text-sm font-medium uppercase'>
+                Rating
+              </p>
+            </div>
           </div>
           <div className='grid h-auto w-full place-items-center rounded-b-md p-2 backdrop-blur-[25px] sm:h-full sm:rounded-md'>
             <div className='m-auto flex items-center gap-1 text-center sm:flex-col'>
