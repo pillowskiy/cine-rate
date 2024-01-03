@@ -33,12 +33,12 @@ export function ImageFromPath({
   return (
     <Image
       className={cn(
+        isLoading && 'animate-pulse rounded-md bg-muted',
         className,
-        isLoading && 'h-full w-full animate-pulse rounded-md bg-muted',
       )}
       alt={alt}
       src={src}
-      onLoadingComplete={() => setIsLoading(false)}
+      onLoad={() => setIsLoading(false)}
       {...props}
     />
   );

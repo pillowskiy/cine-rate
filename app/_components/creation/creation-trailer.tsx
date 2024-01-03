@@ -84,17 +84,6 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
   if (data) {
     return (
       <div className='relative h-full w-full after:absolute after:inset-0 after:bg-gradient-to-t after:from-black'>
-        <div className='absolute left-0 top-0 z-10 flex w-full flex-row-reverse p-4'>
-          <Button
-            className='h-7 w-7 sm:h-8 sm:w-8'
-            variant='outline'
-            size='icon'
-            disabled
-          >
-            <MoreHorizontal className='h-5 w-5' />
-            <span className="sr-only">Trailer Options Menu</span>
-          </Button>
-        </div>
         <video
           ref={videoRef}
           className='absolute bottom-0 w-full object-cover align-top'
@@ -115,7 +104,7 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
             <Play className='mr-2 h-5 w-5 sm:h-8 sm:w-8' />
             <span className='text-sm sm:text-base'>
               {options.isPlaying ? 'Pause' : 'Play'} trailer
-              <i className='ml-2 text-sm not-italic text-foreground/80'>
+              <i className='ml-2 text-sm not-italic opacity-80'>
                 {minutesFormat(+data.details.lengthSeconds)}
               </i>
             </span>

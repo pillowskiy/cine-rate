@@ -41,6 +41,7 @@ export function MediaTabs({ images }: MediaTabsProps) {
                     alt={`Image #${index}`}
                     width={720}
                     height={480}
+                    loading='lazy'
                   />
                 </div>
                 <OpenOriginalImage path={image.file_path} />
@@ -65,6 +66,7 @@ export function MediaTabs({ images }: MediaTabsProps) {
                     alt={`Image #${index}`}
                     width={260}
                     height={390}
+                    loading='lazy'
                   />
                 </div>
                 <OpenOriginalImage path={image.file_path} />

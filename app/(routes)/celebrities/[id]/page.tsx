@@ -22,7 +22,7 @@ export default async function PersonPage({ params }: INextPageParams) {
         <BaseFigure
           posterPath={person.profile_path}
           alt='Person Avatar'
-          className='w-full'
+          className='aspect-[2/3] w-full h-auto'
           width={260}
           height={420}
         />

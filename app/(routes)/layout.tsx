@@ -41,8 +41,11 @@ const keywords = [
 ];
 
 export const metadata: Metadata = {
+  themeColor: '#ffffff',
   metadataBase: new URL(APP_URL),
   title: 'CineRate',
+  description:
+    '🎥 CineRate - your personal cinematic guide in the world of movies and TV shows!',
   applicationName: 'CineRate',
   generator: 'Next.js',
   keywords,
@@ -59,6 +62,9 @@ export const metadata: Metadata = {
     description:
       '🎥 CineRate - your personal cinematic guide in the world of movies and TV shows!',
     images: APP_URL + 'og-image.png',
+  },
+  twitter: {
+    card: 'summary_large_image',
   },
 };
 
