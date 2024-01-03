@@ -17,7 +17,7 @@ interface CreationCatalogProps extends ComponentProps<'div'> {
   mediaType: MediaType;
 }
 
-export default function CreationCatalog({
+export function CreationCatalog({
   mediaType,
   className,
   ...props

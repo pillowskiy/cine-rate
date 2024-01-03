@@ -13,7 +13,7 @@ interface CreationCatalogHeaderProps {
   Sort: typeof MovieSort | typeof TVSort;
 }
 
-export default function CreationCatalogHeader({
+export function CreationCatalogHeader({
   mediaType,
   Sort,
 }: CreationCatalogHeaderProps) {

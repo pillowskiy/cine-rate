@@ -1,5 +1,7 @@
-import CreationCatalog from '@components/creation/creation-catalog';
-import CreationCatalogHeader from '@components/creation/creation-catalog-header';
+import {
+  CreationCatalogHeader,
+  CreationCatalog,
+} from '@components/creation/creation-catalog';
 import { MediaType, MovieSort } from '@config/enums';
 
 export default async function MoviesPage() {
