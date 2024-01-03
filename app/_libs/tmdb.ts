@@ -11,7 +11,7 @@ interface TMDBImagePathProps {
 }
 
 const scales = {
-  avatar: 'w92_and_h92_face',
+  avatar: 'w45_and_h45_face',
   poster: `w500`,
   backdrop: `w500_and_h282_face`,
   large_backdrop: 'w1000_and_h450_face',
