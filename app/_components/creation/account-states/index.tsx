@@ -4,7 +4,7 @@ import type { AccountStatesResponse } from '@app/types/creation-types';
 import type { CreationIdentifierProps } from '../common/types';
 
 import { ComponentProps, ReactNode, useEffect, useState } from 'react';
-import { StatesContext, useStatesReducer, StatesAction } from './utils';
+import { StatesContext, useStatesReducer, StatesAction } from './common/utils';
 
 import { FavoriteButton } from './favorite-button';
 import { RatingButton } from './rating-button';
@@ -63,19 +63,16 @@ export function StatesPopover({
                 className='h-7 justify-start'
                 size='sm'
                 variant='ghost'
-                withText
               />
               <RatingButton
                 className='h-7 justify-start'
                 size='sm'
                 variant='ghost'
-                withText
               />
               <FavoriteButton
                 className='h-7 justify-start'
                 size='sm'
                 variant='ghost'
-                withText
               />
             </div>
           )}
@@ -128,10 +125,9 @@ export function CreationStatesDetailed({
             Favorite List
           </span>
           <FavoriteButton
-            className='h-7 text-lg'
+            className='h-7 text-lg text-white'
             size='sm'
             variant='link'
-            withText
           />
         </div>
 
@@ -140,10 +136,9 @@ export function CreationStatesDetailed({
             Your Watchlist
           </span>
           <WatchlistButton
-            className='h-7 text-lg'
+            className='h-7 text-lg text-white'
             size='sm'
             variant='link'
-            withText
           />
         </div>
 
@@ -152,10 +147,9 @@ export function CreationStatesDetailed({
             Your Rating
           </span>
           <RatingButton
-            className='h-7 text-lg'
+            className='h-7 text-lg text-white'
             size='sm'
             variant='link'
-            withText
           />
         </div>
       </div>

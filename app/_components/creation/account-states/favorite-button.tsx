@@ -1,8 +1,8 @@
 'use client';
 
-import type { BaseButtonProps } from './types';
+import type { BaseButtonProps } from './common/types';
 import { useContext } from 'react';
-import { StatesAction, StatesContext } from './utils';
+import { StatesAction, StatesContext } from './common/utils';
 import { Button } from '@ui/button';
 import { cn } from '@libs/index';
 import { Heart } from 'lucide-react';
@@ -13,11 +13,7 @@ import { useOptimistic } from '@hooks/useOptimistic';
 
 interface ToggleFavoriteProps extends BaseButtonProps {}
 
-export function FavoriteButton({
-  withText,
-  size,
-  ...props
-}: ToggleFavoriteProps) {
+export function FavoriteButton({ size, ...props }: ToggleFavoriteProps) {
   const [states, dispatch] = useContext(StatesContext);
   const { toast } = useToast();
   const {
@@ -53,7 +49,7 @@ export function FavoriteButton({
         },
         onResolve: () => {
           return dispatch({ type: StatesAction.FAVORITE });
-        }
+        },
       }
     );
   }
@@ -72,11 +68,9 @@ export function FavoriteButton({
           favorite && 'fill-red-500 text-red-500'
         )}
       />
-      {withText && (
-        <span className='ml-1.5'>
-          {favorite && 'fill-red-500 text-red-500' ? 'Unlist' : 'Add'}
-        </span>
-      )}
+      <span className='ml-1.5'>
+        {favorite && 'fill-red-500 text-red-500' ? 'Unlist' : 'Add'}
+      </span>
     </Button>
   );
 }

@@ -1,6 +1,6 @@
-import type { BaseButtonProps } from './types';
+import type { BaseButtonProps } from './common/types';
 import { useContext } from 'react';
-import { StatesAction, StatesContext } from './utils';
+import { StatesAction, StatesContext } from './common/utils';
 import { Button } from '@ui/button';
 import { BookmarkPlus } from 'lucide-react';
 import { cn } from '@libs/index';
@@ -11,11 +11,7 @@ import { useOptimistic } from '@/app/_hooks/useOptimistic';
 
 interface RatingButtonProps extends BaseButtonProps {}
 
-export function WatchlistButton({
-  withText,
-  size,
-  ...props
-}: RatingButtonProps) {
+export function WatchlistButton({ size, ...props }: RatingButtonProps) {
   const [states, dispatch] = useContext(StatesContext);
   const { toast } = useToast();
 
@@ -52,7 +48,7 @@ export function WatchlistButton({
         },
         onResolve: () => {
           return dispatch({ type: StatesAction.WATCHLIST });
-        }
+        },
       }
     );
   }
@@ -71,9 +67,7 @@ export function WatchlistButton({
           inWatchlist && 'fill-foreground'
         )}
       />
-      {withText && (
-        <span className='ml-1.5'>{inWatchlist ? 'Unlist' : 'Add'}</span>
-      )}
+      <span className='ml-1.5'>{inWatchlist ? 'Unlist' : 'Add'}</span>
     </Button>
   );
 }

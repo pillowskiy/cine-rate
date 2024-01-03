@@ -1,7 +1,7 @@
 import type { AccountStatesResponse } from '@app/types/creation-types';
-import type { BaseButtonProps } from './types';
+import type { BaseButtonProps } from './common/types';
 import { useContext } from 'react';
-import { StatesAction, StatesContext } from './utils';
+import { StatesAction, StatesContext } from './common/utils';
 
 import { Button } from '@ui/button';
 import { cn } from '@libs/index';
@@ -11,7 +11,7 @@ import { CreationRatingDialog } from '@components/dialog/creation-rating-dialog'
 
 interface RatingButtonProps extends BaseButtonProps {}
 
-export function RatingButton({ withText, size, ...props }: RatingButtonProps) {
+export function RatingButton({ size, ...props }: RatingButtonProps) {
   const [states, dispatch] = useContext(StatesContext);
   if (!states) return null;
 
@@ -34,7 +34,7 @@ export function RatingButton({ withText, size, ...props }: RatingButtonProps) {
             states.rated && 'fill-yellow-500 text-yellow-500'
           )}
         />
-        {withText && <span className='ml-1.5'>Rate</span>}
+        <span className='ml-1.5'>Rate</span>
       </Button>
     </CreationRatingDialog>
   );
