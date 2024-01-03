@@ -2,14 +2,11 @@ import type { MediaType } from '@config/enums';
 import { Star, TrendingUp } from 'lucide-react';
 import { Button } from '@ui/button';
 import type { CreationDetailsProps } from './common/types';
-import { CreationReviewsDialog } from './creation-reviews-dialog';
-import { cn } from '@/app/_libs';
+import { cn } from '@libs/index';
 
-interface CreationStatesProps extends CreationDetailsProps {
-  mediaType: MediaType;
-}
+interface CreationStatesProps extends CreationDetailsProps {}
 
-export function CreationStates({ details, mediaType }: CreationStatesProps) {
+export function CreationStates({ details }: CreationStatesProps) {
   return (
     <div className='flex w-full justify-between gap-4 overflow-x-auto sm:w-fit sm:justify-start'>
       <div className='flex flex-col items-center justify-center space-y-1 text-center'>
@@ -25,18 +22,6 @@ export function CreationStates({ details, mediaType }: CreationStatesProps) {
           <Star className='mr-1.5 h-7 w-7 fill-yellow-400 text-yellow-400' />
           <span>{details.vote_average.toFixed(1)}</span>
         </div>
-      </div>
-
-      <div className='flex flex-col items-center justify-center space-y-1 text-center'>
-        <span className='truncate text-xs font-semibold uppercase'>
-          Your Rating
-        </span>
-        <CreationReviewsDialog creationId={details.id} mediaType={mediaType}>
-          <Button className='text-lg' variant='ghost' size='sm'>
-            <Star className='mr-1.5 h-7 w-7' />
-            <span>Reviews</span>
-          </Button>
-        </CreationReviewsDialog>
       </div>
 
       <div className='flex flex-col items-center justify-center space-y-1 text-center'>

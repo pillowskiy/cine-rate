@@ -41,7 +41,7 @@ const EpisodeHeader = memo(({ series }: EpisodeHeaderProps) => {
           </div>
           <h2 className='text-2xl font-semibold'>Episode List</h2>
         </div>
-        <CreationStates details={series} mediaType={MediaType.TV} />
+        <CreationStates details={series} />
       </div>
     </header>
   );
