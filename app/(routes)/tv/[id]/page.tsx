@@ -6,6 +6,7 @@ import CreationHeader from '@components/creation/creation-header';
 import CreationSimilar from '@components/creation/creation-similar';
 import CreationOverview from '@components/creation/creation-overview';
 import CreationMediaTabs from '@components/creation/creation-media-tabs';
+import CreationReviews from '@components/creation/creation-reviews';
 
 import SerriesSeasons from './series-seasons';
 import SeriesDetails from './series-details';
@@ -33,6 +34,7 @@ export default async function TVPage({ params }: INextPageParams) {
           {tv.seasons.length && <SerriesSeasons details={tv} />}
           <CreationMediaTabs creationId={tv.id} mediaType={MediaType.TV} />
           <CreationSimilar creationId={tv.id} mediaType={MediaType.TV} />
+          <CreationReviews creationId={tv.id} mediaType={MediaType.TV} />
         </div>
         <SeriesDetails
           className='w-full min-w-[260px] space-y-6 sm:w-[260px]'

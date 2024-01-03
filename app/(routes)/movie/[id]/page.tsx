@@ -7,6 +7,7 @@ import CreationOverview from '@components/creation/creation-overview';
 import CreationSimilar from '@components/creation/creation-similar';
 import CreationMediaTabs from '@components/creation/creation-media-tabs';
 import CreationCollection from '@components/creation/creation-collection';
+import CreationReviews from '@components/creation/creation-reviews';
 
 import MovieDetails from './movie-details';
 
@@ -38,6 +39,7 @@ export default async function MoviePage({ params }: INextPageParams) {
             mediaType={MediaType.Movie}
           />
           <CreationSimilar creationId={movie.id} mediaType={MediaType.Movie} />
+          <CreationReviews creationId={movie.id} mediaType={MediaType.Movie} />
         </div>
         <MovieDetails
           className='w-full min-w-[260px] space-y-6 sm:w-[260px]'
