@@ -66,6 +66,7 @@ export function SearchDialog() {
           <span className='hidden sm:inline-flex'>
             Search for a creation...
           </span>
+          <span className='sr-only'>Search for a creation...</span>
           <Search className='m-auto h-5 w-5 sm:hidden' />
         </Button>
       </DialogTrigger>

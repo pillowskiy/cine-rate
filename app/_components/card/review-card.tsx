@@ -18,9 +18,9 @@ export function ReviewCard({ review }: ReviewCardProps) {
         />
         <div className='w-full space-y-1 overflow-hidden'>
           <div>
-            <h4 className='text-sm font-semibold leading-none'>
+            <h5 className='font-semibold leading-none'>
               {review.author}
-            </h4>
+            </h5>
             <span className='text-xs leading-none text-muted-foreground/70'>
               {review.author_details.username}
             </span>

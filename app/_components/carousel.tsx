@@ -14,10 +14,7 @@ export function Carousel({ children, className, ...props }: CarouselProps) {
         viewport={{ once: true, amount: 0.2 }}
         initial={Target.HIDDEN}
         whileInView={Target.VISIBLE}
-        className={cn(
-          'flex snap-x space-x-4 pb-4 pt-1',
-          className
-        )}
+        className={cn('flex space-x-4 pb-4', className)}
         {...props}
       >
         {children}

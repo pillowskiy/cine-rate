@@ -2,8 +2,17 @@ import type { CreationsResponse } from '@app/types/creation-types';
 import type { BaseParams } from '@app/types/index';
 import { $api } from '@api/api-interceptor';
 
-export function getTrending(periodParam: 'day' | 'week' = 'day', params?: BaseParams) {
+const REVALIDATE_DAY = 60 * 24;
+const REVALIDATE_WEEK = REVALIDATE_DAY * 7;
+
+export function getTrending(
+  periodParam: 'day' | 'week' = 'day',
+  params?: BaseParams
+) {
   return $api.safeFetch<CreationsResponse>(`/trending/all/${periodParam}`, {
     params,
+    next: {
+      revalidate: periodParam === 'day' ? REVALIDATE_DAY : REVALIDATE_WEEK,
+    },
   });
 }
