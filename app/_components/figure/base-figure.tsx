@@ -19,7 +19,7 @@ export function BaseFigure({
     <figure className={cn('w-full overflow-hidden rounded-md', className)}>
       <ImageFromPath
         className={
-          'w-full object-cover transition-all ease-in-out hover:scale-105 h-full'
+          'w-full object-cover transition-all ease-in-out hover:scale-105 h-auto'
         }
         src={buildImagePath({ path: posterPath, scale: 'poster' })}
         alt={alt || 'Creation Poster'}

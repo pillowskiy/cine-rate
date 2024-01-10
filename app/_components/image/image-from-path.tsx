@@ -22,7 +22,7 @@ export function ImageFromPath({
       <div
         className={cn(
           className,
-          'grid h-full w-full place-items-center bg-secondary',
+          'grid h-full w-full place-items-center bg-secondary'
         )}
       >
         <FallbackIcon className='m-auto h-12 w-12 text-primary/70' />
@@ -33,12 +33,15 @@ export function ImageFromPath({
   return (
     <Image
       className={cn(
-        isLoading && 'animate-pulse rounded-md bg-muted',
+        'transition-all duration-500',
         className,
+        isLoading && 'blur-xl w-full h-full',
       )}
       alt={alt}
       src={src}
-      onLoad={() => setIsLoading(false)}
+      placeholder='blur'
+      blurDataURL={`/_next/image?url=${encodeURIComponent(src)}&q=1&w=128`}
+      onLoadingComplete={() => setIsLoading(false)}
       {...props}
     />
   );
