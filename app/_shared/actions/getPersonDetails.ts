@@ -6,5 +6,6 @@ import { $api } from '@api/api-interceptor';
 export function getPersonDetails(personId: number, params?: BaseParams) {
   return $api.safeFetch<IPersonDetails>(`/${MediaType.Person}/${personId}`, {
     params,
+    cache: 'force-cache',
   });
 }

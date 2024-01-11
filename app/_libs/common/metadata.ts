@@ -1,9 +1,11 @@
 import type { MediaType } from '@config/enums';
 import { getCreationDetails } from '@actions/getCreationDetails';
+import { getPersonDetails } from '@actions/getPersonDetails';
 import type { INextPageParams } from '@app/types/index';
 import type { Metadata } from 'next';
 import { buildImagePath } from '@libs/tmdb';
 import { pipe } from '@libs/common/next';
+import { getAverageColorFromUrl } from '../colors';
 
 export const APP_URL =
   process.env.NEXT_PUBLIC_APP_URL || 'https://cine-rate.vercel.app/';
@@ -26,15 +28,18 @@ export function generateCreationMetadata(mediaType: MediaType) {
     const assignTitleException =
       'original_name' in creation ? creation.original_name : 'Unknown';
     const creationTitle = title || original_title || assignTitleException;
+    const metadataTitle = `${creationTitle} — CineRate`;
+
+    const backdropUrl = buildImagePath({ path: creation.backdrop_path });
+    const themeColor = await getAverageColorFromUrl(backdropUrl);
 
     return {
-      themeColor: '#F59E0B',
-      title: `${creationTitle} — CineRate`,
+      themeColor,
+      title: metadataTitle,
       openGraph: {
         type: 'website',
-        title: `${creationTitle} — CineRate`,
-        images:
-          buildImagePath({ path: creation.backdrop_path }) || '/og-image.png',
+        title: metadataTitle,
+        images: backdropUrl ?? '/og-image.png',
         url,
         description: creation.overview,
       },
@@ -50,7 +55,7 @@ export function generateNotFoundMetadata({
   ...ogMetadata
 }: NonNullable<Metadata['openGraph']> = {}): Metadata {
   return {
-    themeColor: '#F59E0B',
+    themeColor: '#ffffff',
     title: `Not Found — CineRate`,
     openGraph: {
       type: 'website',
@@ -62,5 +67,40 @@ export function generateNotFoundMetadata({
     twitter: {
       card: 'summary_large_image',
     },
+  };
+}
+
+export function generatePersonMetadata() {
+  return async ({ params }: INextPageParams): Promise<Metadata> => {
+    const personId = pipe.strToInt(params.id);
+    const url = APP_URL + `person/${personId}`;
+
+    const [person, error] = await getPersonDetails(personId);
+
+    if (error) {
+      return generateNotFoundMetadata({
+        url,
+        description: `🙈 Some person with id ${personId} that couldn't be found`,
+      });
+    }
+
+    const title = `${person.name} — CineRate`;
+    const profileImageUrl = buildImagePath({ path: person.profile_path });
+    const themeColor = await getAverageColorFromUrl(profileImageUrl);
+
+    return {
+      themeColor,
+      title,
+      openGraph: {
+        title,
+        url,
+        type: 'website',
+        images: profileImageUrl ?? '/og-image.png',
+        description: person.biography,
+      },
+      twitter: {
+        card: 'summary',
+      }
+    };
   };
 }

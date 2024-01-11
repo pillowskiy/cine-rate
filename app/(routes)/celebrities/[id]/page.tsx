@@ -8,7 +8,10 @@ import PersonDetails from './person-details';
 
 import { getPersonDetails } from '@actions/getPersonDetails';
 import { pipe } from '@libs/common/next';
+import { generatePersonMetadata } from '@libs/common/metadata';
 import { notFound } from 'next/navigation';
+
+export const generateMetadata = generatePersonMetadata();
 
 export default async function PersonPage({ params }: INextPageParams) {
   const personId = pipe.strToInt(params?.id);
