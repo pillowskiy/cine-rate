@@ -21,7 +21,7 @@ export function AuthButton() {
         aria-label='log in'
         disabled
       >
-        <Loader2 className='h-5 w-5 animate-spin' />
+        <Loader2 className='h-5 w-5 animate-spin will-change-transform' />
       </Button>
     );
   }

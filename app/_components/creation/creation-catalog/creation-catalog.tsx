@@ -1,6 +1,6 @@
 'use client';
 
-import { type ComponentProps, useEffect, useState, useMemo } from 'react';
+import { type ComponentProps, useEffect, useState } from 'react';
 import type { CreationsResponse } from '@app/types/creation-types';
 import type { IPagination } from '@app/types/index';
 import type { MediaType } from '@config/enums';
@@ -26,33 +26,27 @@ export function CreationCatalog({
   const [{ currentPage }, setPagination] =
     useState<IPagination>(initialPagination);
   const searchParamsMap = useSearchParams();
-  const searchParamsObj = useMemo(
-    () => Object.fromEntries(searchParamsMap.entries()),
-    [searchParamsMap]
-  );
+  const searchParamsObj = Object.fromEntries(searchParamsMap.entries());
 
   const getData = async (page: number = currentPage + 1) => {
-    const searchParams = {
-      mediaType,
-      page,
-      ...searchParamsObj,
-    };
+    const searchParams = { page, ...searchParamsObj };
     return ky
-      .get('api/discover', { searchParams, cache: 'force-cache' })
+      .get(`api/${mediaType}/discover`, { searchParams, cache: 'force-cache' })
       .then((res) => res.json<CreationsResponse>())
       .then((data) => {
+        // TEMP: two rerenders
         setItems((prev) => [...(prev || []), ...data.results]);
         setPagination((prev) => ({ ...prev, currentPage: data.page }));
       });
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => void getData(), [searchParamsObj]);
+  useEffect(() => void getData(), []);
   const { canScroll } = useInfiniteScroll(getData, currentPage);
 
   function handleItems() {
     if (!items) return <CatalogSkeletonGroup itemsCount={20} />;
-    if (!items.length) return <NotFound />;
+    if (!items.length) return <NotFound className='col-span-full' />;
 
     return items.map((movie) => (
       <CreationArticle
@@ -60,7 +54,7 @@ export function CreationCatalog({
         defaultMediaType={mediaType}
         key={movie.id}
         creation={movie}
-        className='mb-4 w-[40%] flex-grow md:w-[260px]'
+        className='mb-4'
         width={260}
         height={390}
       />
@@ -68,7 +62,13 @@ export function CreationCatalog({
   }
 
   return (
-    <section className={cn('flex flex-wrap gap-4', className)} {...props}>
+    <section
+      className={cn(
+        'grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5',
+        className
+      )}
+      {...props}
+    >
       {handleItems()}
       {!!items?.length && !canScroll && <CatalogSkeletonGroup />}
     </section>

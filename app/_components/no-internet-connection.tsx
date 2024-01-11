@@ -3,8 +3,12 @@
 import { WifiOff } from 'lucide-react';
 import { useSyncExternalStore } from 'react';
 
-function getSnapshot() {
+function getSnapshot(): boolean {
   return navigator.onLine;
+}
+
+function getServerSnapshot(): boolean {
+  return true;
 }
 
 function subscribe(callback: () => void) {
@@ -13,11 +17,15 @@ function subscribe(callback: () => void) {
   return () => {
     window.removeEventListener('online', callback);
     window.removeEventListener('offline', callback);
-  }
+  };
 }
 
 export default function NoInternetConnection() {
-  const isOnline = useSyncExternalStore(subscribe, getSnapshot);
+  const isOnline = useSyncExternalStore<boolean>(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot
+  );
 
   if (!isOnline) {
     return (

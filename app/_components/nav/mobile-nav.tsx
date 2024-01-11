@@ -2,28 +2,43 @@
 
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from '@ui/sheet';
 
-import { Button } from '@ui/button';
-import { Menu } from 'lucide-react';
-import { Logo } from '@components/logo';
-import { AppNav } from '@components/nav/app-nav';
-import { ToggleTheme } from '@components/toggle-theme';
-import { useState } from 'react';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '../ui/accordion';
+} from '@ui/accordion';
+
+import { Button } from '@ui/button';
+import { Check, Menu } from 'lucide-react';
+import { Logo } from '@components/logo';
+import { AppNav } from '@components/nav/app-nav';
+
+import { useTheme } from 'next-themes';
+import { useState } from 'react';
+import { cn } from '@libs/index';
+
+const themes = [
+  {
+    value: 'light',
+    label: 'Light',
+  },
+  {
+    value: 'dark',
+    label: 'Dark',
+  },
+];
 
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+
   return (
     <Sheet open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
       <SheetTrigger asChild>
@@ -51,7 +66,7 @@ export function MobileNav() {
           <AccordionItem className='border-b-0' value='language'>
             <AccordionTrigger className='pr-4 pt-0'>Language</AccordionTrigger>
             <AccordionContent asChild>
-              <ul className='space-y-2 pl-6 text-base text-foreground/70'>
+              <ul className='space-y-2 pl-6 text-base text-foreground/70 columns-1 [&>*]:w-fit'>
                 <li>English</li>
                 <li>Ukrainian</li>
                 <li>Polland</li>
@@ -63,11 +78,23 @@ export function MobileNav() {
           <AccordionItem className='border-b-0' value='theme'>
             <AccordionTrigger className='pr-4 pt-0'>Theme</AccordionTrigger>
             <AccordionContent asChild>
-              <ul className='space-y-2 pl-6 text-base text-foreground/70'>
-                <li>Dark</li>
-                <li>White</li>
-                <li>System</li>
-              </ul>
+              <div className='space-y-2 pl-6 text-base text-foreground/70'>
+                {themes.map(({ value, label }) => (
+                  <button
+                    className={cn(
+                      'relative flex items-center w-full',
+                      theme === value && 'text-foreground'
+                    )}
+                    key={value}
+                    onClick={() => setTheme(value)}
+                  >
+                    {theme === value && (
+                      <Check className='absolute -left-1.5 h-4 w-4 -translate-x-[100%]' />
+                    )}
+                    <span>{label}</span>
+                  </button>
+                ))}
+              </div>
             </AccordionContent>
           </AccordionItem>
 

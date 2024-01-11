@@ -3,18 +3,22 @@
 import type { AccountStatesResponse } from '@app/types/creation-types';
 import type { CreationIdentifierProps } from '../common/types';
 
-import { ComponentProps, ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { StatesContext, useStatesReducer, StatesAction } from './common/utils';
 
 import { FavoriteButton } from './favorite-button';
 import { RatingButton } from './rating-button';
 import { WatchlistButton } from './watchlist-button';
 
+import { Target, opacityAnimations } from '@config/animations';
+import { type HTMLMotionProps, motion } from 'framer-motion';
+
 import { useAuth } from '@redux/hooks';
-import { Popover, PopoverContent, PopoverTrigger } from '@ui/popover';
 import useFetch from '@hooks/useFetch';
+import { Popover, PopoverContent, PopoverTrigger } from '@ui/popover';
 import ky from 'ky';
 import { cn } from '@libs/index';
+
 
 interface CreationStatesProps extends CreationIdentifierProps {
   children: ReactNode;
@@ -84,7 +88,7 @@ export function StatesPopover({
 
 interface StatesDetailedProps
   extends CreationIdentifierProps,
-    ComponentProps<'div'> {}
+    HTMLMotionProps<'div'> {}
 
 export function CreationStatesDetailed({
   creationId,
@@ -113,7 +117,10 @@ export function CreationStatesDetailed({
 
   return (
     <StatesContext.Provider value={[states, dispatch]}>
-      <div
+      <motion.div
+        initial={Target.HIDDEN}
+        animate={Target.VISIBLE}
+        variants={opacityAnimations}
         className={cn(
           'flex w-full justify-between gap-4 overflow-x-auto sm:w-fit sm:justify-start',
           className
@@ -152,7 +159,7 @@ export function CreationStatesDetailed({
             variant='link'
           />
         </div>
-      </div>
+      </motion.div>
     </StatesContext.Provider>
   );
 }

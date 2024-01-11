@@ -10,7 +10,7 @@ export function CatalogSkeletonGroup({
   return Array.from({ length: itemsCount }, (_, index) => (
     <SkeletonArticle
       key={index}
-      className='mb-4 w-[40%] flex-grow md:w-[260px]'
+      className='mb-4 w-full'
     />
   ));
 }
