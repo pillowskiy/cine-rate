@@ -45,7 +45,7 @@ export function CreationReviewsCatalog({
   // TEMP: transition to loading component
   if (!data) return null;
 
-  if (!data.results.length) {
+  if (!data.results?.length) {
     return <NotFound />;
   }
 

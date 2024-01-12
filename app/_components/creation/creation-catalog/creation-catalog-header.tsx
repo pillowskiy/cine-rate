@@ -2,7 +2,6 @@ import { Button } from '@ui/button';
 
 import { CreationFilterDialog } from '@components/dialog/creation-filter-dialog';
 import { CreationSortSelect } from '@components/select/creation-sort-select';
-import { CreationShowSelect } from '@components/select/creation-show-select';
 
 import { Filter } from 'lucide-react';
 
@@ -26,7 +25,6 @@ export function CreationCatalogHeader({
       </CreationFilterDialog>
 
       <CreationSortSelect Sort={Sort} />
-      <CreationShowSelect />
     </header>
   );
 }
