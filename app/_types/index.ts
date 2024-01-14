@@ -40,3 +40,8 @@ export interface IApiReject {
   message: string;
   status: number;
 }
+
+export interface IRibbon {
+  name: string;
+  color: string;
+}

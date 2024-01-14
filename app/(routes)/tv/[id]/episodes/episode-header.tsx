@@ -1,6 +1,5 @@
 import type { ITVDetails } from '@app/types/tv-types';
 import { memo } from 'react';
-import { MediaType } from '@config/enums';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { CreationStates } from '@components/creation/creation-states';
 import { getTitle } from '@components/creation/common/utils';

@@ -40,7 +40,7 @@ export function NotFound({
         whileInView={Target.VISIBLE}
         variants={opacityAnimations}
         className={cn(
-          'relative mt-8 grid w-full select-none place-items-center gap-4 rounded-md p-8',
+          'relative mt-8 grid w-full select-none place-items-center gap-4 min-h-[200px] rounded-md p-8',
           className
         )}
         {...props}

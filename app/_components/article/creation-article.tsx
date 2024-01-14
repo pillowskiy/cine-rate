@@ -18,6 +18,7 @@ import {
   CreationStatesDetailed,
   StatesPopover,
 } from '@components/creation/account-states';
+import { CreationRibbon } from '../creation/creation-ribbon';
 
 interface CreationArticleProps extends Omit<BaseArticleProps, 'src' | 'href'> {
   size?: 'default' | 'sm';
@@ -46,7 +47,7 @@ export const CreationArticle = memo(
 
     return (
       <BaseArticle {...props}>
-        <div className='relative'>
+        <div className='relative overflow-hidden p-[1px]'>
           <Link href={`/${mediaType}/${creation.id}`}>
             <BaseArticleFigure
               src={buildImagePath(
@@ -70,6 +71,8 @@ export const CreationArticle = memo(
               <Info className='h-5 w-5' />
             </Button>
           </StatesPopover>
+
+          <CreationRibbon creation={creation} />
         </div>
         <BaseArticleContent>
           <h2
