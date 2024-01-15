@@ -29,7 +29,8 @@
       "@hooks/*": ["./app/_hooks/*"],
       "@redux/*": ["./app/_redux/*"],
       "@libs/*": ["./app/_libs/*"],
-      "@api/*": ["./app/_shared/api/*"]
+      "@api/*": ["./app/_shared/api/*"],
+      "@providers/*": ["./app/_providers/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "middleware.ts"],
