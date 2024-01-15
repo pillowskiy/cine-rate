@@ -11,7 +11,7 @@ import { RatingButton } from './rating-button';
 import { WatchlistButton } from './watchlist-button';
 
 import { Target, opacityAnimations } from '@config/animations';
-import { type HTMLMotionProps, motion } from 'framer-motion';
+import { type HTMLMotionProps, m } from 'framer-motion';
 
 import { useAuth } from '@redux/hooks';
 import useFetch from '@hooks/useFetch';
@@ -117,7 +117,7 @@ export function CreationStatesDetailed({
 
   return (
     <StatesContext.Provider value={[states, dispatch]}>
-      <motion.div
+      <m.div
         initial={Target.HIDDEN}
         animate={Target.VISIBLE}
         variants={opacityAnimations}
@@ -159,7 +159,7 @@ export function CreationStatesDetailed({
             variant='link'
           />
         </div>
-      </motion.div>
+      </m.div>
     </StatesContext.Provider>
   );
 }

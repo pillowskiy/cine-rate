@@ -6,7 +6,7 @@ import { MSeparator } from '@ui/separator';
 import { BookmarkPlus, LogIn } from 'lucide-react';
 import Link from 'next/link';
 import { useAuth } from '@redux/hooks';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Target, opacityAnimations } from '@config/animations';
 
 export default function WatchlistCarousel() {
@@ -14,7 +14,7 @@ export default function WatchlistCarousel() {
   if (user || isLoading) return null;
 
   return (
-    <motion.section
+    <m.section
       viewport={{ once: true, amount: 0.4 }}
       initial={Target.HIDDEN}
       whileInView={Target.VISIBLE}
@@ -26,7 +26,7 @@ export default function WatchlistCarousel() {
       />
       <MSeparator className='my-4' />
 
-      <motion.div
+      <m.div
         custom={2}
         variants={opacityAnimations}
         className='mt-8 grid w-full place-items-center gap-4 p-8'
@@ -54,7 +54,7 @@ export default function WatchlistCarousel() {
           <div className='absolute left-[50%] top-[35%] h-[48px] w-[48px] -translate-x-[50%] animate-pulse rounded-full bg-red-500 blur-xl sm:h-[96px] sm:w-[96px]' />
           <div className='absolute left-[55%] top-[40%] h-[32px] w-[32px] -translate-x-[50%] animate-pulse rounded-full bg-blue-500 blur-xl sm:h-[64px] sm:w-[64px]' />
         </div>
-      </motion.div>
-    </motion.section>
+      </m.div>
+    </m.section>
   );
 }

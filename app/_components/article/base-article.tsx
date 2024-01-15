@@ -5,7 +5,7 @@ import type { ImageProps } from 'next/image';
 import { cn } from '@libs/index';
 import { Button } from '@ui/button';
 import { ImageFromPath } from '@components/image/image-from-path';
-import { motion, HTMLMotionProps } from 'framer-motion';
+import { m, HTMLMotionProps } from 'framer-motion';
 import { xTransitionAnimations, Target } from '@config/animations';
 
 export interface BaseArticleProps extends HTMLMotionProps<'article'> {}
@@ -18,7 +18,7 @@ export function BaseArticle({
   ...props
 }: BaseArticleProps) {
   return (
-    <motion.article
+    <m.article
       viewport={{ once: true }}
       initial={Target.HIDDEN}
       whileInView={Target.VISIBLE}
@@ -30,7 +30,7 @@ export function BaseArticle({
       {...props}
     >
       {children}
-    </motion.article>
+    </m.article>
   );
 }
 

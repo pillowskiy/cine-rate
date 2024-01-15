@@ -2,7 +2,7 @@
 
 import { cn } from '@libs/index';
 import { SearchX } from 'lucide-react';
-import { type HTMLMotionProps, motion } from 'framer-motion';
+import { type HTMLMotionProps, m } from 'framer-motion';
 import { Target, opacityAnimations } from '@config/animations';
 import { useClientReady } from '@hooks/useClientReady';
 
@@ -34,7 +34,7 @@ export function NotFound({
   if (!isClientReady) return null;
 
   return (
-      <motion.div
+      <m.div
         viewport={{ once: true, amount: 0.2 }}
         initial={Target.HIDDEN}
         whileInView={Target.VISIBLE}
@@ -61,6 +61,6 @@ export function NotFound({
           <div className='absolute left-[50%] top-[15%] h-[48px] w-[48px] -translate-x-[50%] animate-pulse rounded-full bg-red-600 blur-xl sm:h-[64px] sm:w-[64px]' />
           <div className='absolute left-[52%] top-[20%] h-[32px] w-[32px] -translate-x-[50%] animate-pulse rounded-full bg-yellow-500 blur-xl sm:h-[48px] sm:w-[48px]' />
         </div>
-      </motion.div>
+      </m.div>
   );
 }

@@ -4,7 +4,7 @@ import * as React from 'react';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
 
 import { cn } from '@/app/_libs';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Target, opacityAnimations } from '@config/animations';
 
 const Tabs = TabsPrimitive.Root;
@@ -13,7 +13,7 @@ const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
 >(({ className, ...props }, ref) => (
-  <motion.div
+  <m.div
     viewport={{ once: true }}
     initial={Target.HIDDEN}
     whileInView={Target.VISIBLE}
@@ -27,7 +27,7 @@ const TabsList = React.forwardRef<
       )}
       {...props}
     />
-  </motion.div>
+  </m.div>
 ));
 TabsList.displayName = TabsPrimitive.List.displayName;
 

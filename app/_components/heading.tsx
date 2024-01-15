@@ -2,7 +2,7 @@
 
 import { Badge } from '@ui/badge';
 import { Target, yTransitionAnimations } from '@config/animations';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 interface HeadingProps {
   title: string;
@@ -23,7 +23,7 @@ const headingAnimation = {
 
 export function Heading({ title, description, badges }: HeadingProps) {
   return (
-    <motion.div
+    <m.div
       viewport={{ once: true }}
       initial={Target.HIDDEN}
       whileInView={Target.VISIBLE}
@@ -42,6 +42,6 @@ export function Heading({ title, description, badges }: HeadingProps) {
         </div>
       </div>
       <p className='text-sm text-muted-foreground'>{description}</p>
-    </motion.div>
+    </m.div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { ScrollArea, ScrollBar } from '@ui/scroll-area';
 import { cn } from '@libs/index';
-import { type HTMLMotionProps, motion } from 'framer-motion';
+import { type HTMLMotionProps, m } from 'framer-motion';
 import { Target } from '@config/animations';
 
 interface CarouselProps extends HTMLMotionProps<'div'> {}
@@ -10,7 +10,7 @@ interface CarouselProps extends HTMLMotionProps<'div'> {}
 export function Carousel({ children, className, ...props }: CarouselProps) {
   return (
     <ScrollArea>
-      <motion.section
+      <m.section
         viewport={{ once: true, amount: 0.2 }}
         initial={Target.HIDDEN}
         whileInView={Target.VISIBLE}
@@ -18,7 +18,7 @@ export function Carousel({ children, className, ...props }: CarouselProps) {
         {...props}
       >
         {children}
-      </motion.section>
+      </m.section>
       <ScrollBar orientation='horizontal' />
     </ScrollArea>
   );

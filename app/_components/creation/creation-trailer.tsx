@@ -7,11 +7,9 @@ import {
   Bot,
   Expand,
   Loader2,
-  MoreHorizontal,
   Play,
   Youtube,
 } from 'lucide-react';
-import { Button } from '@ui/button';
 import { YoutubeEmbedDialog } from '@components/dialog/youtube-embed-dialog';
 import Link from 'next/link';
 import useFetch from '@hooks/useFetch';

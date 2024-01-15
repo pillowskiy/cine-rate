@@ -5,13 +5,9 @@ import Main from '@components/main';
 import Header from '@components/header';
 import Footer from '@components/footer';
 
-import ThemeProvider from '@components/theme-provider';
-import StoreProvider from '@components/store-provider';
-import AuthProvider from '@components/auth-provider';
-import ScrollTopProvider from '@components/scroll-top-provider';
-
 import { Toaster } from '@components/ui/toaster';
 import NoInternetConnection from '@components/no-internet-connection';
+import ServeSiteProviders from '@providers/index';
 import { APP_URL } from '@libs/common/metadata';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -78,23 +74,13 @@ export default function RootLayout({
       <body className={inter.className}>
         <NoInternetConnection />
         <Toaster />
-        <StoreProvider>
-          <ScrollTopProvider>
-            <AuthProvider>
-              <ThemeProvider
-                attribute='class'
-                defaultTheme='light'
-                enableSystem
-              >
-                <div className='flex min-h-screen flex-col'>
-                  <Header />
-                  <Main>{children}</Main>
-                </div>
-                <Footer />
-              </ThemeProvider>
-            </AuthProvider>
-          </ScrollTopProvider>
-        </StoreProvider>
+        <ServeSiteProviders>
+          <div className='flex min-h-screen flex-col'>
+            <Header />
+            <Main>{children}</Main>
+          </div>
+          <Footer />
+        </ServeSiteProviders>
       </body>
     </html>
   );

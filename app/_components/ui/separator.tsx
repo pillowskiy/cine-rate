@@ -4,7 +4,7 @@ import * as React from 'react';
 import * as SeparatorPrimitive from '@radix-ui/react-separator';
 
 import { cn } from '@/app/_libs';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Target, widthAnimations } from '@config/animations';
 
 const Separator = React.forwardRef<
@@ -40,7 +40,7 @@ const MSeparator = ({
   orientation = 'horizontal',
 }: MSeparatorProps) => {
   return (
-    <motion.div
+    <m.div
       viewport={{ once: true }}
       initial={Target.HIDDEN}
       whileInView={Target.VISIBLE}
