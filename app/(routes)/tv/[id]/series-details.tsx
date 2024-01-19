@@ -29,7 +29,7 @@ export default async function SeriesDetails({
           <ListItem title='Status:' description={details.status} />
           <ListItem
             title='Original Language:'
-            description={details.original_language.toUpperCase()}
+            description={details.original_language?.toUpperCase() ?? 'Unknown'}
           />
           <ListItem
             title='Created By:'

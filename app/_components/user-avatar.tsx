@@ -26,7 +26,7 @@ export function UserAvatar({ username, path, gravatarHash }: UserAvatarProps) {
         {username
           .split(' ')
           .slice(0, 2)
-          .map((str) => str[0].toUpperCase())
+          .map((str) => str[0]?.toUpperCase())
           .join('')}
       </AvatarFallback>
     </Avatar>

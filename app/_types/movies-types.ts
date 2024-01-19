@@ -13,7 +13,7 @@ export interface IMovieDetails extends ICreationExternalIds {
   homepage: string;
   id: number;
   imdb_id: string;
-  original_language: string;
+  original_language?: string;
   original_title: string;
   overview: string;
   popularity: number;
