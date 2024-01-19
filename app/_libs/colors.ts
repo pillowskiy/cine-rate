@@ -3,6 +3,7 @@ import getColors from 'get-image-colors';
 
 const DEFAULT_COLOR = '#ffffff';
 
+// The function works very slowly and blocks sending RSC for an average of 1.5 seconds 🤯
 export async function getAverageColorFromUrl(url?: string | null) {
   if (!url) return DEFAULT_COLOR;
 

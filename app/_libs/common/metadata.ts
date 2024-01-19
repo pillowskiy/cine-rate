@@ -5,7 +5,6 @@ import type { INextPageParams } from '@app/types/index';
 import type { Metadata } from 'next';
 import { buildImagePath } from '@libs/tmdb';
 import { pipe } from '@libs/common/next';
-import { getAverageColorFromUrl } from '../colors';
 
 export const APP_URL =
   process.env.NEXT_PUBLIC_APP_URL || 'https://cine-rate.vercel.app/';
@@ -31,7 +30,8 @@ export function generateCreationMetadata(mediaType: MediaType) {
     const metadataTitle = `${creationTitle} — CineRate`;
 
     const backdropUrl = buildImagePath({ path: creation.backdrop_path });
-    const themeColor = await getAverageColorFromUrl(backdropUrl);
+    // const themeColor = await getAverageColorFromUrl(backdropUrl);
+    const themeColor = '#ffffff';
 
     return {
       themeColor,
@@ -86,7 +86,8 @@ export function generatePersonMetadata() {
 
     const title = `${person.name} — CineRate`;
     const profileImageUrl = buildImagePath({ path: person.profile_path });
-    const themeColor = await getAverageColorFromUrl(profileImageUrl);
+    // const themeColor = await getAverageColorFromUrl(profileImageUrl);
+    const themeColor = '#ffffff';
 
     return {
       themeColor,

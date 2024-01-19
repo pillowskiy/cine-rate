@@ -14,7 +14,7 @@ export function capitalize(
   string: string,
   options?: CapitalizeOptions
 ): string {
-  return (options?.assignLowerCase ? string.toLocaleLowerCase() : string)
+  return ((options?.assignLowerCase ? string.toLowerCase() : string) || '')
     .split(options?.split ?? ' ')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(options?.join ?? ' ');
