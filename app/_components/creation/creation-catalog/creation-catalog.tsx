@@ -31,10 +31,9 @@ export function CreationCatalog({
   const getData = async (page: number = currentPage + 1) => {
     const searchParams = { page, ...searchParamsObj };
     return ky
-      .get(`api/${mediaType}/discover`, { searchParams, cache: 'force-cache' })
+      .get(`api/${mediaType}/discover`, { searchParams })
       .then((res) => res.json<CreationsResponse>())
       .then((data) => {
-        // TEMP: two rerenders
         setItems((prev) => [...(prev || []), ...data.results]);
         setPagination((prev) => ({ ...prev, currentPage: data.page }));
       });
