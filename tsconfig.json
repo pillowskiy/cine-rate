@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "baseUrl": ".",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -20,25 +21,23 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
-      "@config/*": ["./app/_config/*"],
-      "@components/*": ["./app/_components/*"],
-      "@ui/*": ["./app/_components/ui/*"],
-      "@app/types/*": ["./app/_types/*"],
-      "@actions/*": ["./app/_shared/actions/*"],
-      "@hooks/*": ["./app/_hooks/*"],
-      "@redux/*": ["./app/_redux/*"],
-      "@libs/*": ["./app/_libs/*"],
-      "@api/*": ["./app/_shared/api/*"],
-      "@providers/*": ["./app/_providers/*"]
+      "#config/*": ["./src/config/*"],
+      "#components/*": ["./src/components/*"],
+      "#ui/*": ["./src/components/ui/*"],
+      "#types/*": ["./src/types/*"],
+      "#actions/*": ["./src/shared/actions/*"],
+      "#hooks/*": ["./src/hooks/*"],
+      "#store/*": ["./src/store/*"],
+      "#libs/*": ["./src/libs/*"],
+      "#api/*": ["./src/shared/api/*"],
+      "#providers/*": ["./src/providers/*"]
     }
   },
   "include": [
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "middleware.ts"
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --debug app/",
-    "lint:write": "eslint --debug app/ --fix",
+    "lint": "eslint --debug src/",
+    "lint:write": "eslint --debug src/ --fix",
     "prettier": "prettier --write .",
     "prepare": "husky"
   },
