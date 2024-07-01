@@ -1,7 +1,6 @@
 'use client';
 
 import { type ReactNode, useEffect } from 'react';
-
 import { usePathname } from 'next/navigation';
 
 export default function ScrollTopProvider({

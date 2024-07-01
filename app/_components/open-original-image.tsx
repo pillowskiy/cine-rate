@@ -1,5 +1,4 @@
 import Link from 'next/link';
-
 import { TMDB_IMAGE_URL } from '@libs/tmdb';
 
 export function OpenOriginalImage({ path }: { path: string }) {

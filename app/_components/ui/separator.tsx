@@ -1,11 +1,9 @@
 'use client';
 
 import * as React from 'react';
-
 import { cn } from '@/app/_libs';
 import * as SeparatorPrimitive from '@radix-ui/react-separator';
 import { m } from 'framer-motion';
-
 import { Target, widthAnimations } from '@config/animations';
 
 const Separator = React.forwardRef<

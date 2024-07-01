@@ -1,7 +1,5 @@
-import Image, { type ImageProps } from 'next/image';
-
+import { type ImageProps } from 'next/image';
 import { buildImagePath } from '@libs/tmdb';
-
 import { cn } from '../../_libs';
 import { ImageFromPath } from '../image/image-from-path';
 

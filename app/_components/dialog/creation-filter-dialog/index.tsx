@@ -1,20 +1,15 @@
 'use client';
 
 import {
-  ChangeEvent,
   type Dispatch,
   type ReactNode,
   type SetStateAction,
   createContext,
   useState,
 } from 'react';
-
 import useQueryParams from '@hooks/useQueryParams';
-
 import type { GetDiscoverParams } from '@actions/getDiscover';
-
 import type { MediaType } from '@config/enums';
-
 import { Button } from '@ui/button';
 import {
   Dialog,
@@ -30,7 +25,6 @@ import { Input } from '@ui/input';
 import { Label } from '@ui/label';
 import { ScrollArea, ScrollBar } from '@ui/scroll-area';
 import { MSeparator } from '@ui/separator';
-
 import { CreationGenres } from './creation-genres';
 import { CreationLanguage } from './creation-language';
 

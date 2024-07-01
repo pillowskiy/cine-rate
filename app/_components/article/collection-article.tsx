@@ -1,14 +1,8 @@
-import type { ReactNode } from 'react';
-
 import Link from 'next/link';
-
 import type { IDetailedCollection } from '@app/types/collection-types';
-
 import { Button } from '@ui/button';
-
 import { cn } from '@libs/index';
 import { buildImagePath } from '@libs/tmdb';
-
 import {
   BaseArticle,
   BaseArticleFigure,

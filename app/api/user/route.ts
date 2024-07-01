@@ -1,8 +1,6 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
-
 import { getSessionUser } from '@actions/getSessionUser';
-
 import { fetchErrorResponse } from '@libs/common/fetch';
 
 export async function GET() {

@@ -1,7 +1,5 @@
 import { ComponentProps } from 'react';
-
 import { cn } from '@/app/_libs';
-
 import { BaseArticleFigureProps } from '../article/base-article';
 import { Skeleton } from '../ui/skeleton';
 

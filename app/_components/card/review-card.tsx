@@ -1,7 +1,5 @@
 import { CalendarDays, Star } from 'lucide-react';
-
 import type { IReview } from '@app/types/review-types';
-
 import { Badge } from '../ui/badge';
 import { Card, CardContent } from '../ui/card';
 import { UserAvatar } from '../user-avatar';

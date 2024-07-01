@@ -1,11 +1,7 @@
 import Link from 'next/link';
-
 import { getPopular } from '@actions/getPopular';
-
 import { MediaType } from '@config/enums';
-
 import { MSeparator } from '@ui/separator';
-
 import { PersonArticle } from '@components/article/person-article';
 import { Carousel } from '@components/carousel';
 import { Heading } from '@components/heading';

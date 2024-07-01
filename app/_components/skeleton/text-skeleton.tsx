@@ -1,7 +1,5 @@
 import { ComponentProps } from 'react';
-
 import { Skeleton } from '@ui/skeleton';
-
 import { cn } from '@libs/index';
 
 interface TextSkeletonProps extends ComponentProps<'section'> {

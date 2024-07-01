@@ -1,7 +1,5 @@
 import { getPersonTranslations } from '@actions/getPersonTranslations';
-
 import { MSeparator } from '@ui/separator';
-
 import { NotFound } from '@components/not-found';
 
 interface PersonBiographyProps {

@@ -1,7 +1,6 @@
 'use client';
 
 import { ReactNode, useEffect } from 'react';
-
 import { useAppDispatch } from '@redux/hooks';
 import { getUser } from '@redux/user/user-actions';
 

@@ -1,9 +1,7 @@
 import type { ReactNode } from 'react';
-
 import type { DialogProps } from '@radix-ui/react-dialog';
 import { Eye, ThumbsDown, ThumbsUp } from 'lucide-react';
 import type { MoreVideoDetails } from 'ytdl-core';
-
 import {
   Dialog,
   DialogContent,
@@ -11,7 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@ui/dialog';
-
 import { formatTimeAgo } from '@libs/time';
 
 interface YoutubeEmbedDialogProps extends DialogProps {

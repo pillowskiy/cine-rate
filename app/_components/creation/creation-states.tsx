@@ -1,11 +1,5 @@
 import { Star, TrendingUp } from 'lucide-react';
-
-import type { MediaType } from '@config/enums';
-
-import { Button } from '@ui/button';
-
 import { cn } from '@libs/index';
-
 import type { CreationDetailsProps } from './common/types';
 
 interface CreationStatesProps extends CreationDetailsProps {}

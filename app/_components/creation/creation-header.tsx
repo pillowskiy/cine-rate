@@ -1,13 +1,9 @@
 import { Expand, Star } from 'lucide-react';
-
 import type { MediaType } from '@config/enums';
-
 import { CreationTrailer } from '@components/creation/creation-trailer';
 import { ImageFromPath } from '@components/image/image-from-path';
-
 import { cn } from '@libs/index';
 import { buildImagePath } from '@libs/tmdb';
-
 import { ExpandImageDialog } from '../dialog/expand-image-dialog';
 import { CreationStatesDetailed } from './account-states';
 import type { CreationDetailsProps } from './common/types';

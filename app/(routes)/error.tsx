@@ -2,7 +2,6 @@
 
 // Error components must be Client Components
 import { useEffect } from 'react';
-
 import { Button } from '@ui/button';
 
 export default function Error({

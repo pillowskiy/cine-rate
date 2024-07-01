@@ -1,7 +1,5 @@
 import { useEffect, useReducer, useRef } from 'react';
-
 import ky, { HTTPError, type Options } from 'ky';
-
 import type { IApiReject } from '@app/types/index';
 
 type Cache<T> = { [url: string]: T };

@@ -1,17 +1,12 @@
 import { memo } from 'react';
-
 import { Star } from 'lucide-react';
-
 import type { IEpisode } from '@app/types/tv-types';
-
 import {
   BaseArticle,
   BaseArticleFigure,
   type BaseArticleProps,
 } from '@components/article/base-article';
-
 import { buildImagePath } from '@libs/tmdb';
-
 import { EpisodeDetails } from './episode-details';
 
 interface EpisodeArticleProps extends BaseArticleProps {

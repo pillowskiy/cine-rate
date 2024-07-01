@@ -2,11 +2,8 @@
 
 import { type HTMLMotionProps, m } from 'framer-motion';
 import { SearchX } from 'lucide-react';
-
 import { useClientReady } from '@hooks/useClientReady';
-
 import { Target, opacityAnimations } from '@config/animations';
-
 import { cn } from '@libs/index';
 
 interface NotFoundProps extends Omit<HTMLMotionProps<'div'>, 'children'> {

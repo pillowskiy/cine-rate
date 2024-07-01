@@ -1,14 +1,9 @@
 import Link from 'next/link';
-
 import { getCreationKeywords } from '@actions/getCreationKeywords';
-
 import type { MediaType } from '@config/enums';
-
 import { Button } from '@ui/button';
 import { MSeparator } from '@ui/separator';
-
 import { Heading } from '@components/heading';
-
 import type { CreationDetailsProps } from './common/types';
 import { getTitle } from './common/utils';
 

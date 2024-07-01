@@ -1,19 +1,13 @@
 'use client';
 
 import { type ComponentProps, useEffect, useState } from 'react';
-
 import ky from 'ky';
-
 import type { IPagination } from '@app/types/index';
 import type { CelebritiesResponse } from '@app/types/person-types';
-
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
-
 import { initialPagination } from '@config/pagination';
-
 import { PersonArticle } from '@components/article/person-article';
 import { CatalogSkeletonGroup } from '@components/skeleton/catalog-skeleton-group';
-
 import { cn } from '@libs/index';
 
 type Celebrities = CelebritiesResponse['results'];

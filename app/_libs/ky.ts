@@ -1,5 +1,4 @@
 import { HTTPError } from 'ky';
-
 import { IApiReject } from '@app/types/index';
 
 export async function rejectKy(err: unknown): Promise<IApiReject> {

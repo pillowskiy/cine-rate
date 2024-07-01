@@ -1,7 +1,5 @@
 import type { IDetailedCollection } from '@app/types/collection-types';
-
 import { ImageFromPath } from '@components/image/image-from-path';
-
 import { buildImagePath } from '@libs/tmdb';
 
 interface CollectionHeaderProps {

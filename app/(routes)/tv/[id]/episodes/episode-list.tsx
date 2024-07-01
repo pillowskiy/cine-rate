@@ -1,12 +1,8 @@
 import type { BaseParams } from '@app/types/index';
 import type { SeasonDetailsResponse } from '@app/types/tv-types';
-
 import { MediaType } from '@config/enums';
-
 import { NotFound } from '@components/not-found';
-
 import { $api } from '@api/api-interceptor';
-
 import { EpisodeArticle } from './episode-article';
 
 async function getSeasonDetails(

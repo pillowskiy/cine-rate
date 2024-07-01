@@ -1,10 +1,7 @@
 import Link from 'next/link';
-
 import type { ITVDetails } from '@app/types/tv-types';
-
 import { Button } from '@ui/button';
 import { MSeparator } from '@ui/separator';
-
 import { SeasonArticle } from '@components/article/season-article';
 import { SeasonsDialog } from '@components/dialog/seasons-dialog';
 import { Heading } from '@components/heading';

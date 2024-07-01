@@ -1,9 +1,7 @@
 'use client';
 
 import { m } from 'framer-motion';
-
 import { Target, yTransitionAnimations } from '@config/animations';
-
 import { Badge } from '@ui/badge';
 
 interface HeadingProps {

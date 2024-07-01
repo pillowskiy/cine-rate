@@ -1,12 +1,9 @@
 import { getCreationCredits } from '@actions/getCreationCredits';
-
 import { MSeparator } from '@ui/separator';
-
 import { CreditArticle } from '@components/article/credit-article';
 import { Carousel } from '@components/carousel';
 import { Heading } from '@components/heading';
 import { NotFound } from '@components/not-found';
-
 import type { CreationIdentifierProps } from './common/types';
 
 export default async function CreationCast({

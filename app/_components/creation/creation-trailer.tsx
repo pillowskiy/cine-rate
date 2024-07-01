@@ -1,21 +1,14 @@
 'use client';
 
 import { type ComponentProps, useEffect, useRef, useState } from 'react';
-
 import Link from 'next/link';
-
 import { useInView } from 'framer-motion';
 import { Bot, Expand, Loader2, Play, Youtube } from 'lucide-react';
-
 import type { CreationTrailerResponse } from '@app/types/creation-types';
-
 import useFetch from '@hooks/useFetch';
-
 import { YoutubeEmbedDialog } from '@components/dialog/youtube-embed-dialog';
-
 import { cn } from '@libs/index';
 import { minutesFormat } from '@libs/time';
-
 import type { CreationIdentifierProps } from './common/types';
 
 interface CreationTrailerProps

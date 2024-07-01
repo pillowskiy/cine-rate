@@ -1,6 +1,5 @@
 import { cookies } from 'next/headers';
 import { type NextRequest, NextResponse } from 'next/server';
-
 import { getRequestToken } from '@actions/getRequestToken';
 
 function getTokenApproveURL(requestToken: string) {

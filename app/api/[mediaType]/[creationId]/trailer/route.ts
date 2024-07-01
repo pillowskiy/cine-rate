@@ -1,15 +1,10 @@
 import { NextResponse } from 'next/server';
-
 import { chooseFormat, getInfo as getVideoInfo } from 'ytdl-core';
-
 import type { INextPageParams } from '@app/types/index';
-
 import { getCreationVideos } from '@actions/getCreationVideos';
-
 import { generateZodErrorsResponse } from '@libs/common/next';
 import { inferOfficialTrailer } from '@libs/tmdb';
 import { buildURL } from '@libs/ytdl';
-
 import { paramsDto } from '../dto';
 
 export async function GET(_: unknown, { params }: INextPageParams) {

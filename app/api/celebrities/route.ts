@@ -1,12 +1,8 @@
 import { type NextRequest, NextResponse } from 'next/server';
-
 import { getPopular } from '@actions/getPopular';
-
 import { MediaType } from '@config/enums';
-
 import { fetchErrorResponse } from '@libs/common/fetch';
 import { generateZodErrorsResponse } from '@libs/common/next';
-
 import { paginationDto } from '../dto';
 
 export async function GET(request: NextRequest) {

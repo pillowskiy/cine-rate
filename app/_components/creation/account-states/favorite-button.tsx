@@ -1,18 +1,13 @@
 'use client';
 
 import { useContext } from 'react';
-
 import ky from 'ky';
 import { Heart } from 'lucide-react';
-
 import { useOptimistic } from '@hooks/useOptimistic';
-
 import { Button } from '@ui/button';
 import { useToast } from '@ui/use-toast';
-
 import { cn } from '@libs/index';
 import { rejectKy } from '@libs/ky';
-
 import type { BaseButtonProps } from './common/types';
 import { StatesAction, StatesContext } from './common/utils';
 

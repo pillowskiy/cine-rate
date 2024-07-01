@@ -1,7 +1,6 @@
 import type { BaseParams } from '@app/types/index';
 import type { IEpisode } from '@app/types/tv-types';
 import type { IEpisodeDetails } from '@app/types/tv-types';
-
 import {
   Accordion,
   AccordionContent,
@@ -9,10 +8,8 @@ import {
   AccordionTrigger,
 } from '@ui/accordion';
 import { MSeparator } from '@ui/separator';
-
 import { CreditArticle } from '@components/article/credit-article';
 import { Heading } from '@components/heading';
-
 import { $api } from '@api/api-interceptor';
 
 export function getEpisodeDetails(

@@ -1,7 +1,5 @@
 import { getTrending } from '@actions/getTrending';
-
 import { MSeparator } from '@ui/separator';
-
 import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
 import { Heading } from '@components/heading';

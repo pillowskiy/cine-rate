@@ -1,14 +1,9 @@
 import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
-
 import { LoadingCarousel } from '@/app/_components/skeleton/loading-carousel';
-
 import type { INextPageParams } from '@app/types/index';
-
 import { getCollection } from '@actions/getCollection';
-
 import { pipe } from '@libs/common/next';
-
 import CollectionHeader from './collection-header';
 
 const CollectionCreations = dynamic(() => import('./collection-creations'), {

@@ -1,5 +1,4 @@
 import type { IPersonDetails } from '@app/types/person-types';
-
 import { MSeparator } from '@ui/separator';
 
 interface PersonKnownAsProps {

@@ -1,10 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-
 import { Check, Menu } from 'lucide-react';
 import { useTheme } from 'next-themes';
-
 import {
   Accordion,
   AccordionContent,
@@ -19,10 +17,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@ui/sheet';
-
 import { Logo } from '@components/logo';
 import { AppNav } from '@components/nav/app-nav';
-
 import { cn } from '@libs/index';
 
 const themes = [

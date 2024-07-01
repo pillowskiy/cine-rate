@@ -1,24 +1,16 @@
 import { type ComponentProps, memo } from 'react';
-
 import Link from 'next/link';
-
 import { Info, Star } from 'lucide-react';
-
 import { ICreation } from '@app/types/creation-types';
-
 import type { MediaType } from '@config/enums';
-
 import { Button } from '@ui/button';
-
 import {
   CreationStatesDetailed,
   StatesPopover,
 } from '@components/creation/account-states';
 import { ImageFromPath } from '@components/image/image-from-path';
-
 import { cn } from '@libs/index';
 import { buildImagePath } from '@libs/tmdb';
-
 import { CreationRibbon } from '../creation/creation-ribbon';
 import {
   BaseArticle,

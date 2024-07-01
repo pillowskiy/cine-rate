@@ -1,12 +1,8 @@
 import type { Metadata } from 'next';
-
 import type { INextPageParams } from '@app/types/index';
-
 import { getCreationDetails } from '@actions/getCreationDetails';
 import { getPersonDetails } from '@actions/getPersonDetails';
-
 import type { MediaType } from '@config/enums';
-
 import { pipe } from '@libs/common/next';
 import { buildImagePath } from '@libs/tmdb';
 

@@ -1,21 +1,14 @@
 'use client';
 
 import { type ReactNode, useEffect, useState } from 'react';
-
 import { useAuth } from '@redux/hooks';
 import { type HTMLMotionProps, m } from 'framer-motion';
 import ky from 'ky';
-
 import type { AccountStatesResponse } from '@app/types/creation-types';
-
 import useFetch from '@hooks/useFetch';
-
 import { Target, opacityAnimations } from '@config/animations';
-
 import { Popover, PopoverContent, PopoverTrigger } from '@ui/popover';
-
 import { cn } from '@libs/index';
-
 import type { CreationIdentifierProps } from '../common/types';
 import { StatesAction, StatesContext, useStatesReducer } from './common/utils';
 import { FavoriteButton } from './favorite-button';

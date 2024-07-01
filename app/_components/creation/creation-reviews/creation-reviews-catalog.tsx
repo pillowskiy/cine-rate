@@ -1,13 +1,10 @@
 'use client';
 
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-
 import { ReviewResponse } from '@/app/_types/review-types';
 import ky from 'ky';
-
 import { ReviewCard } from '@components/card/review-card';
 import { NotFound } from '@components/not-found';
-
 import type { CreationIdentifierProps } from '../common/types';
 import { PaginationActionType, PaginationContext } from './common/utils';
 

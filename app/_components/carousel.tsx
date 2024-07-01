@@ -1,11 +1,8 @@
 'use client';
 
 import { type HTMLMotionProps, m } from 'framer-motion';
-
 import { Target } from '@config/animations';
-
 import { ScrollArea, ScrollBar } from '@ui/scroll-area';
-
 import { cn } from '@libs/index';
 
 interface CarouselProps extends HTMLMotionProps<'div'> {}

@@ -1,13 +1,9 @@
 import { notFound } from 'next/navigation';
-
 import { Heading } from '@/app/_components/heading';
 import { MSeparator } from '@/app/_components/ui/separator';
 import zod from 'zod';
-
 import type { INextPageParams } from '@app/types/index';
-
 import { ResourceTarget } from '@config/enums';
-
 import { ResourcesTabs } from '@components/resources/tabs';
 
 const paramsDto = zod.object({

@@ -1,12 +1,8 @@
 import { type NextRequest, NextResponse } from 'next/server';
-
 import type { INextPageParams } from '@app/types/index';
-
 import { getGenres } from '@actions/getGenres';
-
 import { fetchErrorResponse } from '@libs/common/fetch';
 import { generateZodErrorsResponse } from '@libs/common/next';
-
 import { paramsDto } from '../dto';
 
 export async function GET(request: NextRequest, { params }: INextPageParams) {

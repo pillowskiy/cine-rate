@@ -1,16 +1,11 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
-
 import { INextPageParams } from '@/app/_types';
 import zod from 'zod';
-
 import type { AccountStatesResponse } from '@app/types/creation-types';
-
 import { $api } from '@api/api-interceptor';
-
 import { fetchErrorResponse } from '@libs/common/fetch';
 import { generateZodErrorsResponse } from '@libs/common/next';
-
 import { paramsDto } from '../dto';
 
 export async function GET(_: unknown, { params }: INextPageParams) {

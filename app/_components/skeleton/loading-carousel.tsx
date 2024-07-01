@@ -1,7 +1,5 @@
 import { ScrollArea, ScrollBar } from '@ui/scroll-area';
-
 import { cn } from '@libs/index';
-
 import { HeadingSkeleton } from './heading-skeleton';
 import { SkeletonArticle, type SkeletonArticleProps } from './skeleton-article';
 

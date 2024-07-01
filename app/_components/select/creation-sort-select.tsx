@@ -1,9 +1,7 @@
 'use client';
 
 import useQueryParams from '@hooks/useQueryParams';
-
 import type { MovieSort, TVSort } from '@config/enums';
-
 import {
   Select,
   SelectContent,
@@ -12,7 +10,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@ui/select';
-
 import { capitalize } from '@libs/index';
 
 interface CreationSortSelectProps {

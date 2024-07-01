@@ -1,5 +1,4 @@
 import type { BaseParams, IApiReject } from '@app/types/index';
-
 import type { RequestConfig, SafeFetchedData } from '.';
 
 const baseFetch = global.fetch;

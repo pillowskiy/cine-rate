@@ -1,16 +1,11 @@
 import Link from 'next/link';
-
 import { getMovies } from '@actions/getMovies';
-
 import { MediaType, MovieSort } from '@config/enums';
-
 import { MSeparator } from '@ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs';
-
 import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
 import { Heading } from '@components/heading';
-
 import { capitalize } from '@libs/index';
 
 const emojis: Record<MovieSort, string> = {

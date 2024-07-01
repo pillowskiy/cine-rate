@@ -1,23 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
 import Link from 'next/link';
-
 import ky from 'ky';
 import { Loader, Search, X } from 'lucide-react';
-
 import type { MultiSearchResponse } from '@app/types/search-types';
-
 import { useDebounce } from '@hooks/useDebounce';
-
 import { MediaType } from '@config/enums';
-
 import { Button } from '@ui/button';
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@ui/dialog';
-
 import { cn, groupBy } from '@libs/index';
-
 import { HorizontalCreationArticle } from '../article/creation-article';
 import { PersonArticle } from '../article/person-article';
 import { Carousel } from '../carousel';

@@ -1,13 +1,8 @@
 import { notFound } from 'next/navigation';
-
 import type { INextPageParams } from '@app/types/index';
-
 import { getCreationDetails } from '@actions/getCreationDetails';
-
 import { MediaType } from '@config/enums';
-
 import { pipe } from '@libs/common/next';
-
 import EpisodeFilter from './episode-filter';
 import EpisodeHeader from './episode-header';
 import EpisodeList from './episode-list';

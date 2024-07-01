@@ -1,5 +1,4 @@
 import type { Gender, MediaType } from '@config/enums';
-
 import type { BaseResponse, ITranslation } from '.';
 import type { ICreation } from './creation-types';
 

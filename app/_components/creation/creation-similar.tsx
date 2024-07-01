@@ -1,12 +1,9 @@
 import { getSimilar } from '@actions/getSimilar';
-
 import { MSeparator } from '@ui/separator';
-
 import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
 import { Heading } from '@components/heading';
 import { NotFound } from '@components/not-found';
-
 import type { CreationIdentifierProps } from './common/types';
 
 export default async function CreationSimilar({

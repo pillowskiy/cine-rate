@@ -1,9 +1,6 @@
 import { Filter } from 'lucide-react';
-
 import { MediaType, MovieSort, TVSort } from '@config/enums';
-
 import { Button } from '@ui/button';
-
 import { CreationFilterDialog } from '@components/dialog/creation-filter-dialog';
 import { CreationSortSelect } from '@components/select/creation-sort-select';
 

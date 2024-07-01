@@ -1,5 +1,4 @@
 import type { ICreation } from '@app/types/creation-types';
-
 import { cn } from '@libs/index';
 import { getCreationRibbon } from '@libs/tmdb';
 

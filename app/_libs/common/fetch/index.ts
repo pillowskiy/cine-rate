@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
-
 import type { BaseParams, IApiReject } from '@app/types/index';
-
 import { FetchError } from './next-fetch';
 
 export type SafeFetchedData<T> = [T, null] | [null, Response];

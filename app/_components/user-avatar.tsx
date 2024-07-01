@@ -1,5 +1,4 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@ui/avatar';
-
 import { buildGravatarPath, buildImagePath } from '@libs/tmdb';
 
 interface UserAvatarProps {

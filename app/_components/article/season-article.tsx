@@ -1,12 +1,8 @@
 import type { ReactNode } from 'react';
-
 import { Star } from 'lucide-react';
-
 import type { ISeason } from '@app/types/tv-types';
-
 import { cn } from '@libs/index';
 import { buildImagePath } from '@libs/tmdb';
-
 import {
   BaseArticle,
   BaseArticleFigure,

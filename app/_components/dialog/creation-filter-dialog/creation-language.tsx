@@ -1,11 +1,8 @@
 'use client';
 
 import { useContext } from 'react';
-
 import type { LanguagesResponse } from '@app/types/configuration-types';
-
 import useFetch from '@hooks/useFetch';
-
 import { Label } from '@ui/label';
 import {
   Select,
@@ -15,7 +12,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@ui/select';
-
 import { FilterContext } from '.';
 
 export function CreationLanguage() {

@@ -1,13 +1,9 @@
 import { memo } from 'react';
-
 import Link from 'next/link';
-
 import type { ITVDetails } from '@app/types/tv-types';
-
 import { getTitle } from '@components/creation/common/utils';
 import { CreationStates } from '@components/creation/creation-states';
 import { ImageFromPath } from '@components/image/image-from-path';
-
 import { buildImagePath } from '@libs/tmdb';
 
 interface EpisodeHeaderProps {

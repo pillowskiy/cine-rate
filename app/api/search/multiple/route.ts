@@ -1,9 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
-
 import zod from 'zod';
-
 import { getMultiSearch } from '@actions/getMultiSearch';
-
 import { fetchErrorResponse } from '@libs/common/fetch';
 import { generateZodErrorsResponse } from '@libs/common/next';
 

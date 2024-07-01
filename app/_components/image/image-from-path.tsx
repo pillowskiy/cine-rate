@@ -1,11 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-
 import Image, { type ImageProps } from 'next/image';
-
 import { Image as FallbackIcon } from 'lucide-react';
-
 import { cn } from '@libs/index';
 
 type ImageFromPathProps = Omit<ImageProps, 'src'> & {

@@ -1,7 +1,5 @@
 import 'server-only';
-
 import type { BaseParams } from '@app/types/index';
-
 import type { RequestConfig, SafeFetchedData } from '.';
 import { handleData, nextFetch } from './next-fetch';
 

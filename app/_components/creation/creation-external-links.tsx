@@ -1,15 +1,9 @@
 import type { ReactNode } from 'react';
-
 import Link from 'next/link';
-
 import { Facebook, Instagram, Link as LinkIcon, Twitter } from 'lucide-react';
-
 import type { CreationExternalIds } from '@app/types/creation-types';
-
 import { MSeparator } from '@ui/separator';
-
 import { Heading } from '@components/heading';
-
 import { type CreationExternalUrls, buildExternalUrls } from '@libs/tmdb';
 
 interface CreationExternalLinksProps {

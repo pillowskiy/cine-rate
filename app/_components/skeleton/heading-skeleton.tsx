@@ -1,6 +1,5 @@
 import { Separator } from '@ui/separator';
 import { Skeleton } from '@ui/skeleton';
-
 import { getRandomWidth } from './common/utils';
 import { TextSkeleton } from './text-skeleton';
 

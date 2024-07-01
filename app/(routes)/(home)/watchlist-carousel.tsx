@@ -1,16 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-
 import { useAuth } from '@redux/hooks';
 import { m } from 'framer-motion';
 import { BookmarkPlus, LogIn } from 'lucide-react';
-
 import { Target, opacityAnimations } from '@config/animations';
-
 import { Button } from '@ui/button';
 import { MSeparator } from '@ui/separator';
-
 import { Heading } from '@components/heading';
 
 export default function WatchlistCarousel() {

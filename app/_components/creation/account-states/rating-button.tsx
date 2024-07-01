@@ -1,15 +1,8 @@
 import { useContext } from 'react';
-
 import { Star } from 'lucide-react';
-
-import type { AccountStatesResponse } from '@app/types/creation-types';
-
 import { Button } from '@ui/button';
-
 import { CreationRatingDialog } from '@components/dialog/creation-rating-dialog';
-
 import { cn } from '@libs/index';
-
 import type { BaseButtonProps } from './common/types';
 import { StatesAction, StatesContext } from './common/utils';
 

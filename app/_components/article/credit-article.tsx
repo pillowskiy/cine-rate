@@ -1,11 +1,6 @@
-import type { ComponentProps } from 'react';
-
 import Link from 'next/link';
-
 import type { ICredit } from '@app/types/person-types';
-
 import { buildImagePath } from '@libs/tmdb';
-
 import {
   BaseArticle,
   BaseArticleContent,

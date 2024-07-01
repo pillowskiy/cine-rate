@@ -1,21 +1,15 @@
 import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
-
 import type { INextPageParams } from '@app/types/index';
-
 import { getCreationDetails } from '@actions/getCreationDetails';
-
 import { MediaType } from '@config/enums';
-
 import CreationCast from '@components/creation/creation-cast';
 import CreationHeader from '@components/creation/creation-header';
 import CreationMediaTabs from '@components/creation/creation-media-tabs';
 import CreationOverview from '@components/creation/creation-overview';
 import CreationSimilar from '@components/creation/creation-similar';
-
 import { generateCreationMetadata } from '@libs/common/metadata';
 import { pipe } from '@libs/common/next';
-
 import SeriesDetails from './series-details';
 import SerriesSeasons from './series-seasons';
 

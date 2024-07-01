@@ -1,10 +1,7 @@
 import { NextResponse } from 'next/server';
-
 import zod from 'zod';
-
 import { getSessionUser } from '@actions/getSessionUser';
 import { postSession } from '@actions/postSession';
-
 import { fetchErrorResponse } from '@libs/common/fetch';
 import { SESSION_COOKIE_EXPIRES } from '@libs/common/next';
 

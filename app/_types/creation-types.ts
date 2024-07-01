@@ -1,7 +1,5 @@
 import type { MoreVideoDetails, videoFormat } from 'ytdl-core';
-
 import type { CreationVideoSite, MediaType } from '@config/enums';
-
 import type { BaseResponse } from '.';
 import type { IMediaResource } from './media-types';
 

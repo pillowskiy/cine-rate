@@ -1,13 +1,9 @@
 import type { CreationImagesResponse } from '@app/types/creation-types';
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs';
-
 import { Carousel } from '@components/carousel';
 import { ImageFromPath } from '@components/image/image-from-path';
 import { NotFound } from '@components/not-found';
-
 import { buildImagePath } from '@libs/tmdb';
-
 import { OpenOriginalImage } from './open-original-image';
 
 interface MediaTabsProps {

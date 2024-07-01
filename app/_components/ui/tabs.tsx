@@ -1,11 +1,9 @@
 'use client';
 
 import * as React from 'react';
-
 import { cn } from '@/app/_libs';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
 import { m } from 'framer-motion';
-
 import { Target, opacityAnimations } from '@config/animations';
 
 const Tabs = TabsPrimitive.Root;

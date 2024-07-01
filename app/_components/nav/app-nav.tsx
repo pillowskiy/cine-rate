@@ -2,9 +2,7 @@
 
 import Link, { type LinkProps } from 'next/link';
 import { usePathname } from 'next/navigation';
-
 import { OriginRoutes } from '@config/routes';
-
 import { cn } from '@libs/index';
 
 interface AppNavProps extends Omit<LinkProps, 'href'> {

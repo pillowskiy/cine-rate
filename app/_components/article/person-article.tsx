@@ -1,9 +1,6 @@
 import Link from 'next/link';
-
 import type { ICelebrity } from '@app/types/person-types';
-
 import { buildImagePath } from '@libs/tmdb';
-
 import {
   BaseArticle,
   BaseArticleContent,

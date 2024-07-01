@@ -1,18 +1,12 @@
 'use client';
 
 import { useContext } from 'react';
-
 import { ChevronDown, Loader } from 'lucide-react';
-
 import type { GenresResponse } from '@app/types/genre-types';
-
 import useFetch from '@hooks/useFetch';
-
 import type { MediaType } from '@config/enums';
-
 import { Label } from '@ui/label';
 import { Toggle } from '@ui/toggle';
-
 import { FilterContext } from '.';
 
 interface CreationGenresProps {

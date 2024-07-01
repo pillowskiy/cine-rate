@@ -1,11 +1,8 @@
 'use client';
 
 import { useReducer } from 'react';
-
 import { MSeparator } from '@ui/separator';
-
 import { Heading } from '@components/heading';
-
 import type { CreationIdentifierProps } from '../common/types';
 import {
   PaginationContext,

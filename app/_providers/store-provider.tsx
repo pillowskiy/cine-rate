@@ -1,7 +1,6 @@
 'use client';
 
 import type { ReactNode } from 'react';
-
 import { store } from '@redux/store';
 import { Provider } from 'react-redux';
 

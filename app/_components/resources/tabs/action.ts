@@ -1,7 +1,5 @@
 import ky from 'ky';
-
 import type { CreationsResponse } from '@app/types/creation-types';
-
 import { ResourceTarget, ResourceType } from '@config/enums';
 
 interface WatchlistParams extends Record<string, string | number | boolean> {

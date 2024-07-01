@@ -1,17 +1,13 @@
 'use client';
 
 import { ReactNode, useState } from 'react';
-
 import ky from 'ky';
 import { Loader2, Star, Trash } from 'lucide-react';
-
 import type {
   AccountStatesResponse,
   RatingResponse,
 } from '@app/types/creation-types';
-
 import type { MediaType } from '@config/enums';
-
 import { Button } from '@ui/button';
 import {
   Dialog,
@@ -22,7 +18,6 @@ import {
   DialogTrigger,
 } from '@ui/dialog';
 import { useToast } from '@ui/use-toast';
-
 import { cn } from '@libs/index';
 import { rejectKy } from '@libs/ky';
 

@@ -1,19 +1,13 @@
 import { notFound } from 'next/navigation';
-
 import { Star } from 'lucide-react';
-
 import type { BaseParams, INextPageParams } from '@app/types/index';
 import type { SeasonDetailsResponse } from '@app/types/tv-types';
-
 import { MediaType } from '@config/enums';
-
 import {
   BaseArticle,
   BaseArticleFigure,
 } from '@components/article/base-article';
-
 import { $api } from '@api/api-interceptor';
-
 import { pipe } from '@libs/common/next';
 import { buildImagePath } from '@libs/tmdb';
 

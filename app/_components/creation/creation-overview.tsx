@@ -1,7 +1,5 @@
 import { MSeparator } from '@ui/separator';
-
 import { BaseFigure } from '@components/figure/base-figure';
-
 import { Heading } from '../heading';
 import type { CreationDetailsProps } from './common/types';
 import { getTitle } from './common/utils';

@@ -4,9 +4,7 @@ import {
   isPending,
   isRejected,
 } from '@reduxjs/toolkit';
-
 import type { IUser } from '@app/types/account-types';
-
 import * as actions from './user-actions';
 
 interface IUserState {

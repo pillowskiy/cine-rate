@@ -1,24 +1,17 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-
 import type { CreationsResponse } from '@app/types/creation-types';
 import type { IPagination } from '@app/types/index';
-
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
-
 import { MediaType, ResourceTarget, ResourceType } from '@config/enums';
 import { initialPagination } from '@config/pagination';
-
 import { TabsContent } from '@ui/tabs';
-
 import { HorizontalCreationArticle } from '@components/article/creation-article';
 import { NotFound } from '@components/not-found';
 import { CatalogSkeletonGroup } from '@components/skeleton/catalog-skeleton-group';
-
 import { getResources } from './action';
 
 type Items = CreationsResponse['results'] | null;

@@ -1,14 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-
 import { useAuth } from '@redux/hooks';
 import { Loader2, LogIn } from 'lucide-react';
-
 import { useClientReady } from '@hooks/useClientReady';
-
 import { Button } from '@ui/button';
-
 import { ProfileDropdown } from '@components/dropdown/profile-dropdown';
 import { UserAvatar } from '@components/user-avatar';
 

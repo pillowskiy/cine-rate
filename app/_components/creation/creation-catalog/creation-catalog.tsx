@@ -1,23 +1,16 @@
 'use client';
 
 import { type ComponentProps, useEffect, useState } from 'react';
-
 import { useSearchParams } from 'next/navigation';
-
 import ky from 'ky';
-
 import type { CreationsResponse } from '@app/types/creation-types';
 import type { IPagination } from '@app/types/index';
-
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
-
 import type { MediaType } from '@config/enums';
 import { initialPagination } from '@config/pagination';
-
 import { CreationArticle } from '@components/article/creation-article';
 import { NotFound } from '@components/not-found';
 import { CatalogSkeletonGroup } from '@components/skeleton/catalog-skeleton-group';
-
 import { cn } from '@libs/index';
 
 interface CreationCatalogProps extends ComponentProps<'div'> {

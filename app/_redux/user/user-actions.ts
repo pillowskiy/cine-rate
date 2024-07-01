@@ -1,10 +1,8 @@
 import type { AppDispatch, RootState } from '@redux/store';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import ky from 'ky';
-
 import type { AccountDetailsResponse } from '@app/types/account-types';
 import type { IApiReject } from '@app/types/index';
-
 import { rejectKy } from '@libs/ky';
 
 type AuthThunkConfig = {

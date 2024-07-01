@@ -7,9 +7,7 @@ import {
   useMemo,
   useState,
 } from 'react';
-
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-
 import {
   Dialog,
   DialogContent,
@@ -18,9 +16,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@ui/dialog';
-
 import { OpenOriginalImage } from '@components/open-original-image';
-
 import { cn } from '@libs/index';
 import { buildImagePath } from '@libs/tmdb';
 

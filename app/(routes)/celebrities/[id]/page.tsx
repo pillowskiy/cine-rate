@@ -1,14 +1,9 @@
 import { notFound } from 'next/navigation';
-
 import type { INextPageParams } from '@app/types/index';
-
 import { getPersonDetails } from '@actions/getPersonDetails';
-
 import { BaseFigure } from '@components/figure/base-figure';
-
 import { generatePersonMetadata } from '@libs/common/metadata';
 import { pipe } from '@libs/common/next';
-
 import CombinedCredits from './combined-credits';
 import PersonBiography from './person-biography';
 import PersonDetails from './person-details';

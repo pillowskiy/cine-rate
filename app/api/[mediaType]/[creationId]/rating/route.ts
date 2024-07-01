@@ -1,16 +1,11 @@
 import { cookies } from 'next/headers';
 import { type NextRequest, NextResponse } from 'next/server';
-
 import zod from 'zod';
-
 import type { RatingResponse } from '@app/types/creation-types';
 import type { INextPageParams } from '@app/types/index';
-
 import { $api } from '@api/api-interceptor';
-
 import { fetchErrorResponse } from '@libs/common/fetch';
 import { generateZodErrorsResponse } from '@libs/common/next';
-
 import { paramsDto } from '../dto';
 
 const bodyDto = zod.object({

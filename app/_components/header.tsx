@@ -1,10 +1,7 @@
 import { Moon, Sun } from 'lucide-react';
-
 import { DesktopNav } from '@components/nav/desktop-nav';
 import { MobileNav } from '@components/nav/mobile-nav';
-
 import { isMobileView } from '@libs/common/views';
-
 import { AuthButton } from './button/auth-button';
 import { SearchDialog } from './dialog/search-dialog';
 import { Logo } from './logo';

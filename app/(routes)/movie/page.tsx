@@ -1,5 +1,4 @@
 import { MediaType, MovieSort } from '@config/enums';
-
 import {
   CreationCatalog,
   CreationCatalogHeader,

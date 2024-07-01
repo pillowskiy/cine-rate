@@ -1,9 +1,7 @@
 'use client';
 
 import { type ReactNode, useCallback, useState } from 'react';
-
 import Link from 'next/link';
-
 import { useAppDispatch, useAuth } from '@redux/hooks';
 import { logout as logoutAction } from '@redux/user/user-actions';
 import {
@@ -14,7 +12,6 @@ import {
   MessageSquare,
   Star,
 } from 'lucide-react';
-
 import {
   DropdownMenu,
   DropdownMenuContent,

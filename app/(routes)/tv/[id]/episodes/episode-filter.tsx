@@ -1,13 +1,9 @@
 'use client';
 
 import { useTransition } from 'react';
-
 import { ArrowDownUp, Loader } from 'lucide-react';
-
 import type { ITVDetails } from '@app/types/tv-types';
-
 import useQueryParams from '@hooks/useQueryParams';
-
 import { Button } from '@ui/button';
 import {
   Select,
