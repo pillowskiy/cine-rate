@@ -1,10 +1,14 @@
-import type { ITVDetails } from '@app/types/tv-types';
 import { memo } from 'react';
-import { ImageFromPath } from '@components/image/image-from-path';
-import { CreationStates } from '@components/creation/creation-states';
-import { getTitle } from '@components/creation/common/utils';
-import { buildImagePath } from '@libs/tmdb';
+
 import Link from 'next/link';
+
+import type { ITVDetails } from '@app/types/tv-types';
+
+import { getTitle } from '@components/creation/common/utils';
+import { CreationStates } from '@components/creation/creation-states';
+import { ImageFromPath } from '@components/image/image-from-path';
+
+import { buildImagePath } from '@libs/tmdb';
 
 interface EpisodeHeaderProps {
   series: ITVDetails;
@@ -25,7 +29,7 @@ const EpisodeHeader = memo(({ series }: EpisodeHeaderProps) => {
           height={390}
         />
       </div>
-      <div className='flex flex-grow flex-col items-center justify-between gap-4 sm:flex-row'>
+      <div className='flex grow flex-col items-center justify-between gap-4 sm:flex-row'>
         <div className='text-center sm:text-left'>
           <div className='flex items-center gap-1.5'>
             <Link
@@ -34,7 +38,7 @@ const EpisodeHeader = memo(({ series }: EpisodeHeaderProps) => {
             >
               {getTitle(series)}
             </Link>
-            <span className='text-sm text-foreground/70'>
+            <span className='text-foreground/70 text-sm'>
               ({new Date(series.first_air_date).getFullYear()})
             </span>
           </div>

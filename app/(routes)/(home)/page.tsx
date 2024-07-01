@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+
 import { LoadingCarousel } from '@components/skeleton/loading-carousel';
 
 const TrendsCarousel = dynamic(() => import('./trends-carousel'), {

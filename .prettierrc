@@ -9,7 +9,6 @@
     "^(react/(.*)$)|^(react$)",
     "^(next/(.*)$)|^(next$)",
     "<THIRD_PARTY_MODULES>",
-    "",
     "^types$",
     "^@/types/(.*)$",
     "^@app/types/(.*)$",
@@ -19,7 +18,6 @@
     "^@ui/(.*)$",
     "^@components/(.*)$",
     "^@providers/(.*)$",
-    "^@actions/(.*)$",
     "^@api/(.*)$",
     "^@libs/(.*)$",
     "^[./]"

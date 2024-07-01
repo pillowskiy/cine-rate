@@ -1,15 +1,20 @@
 'use client';
 
-import type { BaseButtonProps } from './common/types';
 import { useContext } from 'react';
-import { StatesAction, StatesContext } from './common/utils';
-import { Button } from '@ui/button';
-import { cn } from '@libs/index';
-import { Heart } from 'lucide-react';
-import { useToast } from '@ui/use-toast';
+
 import ky from 'ky';
-import { rejectKy } from '@libs/ky';
+import { Heart } from 'lucide-react';
+
 import { useOptimistic } from '@hooks/useOptimistic';
+
+import { Button } from '@ui/button';
+import { useToast } from '@ui/use-toast';
+
+import { cn } from '@libs/index';
+import { rejectKy } from '@libs/ky';
+
+import type { BaseButtonProps } from './common/types';
+import { StatesAction, StatesContext } from './common/utils';
 
 interface ToggleFavoriteProps extends BaseButtonProps {}
 
@@ -64,7 +69,7 @@ export function FavoriteButton({ size, ...props }: ToggleFavoriteProps) {
     >
       <Heart
         className={cn(
-          size === 'sm' ? 'h-5 w-5' : 'h-7 w-7',
+          size === 'sm' ? 'size-5' : 'size-7',
           favorite && 'fill-red-500 text-red-500'
         )}
       />

@@ -1,9 +1,11 @@
-import type { CreationDetailsProps } from './common/types';
-import { BaseFigure } from '@components/figure/base-figure';
 import { MSeparator } from '@ui/separator';
+
+import { BaseFigure } from '@components/figure/base-figure';
+
+import { Heading } from '../heading';
+import type { CreationDetailsProps } from './common/types';
 import { getTitle } from './common/utils';
 import { CreationGenres } from './creation-genres';
-import { Heading } from '../heading';
 
 export default function CreationOverview({ details }: CreationDetailsProps) {
   return (
@@ -15,17 +17,17 @@ export default function CreationOverview({ details }: CreationDetailsProps) {
       <MSeparator className='my-4' />
       <div className='flex space-x-4 sm:space-x-0'>
         <BaseFigure
-          className='block w-[120px] min-w-[120px] aspect-[2/3] h-fit sm:hidden'
+          className='block aspect-[2/3] h-fit w-[120px] min-w-[120px] sm:hidden'
           posterPath={details.poster_path}
           width={320}
           height={550}
         />
-        <div className='flex-grow space-y-2 overflow-hidden'>
+        <div className='grow space-y-2 overflow-hidden'>
           <CreationGenres
             className='w-full sm:hidden'
             genres={details.genres.slice(0, 3)}
           />
-          <p className='flex-grow break-words text-sm md:text-base'>
+          <p className='grow break-words text-sm md:text-base'>
             {details.overview || 'No overview found.'}
           </p>
         </div>

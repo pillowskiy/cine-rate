@@ -1,8 +1,10 @@
 'use client';
 
-import { Badge } from '@ui/badge';
-import { Target, yTransitionAnimations } from '@config/animations';
 import { m } from 'framer-motion';
+
+import { Target, yTransitionAnimations } from '@config/animations';
+
+import { Badge } from '@ui/badge';
 
 interface HeadingProps {
   title: string;
@@ -41,7 +43,7 @@ export function Heading({ title, description, badges }: HeadingProps) {
             ))}
         </div>
       </div>
-      <p className='text-sm text-muted-foreground'>{description}</p>
+      <p className='text-muted-foreground text-sm'>{description}</p>
     </m.div>
   );
 }

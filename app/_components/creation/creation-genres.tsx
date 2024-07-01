@@ -1,9 +1,14 @@
-import { cn } from '@/app/_libs';
-import type { IPartialGenre } from '@app/types/genre-types';
-import type { MediaType } from '@config/enums';
-import { Button } from '@ui/button';
-import Link from 'next/link';
 import { ComponentProps } from 'react';
+
+import Link from 'next/link';
+
+import { cn } from '@/app/_libs';
+
+import type { IPartialGenre } from '@app/types/genre-types';
+
+import type { MediaType } from '@config/enums';
+
+import { Button } from '@ui/button';
 
 interface CreationGenresProps extends Omit<ComponentProps<'div'>, 'children'> {
   mediaType?: MediaType;
@@ -19,7 +24,7 @@ export function CreationGenres({
   return (
     <div
       className={cn(
-        'flex h-7 items-center space-x-2 text-sm opacity-70 overflow-x-auto',
+        'flex h-7 items-center space-x-2 overflow-x-auto text-sm opacity-70',
         className
       )}
       {...props}
@@ -37,7 +42,7 @@ export function CreationGenres({
           legacyBehavior
         >
           <Button
-            className='h-full bg-transparent px-2 text-xs truncate'
+            className='h-full truncate bg-transparent px-2 text-xs'
             variant='outline'
           >
             {genre.name}

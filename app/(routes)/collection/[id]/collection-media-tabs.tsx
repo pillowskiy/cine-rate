@@ -1,8 +1,11 @@
-import type { BaseParams } from '@app/types/index';
 import type { CreationImagesResponse } from '@app/types/creation-types';
+import type { BaseParams } from '@app/types/index';
+
+import { MSeparator } from '@ui/separator';
+
 import { Heading } from '@components/heading';
 import { MediaTabs } from '@components/media-tabs';
-import { MSeparator } from '@ui/separator';
+
 import { $api } from '@api/api-interceptor';
 
 interface CollectionMediaTabsProps {

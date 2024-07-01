@@ -1,8 +1,10 @@
-import { Heading } from '@components/heading';
 import { getTrending } from '@actions/getTrending';
+
+import { MSeparator } from '@ui/separator';
+
 import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
-import { MSeparator } from '@ui/separator';
+import { Heading } from '@components/heading';
 import { NotFound } from '@components/not-found';
 
 export default async function TrendsCarousel() {

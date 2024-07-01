@@ -2,20 +2,24 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
-import type { IPagination } from '@app/types/index';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+
 import type { CreationsResponse } from '@app/types/creation-types';
+import type { IPagination } from '@app/types/index';
+
+import useInfiniteScroll from '@hooks/useInfiniteScroll';
+
 import { MediaType, ResourceTarget, ResourceType } from '@config/enums';
+import { initialPagination } from '@config/pagination';
 
 import { TabsContent } from '@ui/tabs';
+
 import { HorizontalCreationArticle } from '@components/article/creation-article';
-import { CatalogSkeletonGroup } from '@components/skeleton/catalog-skeleton-group';
 import { NotFound } from '@components/not-found';
+import { CatalogSkeletonGroup } from '@components/skeleton/catalog-skeleton-group';
 
 import { getResources } from './action';
-import { useSearchParams } from 'next/navigation';
-import { initialPagination } from '@config/pagination';
-import useInfiniteScroll from '@hooks/useInfiniteScroll';
-import Link from 'next/link';
 
 type Items = CreationsResponse['results'] | null;
 
@@ -96,7 +100,7 @@ export default function ResourcesTabsContent({
   return (
     <TabsContent className='flex flex-wrap gap-4' value={resourceType}>
       <HandleItems defaultMediaType={mediaTypes[resourceType]} items={items} />
-      {(!!items?.length && !canScroll) && <CatalogSkeletonGroup />}
+      {!!items?.length && !canScroll && <CatalogSkeletonGroup />}
     </TabsContent>
   );
 }

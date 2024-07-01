@@ -1,7 +1,9 @@
 import { ScrollArea, ScrollBar } from '@ui/scroll-area';
-import { SkeletonArticle, type SkeletonArticleProps } from './skeleton-article';
-import { HeadingSkeleton } from './heading-skeleton';
+
 import { cn } from '@libs/index';
+
+import { HeadingSkeleton } from './heading-skeleton';
+import { SkeletonArticle, type SkeletonArticleProps } from './skeleton-article';
 
 interface LoadingCarouselProps extends SkeletonArticleProps {
   withHeading?: boolean;

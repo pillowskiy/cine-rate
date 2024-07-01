@@ -1,6 +1,20 @@
 'use client';
 
-import { useState, type ReactNode, useCallback } from 'react';
+import { type ReactNode, useCallback, useState } from 'react';
+
+import Link from 'next/link';
+
+import { useAppDispatch, useAuth } from '@redux/hooks';
+import { logout as logoutAction } from '@redux/user/user-actions';
+import {
+  BookmarkPlus,
+  Heart,
+  LogOut,
+  Mails,
+  MessageSquare,
+  Star,
+} from 'lucide-react';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,18 +26,6 @@ import {
   DropdownMenuTrigger,
 } from '@ui/dropdown-menu';
 import { useToast } from '@ui/use-toast';
-
-import {
-  MessageSquare,
-  Mails,
-  Star,
-  BookmarkPlus,
-  LogOut,
-  Heart,
-} from 'lucide-react';
-import { useAppDispatch, useAuth } from '@redux/hooks';
-import { logout as logoutAction } from '@redux/user/user-actions';
-import Link from 'next/link';
 
 interface ProfileDropdownProps {
   children: ReactNode;
@@ -69,11 +71,11 @@ export function ProfileDropdown({ children }: ProfileDropdownProps) {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem disabled>
-            <MessageSquare className='mr-2 h-4 w-4' />
+            <MessageSquare className='mr-2 size-4' />
             <span>Discussions</span>
           </DropdownMenuItem>
           <DropdownMenuItem disabled>
-            <Mails className='mr-2 h-4 w-4' />
+            <Mails className='mr-2 size-4' />
             <span>Lists</span>
           </DropdownMenuItem>
           <Link href='/account/favorite' passHref legacyBehavior>
@@ -81,7 +83,7 @@ export function ProfileDropdown({ children }: ProfileDropdownProps) {
               onClick={closeDropdown}
               className='cursor-pointer'
             >
-              <Heart className='mr-2 h-4 w-4' />
+              <Heart className='mr-2 size-4' />
               <span>Favorite</span>
             </DropdownMenuItem>
           </Link>
@@ -90,7 +92,7 @@ export function ProfileDropdown({ children }: ProfileDropdownProps) {
               onClick={closeDropdown}
               className='cursor-pointer'
             >
-              <Star className='mr-2 h-4 w-4' />
+              <Star className='mr-2 size-4' />
               <span>Rated</span>
             </DropdownMenuItem>
           </Link>
@@ -99,14 +101,14 @@ export function ProfileDropdown({ children }: ProfileDropdownProps) {
               onClick={closeDropdown}
               className='cursor-pointer'
             >
-              <BookmarkPlus className='mr-2 h-4 w-4' />
+              <BookmarkPlus className='mr-2 size-4' />
               <span>Watch List</span>
             </DropdownMenuItem>
           </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={logout}>
-          <LogOut className='mr-2 h-4 w-4' />
+          <LogOut className='mr-2 size-4' />
           <span>Log Out</span>
           <DropdownMenuShortcut>⇧+Q</DropdownMenuShortcut>
         </DropdownMenuItem>

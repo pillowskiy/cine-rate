@@ -1,6 +1,9 @@
 'use client';
 
+import useQueryParams from '@hooks/useQueryParams';
+
 import type { MovieSort, TVSort } from '@config/enums';
+
 import {
   Select,
   SelectContent,
@@ -9,8 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@ui/select';
+
 import { capitalize } from '@libs/index';
-import useQueryParams from '@hooks/useQueryParams';
 
 interface CreationSortSelectProps {
   Sort: typeof MovieSort | typeof TVSort;
@@ -26,7 +29,7 @@ export function CreationSortSelect({ Sort }: CreationSortSelectProps) {
       }}
       defaultValue={urlSearchParams.get('sort_by') || undefined}
     >
-      <SelectTrigger className='w-[140px] sm:w-[180px] truncate'>
+      <SelectTrigger className='w-[140px] truncate sm:w-[180px]'>
         <SelectValue className='mr-4' placeholder='Sort results by' />
       </SelectTrigger>
       <SelectContent>

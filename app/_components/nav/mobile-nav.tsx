@@ -1,5 +1,17 @@
 'use client';
 
+import { useState } from 'react';
+
+import { Check, Menu } from 'lucide-react';
+import { useTheme } from 'next-themes';
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@ui/accordion';
+import { Button } from '@ui/button';
 import {
   Sheet,
   SheetContent,
@@ -8,20 +20,9 @@ import {
   SheetTrigger,
 } from '@ui/sheet';
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@ui/accordion';
-
-import { Button } from '@ui/button';
-import { Check, Menu } from 'lucide-react';
 import { Logo } from '@components/logo';
 import { AppNav } from '@components/nav/app-nav';
 
-import { useTheme } from 'next-themes';
-import { useState } from 'react';
 import { cn } from '@libs/index';
 
 const themes = [
@@ -48,7 +49,7 @@ export function MobileNav() {
           aria-label='menu'
           size='icon'
         >
-          <Menu className='h-5 w-5' />
+          <Menu className='size-5' />
         </Button>
       </SheetTrigger>
       <SheetContent className='pr-0' side='left'>
@@ -58,7 +59,7 @@ export function MobileNav() {
           </SheetTitle>
         </SheetHeader>
         <AppNav
-          className='my-4 flex flex-col space-y-2 pl-6 text-base font-normal text-foreground'
+          className='text-foreground my-4 flex flex-col space-y-2 pl-6 text-base font-normal'
           onClick={() => setIsOpen(false)}
         />
 
@@ -66,7 +67,7 @@ export function MobileNav() {
           <AccordionItem className='border-b-0' value='language'>
             <AccordionTrigger className='pr-4 pt-0'>Language</AccordionTrigger>
             <AccordionContent asChild>
-              <ul className='space-y-2 pl-6 text-base text-foreground/70 columns-1 [&>*]:w-fit'>
+              <ul className='text-foreground/70 columns-1 space-y-2 pl-6 text-base [&>*]:w-fit'>
                 <li>English</li>
                 <li>Ukrainian</li>
                 <li>Polland</li>
@@ -78,18 +79,18 @@ export function MobileNav() {
           <AccordionItem className='border-b-0' value='theme'>
             <AccordionTrigger className='pr-4 pt-0'>Theme</AccordionTrigger>
             <AccordionContent asChild>
-              <div className='space-y-2 pl-6 text-base text-foreground/70'>
+              <div className='text-foreground/70 space-y-2 pl-6 text-base'>
                 {themes.map(({ value, label }) => (
                   <button
                     className={cn(
-                      'relative flex items-center w-full',
+                      'relative flex w-full items-center',
                       theme === value && 'text-foreground'
                     )}
                     key={value}
                     onClick={() => setTheme(value)}
                   >
                     {theme === value && (
-                      <Check className='absolute -left-1.5 h-4 w-4 -translate-x-[100%]' />
+                      <Check className='absolute -left-1.5 size-4 -translate-x-full' />
                     )}
                     <span>{label}</span>
                   </button>
@@ -101,7 +102,7 @@ export function MobileNav() {
           <AccordionItem className='border-b-0' value='privacy'>
             <AccordionTrigger className='pr-4 pt-0'>Privacy</AccordionTrigger>
             <AccordionContent asChild>
-              <ul className='space-y-2 pl-6 text-base text-foreground/70'>
+              <ul className='text-foreground/70 space-y-2 pl-6 text-base'>
                 <li>Cookies</li>
               </ul>
             </AccordionContent>

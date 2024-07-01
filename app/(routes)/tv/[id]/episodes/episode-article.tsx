@@ -1,12 +1,17 @@
-import type { IEpisode } from '@app/types/tv-types';
 import { memo } from 'react';
+
+import { Star } from 'lucide-react';
+
+import type { IEpisode } from '@app/types/tv-types';
+
 import {
   BaseArticle,
   BaseArticleFigure,
   type BaseArticleProps,
 } from '@components/article/base-article';
+
 import { buildImagePath } from '@libs/tmdb';
-import { Star } from 'lucide-react';
+
 import { EpisodeDetails } from './episode-details';
 
 interface EpisodeArticleProps extends BaseArticleProps {
@@ -17,7 +22,11 @@ interface EpisodeArticleProps extends BaseArticleProps {
 export const EpisodeArticle = memo(
   ({ seriesId, episode, ...props }: EpisodeArticleProps) => {
     return (
-      <BaseArticle className='space-y-4 rounded-md border p-4' key={episode.id} {...props}>
+      <BaseArticle
+        className='space-y-4 rounded-md border p-4'
+        key={episode.id}
+        {...props}
+      >
         <section className='flex w-full flex-col items-start gap-4 sm:flex-row'>
           <div className='w-full sm:w-fit'>
             <BaseArticleFigure
@@ -39,7 +48,7 @@ export const EpisodeArticle = memo(
               </span>
               <div className='flex gap-1.5 text-sm'>
                 <div className='flex items-center space-x-1.5'>
-                  <Star className='h-4 w-4 fill-yellow-300 text-yellow-400' />
+                  <Star className='size-4 fill-yellow-300 text-yellow-400' />
                   <span>{episode.vote_average.toFixed(1)}</span>
                 </div>
                 <span>{new Date(episode.air_date).toDateString()}</span>

@@ -1,19 +1,19 @@
-import type { CreationIdentifierProps } from './common/types';
+import { getCreationCredits } from '@actions/getCreationCredits';
+
+import { MSeparator } from '@ui/separator';
+
 import { CreditArticle } from '@components/article/credit-article';
 import { Carousel } from '@components/carousel';
-import { MSeparator } from '@ui/separator';
-import { getCreationCredits } from '@actions/getCreationCredits';
 import { Heading } from '@components/heading';
 import { NotFound } from '@components/not-found';
+
+import type { CreationIdentifierProps } from './common/types';
 
 export default async function CreationCast({
   creationId,
   mediaType,
 }: CreationIdentifierProps) {
-  const [credits, error] = await getCreationCredits(
-    creationId,
-    mediaType
-  );
+  const [credits, error] = await getCreationCredits(creationId, mediaType);
 
   if (error) return null;
 

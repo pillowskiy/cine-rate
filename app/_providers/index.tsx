@@ -1,8 +1,8 @@
-import ThemeProvider from './theme-provider';
 import AuthProvider from './auth-provider';
+import LazyMotionProvider from './lazy-motion-provider';
 import ScrollTopProvider from './scroll-top-provider';
 import StoreProvider from './store-provider';
-import LazyMotionProvider from './lazy-motion-provider';
+import ThemeProvider from './theme-provider';
 
 export default function ServeSiteProviders({
   children,

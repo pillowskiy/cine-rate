@@ -1,7 +1,9 @@
-'use client'; // Error components must be Client Components
+'use client';
+
+// Error components must be Client Components
+import { useEffect } from 'react';
 
 import { Button } from '@ui/button';
-import { useEffect } from 'react';
 
 export default function Error({
   error,
@@ -17,7 +19,7 @@ export default function Error({
   return (
     <main className='absolute left-[50%] top-[50%] h-fit -translate-x-[50%] -translate-y-[50%] space-y-4 text-center'>
       <h2 className='text-6xl'>Oops!</h2>
-      <p className='text-lg text-muted-foreground'>Something went wrong.</p>
+      <p className='text-muted-foreground text-lg'>Something went wrong.</p>
       <Button onClick={() => reset()}>Try again</Button>
     </main>
   );

@@ -1,16 +1,19 @@
 'use client';
 
+import { useEffect } from 'react';
+
+import { useRouter } from 'next/navigation';
+
+import { useAppDispatch } from '@redux/hooks';
+import { approve } from '@redux/user/user-actions';
+
 import type { INextPageParams } from '@app/types/index';
+
+import { useToast } from '@ui/use-toast';
 
 import Loader from '@components/loader';
 
-import { approve } from '@redux/user/user-actions';
 import { pipe } from '@libs/common/next';
-
-import { useEffect } from 'react';
-import { useAppDispatch } from '@redux/hooks';
-import { useRouter } from 'next/navigation';
-import { useToast } from '@ui/use-toast';
 
 const statusDescription = {
   200: 'You have successfully authorized us to receive and modify your data through the TMDB service.',

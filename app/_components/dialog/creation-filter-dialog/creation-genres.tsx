@@ -1,13 +1,19 @@
 'use client';
 
 import { useContext } from 'react';
-import type { GenresResponse } from '@app/types/genre-types';
-import type { MediaType } from '@config/enums';
-import { Toggle } from '@ui/toggle';
-import { Label } from '@ui/label';
+
 import { ChevronDown, Loader } from 'lucide-react';
-import { FilterContext } from '.';
+
+import type { GenresResponse } from '@app/types/genre-types';
+
 import useFetch from '@hooks/useFetch';
+
+import type { MediaType } from '@config/enums';
+
+import { Label } from '@ui/label';
+import { Toggle } from '@ui/toggle';
+
+import { FilterContext } from '.';
 
 interface CreationGenresProps {
   mediaType: MediaType;
@@ -21,12 +27,12 @@ export function CreationGenres({ mediaType }: CreationGenresProps) {
 
   if (!data && !error) {
     return (
-      <div className='flex w-full items-center justify-between rounded-md border py-2 px-3'>
+      <div className='flex w-full items-center justify-between rounded-md border px-3 py-2'>
         <div className='flex items-center'>
-          <Loader className='mr-1.5 h-6 w-6 animate-spin' />
+          <Loader className='mr-1.5 size-6 animate-spin' />
           <span className='animate-pulse text-sm'>Loading genres..</span>
         </div>
-        <ChevronDown className='w-4 h-4 text-foreground/50' />
+        <ChevronDown className='text-foreground/50 size-4' />
       </div>
     );
   }

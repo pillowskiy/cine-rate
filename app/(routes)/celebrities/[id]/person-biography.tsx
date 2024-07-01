@@ -1,6 +1,9 @@
-import { MSeparator } from '@ui/separator';
 import { getPersonTranslations } from '@actions/getPersonTranslations';
+
+import { MSeparator } from '@ui/separator';
+
 import { NotFound } from '@components/not-found';
+
 interface PersonBiographyProps {
   personId: number;
 }
@@ -31,7 +34,7 @@ export default async function PersonBiography({
           {fragmentedBio.length > MAX_FRAGMENTS && (
             <details className='space-y-4 pb-6'>
               <summary className='absolute bottom-0 right-0 cursor-pointer rounded-md p-2 no-underline marker:hidden marker:content-none [&[data-state=open]>svg]:rotate-180'>
-                <span className='flex flex-1 items-center justify-between py-4 text-sm font-medium text-foreground/70 transition-all hover:underline'>
+                <span className='text-foreground/70 flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline'>
                   Read more
                 </span>
               </summary>

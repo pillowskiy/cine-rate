@@ -1,11 +1,16 @@
-import type { CreationDetailsProps } from './common/types';
-import type { MediaType } from '@config/enums';
-import { MSeparator } from '@ui/separator';
-import { Button } from '@ui/button';
-import { getTitle } from './common/utils';
-import { getCreationKeywords } from '@actions/getCreationKeywords';
 import Link from 'next/link';
+
+import { getCreationKeywords } from '@actions/getCreationKeywords';
+
+import type { MediaType } from '@config/enums';
+
+import { Button } from '@ui/button';
+import { MSeparator } from '@ui/separator';
+
 import { Heading } from '@components/heading';
+
+import type { CreationDetailsProps } from './common/types';
+import { getTitle } from './common/utils';
 
 interface CreationKeywordsProps extends CreationDetailsProps {
   mediaType: MediaType.Movie | MediaType.TV;
@@ -40,7 +45,7 @@ export default async function CreationKeywords({
             passHref
             legacyBehavior
           >
-            <Button className='h-7 text-sm truncate' variant='outline'>
+            <Button className='h-7 truncate text-sm' variant='outline'>
               {keyword.name}
             </Button>
           </Link>

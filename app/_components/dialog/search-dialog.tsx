@@ -1,18 +1,26 @@
 'use client';
 
-import { cn, groupBy } from '@libs/index';
-import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@ui/dialog';
-import { Button } from '@ui/button';
-import { Loader, Search, X } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import type { MultiSearchResponse } from '@app/types/search-types';
-import { MediaType } from '@config/enums';
+import { useEffect, useState } from 'react';
+
 import Link from 'next/link';
-import { Carousel } from '../carousel';
-import { PersonArticle } from '../article/person-article';
-import { useDebounce } from '@hooks/useDebounce';
-import { HorizontalCreationArticle } from '../article/creation-article';
+
 import ky from 'ky';
+import { Loader, Search, X } from 'lucide-react';
+
+import type { MultiSearchResponse } from '@app/types/search-types';
+
+import { useDebounce } from '@hooks/useDebounce';
+
+import { MediaType } from '@config/enums';
+
+import { Button } from '@ui/button';
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@ui/dialog';
+
+import { cn, groupBy } from '@libs/index';
+
+import { HorizontalCreationArticle } from '../article/creation-article';
+import { PersonArticle } from '../article/person-article';
+import { Carousel } from '../carousel';
 
 async function getMultipleSearch(query: string) {
   return ky
@@ -59,39 +67,39 @@ export function SearchDialog() {
           variant='outline'
           onClick={() => setIsDialogOpen(true)}
           className={cn(
-            'justify-start text-sm sm:w-[260px] sm:text-muted-foreground',
-            'aspect-square p-0 sm:px-4 sm:py-4 sm:pr-12'
+            'sm:text-muted-foreground justify-start text-sm sm:w-[260px]',
+            'aspect-square p-0 sm:p-4 sm:pr-12'
           )}
         >
           <span className='hidden sm:inline-flex'>
             Search for a creation...
           </span>
           <span className='sr-only'>Search for a creation...</span>
-          <Search className='m-auto h-5 w-5 sm:hidden' />
+          <Search className='m-auto size-5 sm:hidden' />
         </Button>
       </DialogTrigger>
       <DialogContent className='gap-0 rounded-md p-0'>
         <div className='z-10 mt-1 flex w-full items-center justify-between gap-2 border-b px-2 pb-1'>
-          <Search className='h-4 w-4 text-foreground/70' />
+          <Search className='text-foreground/70 size-4' />
           <input
             onChange={({ target }) => setQuery(target.value.toLowerCase())}
-            className='flex-grow border-none bg-transparent px-0 py-2 text-sm outline-none'
+            className='grow border-none bg-transparent px-0 py-2 text-sm outline-none'
             placeholder='Type a command or search...'
           />
           <DialogClose>
-            <X className='h-4 w-4 text-foreground/70 opacity-0' />
+            <X className='text-foreground/70 size-4 opacity-0' />
           </DialogClose>
         </div>
         <div className='relative h-[600px] space-y-4 overflow-y-auto p-2 sm:max-h-[400px] sm:min-h-[400px]'>
           {isLoading && (
-            <div className='fixed inset-0 grid h-full w-full place-items-center rounded-md bg-background'>
-              <Loader className='m-auto h-16 w-16 animate-spin' />
+            <div className='bg-background fixed inset-0 grid size-full place-items-center rounded-md'>
+              <Loader className='m-auto size-16 animate-spin' />
             </div>
           )}
 
           {!isLoading && !!data?.person && (
             <div>
-              <span className='px-2 text-sm font-semibold text-foreground/70'>
+              <span className='text-foreground/70 px-2 text-sm font-semibold'>
                 Most Popular Celebrities
               </span>
               <Carousel className='space-x-0'>
@@ -109,7 +117,7 @@ export function SearchDialog() {
                       >
                         <div
                           onClick={() => setIsDialogOpen(false)}
-                          className='flex cursor-pointer gap-2 rounded-md p-2 transition-all hover:bg-accent'
+                          className='hover:bg-accent flex cursor-pointer gap-2 rounded-md p-2 transition-all'
                         >
                           <PersonArticle
                             className='w-[120px] min-w-[120px]'
@@ -125,7 +133,7 @@ export function SearchDialog() {
 
           {!isLoading && !!data?.movie && (
             <div>
-              <span className='px-2 text-sm font-semibold text-foreground/70'>
+              <span className='text-foreground/70 px-2 text-sm font-semibold'>
                 Most Popular Movies
               </span>
               {data.movie
@@ -156,7 +164,7 @@ export function SearchDialog() {
 
           {!isLoading && !!data?.tv && (
             <div>
-              <span className='px-2 text-sm font-semibold text-foreground/70'>
+              <span className='text-foreground/70 px-2 text-sm font-semibold'>
                 Most Popular Series and Shows
               </span>
               {data.tv

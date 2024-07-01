@@ -1,12 +1,17 @@
-import { MediaType, MovieSort } from '@config/enums';
-import { MSeparator } from '@ui/separator';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@ui/tabs';
-import { CreationArticle } from '@components/article/creation-article';
-import { Heading } from '@components/heading';
-import { Carousel } from '@components/carousel';
-import { getMovies } from '@actions/getMovies';
-import { capitalize } from '@libs/index';
 import Link from 'next/link';
+
+import { getMovies } from '@actions/getMovies';
+
+import { MediaType, MovieSort } from '@config/enums';
+
+import { MSeparator } from '@ui/separator';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs';
+
+import { CreationArticle } from '@components/article/creation-article';
+import { Carousel } from '@components/carousel';
+import { Heading } from '@components/heading';
+
+import { capitalize } from '@libs/index';
 
 const emojis: Record<MovieSort, string> = {
   [MovieSort.NowPlaying]: '🎥',
@@ -47,8 +52,8 @@ async function CreationCarousel({ sort }: { sort: MovieSort }) {
           </p>
         </Link>
 
-        <div className='absolute -z-10 h-10 w-10 animate-pulse rounded-full bg-cyan-500 blur-xl' />
-        <div className='absolute -z-10 h-5 w-5 animate-pulse rounded-full bg-blue-600 blur-xl' />
+        <div className='absolute -z-10 size-10 animate-pulse rounded-full bg-cyan-500 blur-xl' />
+        <div className='absolute -z-10 size-5 animate-pulse rounded-full bg-blue-600 blur-xl' />
       </div>
     </Carousel>
   );

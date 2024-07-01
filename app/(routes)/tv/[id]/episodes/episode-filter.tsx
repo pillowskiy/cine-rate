@@ -1,7 +1,13 @@
 'use client';
 
-import useQueryParams from '@hooks/useQueryParams';
+import { useTransition } from 'react';
+
+import { ArrowDownUp, Loader } from 'lucide-react';
+
 import type { ITVDetails } from '@app/types/tv-types';
+
+import useQueryParams from '@hooks/useQueryParams';
+
 import { Button } from '@ui/button';
 import {
   Select,
@@ -11,8 +17,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@ui/select';
-import { ArrowDownUp, Loader } from 'lucide-react';
-import { useTransition } from 'react';
 
 interface EpisodeFilterProps {
   series: ITVDetails;
@@ -43,7 +47,7 @@ export default function EpisodeFilter({ series }: EpisodeFilterProps) {
 
   return (
     <section className='flex items-center justify-between gap-2 rounded-md border px-2 py-1'>
-      <div className='flex flex-grow items-center justify-between gap-4 overflow-auto px-2 py-1 sm:justify-start'>
+      <div className='flex grow items-center justify-between gap-4 overflow-auto px-2 py-1 sm:justify-start'>
         <Select
           value={selectedValue}
           onValueChange={onValueChange}
@@ -90,11 +94,16 @@ export default function EpisodeFilter({ series }: EpisodeFilterProps) {
       </div>
 
       <div className='mx-2 hidden sm:inline-block'>
-        <Button size='icon' variant='outline' aria-label='episode filter' onClick={onSortChange}>
+        <Button
+          size='icon'
+          variant='outline'
+          aria-label='episode filter'
+          onClick={onSortChange}
+        >
           {isLoading ? (
-            <Loader className='h-5 w-5 animate-spin' />
+            <Loader className='size-5 animate-spin' />
           ) : (
-            <ArrowDownUp className='h-5 w-5' />
+            <ArrowDownUp className='size-5' />
           )}
         </Button>
       </div>

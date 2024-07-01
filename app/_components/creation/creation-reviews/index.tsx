@@ -1,16 +1,19 @@
 'use client';
 
 import { useReducer } from 'react';
-import type { CreationIdentifierProps } from '../common/types';
-import { Heading } from '@components/heading';
+
 import { MSeparator } from '@ui/separator';
-import { CreationReviewsPagination } from './creation-reviews-pagination';
-import { CreationReviewsCatalog } from './creation-reviews-catalog';
+
+import { Heading } from '@components/heading';
+
+import type { CreationIdentifierProps } from '../common/types';
 import {
   PaginationContext,
   initialPaginationState,
   paginationReducer,
 } from './common/utils';
+import { CreationReviewsCatalog } from './creation-reviews-catalog';
+import { CreationReviewsPagination } from './creation-reviews-pagination';
 
 export default function CreationReviews({
   creationId,
@@ -27,10 +30,7 @@ export default function CreationReviews({
       <MSeparator />
 
       <PaginationContext.Provider value={reducer}>
-        <CreationReviewsCatalog
-          creationId={creationId}
-          mediaType={mediaType}
-        />
+        <CreationReviewsCatalog creationId={creationId} mediaType={mediaType} />
         <CreationReviewsPagination />
       </PaginationContext.Provider>
     </section>

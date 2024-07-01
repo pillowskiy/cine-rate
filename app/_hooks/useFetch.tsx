@@ -1,5 +1,7 @@
 import { useEffect, useReducer, useRef } from 'react';
-import ky, { type Options, HTTPError } from 'ky';
+
+import ky, { HTTPError, type Options } from 'ky';
+
 import type { IApiReject } from '@app/types/index';
 
 type Cache<T> = { [url: string]: T };
@@ -60,7 +62,10 @@ export default function useFetch<T>(
         .catch(async (error) => {
           if (cancelRequest.current) return;
           if (!(error instanceof HTTPError)) throw error;
-          dispatch({ type: 'error', payload: await error.response.json() as IApiReject });
+          dispatch({
+            type: 'error',
+            payload: (await error.response.json()) as IApiReject,
+          });
         });
     };
 

@@ -1,6 +1,9 @@
-import type { MediaType } from '@config/enums';
-import { MSeparator } from '@ui/separator';
 import { getCreationImages } from '@actions/getCreationImages';
+
+import type { MediaType } from '@config/enums';
+
+import { MSeparator } from '@ui/separator';
+
 import { Heading } from '@components/heading';
 import { MediaTabs } from '@components/media-tabs';
 

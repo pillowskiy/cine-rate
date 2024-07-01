@@ -5,17 +5,16 @@ interface PaginationState {
   totalPages: number;
 }
 
-type PaginationAction = {
-  type: PaginationActionType.SetPage | PaginationActionType.SetTotalPages;
-  payload: number;
-} | {
-  type: PaginationActionType.NextPage | PaginationActionType.PrevPage;
-};
+type PaginationAction =
+  | {
+      type: PaginationActionType.SetPage | PaginationActionType.SetTotalPages;
+      payload: number;
+    }
+  | {
+      type: PaginationActionType.NextPage | PaginationActionType.PrevPage;
+    };
 
-type PaginationContextInitial = [
-  PaginationState,
-  Dispatch<PaginationAction>,
-];
+type PaginationContextInitial = [PaginationState, Dispatch<PaginationAction>];
 
 export const initialPaginationState: PaginationState = {
   page: 1,

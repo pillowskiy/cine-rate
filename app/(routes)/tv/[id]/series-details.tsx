@@ -1,12 +1,16 @@
-import type { ITVDetails } from '@app/types/tv-types';
 import type { ComponentProps } from 'react';
+
+import type { ITVDetails } from '@app/types/tv-types';
+
 import { MediaType } from '@config/enums';
-import CreationKeywords from '@components/creation/creation-keywords';
-import CreationExternalLinks from '@components/creation/creation-external-links';
-import { getTitle } from '@components/creation/common/utils';
-import { Heading } from '@components/heading';
-import { MSeparator } from '@ui/separator';
+
 import { List, ListItem } from '@ui/list';
+import { MSeparator } from '@ui/separator';
+
+import { getTitle } from '@components/creation/common/utils';
+import CreationExternalLinks from '@components/creation/creation-external-links';
+import CreationKeywords from '@components/creation/creation-keywords';
+import { Heading } from '@components/heading';
 
 interface SeriesDetailsProps extends ComponentProps<'div'> {
   details: ITVDetails;

@@ -1,5 +1,5 @@
-import 'server-only';
 import getColors from 'get-image-colors';
+import 'server-only';
 
 const DEFAULT_COLOR = '#ffffff';
 

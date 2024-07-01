@@ -1,19 +1,23 @@
-import type { INextPageParams } from '@app/types/index';
-import { pipe } from '@libs/common/next';
-import { getCollection } from '@actions/getCollection';
-import { LoadingCarousel } from '@/app/_components/skeleton/loading-carousel';
 import dynamic from 'next/dynamic';
+import { notFound } from 'next/navigation';
+
+import { LoadingCarousel } from '@/app/_components/skeleton/loading-carousel';
+
+import type { INextPageParams } from '@app/types/index';
+
+import { getCollection } from '@actions/getCollection';
+
+import { pipe } from '@libs/common/next';
 
 import CollectionHeader from './collection-header';
-import { notFound } from 'next/navigation';
 
 const CollectionCreations = dynamic(() => import('./collection-creations'), {
   ssr: false,
-  loading: () => <LoadingCarousel aspect='horizontal' />
+  loading: () => <LoadingCarousel aspect='horizontal' />,
 });
 const CollectionMediaTabs = dynamic(() => import('./collection-media-tabs'), {
   ssr: false,
-  loading: () => <LoadingCarousel className='mt-6' />
+  loading: () => <LoadingCarousel className='mt-6' />,
 });
 
 export default async function CollectionPage({ params }: INextPageParams) {

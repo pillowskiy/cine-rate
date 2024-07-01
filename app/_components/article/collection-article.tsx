@@ -1,14 +1,19 @@
-import type { IDetailedCollection } from '@app/types/collection-types';
 import type { ReactNode } from 'react';
+
+import Link from 'next/link';
+
+import type { IDetailedCollection } from '@app/types/collection-types';
+
 import { Button } from '@ui/button';
+
+import { cn } from '@libs/index';
+import { buildImagePath } from '@libs/tmdb';
+
 import {
   BaseArticle,
   BaseArticleFigure,
   type BaseArticleProps,
 } from './base-article';
-import { buildImagePath } from '@libs/tmdb';
-import { cn } from '@libs/index';
-import Link from 'next/link';
 
 interface CollectionArticle extends BaseArticleProps {
   collection: IDetailedCollection;
@@ -38,7 +43,7 @@ export function CollectionArticle({
         />
       </div>
       <div className='w-full space-y-4 sm:w-max'>
-        <h2 className='text-xl sm:text-2xl font-semibold tracking-tight truncate'>
+        <h2 className='truncate text-xl font-semibold tracking-tight sm:text-2xl'>
           {collection.name}
         </h2>
         <p className='break-words text-sm md:text-base'>

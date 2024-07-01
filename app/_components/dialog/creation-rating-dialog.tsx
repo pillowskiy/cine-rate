@@ -1,14 +1,18 @@
 'use client';
 
+import { ReactNode, useState } from 'react';
+
+import ky from 'ky';
+import { Loader2, Star, Trash } from 'lucide-react';
+
 import type {
   AccountStatesResponse,
   RatingResponse,
 } from '@app/types/creation-types';
+
 import type { MediaType } from '@config/enums';
-import { ReactNode, useState } from 'react';
 
 import { Button } from '@ui/button';
-import { useToast } from '@ui/use-toast';
 import {
   Dialog,
   DialogContent,
@@ -17,17 +21,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@ui/dialog';
-import { Loader2, Star, Trash } from 'lucide-react';
+import { useToast } from '@ui/use-toast';
+
 import { cn } from '@libs/index';
 import { rejectKy } from '@libs/ky';
-import ky from 'ky';
 
 interface CreationRatingDialogProps {
   mediaType: MediaType;
   creationId: number;
   initialRated: AccountStatesResponse['rated'];
   children: ReactNode;
-  onUpdate?: (data: { rating: number | null }) => void
+  onUpdate?: (data: { rating: number | null }) => void;
 }
 
 export function CreationRatingDialog({
@@ -53,7 +57,7 @@ export function CreationRatingDialog({
       })
       .then((res) => res.json<RatingResponse>())
       .then((data) => {
-        if(onUpdate) onUpdate({ rating: isRated ? null : rating });
+        if (onUpdate) onUpdate({ rating: isRated ? null : rating });
         setIsRated((prev) => {
           return prev || !prev;
         });
@@ -89,7 +93,7 @@ export function CreationRatingDialog({
           });
         }
 
-        if(onUpdate) onUpdate({ rating: null });
+        if (onUpdate) onUpdate({ rating: null });
         setIsRated(false);
         setRating(0);
         toast({
@@ -113,7 +117,7 @@ export function CreationRatingDialog({
         <div className='absolute left-[50%] top-0 grid w-fit -translate-x-[50%] -translate-y-[60%] place-items-center'>
           <Star
             className={cn(
-              'h-[72px] w-[72px] fill-blue-500 text-blue-500 transition-all duration-300',
+              'size-[72px] fill-blue-500 text-blue-500 transition-all duration-300',
               isRated && 'fill-yellow-500 text-yellow-500'
             )}
             style={{ transform: `scale(1.${((rating - 1) / 2) * 10})` }}
@@ -140,7 +144,7 @@ export function CreationRatingDialog({
                   }
                   key={index}
                   className={cn(
-                    'h-5 w-5 cursor-pointer transition-all hover:fill-yellow-500 hover:text-yellow-500',
+                    'size-5 cursor-pointer transition-all hover:fill-yellow-500 hover:text-yellow-500',
                     rating >= index + 1 && 'fill-yellow-500 text-yellow-500'
                   )}
                 />
@@ -155,19 +159,19 @@ export function CreationRatingDialog({
                 disabled={!isRated || isLoading}
               >
                 {isLoading ? (
-                  <Loader2 className='h-5 w-5 animate-spin' />
+                  <Loader2 className='size-5 animate-spin' />
                 ) : (
-                  <Trash className='h-5 w-5' />
+                  <Trash className='size-5' />
                 )}
               </Button>
               <Button
                 onClick={upsertRating}
-                className='flex-grow'
+                className='grow'
                 type='submit'
                 disabled={!rating || isLoading}
               >
                 {isLoading ? (
-                  <Loader2 className='h-5 w-5 animate-spin' />
+                  <Loader2 className='size-5 animate-spin' />
                 ) : (
                   'Submit'
                 )}

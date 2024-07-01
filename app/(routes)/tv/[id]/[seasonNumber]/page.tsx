@@ -1,15 +1,21 @@
-import type { INextPageParams, BaseParams } from '@app/types/index';
-import type { SeasonDetailsResponse } from '@app/types/tv-types';
-import { MediaType } from '@config/enums';
+import { notFound } from 'next/navigation';
+
 import { Star } from 'lucide-react';
+
+import type { BaseParams, INextPageParams } from '@app/types/index';
+import type { SeasonDetailsResponse } from '@app/types/tv-types';
+
+import { MediaType } from '@config/enums';
+
 import {
   BaseArticle,
   BaseArticleFigure,
 } from '@components/article/base-article';
+
+import { $api } from '@api/api-interceptor';
+
 import { pipe } from '@libs/common/next';
 import { buildImagePath } from '@libs/tmdb';
-import { $api } from '@api/api-interceptor';
-import { notFound } from 'next/navigation';
 
 async function getSeasonDetails(
   seriesId: number,
@@ -57,7 +63,7 @@ export default async function SeasonPage({ params }: INextPageParams) {
                 </span>
                 <div className='flex gap-1.5 text-sm'>
                   <div className='flex items-center space-x-1.5'>
-                    <Star className='h-4 w-4 fill-yellow-300 text-yellow-400' />
+                    <Star className='size-4 fill-yellow-300 text-yellow-400' />
                     <span>{episode.vote_average.toFixed(1)}</span>
                   </div>
                   <span>{new Date(episode.air_date).toDateString()}</span>

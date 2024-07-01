@@ -1,16 +1,18 @@
-import type { CreationDetailsProps } from './common/types';
+import { Expand, Star } from 'lucide-react';
+
 import type { MediaType } from '@config/enums';
 
-import { Expand, Star } from 'lucide-react';
 import { CreationTrailer } from '@components/creation/creation-trailer';
-import { buildImagePath } from '@libs/tmdb';
 import { ImageFromPath } from '@components/image/image-from-path';
-import { getRealesedDate, getTitle } from './common/utils';
-import { CreationStatesDetailed } from './account-states';
-import { CreationGenres } from './creation-genres';
-import { ExpandImageDialog } from '../dialog/expand-image-dialog';
 
 import { cn } from '@libs/index';
+import { buildImagePath } from '@libs/tmdb';
+
+import { ExpandImageDialog } from '../dialog/expand-image-dialog';
+import { CreationStatesDetailed } from './account-states';
+import type { CreationDetailsProps } from './common/types';
+import { getRealesedDate, getTitle } from './common/utils';
+import { CreationGenres } from './creation-genres';
 
 interface CreationHeaderProps extends CreationDetailsProps {
   mediaType: MediaType;
@@ -35,7 +37,7 @@ export default async function MovieHeader({
       >
         <ImageFromPath
           className={
-            'aspect-[16/9] h-full w-full scale-110 select-none object-cover object-top blur-sm'
+            'aspect-[16/9] size-full scale-110 select-none object-cover object-top blur-sm'
           }
           src={buildImagePath({
             path: details.backdrop_path,
@@ -92,12 +94,12 @@ export default async function MovieHeader({
             {!!posterPath && (
               <div
                 className={cn(
-                  'absolute inset-0 grid h-full w-full place-items-center bg-black/30 opacity-0',
+                  'absolute inset-0 grid size-full place-items-center bg-black/30 opacity-0',
                   'backdrop-blur-sm transition-opacity duration-300 hover:opacity-100'
                 )}
               >
                 <div className='m-auto w-fit text-center'>
-                  <Expand className='sm:h-[48px] sm:w-[48px] md:h-[64px] md:w-[64px]' />
+                  <Expand className='sm:size-[48px] md:size-[64px]' />
                   <p className='font-semibold'>Expand</p>
                 </div>
               </div>
@@ -117,16 +119,14 @@ export default async function MovieHeader({
               aria-label='REVIEWS'
             >
               <div className='relative'>
-                <Star className='m-auto h-5 w-5 fill-yellow-500 text-yellow-500 sm:h-[48px] sm:w-[48px] md:h-[64px] md:w-[64px]' />
+                <Star className='m-auto size-5 fill-yellow-500 text-yellow-500 sm:size-[48px] md:size-[64px]' />
                 <div className='absolute left-[50%] top-[50%] hidden -translate-x-[50%] -translate-y-[40%] sm:block'>
                   <span className='select-none text-sm sm:text-base'>
                     {details.vote_average.toFixed(1)}
                   </span>
                 </div>
               </div>
-              <p className='text-sm font-medium uppercase'>
-                Rating
-              </p>
+              <p className='text-sm font-medium uppercase'>Rating</p>
             </div>
           </div>
           <div className='grid h-auto w-full place-items-center rounded-b-md p-2 backdrop-blur-[25px] sm:h-full sm:rounded-md'>

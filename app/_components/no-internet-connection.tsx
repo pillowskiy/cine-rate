@@ -1,7 +1,8 @@
 'use client';
 
-import { WifiOff } from 'lucide-react';
 import { useSyncExternalStore } from 'react';
+
+import { WifiOff } from 'lucide-react';
 
 function getSnapshot(): boolean {
   return navigator.onLine;
@@ -29,8 +30,8 @@ export default function NoInternetConnection() {
 
   if (!isOnline) {
     return (
-      <div className='fixed top-0 z-50 flex h-full w-full select-none flex-col items-center justify-center bg-black/70 opacity-80 backdrop-blur-xl'>
-        <WifiOff className='h-[48px] w-[48px] animate-pulse' />
+      <div className='fixed top-0 z-50 flex size-full select-none flex-col items-center justify-center bg-black/70 opacity-80 backdrop-blur-xl'>
+        <WifiOff className='size-[48px] animate-pulse' />
         <span className='animate-pulse'>No internet connection.</span>
       </div>
     );

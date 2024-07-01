@@ -1,5 +1,6 @@
+import type { BaseParams } from '@app/types/index';
 import type { IEpisode } from '@app/types/tv-types';
-import { MSeparator } from '@ui/separator';
+import type { IEpisodeDetails } from '@app/types/tv-types';
 
 import {
   Accordion,
@@ -7,11 +8,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@ui/accordion';
+import { MSeparator } from '@ui/separator';
+
 import { CreditArticle } from '@components/article/credit-article';
 import { Heading } from '@components/heading';
 
-import type { BaseParams } from '@app/types/index';
-import type { IEpisodeDetails } from '@app/types/tv-types';
 import { $api } from '@api/api-interceptor';
 
 export function getEpisodeDetails(
@@ -21,9 +22,7 @@ export function getEpisodeDetails(
   params?: BaseParams
 ) {
   return $api.safeFetch<IEpisodeDetails>(
-    `/tv/${seriesId}` +
-      `/season/${seasonNumber}` +
-      `/episode/${episodeNumber}`,
+    `/tv/${seriesId}` + `/season/${seasonNumber}` + `/episode/${episodeNumber}`,
     { params }
   );
 }
@@ -68,13 +67,13 @@ export async function EpisodeDetails({
                 ))}
               </ul>
             </div>
-            <div className='flex-grow'>
+            <div className='grow'>
               <div className='flex items-center justify-between'>
                 <div className='space-y-1'>
                   <h2 className='text-2xl font-semibold tracking-tight'>
                     Guest Stars ({details.guest_stars.length})
                   </h2>
-                  <p className='text-sm text-muted-foreground'>
+                  <p className='text-muted-foreground text-sm'>
                     Star-Studded Special Appearances.
                   </p>
                 </div>

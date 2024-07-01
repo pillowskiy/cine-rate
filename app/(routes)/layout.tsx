@@ -1,14 +1,17 @@
-import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Main from '@components/main';
-import Header from '@components/header';
-import Footer from '@components/footer';
 
-import { Toaster } from '@components/ui/toaster';
+import Footer from '@components/footer';
+import Header from '@components/header';
+import Main from '@components/main';
 import NoInternetConnection from '@components/no-internet-connection';
+import { Toaster } from '@components/ui/toaster';
+
 import ServeSiteProviders from '@providers/index';
+
 import { APP_URL } from '@libs/common/metadata';
+
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 

@@ -1,5 +1,5 @@
 export enum OriginRoutes {
-    Movies = '/movie',
-    TV = '/tv',
-    Celebrities = '/celebrities',
+  Movies = '/movie',
+  TV = '/tv',
+  Celebrities = '/celebrities',
 }

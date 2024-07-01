@@ -1,12 +1,16 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useAuth } from '@redux/hooks';
 import { Loader2, LogIn } from 'lucide-react';
+
+import { useClientReady } from '@hooks/useClientReady';
+
 import { Button } from '@ui/button';
+
 import { ProfileDropdown } from '@components/dropdown/profile-dropdown';
 import { UserAvatar } from '@components/user-avatar';
-import { useClientReady } from '@hooks/useClientReady';
-import Link from 'next/link';
 
 export function AuthButton() {
   const { user, isLoading } = useAuth();
@@ -21,7 +25,7 @@ export function AuthButton() {
         aria-label='log in'
         disabled
       >
-        <Loader2 className='h-5 w-5 animate-spin will-change-transform' />
+        <Loader2 className='size-5 animate-spin will-change-transform' />
       </Button>
     );
   }
@@ -48,7 +52,7 @@ export function AuthButton() {
         aria-label='log in'
         size='icon'
       >
-        <LogIn className='h-5 w-5' />
+        <LogIn className='size-5' />
       </Button>
     </Link>
   );

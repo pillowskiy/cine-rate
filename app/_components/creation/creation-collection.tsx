@@ -1,7 +1,11 @@
-import type { CollectionDetailsResponse } from '@app/types/collection-types';
 import { $api } from '@/app/_shared/api/api-interceptor';
-import { Heading } from '@components/heading';
+
+import type { CollectionDetailsResponse } from '@app/types/collection-types';
+
 import { MSeparator } from '@ui/separator';
+
+import { Heading } from '@components/heading';
+
 import { CollectionArticle } from '../article/collection-article';
 
 interface CreationCollectionProps {
@@ -9,8 +13,9 @@ interface CreationCollectionProps {
 }
 
 async function getCollection(collectionId: number) {
-  return $api
-    .safeFetch<CollectionDetailsResponse>(`/collection/${collectionId}`);
+  return $api.safeFetch<CollectionDetailsResponse>(
+    `/collection/${collectionId}`
+  );
 }
 
 export default async function CreationCollection({

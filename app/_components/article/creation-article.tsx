@@ -1,24 +1,32 @@
-import type { MediaType } from '@config/enums';
 import { type ComponentProps, memo } from 'react';
-import { buildImagePath } from '@libs/tmdb';
-import { ICreation } from '@app/types/creation-types';
-import { Info, Star } from 'lucide-react';
-import {
-  BaseArticleProps,
-  BaseArticle,
-  BaseArticleContent,
-  BaseArticleFigure,
-  BaseArticleFigureProps,
-} from './base-article';
+
 import Link from 'next/link';
-import { ImageFromPath } from '@components/image/image-from-path';
-import { cn } from '@libs/index';
+
+import { Info, Star } from 'lucide-react';
+
+import { ICreation } from '@app/types/creation-types';
+
+import type { MediaType } from '@config/enums';
+
 import { Button } from '@ui/button';
+
 import {
   CreationStatesDetailed,
   StatesPopover,
 } from '@components/creation/account-states';
+import { ImageFromPath } from '@components/image/image-from-path';
+
+import { cn } from '@libs/index';
+import { buildImagePath } from '@libs/tmdb';
+
 import { CreationRibbon } from '../creation/creation-ribbon';
+import {
+  BaseArticle,
+  BaseArticleContent,
+  BaseArticleFigure,
+  BaseArticleFigureProps,
+  BaseArticleProps,
+} from './base-article';
 
 interface CreationArticleProps extends Omit<BaseArticleProps, 'src' | 'href'> {
   size?: 'default' | 'sm';
@@ -47,7 +55,7 @@ export const CreationArticle = memo(
 
     return (
       <BaseArticle {...props}>
-        <div className='relative overflow-hidden p-[1px]'>
+        <div className='relative overflow-hidden p-px'>
           <Link href={`/${mediaType}/${creation.id}`}>
             <BaseArticleFigure
               src={buildImagePath(
@@ -63,12 +71,12 @@ export const CreationArticle = memo(
           </Link>
           <StatesPopover creationId={creation.id} mediaType={mediaType}>
             <Button
-              className='absolute right-2 top-2 h-7 w-7'
+              className='absolute right-2 top-2 size-7'
               variant='outline'
               size='icon'
               aria-label='creation info'
             >
-              <Info className='h-5 w-5' />
+              <Info className='size-5' />
             </Button>
           </StatesPopover>
 
@@ -83,7 +91,7 @@ export const CreationArticle = memo(
           </h2>
           <div className='flex items-center justify-between text-xs'>
             <div className='flex items-center space-x-1.5'>
-              <Star className='h-4 w-4 fill-yellow-300 text-yellow-400' />
+              <Star className='size-4 fill-yellow-300 text-yellow-400' />
               <span>{(creation.vote_average ?? 0).toFixed(1)}</span>
             </div>
             <span>({creation.vote_count} reviews)</span>
@@ -124,13 +132,13 @@ export const HorizontalCreationArticle = memo(
     return (
       <article
         className={cn(
-          'flex w-full cursor-pointer gap-2 rounded-md p-2 transition-all hover:bg-accent',
+          'hover:bg-accent flex w-full cursor-pointer gap-2 rounded-md p-2 transition-all',
           className
         )}
         {...props}
       >
         <ImageFromPath
-          className='aspect-[16/9] max-w-[120px] min-w-[120px] rounded-md'
+          className='aspect-[16/9] min-w-[120px] max-w-[120px] rounded-md'
           src={buildImagePath({
             path: creation.backdrop_path,
             scale: 'backdrop',
@@ -146,7 +154,7 @@ export const HorizontalCreationArticle = memo(
           </h2>
           <div className='flex items-center gap-2 text-xs'>
             <div className='flex items-center space-x-1.5'>
-              <Star className='h-4 w-4 fill-yellow-300 text-yellow-400' />
+              <Star className='size-4 fill-yellow-300 text-yellow-400' />
               <span>{creation.vote_average.toFixed(1)}</span>
             </div>
             <span>({creation.vote_count} reviews)</span>
@@ -158,7 +166,7 @@ export const HorizontalCreationArticle = memo(
 
         {withStates && (
           <CreationStatesDetailed
-            className='hidden md:flex ml-auto'
+            className='ml-auto hidden md:flex'
             creationId={creation.id}
             mediaType={mediaType}
           />

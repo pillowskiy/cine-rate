@@ -1,6 +1,13 @@
+import {
+  createSlice,
+  isFulfilled,
+  isPending,
+  isRejected,
+} from '@reduxjs/toolkit';
+
 import type { IUser } from '@app/types/account-types';
+
 import * as actions from './user-actions';
-import { createSlice, isFulfilled, isPending, isRejected } from '@reduxjs/toolkit';
 
 interface IUserState {
   user: IUser | null;
@@ -18,10 +25,9 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     // Approve
-    builder
-      .addCase(actions.approve.fulfilled, (state, action) => {
-        state.user = action.payload;
-      })
+    builder.addCase(actions.approve.fulfilled, (state, action) => {
+      state.user = action.payload;
+    });
 
     // Get User
     builder
@@ -33,10 +39,9 @@ export const userSlice = createSlice({
       });
 
     // Logout
-    builder
-      .addCase(actions.logout.fulfilled, (state) => {
-        state.user = null;
-      })
+    builder.addCase(actions.logout.fulfilled, (state) => {
+      state.user = null;
+    });
 
     builder
       .addMatcher(isPending, (state) => {
@@ -47,6 +52,6 @@ export const userSlice = createSlice({
       })
       .addMatcher(isRejected, (state) => {
         state.isLoading = false;
-      })
-  }
+      });
+  },
 });

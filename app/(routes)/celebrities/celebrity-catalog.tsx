@@ -1,14 +1,20 @@
 'use client';
 
 import { type ComponentProps, useEffect, useState } from 'react';
+
+import ky from 'ky';
+
 import type { IPagination } from '@app/types/index';
 import type { CelebritiesResponse } from '@app/types/person-types';
+
+import useInfiniteScroll from '@hooks/useInfiniteScroll';
+
+import { initialPagination } from '@config/pagination';
+
 import { PersonArticle } from '@components/article/person-article';
 import { CatalogSkeletonGroup } from '@components/skeleton/catalog-skeleton-group';
-import { initialPagination } from '@config/pagination';
-import useInfiniteScroll from '@hooks/useInfiniteScroll';
+
 import { cn } from '@libs/index';
-import ky from 'ky';
 
 type Celebrities = CelebritiesResponse['results'];
 
@@ -47,7 +53,7 @@ export function CelebrityCatalog({
         custom={i}
         key={celebrity.id}
         celebrity={celebrity}
-        className='mb-4 w-[40%] flex-grow md:w-[260px]'
+        className='mb-4 w-2/5 grow md:w-[260px]'
       />
     ));
   }

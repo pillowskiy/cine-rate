@@ -95,11 +95,14 @@ export const ribbons = {
 } as const satisfies Record<string, IRibbon>;
 
 /*
-  * TEMP: I don't quite like it, but as tempopary feature it's ok ¯\_(ツ)_/¯
+ * TEMP: I don't quite like it, but as tempopary feature it's ok ¯\_(ツ)_/¯
  */
 export function getCreationRibbon(creation: ICreation): IRibbon | null {
   const releaseDate = new Date(creation.release_date).getTime();
-  if (releaseDate < new Date('01.01.1990').getTime() && creation.vote_average >= 7) {
+  if (
+    releaseDate < new Date('01.01.1990').getTime() &&
+    creation.vote_average >= 7
+  ) {
     return ribbons.old_classic;
   }
 
@@ -110,7 +113,8 @@ export function getCreationRibbon(creation: ICreation): IRibbon | null {
 
   if (creation.vote_count >= 10000) return ribbons.legendary;
   if (creation.popularity >= 800) return ribbons.popular;
-  if (creation.vote_average >= 8 && creation.vote_count >= 100) return ribbons.top_rated;
+  if (creation.vote_average >= 8 && creation.vote_count >= 100)
+    return ribbons.top_rated;
 
   return null;
 }

@@ -1,10 +1,14 @@
+import { notFound } from 'next/navigation';
+
 import { Heading } from '@/app/_components/heading';
 import { MSeparator } from '@/app/_components/ui/separator';
-import type { INextPageParams } from '@app/types/index';
-import { ResourcesTabs } from '@components/resources/tabs';
-import { ResourceTarget } from '@config/enums';
-import { notFound } from 'next/navigation';
 import zod from 'zod';
+
+import type { INextPageParams } from '@app/types/index';
+
+import { ResourceTarget } from '@config/enums';
+
+import { ResourcesTabs } from '@components/resources/tabs';
 
 const paramsDto = zod.object({
   resourceTarget: zod.nativeEnum(ResourceTarget),

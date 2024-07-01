@@ -1,5 +1,7 @@
 'use client';
 
+import { useContext, useMemo } from 'react';
+
 import {
   Pagination,
   PaginationContent,
@@ -9,7 +11,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@ui/pagination';
-import { useContext, useMemo } from 'react';
+
 import { PaginationActionType, PaginationContext } from './common/utils';
 
 type PaginationGap = ('ellipsis' | number)[];

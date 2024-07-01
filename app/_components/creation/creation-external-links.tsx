@@ -1,10 +1,16 @@
 import type { ReactNode } from 'react';
-import type { CreationExternalIds } from '@app/types/creation-types';
-import { type CreationExternalUrls, buildExternalUrls } from '@libs/tmdb';
-import { Facebook, Instagram, Link as LinkIcon, Twitter } from 'lucide-react';
+
 import Link from 'next/link';
+
+import { Facebook, Instagram, Link as LinkIcon, Twitter } from 'lucide-react';
+
+import type { CreationExternalIds } from '@app/types/creation-types';
+
 import { MSeparator } from '@ui/separator';
+
 import { Heading } from '@components/heading';
+
+import { type CreationExternalUrls, buildExternalUrls } from '@libs/tmdb';
 
 interface CreationExternalLinksProps {
   externalIds: CreationExternalIds;
@@ -35,13 +41,13 @@ export default function CreationExternalLinks({
       <div className='flex w-full gap-4 overflow-x-auto'>
         {urls.map(([icon, url]) => (
           <Link
-            className='[&>svg]:h-[36px] first:w-auto opacity-70 transition-opacity hover:opacity-100 px-1'
+            className='px-1 opacity-70 transition-opacity first:w-auto hover:opacity-100 [&>svg]:h-[36px]'
             href={url}
             target='_blank'
             key={url}
           >
             {icons[icon as keyof typeof icons]}
-            <span className="sr-only">{icon}</span>
+            <span className='sr-only'>{icon}</span>
           </Link>
         ))}
       </div>

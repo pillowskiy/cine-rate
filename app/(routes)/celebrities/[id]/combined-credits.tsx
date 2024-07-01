@@ -1,10 +1,14 @@
 import type { CombinedCreditsResponse } from '@app/types/person-types';
+
+import { MediaType } from '@config/enums';
+
+import { MSeparator } from '@ui/separator';
+
 import { CreationArticle } from '@components/article/creation-article';
 import { Carousel } from '@components/carousel';
-import { MSeparator } from '@ui/separator';
-import { $api } from '@api/api-interceptor';
-import { MediaType } from '@config/enums';
 import { NotFound } from '@components/not-found';
+
+import { $api } from '@api/api-interceptor';
 
 export function getCombinedCredits(personId: number) {
   return $api.safeFetch<CombinedCreditsResponse>(

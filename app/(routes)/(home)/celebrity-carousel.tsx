@@ -1,11 +1,15 @@
+import Link from 'next/link';
+
+import { getPopular } from '@actions/getPopular';
+
 import { MediaType } from '@config/enums';
+
+import { MSeparator } from '@ui/separator';
+
 import { PersonArticle } from '@components/article/person-article';
 import { Carousel } from '@components/carousel';
-import { getPopular } from '@actions/getPopular';
-import { MSeparator } from '@ui/separator';
-import { NotFound } from '@components/not-found';
 import { Heading } from '@components/heading';
-import Link from 'next/link';
+import { NotFound } from '@components/not-found';
 
 export default async function CelebrityCarousel() {
   const [celebrities, error] = await getPopular(MediaType.Person);
@@ -42,8 +46,8 @@ export default async function CelebrityCarousel() {
               </p>
             </Link>
 
-            <div className='absolute -z-10 h-10 w-10 animate-pulse rounded-full bg-orange-500 blur-xl' />
-            <div className='absolute -z-10 h-5 w-5 animate-pulse rounded-full bg-red-600 blur-xl' />
+            <div className='absolute -z-10 size-10 animate-pulse rounded-full bg-orange-500 blur-xl' />
+            <div className='absolute -z-10 size-5 animate-pulse rounded-full bg-red-600 blur-xl' />
           </div>
         </Carousel>
       ) : (

@@ -1,15 +1,18 @@
+import { notFound } from 'next/navigation';
+
 import type { INextPageParams } from '@app/types/index';
 
-import { BaseFigure } from '@components/figure/base-figure';
-import PersonBiography from './person-biography';
-import CombinedCredits from './combined-credits';
-import PersonKnownAs from './person-known-as';
-import PersonDetails from './person-details';
-
 import { getPersonDetails } from '@actions/getPersonDetails';
-import { pipe } from '@libs/common/next';
+
+import { BaseFigure } from '@components/figure/base-figure';
+
 import { generatePersonMetadata } from '@libs/common/metadata';
-import { notFound } from 'next/navigation';
+import { pipe } from '@libs/common/next';
+
+import CombinedCredits from './combined-credits';
+import PersonBiography from './person-biography';
+import PersonDetails from './person-details';
+import PersonKnownAs from './person-known-as';
 
 export const generateMetadata = generatePersonMetadata();
 
@@ -25,13 +28,13 @@ export default async function PersonPage({ params }: INextPageParams) {
         <BaseFigure
           posterPath={person.profile_path}
           alt='Person Avatar'
-          className='aspect-[2/3] w-full h-auto'
+          className='aspect-[2/3] h-auto w-full'
           width={260}
           height={420}
         />
         <PersonDetails person={person} />
       </section>
-      <section className='flex-grow space-y-6 overflow-hidden'>
+      <section className='grow space-y-6 overflow-hidden'>
         <h1 className='mb-4 truncate text-3xl font-medium'>{person.name}</h1>
         <PersonBiography personId={person.id} />
         <CombinedCredits personId={person.id} />

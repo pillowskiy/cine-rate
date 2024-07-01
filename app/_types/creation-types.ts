@@ -1,7 +1,9 @@
+import type { MoreVideoDetails, videoFormat } from 'ytdl-core';
+
+import type { CreationVideoSite, MediaType } from '@config/enums';
+
 import type { BaseResponse } from '.';
-import type { MediaType, CreationVideoSite } from '@config/enums';
 import type { IMediaResource } from './media-types';
-import type { videoFormat, MoreVideoDetails } from 'ytdl-core';
 
 export interface IKeyword {
   id: number;
@@ -44,15 +46,15 @@ export type ToggleFavoriteData = {
   mediaType: MediaType;
   creationId: number;
   favorite: boolean;
-}
+};
 
 export type ToggleRatingData = {
   value: number;
-}
+};
 
 export type AddRatingData = {
   value: number;
-}
+};
 
 export type CreationsResponse = BaseResponse<ICreation>;
 export type CreationVideosResponse = {
@@ -74,33 +76,33 @@ export type ToggleResponse = {
   success: boolean;
   status_code: number;
   status_message: string;
-}
+};
 
 // TEMP: dublicate
 export type RatingResponse = {
   success: boolean;
   status_code: number;
   status_message: string;
-}
+};
 
 export type AccountStatesResponse = {
   id: number;
   favorite: boolean;
   rated: false | { value: number };
   watchlist: boolean;
-}
+};
 
 export type CreationTrailerResponse = {
-  details: MoreVideoDetails,
-  format: videoFormat,
-}
+  details: MoreVideoDetails;
+  format: videoFormat;
+};
 
 export type CreationExternalIds = {
   imdb_id?: string | null;
   facebook_id?: string | null;
   instagram_id?: string | null;
   twitter_id?: string | null;
-}
+};
 
 export interface ICreationExternalIds {
   external_ids: CreationExternalIds;

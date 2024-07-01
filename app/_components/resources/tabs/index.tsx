@@ -1,5 +1,7 @@
 import { ResourceTarget, ResourceType } from '@config/enums';
+
 import { Tabs, TabsList, TabsTrigger } from '@ui/tabs';
+
 import ResourcesTabsContent from './resources-tabs-content';
 
 interface ResourcesTabsProps {

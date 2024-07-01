@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function useInfiniteScroll<
-  T extends (...args: any[]) => void,
->(callback: T, dependency: unknown, stopped?: boolean) {
+export default function useInfiniteScroll<T extends (...args: any[]) => void>(
+  callback: T,
+  dependency: unknown,
+  stopped?: boolean
+) {
   const [canScroll, setCanScroll] = useState(true);
 
   useEffect(() => {

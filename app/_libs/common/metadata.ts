@@ -1,10 +1,14 @@
-import type { MediaType } from '@config/enums';
+import type { Metadata } from 'next';
+
+import type { INextPageParams } from '@app/types/index';
+
 import { getCreationDetails } from '@actions/getCreationDetails';
 import { getPersonDetails } from '@actions/getPersonDetails';
-import type { INextPageParams } from '@app/types/index';
-import type { Metadata } from 'next';
-import { buildImagePath } from '@libs/tmdb';
+
+import type { MediaType } from '@config/enums';
+
 import { pipe } from '@libs/common/next';
+import { buildImagePath } from '@libs/tmdb';
 
 export const APP_URL =
   process.env.NEXT_PUBLIC_APP_URL || 'https://cine-rate.vercel.app/';
@@ -101,7 +105,7 @@ export function generatePersonMetadata() {
       },
       twitter: {
         card: 'summary',
-      }
+      },
     };
   };
 }

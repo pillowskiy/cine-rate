@@ -1,6 +1,11 @@
 import type { ComponentProps } from 'react';
-import { buildImagePath } from '@libs/tmdb';
+
+import Link from 'next/link';
+
 import type { ICredit } from '@app/types/person-types';
+
+import { buildImagePath } from '@libs/tmdb';
+
 import {
   BaseArticle,
   BaseArticleContent,
@@ -8,7 +13,6 @@ import {
   BaseArticleFigureProps,
   type BaseArticleProps,
 } from './base-article';
-import Link from 'next/link';
 
 interface CreditArticleProps extends BaseArticleProps {
   credit: ICredit;
@@ -42,7 +46,7 @@ export function CreditArticle({
         <h2 className='truncate font-semibold tracking-tight'>
           {credit.original_name}
         </h2>
-        <p className='text-xs truncate'>{credit.character}</p>
+        <p className='truncate text-xs'>{credit.character}</p>
       </BaseArticleContent>
     </BaseArticle>
   );

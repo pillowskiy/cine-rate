@@ -1,24 +1,26 @@
 'use client';
 
-import type { AccountStatesResponse } from '@app/types/creation-types';
-import type { CreationIdentifierProps } from '../common/types';
-
 import { type ReactNode, useEffect, useState } from 'react';
-import { StatesContext, useStatesReducer, StatesAction } from './common/utils';
 
+import { useAuth } from '@redux/hooks';
+import { type HTMLMotionProps, m } from 'framer-motion';
+import ky from 'ky';
+
+import type { AccountStatesResponse } from '@app/types/creation-types';
+
+import useFetch from '@hooks/useFetch';
+
+import { Target, opacityAnimations } from '@config/animations';
+
+import { Popover, PopoverContent, PopoverTrigger } from '@ui/popover';
+
+import { cn } from '@libs/index';
+
+import type { CreationIdentifierProps } from '../common/types';
+import { StatesAction, StatesContext, useStatesReducer } from './common/utils';
 import { FavoriteButton } from './favorite-button';
 import { RatingButton } from './rating-button';
 import { WatchlistButton } from './watchlist-button';
-
-import { Target, opacityAnimations } from '@config/animations';
-import { type HTMLMotionProps, m } from 'framer-motion';
-
-import { useAuth } from '@redux/hooks';
-import useFetch from '@hooks/useFetch';
-import { Popover, PopoverContent, PopoverTrigger } from '@ui/popover';
-import ky from 'ky';
-import { cn } from '@libs/index';
-
 
 interface CreationStatesProps extends CreationIdentifierProps {
   children: ReactNode;

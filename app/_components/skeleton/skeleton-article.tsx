@@ -1,7 +1,9 @@
 import { ComponentProps } from 'react';
-import { Skeleton } from '../ui/skeleton';
-import { BaseArticleFigureProps } from '../article/base-article';
+
 import { cn } from '@/app/_libs';
+
+import { BaseArticleFigureProps } from '../article/base-article';
+import { Skeleton } from '../ui/skeleton';
 
 export interface SkeletonArticleProps extends ComponentProps<'article'> {
   aspect?: BaseArticleFigureProps['aspect'];

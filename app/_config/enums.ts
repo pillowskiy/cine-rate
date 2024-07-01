@@ -1,41 +1,41 @@
 export enum TVSort {
-    TopRated = 'top_rated',
-    AiringToday = 'airing_today',
-    OnTheAir = 'on_the_air',
-    Popular = 'popular',
+  TopRated = 'top_rated',
+  AiringToday = 'airing_today',
+  OnTheAir = 'on_the_air',
+  Popular = 'popular',
 }
 
 export enum MovieSort {
-    Popular = 'popular',
-    NowPlaying = 'now_playing',
-    TopRated = 'top_rated',
-    Upcoming = 'upcoming',
+  Popular = 'popular',
+  NowPlaying = 'now_playing',
+  TopRated = 'top_rated',
+  Upcoming = 'upcoming',
 }
 
 export enum MediaType {
-    Movie = 'movie',
-    TV = 'tv',
-    Person = 'person',
+  Movie = 'movie',
+  TV = 'tv',
+  Person = 'person',
 }
 
 export enum ResourceType {
-    Movie = 'movies',
-    TV = 'tv',
+  Movie = 'movies',
+  TV = 'tv',
 }
 
 export enum ResourceTarget {
-    Rated = 'rated',
-    Watchlist = 'watchlist',
-    Favorite = 'favorite',
+  Rated = 'rated',
+  Watchlist = 'watchlist',
+  Favorite = 'favorite',
 }
 
 export enum Gender {
-    Unknown = 0,
-    Woman = 1,
-    Man = 2,
-    NonBinary = 3,
+  Unknown = 0,
+  Woman = 1,
+  Man = 2,
+  NonBinary = 3,
 }
 
 export enum CreationVideoSite {
-    YOUTUBE = 'YouTube',
+  YOUTUBE = 'YouTube',
 }

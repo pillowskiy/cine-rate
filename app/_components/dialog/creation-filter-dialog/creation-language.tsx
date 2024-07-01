@@ -1,7 +1,12 @@
 'use client';
 
+import { useContext } from 'react';
+
 import type { LanguagesResponse } from '@app/types/configuration-types';
 
+import useFetch from '@hooks/useFetch';
+
+import { Label } from '@ui/label';
 import {
   Select,
   SelectContent,
@@ -10,11 +15,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@ui/select';
-import { Label } from '@ui/label';
 
-import { useContext } from 'react';
 import { FilterContext } from '.';
-import useFetch from '@hooks/useFetch';
 
 export function CreationLanguage() {
   const [filter, setFilter] = useContext(FilterContext);

@@ -1,7 +1,8 @@
 'use client';
 
-import { Button, type ButtonProps } from '@ui/button';
 import { useTheme } from 'next-themes';
+
+import { Button, type ButtonProps } from '@ui/button';
 
 interface ToggleThemeProps extends ButtonProps {}
 

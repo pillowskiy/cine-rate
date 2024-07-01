@@ -1,6 +1,7 @@
-import type { MediaType } from '@config/enums';
 import type { IMovieDetails } from '@app/types/movies-types';
 import type { ITVDetails } from '@app/types/tv-types';
+
+import type { MediaType } from '@config/enums';
 
 export type CreationDetails = IMovieDetails | ITVDetails;
 

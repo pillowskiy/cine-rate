@@ -1,12 +1,16 @@
+import { notFound } from 'next/navigation';
+
 import type { INextPageParams } from '@app/types/index';
+
 import { getCreationDetails } from '@actions/getCreationDetails';
+
 import { MediaType } from '@config/enums';
+
 import { pipe } from '@libs/common/next';
 
 import EpisodeFilter from './episode-filter';
-import EpisodeList from './episode-list';
 import EpisodeHeader from './episode-header';
-import { notFound } from 'next/navigation';
+import EpisodeList from './episode-list';
 
 export default async function EpisodesPage({
   params,
@@ -24,7 +28,11 @@ export default async function EpisodesPage({
     <main className='min-h-screen w-full space-y-6'>
       <EpisodeHeader series={series} />
       <EpisodeFilter series={series} />
-      <EpisodeList seriesId={seriesId} seasonNumber={seasonNumber} sort={sort} />
+      <EpisodeList
+        seriesId={seriesId}
+        seasonNumber={seasonNumber}
+        sort={sort}
+      />
     </main>
   );
 }

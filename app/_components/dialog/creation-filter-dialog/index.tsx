@@ -1,33 +1,38 @@
 'use client';
 
 import {
-  useState,
-  type ReactNode,
+  ChangeEvent,
   type Dispatch,
+  type ReactNode,
   type SetStateAction,
   createContext,
-  ChangeEvent,
+  useState,
 } from 'react';
+
+import useQueryParams from '@hooks/useQueryParams';
+
+import type { GetDiscoverParams } from '@actions/getDiscover';
+
 import type { MediaType } from '@config/enums';
+
 import { Button } from '@ui/button';
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogClose,
 } from '@ui/dialog';
-import type { GetDiscoverParams } from '@actions/getDiscover';
-import { ScrollArea, ScrollBar } from '@ui/scroll-area';
-import { Label } from '@ui/label';
 import { Input } from '@ui/input';
+import { Label } from '@ui/label';
+import { ScrollArea, ScrollBar } from '@ui/scroll-area';
 import { MSeparator } from '@ui/separator';
+
 import { CreationGenres } from './creation-genres';
 import { CreationLanguage } from './creation-language';
-import useQueryParams from '@hooks/useQueryParams';
 
 interface CreationFilterDialogProps {
   mediaType: MediaType;

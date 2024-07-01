@@ -1,12 +1,18 @@
 'use client';
 
 import type { ComponentProps } from 'react';
+
 import type { ImageProps } from 'next/image';
-import { cn } from '@libs/index';
+
+import { HTMLMotionProps, m } from 'framer-motion';
+
+import { Target, xTransitionAnimations } from '@config/animations';
+
 import { Button } from '@ui/button';
+
 import { ImageFromPath } from '@components/image/image-from-path';
-import { m, HTMLMotionProps } from 'framer-motion';
-import { xTransitionAnimations, Target } from '@config/animations';
+
+import { cn } from '@libs/index';
 
 export interface BaseArticleProps extends HTMLMotionProps<'article'> {}
 

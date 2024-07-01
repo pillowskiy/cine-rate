@@ -1,25 +1,28 @@
 'use client';
 
 import {
-  useState,
+  type MouseEvent,
+  type ReactNode,
   useEffect,
   useMemo,
-  type ReactNode,
-  type MouseEvent,
+  useState,
 } from 'react';
+
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from '@ui/dialog';
-import { buildImagePath } from '@libs/tmdb';
+
 import { OpenOriginalImage } from '@components/open-original-image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+
 import { cn } from '@libs/index';
+import { buildImagePath } from '@libs/tmdb';
 
 interface ExpandImageDialogProps {
   path: string;
@@ -49,12 +52,12 @@ export function ExpandImageDialog({
           </DialogDescription>
         </DialogHeader>
         <div className='flex items-center justify-between gap-4'>
-          <ChevronLeft className='h-7 w-7 cursor-pointer' />
-          <div className='h-full w-full'>
+          <ChevronLeft className='size-7 cursor-pointer' />
+          <div className='size-full'>
             <ExpandImageDialogContent path={path} />
             <OpenOriginalImage path={path} />
           </div>
-          <ChevronRight className='h-7 w-7 cursor-pointer' />
+          <ChevronRight className='size-7 cursor-pointer' />
         </div>
       </DialogContent>
     </Dialog>
@@ -103,7 +106,7 @@ function ExpandImageDialogContent({
       onMouseLeave={handleMouseLeave}
     >
       <div
-        className='z-10 h-full w-full bg-black object-cover will-change-contents'
+        className='z-10 size-full bg-black object-cover will-change-contents'
         style={{
           backgroundImage: `url( ${buildImagePath({ path })} )`,
           backgroundSize: `${proportion.scale * 100}%`,
@@ -113,9 +116,9 @@ function ExpandImageDialogContent({
       />
       <div
         className={cn(
-          'absolute left-0 top-0 z-20 h-[64px] w-[64px]',
+          'absolute left-0 top-0 z-20 size-[64px]',
           '-translate-x-[32px] -translate-y-[32px]',
-          'cursor-none rounded-md border bg-background/30',
+          'bg-background/30 cursor-none rounded-md border',
           !(proportion.x && proportion.y) && 'hidden'
         )}
         style={{

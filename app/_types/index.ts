@@ -32,8 +32,8 @@ export interface IPagination {
 }
 
 export interface INextPageParams {
-  searchParams: Record<string, string>
-  params: Record<string, string | number | symbol>
+  searchParams: Record<string, string>;
+  params: Record<string, string | number | symbol>;
 }
 
 export interface IApiReject {

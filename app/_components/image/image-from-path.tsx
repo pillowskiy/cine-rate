@@ -1,9 +1,12 @@
 'use client';
 
-import Image, { type ImageProps } from 'next/image';
-import { Image as FallbackIcon } from 'lucide-react';
-import { cn } from '@libs/index';
 import { useState } from 'react';
+
+import Image, { type ImageProps } from 'next/image';
+
+import { Image as FallbackIcon } from 'lucide-react';
+
+import { cn } from '@libs/index';
 
 type ImageFromPathProps = Omit<ImageProps, 'src'> & {
   src: string | null;
@@ -22,10 +25,10 @@ export function ImageFromPath({
       <div
         className={cn(
           className,
-          'grid h-full w-full place-items-center bg-secondary'
+          'bg-secondary grid size-full place-items-center'
         )}
       >
-        <FallbackIcon className='m-auto h-12 w-12 text-primary/70' />
+        <FallbackIcon className='text-primary/70 m-auto size-12' />
       </div>
     );
   }
@@ -35,7 +38,7 @@ export function ImageFromPath({
       className={cn(
         'transition-all duration-500',
         className,
-        isLoading && 'blur-xl w-full h-full',
+        isLoading && 'size-full blur-xl'
       )}
       alt={alt}
       src={src}

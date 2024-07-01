@@ -1,7 +1,8 @@
+import Link from 'next/link';
+
 import type { ISeason } from '@app/types/tv-types';
-import { SeasonArticle } from '@components/article/season-article';
+
 import { Button } from '@ui/button';
-import { ScrollArea, ScrollBar } from '@ui/scroll-area';
 import {
   Dialog,
   DialogClose,
@@ -11,7 +12,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@ui/dialog';
-import Link from 'next/link';
+import { ScrollArea, ScrollBar } from '@ui/scroll-area';
+
+import { SeasonArticle } from '@components/article/season-article';
 
 interface SeasonsDialogProps {
   seriesId: number;

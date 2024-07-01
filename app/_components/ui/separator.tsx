@@ -1,10 +1,11 @@
 'use client';
 
 import * as React from 'react';
-import * as SeparatorPrimitive from '@radix-ui/react-separator';
 
 import { cn } from '@/app/_libs';
+import * as SeparatorPrimitive from '@radix-ui/react-separator';
 import { m } from 'framer-motion';
+
 import { Target, widthAnimations } from '@config/animations';
 
 const Separator = React.forwardRef<
@@ -20,8 +21,8 @@ const Separator = React.forwardRef<
       decorative={decorative}
       orientation={orientation}
       className={cn(
-        'shrink-0 bg-border',
-        orientation === 'horizontal' ? 'h-[1px] w-full' : 'h-full w-[1px]',
+        'bg-border shrink-0',
+        orientation === 'horizontal' ? 'h-px w-full' : 'h-full w-px',
         className
       )}
       {...props}
@@ -46,8 +47,8 @@ const MSeparator = ({
       whileInView={Target.VISIBLE}
       variants={widthAnimations}
       className={cn(
-        'shrink-0 bg-border',
-        orientation === 'horizontal' ? 'h-[1px] w-full' : 'h-full w-[1px]',
+        'bg-border shrink-0',
+        orientation === 'horizontal' ? 'h-px w-full' : 'h-full w-px',
         className
       )}
     />

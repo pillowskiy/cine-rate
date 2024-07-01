@@ -1,11 +1,15 @@
-import type { IMovieDetails } from '@app/types/movies-types';
 import type { ComponentProps } from 'react';
+
+import type { IMovieDetails } from '@app/types/movies-types';
+
 import { MediaType } from '@config/enums';
-import CreationKeywords from '@components/creation/creation-keywords';
-import CreationExternalLinks from '@components/creation/creation-external-links';
-import { getTitle } from '@components/creation/common/utils';
+
 import { List, ListItem } from '@ui/list';
 import { MSeparator } from '@ui/separator';
+
+import { getTitle } from '@components/creation/common/utils';
+import CreationExternalLinks from '@components/creation/creation-external-links';
+import CreationKeywords from '@components/creation/creation-keywords';
 import { Heading } from '@components/heading';
 
 interface MovieDetailsProps extends ComponentProps<'div'> {

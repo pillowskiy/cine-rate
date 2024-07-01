@@ -1,6 +1,7 @@
-import type { MediaType, TVSort, MovieSort } from '@config/enums';
 import type { CreationsResponse } from '@app/types/creation-types';
 import type { BaseParams } from '@app/types/index';
+
+import type { MediaType, MovieSort, TVSort } from '@config/enums';
 
 import { $api } from '@api/api-interceptor';
 
@@ -8,7 +9,7 @@ import { $api } from '@api/api-interceptor';
  * Movie discover:
  *  Reference: https://developer.themoviedb.org/reference/discover-movie
  *  Docs: https://themoviedb.api-docs.io/3/discover/movie-discover
- * 
+ *
  * Tv Discover:
  *  Reference: https://developer.themoviedb.org/reference/discover-tv
  *  Docs: https://themoviedb.api-docs.io/3/discover/tv-discover
@@ -37,7 +38,7 @@ export interface GetDiscoverParams extends BaseParams {
 
   // TEMP
   sort_by?: MovieSort | TVSort;
-  
+
   with_genres?: string;
 
   'vote_average.gte'?: number;

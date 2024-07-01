@@ -1,12 +1,15 @@
 'use client';
 
-import { ReviewCard } from '@components/card/review-card';
-import type { CreationIdentifierProps } from '../common/types';
-import { NotFound } from '@components/not-found';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+
 import { ReviewResponse } from '@/app/_types/review-types';
-import { PaginationActionType, PaginationContext } from './common/utils';
 import ky from 'ky';
+
+import { ReviewCard } from '@components/card/review-card';
+import { NotFound } from '@components/not-found';
+
+import type { CreationIdentifierProps } from '../common/types';
+import { PaginationActionType, PaginationContext } from './common/utils';
 
 export function CreationReviewsCatalog({
   creationId,
@@ -18,7 +21,8 @@ export function CreationReviewsCatalog({
 
   const scrollToCatalog = useCallback(() => {
     const offsetTop = catalogRef.current?.offsetTop;
-    if (offsetTop) window.scrollTo({ top: offsetTop - 150, behavior: 'smooth' });
+    if (offsetTop)
+      window.scrollTo({ top: offsetTop - 150, behavior: 'smooth' });
   }, []);
 
   useEffect(() => {
@@ -38,7 +42,7 @@ export function CreationReviewsCatalog({
         }
         setData(data);
         scrollToCatalog();
-      })
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.page]);
 

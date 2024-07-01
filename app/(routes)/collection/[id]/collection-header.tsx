@@ -1,5 +1,7 @@
 import type { IDetailedCollection } from '@app/types/collection-types';
+
 import { ImageFromPath } from '@components/image/image-from-path';
+
 import { buildImagePath } from '@libs/tmdb';
 
 interface CollectionHeaderProps {
@@ -22,10 +24,10 @@ export default function CollectionHeader({ details }: CollectionHeaderProps) {
           height={390}
         />
       </div>
-      <div className='flex flex-grow flex-col items-center justify-between gap-4 sm:flex-row'>
+      <div className='flex grow flex-col items-center justify-between gap-4 sm:flex-row'>
         <div className='text-center sm:max-w-[80%] sm:text-left'>
           <h3 className='text-xl'>{details.name}</h3>
-          <p className='text-sm text-foreground/70'>{details.overview}</p>
+          <p className='text-foreground/70 text-sm'>{details.overview}</p>
         </div>
 
         <div className='h-full'>

@@ -1,8 +1,10 @@
 'use client';
 
-import type { CreationDetailsProps } from './common/types';
-import JSConfetti from 'js-confetti';
 import { useEffect, useRef } from 'react';
+
+import JSConfetti from 'js-confetti';
+
+import type { CreationDetailsProps } from './common/types';
 
 const genreEmojis = {
   Action: '🔫',

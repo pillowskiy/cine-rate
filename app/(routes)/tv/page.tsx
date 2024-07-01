@@ -1,8 +1,9 @@
-import {
-  CreationCatalogHeader,
-  CreationCatalog,
-} from '@components/creation/creation-catalog';
 import { MediaType, TVSort } from '@config/enums';
+
+import {
+  CreationCatalog,
+  CreationCatalogHeader,
+} from '@components/creation/creation-catalog';
 
 export default async function TVPage() {
   return (

@@ -1,21 +1,22 @@
 'use client';
 
-import type { CreationIdentifierProps } from './common/types';
-import type { CreationTrailerResponse } from '@app/types/creation-types';
 import { type ComponentProps, useEffect, useRef, useState } from 'react';
-import {
-  Bot,
-  Expand,
-  Loader2,
-  Play,
-  Youtube,
-} from 'lucide-react';
-import { YoutubeEmbedDialog } from '@components/dialog/youtube-embed-dialog';
+
 import Link from 'next/link';
-import useFetch from '@hooks/useFetch';
+
 import { useInView } from 'framer-motion';
+import { Bot, Expand, Loader2, Play, Youtube } from 'lucide-react';
+
+import type { CreationTrailerResponse } from '@app/types/creation-types';
+
+import useFetch from '@hooks/useFetch';
+
+import { YoutubeEmbedDialog } from '@components/dialog/youtube-embed-dialog';
+
 import { cn } from '@libs/index';
 import { minutesFormat } from '@libs/time';
+
+import type { CreationIdentifierProps } from './common/types';
 
 interface CreationTrailerProps
   extends CreationIdentifierProps,
@@ -70,10 +71,10 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
 
   if (!data && !error) {
     return (
-      <div className='grid h-full w-full place-items-center text-center'>
+      <div className='grid size-full place-items-center text-center'>
         <div className='flex flex-col items-center justify-center space-y-1'>
-          <Loader2 className='h-[48px] w-[48px] animate-spin sm:h-[64px] sm:w-[64px]' />
-          <span className='text-sm text-foreground/70'>Processing data...</span>
+          <Loader2 className='size-[48px] animate-spin sm:size-[64px]' />
+          <span className='text-foreground/70 text-sm'>Processing data...</span>
         </div>
       </div>
     );
@@ -81,7 +82,7 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
 
   if (data) {
     return (
-      <div className='relative h-full w-full after:absolute after:inset-0 after:bg-gradient-to-t after:from-black'>
+      <div className='relative size-full after:absolute after:inset-0 after:bg-gradient-to-t after:from-black'>
         <video
           ref={videoRef}
           className='absolute bottom-0 w-full object-cover align-top'
@@ -96,10 +97,10 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
         </video>
         <div className='absolute bottom-0 left-0 z-10 flex w-full justify-between p-4'>
           <button
-            className='flex cursor-pointer items-center transition-all hover:underline px-1'
+            className='flex cursor-pointer items-center px-1 transition-all hover:underline'
             onClick={() => playingChange()}
           >
-            <Play className='mr-2 h-5 w-5 sm:h-8 sm:w-8' />
+            <Play className='mr-2 size-5 sm:size-8' />
             <span className='text-sm sm:text-base'>
               {options.isPlaying ? 'Pause' : 'Play'} trailer
               <i className='ml-2 text-sm not-italic opacity-80'>
@@ -110,8 +111,8 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
 
           <div className='ml-auto flex items-center gap-2'>
             <Link href={data.details.video_url} target='_blank'>
-              <Youtube className='h-5 w-5 cursor-pointer transition-all sm:h-8 sm:w-8' />
-              <span className="sr-only">Open Original Video</span>
+              <Youtube className='size-5 cursor-pointer transition-all sm:size-8' />
+              <span className='sr-only'>Open Original Video</span>
             </Link>
 
             <YoutubeEmbedDialog
@@ -119,7 +120,7 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
               onOpenChange={(open) => open && playingChange(false)}
             >
               <button className='p-1' aria-label='Open Youtube Embed Video'>
-                <Expand className='h-5 w-5 cursor-pointer transition-all sm:h-6 sm:w-6' />
+                <Expand className='size-5 cursor-pointer transition-all sm:size-6' />
               </button>
             </YoutubeEmbedDialog>
             {/* TODO video trailer actions */}
@@ -130,10 +131,10 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
   }
 
   return (
-    <div className='grid h-full w-full place-items-center text-center'>
+    <div className='grid size-full place-items-center text-center'>
       <div className='flex flex-col items-center justify-center space-y-1 p-6'>
-        <Bot className='h-[64px] w-[64px] animate-pulse shadow-yellow-500 ' />
-        <span className='text-sm text-foreground/70'>
+        <Bot className='size-[64px] animate-pulse shadow-yellow-500 ' />
+        <span className='text-foreground/70 text-sm'>
           {error?.message || 'O-ops! Something went wrong..'}
         </span>
       </div>

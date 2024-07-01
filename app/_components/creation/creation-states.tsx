@@ -1,8 +1,12 @@
-import type { MediaType } from '@config/enums';
 import { Star, TrendingUp } from 'lucide-react';
+
+import type { MediaType } from '@config/enums';
+
 import { Button } from '@ui/button';
-import type { CreationDetailsProps } from './common/types';
+
 import { cn } from '@libs/index';
+
+import type { CreationDetailsProps } from './common/types';
 
 interface CreationStatesProps extends CreationDetailsProps {}
 
@@ -19,7 +23,7 @@ export function CreationStates({ details }: CreationStatesProps) {
             'text-lg font-medium disabled:pointer-events-none disabled:opacity-50'
           )}
         >
-          <Star className='mr-1.5 h-7 w-7 fill-yellow-400 text-yellow-400' />
+          <Star className='mr-1.5 size-7 fill-yellow-400 text-yellow-400' />
           <span>{details.vote_average.toFixed(1)}</span>
         </div>
       </div>
@@ -34,7 +38,7 @@ export function CreationStates({ details }: CreationStatesProps) {
             'text-lg font-medium disabled:pointer-events-none disabled:opacity-50'
           )}
         >
-          <TrendingUp className='mr-1.5 h-7 w-7' />
+          <TrendingUp className='mr-1.5 size-7' />
           <span>{details.popularity.toFixed(0)}</span>
         </div>
       </div>

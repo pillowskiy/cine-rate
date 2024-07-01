@@ -1,5 +1,6 @@
 import type { CreationsResponse } from '@app/types/creation-types';
 import type { BaseParams } from '@app/types/index';
+
 import { $api } from '@api/api-interceptor';
 
 const REVALIDATE_DAY = 60 * 24;
