@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint --debug src/",
+    "lint:write": "eslint --debug src/ --fix",
+    "prettier": "prettier --write src/**/*.js",
+    "prepare": "husky"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^13.5.6",
@@ -46,6 +49,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "@types/get-image-colors": "^4.0.5",
     "@types/node": "^20.14.9",
     "@types/react": "^18.3.3",
@@ -54,10 +59,27 @@
     "eslint": "^8.57.0",
     "eslint-config-next": "^13.5.6",
     "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
     "postcss": "^8.4.39",
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.4.1",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.5.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "YOUR_COMMAND_HERE",
+      "pre-push": "YOUR_COMMAND_HERE"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --max-warnings=0",
+      "prettier --write"
+    ],
+    "**/*.{html,json,css,scss,md,mdx}": [
+      "prettier -w"
+    ]
   }
 }
