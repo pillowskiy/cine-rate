@@ -7,7 +7,7 @@ function getTokenApproveURL(requestToken: string) {
     process.env.TMDB_URL +
     'authenticate/' +
     requestToken +
-    `?redirect_to=${process.env.APP_URL}/auth/approve/`
+    `?redirect_to=${process.env.NEXT_PUBLIC_APP_URL}/auth/approve/`
   );
 }
 
