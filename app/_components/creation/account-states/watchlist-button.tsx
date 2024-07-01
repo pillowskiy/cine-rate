@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import { useOptimistic } from '@/app/_hooks/useOptimistic';
 import ky from 'ky';
 import { BookmarkPlus } from 'lucide-react';
 import { Button } from '@ui/button';
 import { useToast } from '@ui/use-toast';
 import { cn } from '@libs/index';
 import { rejectKy } from '@libs/ky';
+import { useOptimistic } from '@/app/_hooks/useOptimistic';
 import type { BaseButtonProps } from './common/types';
 import { StatesAction, StatesContext } from './common/utils';
 

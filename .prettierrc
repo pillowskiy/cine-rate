@@ -10,7 +10,6 @@
     "^(next/(.*)$)|^(next$)",
     "<THIRD_PARTY_MODULES>",
     "^types$",
-    "^@/types/(.*)$",
     "^@app/types/(.*)$",
     "^@hooks/(.*)$",
     "^@actions/(.*)$",
@@ -20,6 +19,7 @@
     "^@providers/(.*)$",
     "^@api/(.*)$",
     "^@libs/(.*)$",
+    "^@/(.*)$",
     "^[./]"
   ],
   "importOrderSeparation": false,

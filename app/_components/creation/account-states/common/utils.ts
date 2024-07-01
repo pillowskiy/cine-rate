@@ -1,8 +1,8 @@
 'use client';
 
 import { createContext, useReducer } from 'react';
-import { MediaType } from '@/app/_config/enums';
 import type { AccountStatesResponse } from '@app/types/creation-types';
+import { MediaType } from '@/app/_config/enums';
 
 type AccountStatesState =
   | (AccountStatesResponse & { mediaType: MediaType })

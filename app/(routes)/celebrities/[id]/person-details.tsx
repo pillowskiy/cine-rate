@@ -1,5 +1,5 @@
-import { List, ListItem } from '@/app/_components/ui/list';
 import type { IPersonDetails } from '@app/types/person-types';
+import { List, ListItem } from '@/app/_components/ui/list';
 
 interface PersonDetailsProps {
   person: IPersonDetails;

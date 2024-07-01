@@ -1,9 +1,9 @@
 import { ComponentProps } from 'react';
 import Link from 'next/link';
-import { cn } from '@/app/_libs';
 import type { IPartialGenre } from '@app/types/genre-types';
 import type { MediaType } from '@config/enums';
 import { Button } from '@ui/button';
+import { cn } from '@/app/_libs';
 
 interface CreationGenresProps extends Omit<ComponentProps<'div'>, 'children'> {
   mediaType?: MediaType;

@@ -1,7 +1,7 @@
-import { $api } from '@/app/_shared/api/api-interceptor';
 import type { CollectionDetailsResponse } from '@app/types/collection-types';
 import { MSeparator } from '@ui/separator';
 import { Heading } from '@components/heading';
+import { $api } from '@/app/_shared/api/api-interceptor';
 import { CollectionArticle } from '../article/collection-article';
 
 interface CreationCollectionProps {

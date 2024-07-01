@@ -1,10 +1,10 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { INextPageParams } from '@/app/_types';
 import zod from 'zod';
 import { getDiscover } from '@actions/getDiscover';
 import { MovieSort, TVSort } from '@config/enums';
 import { fetchErrorResponse } from '@libs/common/fetch';
 import { generateZodErrorsResponse } from '@libs/common/next';
+import { INextPageParams } from '@/app/_types';
 import { paramsDto } from '../dto';
 
 const filterDto = zod.object({
