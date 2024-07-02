@@ -72,12 +72,6 @@
     "tailwindcss": "^3.4.4",
     "typescript": "^5.5.2"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "YOUR_COMMAND_HERE",
-      "pre-push": "YOUR_COMMAND_HERE"
-    }
-  },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
       "eslint --max-warnings=0",
