@@ -40,7 +40,7 @@ export function ImageFromPath({
       alt={alt}
       src={src}
       placeholder='blur'
-      blurDataURL={`/_next/image?url=${encodeURIComponent(src)}&q=1&w=128`}
+      blurDataURL={`/_next/image?url=${encodeURIComponent(src)}&q=1&w=64`}
       onLoadingComplete={() => setIsLoading(false)}
       quality={quality}
       {...props}

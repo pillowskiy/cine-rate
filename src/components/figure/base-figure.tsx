@@ -6,13 +6,15 @@ import { ImageFromPath } from '../image/image-from-path';
 interface BaseFigureProps extends Omit<ImageProps, 'alt' | 'src'> {
   alt?: string;
   className?: string;
-  posterPath: string;
+  path: string;
+  scale?: 'poster' | 'backdrop';
 }
 
 export function BaseFigure({
-  posterPath,
+  path,
   alt,
   className,
+  scale = 'poster',
   ...props
 }: BaseFigureProps) {
   return (
@@ -21,7 +23,7 @@ export function BaseFigure({
         className={
           'h-auto w-full object-cover transition-all ease-in-out hover:scale-105'
         }
-        src={buildImagePath({ path: posterPath, scale: 'poster' })}
+        src={buildImagePath({ path, scale })}
         alt={alt || 'Creation Poster'}
         {...props}
       />

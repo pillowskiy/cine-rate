@@ -21,7 +21,7 @@ export default async function PersonPage({ params }: INextPageParams) {
     <main className='flex flex-col gap-4 sm:flex-row'>
       <section className='flex-[1 1 260px] space-y-6 sm:min-w-[260px]'>
         <BaseFigure
-          posterPath={person.profile_path}
+          path={person.profile_path}
           alt='Person Avatar'
           className='aspect-[2/3] h-auto w-full'
           width={260}

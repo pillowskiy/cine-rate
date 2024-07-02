@@ -16,7 +16,7 @@ export default function CreationOverview({ details }: CreationDetailsProps) {
       <div className='flex space-x-4 sm:space-x-0'>
         <BaseFigure
           className='block aspect-[2/3] h-fit w-[120px] min-w-[120px] sm:hidden'
-          posterPath={details.poster_path}
+          path={details.poster_path}
           width={120}
           height={180}
           quality={100}

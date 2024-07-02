@@ -8,7 +8,7 @@ import {
   CreationStatesDetailed,
   StatesPopover,
 } from '#components/creation/account-states';
-import { ImageFromPath } from '#components/image/image-from-path';
+import { BaseFigure } from '#components/figure/base-figure';
 import { cn } from '#libs/index';
 import { buildImagePath } from '#libs/tmdb';
 import { CreationRibbon } from '../creation/creation-ribbon';
@@ -96,7 +96,7 @@ export const CreationArticle = memo(
 
 CreationArticle.displayName = 'CreationArticle';
 
-interface HorizontalCreationArticle extends ComponentProps<'article'> {
+interface HorizontalCreationArticleProps extends ComponentProps<'article'> {
   alt: string;
   width: number;
   height: number;
@@ -115,7 +115,7 @@ export const HorizontalCreationArticle = memo(
     withStates,
     defaultMediaType,
     ...props
-  }: HorizontalCreationArticle) => {
+  }: HorizontalCreationArticleProps) => {
     const mediaType = defaultMediaType || creation.media_type;
     if (!mediaType) return null;
 
@@ -129,12 +129,10 @@ export const HorizontalCreationArticle = memo(
         )}
         {...props}
       >
-        <ImageFromPath
+        <BaseFigure
           className='aspect-[16/9] min-w-[120px] max-w-[120px] rounded-md'
-          src={buildImagePath({
-            path: creation.backdrop_path,
-            scale: 'backdrop',
-          })}
+          path={creation.backdrop_path}
+          scale='backdrop'
           alt={alt}
           width={width}
           height={height}
