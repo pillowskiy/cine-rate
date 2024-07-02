@@ -13,6 +13,7 @@ export function ImageFromPath({
   src,
   alt,
   className,
+  quality = 90,
   ...props
 }: ImageFromPathProps) {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,10 +21,9 @@ export function ImageFromPath({
   if (!src) {
     return (
       <div
-        className={cn(
-          className,
-          'bg-secondary grid size-full place-items-center'
-        )}
+        // Prevent overriden styles from the parent component
+        style={{ width: '100%', height: '100%' }}
+        className={cn(className, 'bg-secondary grid place-items-center')}
       >
         <FallbackIcon className='text-primary/70 m-auto size-12' />
       </div>
@@ -33,15 +33,16 @@ export function ImageFromPath({
   return (
     <Image
       className={cn(
-        'transition-all duration-500',
+        'bg-secondary transition-all duration-500',
         className,
-        isLoading && 'size-full blur-xl'
+        isLoading && 'blur-md'
       )}
       alt={alt}
       src={src}
       placeholder='blur'
       blurDataURL={`/_next/image?url=${encodeURIComponent(src)}&q=1&w=128`}
       onLoadingComplete={() => setIsLoading(false)}
+      quality={quality}
       {...props}
     />
   );

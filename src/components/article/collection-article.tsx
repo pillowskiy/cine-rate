@@ -31,8 +31,8 @@ export function CollectionArticle({
             scale: 'poster',
           })}
           aspect='vertical'
-          width={320}
-          height={550}
+          width={120}
+          height={180}
           alt='Collection Poster'
         />
       </div>

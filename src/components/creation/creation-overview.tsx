@@ -17,8 +17,9 @@ export default function CreationOverview({ details }: CreationDetailsProps) {
         <BaseFigure
           className='block aspect-[2/3] h-fit w-[120px] min-w-[120px] sm:hidden'
           posterPath={details.poster_path}
-          width={320}
-          height={550}
+          width={120}
+          height={180}
+          quality={100}
         />
         <div className='grow space-y-2 overflow-hidden'>
           <CreationGenres

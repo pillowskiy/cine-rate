@@ -25,7 +25,7 @@ export default async function PersonPage({ params }: INextPageParams) {
           alt='Person Avatar'
           className='aspect-[2/3] h-auto w-full'
           width={260}
-          height={420}
+          height={390}
         />
         <PersonDetails person={person} />
       </section>

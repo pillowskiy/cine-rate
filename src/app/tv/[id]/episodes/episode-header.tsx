@@ -21,8 +21,8 @@ const EpisodeHeader = memo(({ series }: EpisodeHeaderProps) => {
             path: series.backdrop_path,
             scale: 'backdrop',
           })}
-          width={260}
-          height={390}
+          width={160}
+          height={90}
         />
       </div>
       <div className='flex grow flex-col items-center justify-between gap-4 sm:flex-row'>

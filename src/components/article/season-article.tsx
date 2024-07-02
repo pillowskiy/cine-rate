@@ -35,8 +35,8 @@ export function SeasonArticle({
           scale: 'poster',
         })}
         aspect='vertical'
-        width={320}
-        height={550}
+        width={120}
+        height={180}
         alt='Season Poster'
       />
       <div className='w-full space-y-4 sm:w-max'>

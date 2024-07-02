@@ -71,24 +71,22 @@ export function BaseArticleFigure({
   ...props
 }: BaseArticleFigureProps) {
   return (
-    <figure className='relative overflow-hidden rounded-md'>
-      <div
-        className={cn(
-          'h-full w-auto',
-          aspect === 'vertical' ? 'aspect-[2/3]' : 'aspect-[16/9]',
-          className
-        )}
-      >
-        <ImageFromPath
-          className='h-auto w-full object-cover transition-all ease-in-out hover:scale-105'
-          height={height}
-          width={width}
-          alt={alt}
-          src={src}
-          loading={loading}
-          {...props}
-        />
-      </div>
-    </figure>
+    <div
+      className={cn(
+        'relative overflow-hidden rounded-md',
+        aspect === 'vertical' ? 'aspect-[2/3]' : 'aspect-[16/9]',
+        className
+      )}
+    >
+      <ImageFromPath
+        className='h-auto w-full object-cover transition-all ease-in-out hover:scale-105'
+        height={height}
+        width={width}
+        alt={alt}
+        src={src}
+        loading={loading}
+        {...props}
+      />
+    </div>
   );
 }

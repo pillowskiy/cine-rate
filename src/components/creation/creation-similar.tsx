@@ -29,8 +29,8 @@ export default async function CreationSimilar({
               creation={creation}
               className='w-[260px]'
               size='sm'
-              width={720}
-              height={480}
+              width={260}
+              height={140}
             />
           ))
         ) : (

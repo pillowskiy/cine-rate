@@ -44,6 +44,7 @@ export default async function MovieHeader({
           height={450}
           priority
           loading='eager'
+          quality={45}
         />
       </div>
 
