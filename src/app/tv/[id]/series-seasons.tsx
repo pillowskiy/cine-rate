@@ -10,10 +10,12 @@ interface SerriesSeasonsProps {
   details: ITVDetails;
 }
 
-export default async function SerriesSeasons({ details }: SerriesSeasonsProps) {
+export default function SerriesSeasons({ details }: SerriesSeasonsProps) {
   const title =
     details.title || details.original_title || details.original_name;
-  const currentSeason = details.seasons.at(-1)!;
+  const currentSeason = details.seasons.filter((s) => s.air_date).at(-1);
+
+  if (!currentSeason) return null;
 
   return (
     <section>
