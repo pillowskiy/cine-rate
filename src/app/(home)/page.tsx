@@ -1,25 +1,14 @@
-import dynamic from 'next/dynamic';
+import { default as nextDynamic } from 'next/dynamic';
 import { LoadingCarousel } from '#components/skeleton/loading-carousel';
+import CelebrityCarousel from './celebrity-carousel';
+import MoviesCarousel from './movies-carousel';
+import SeriesCarousel from './series-carousel';
+import TrendsCarousel from './trends-carousel';
 
-const TrendsCarousel = dynamic(() => import('./trends-carousel'), {
-  loading: () => <LoadingCarousel />,
-  ssr: false,
-});
-const MoviesCarousel = dynamic(() => import('./movies-carousel'), {
-  loading: () => <LoadingCarousel className='mt-6' aspect='horizontal' />,
-  ssr: false,
-});
-const SeriesCarousel = dynamic(() => import('./series-carousel'), {
-  loading: () => <LoadingCarousel className='mt-6' aspect='horizontal' />,
-  ssr: false,
-});
-const CelebrityCarousel = dynamic(() => import('./celebrity-carousel'), {
-  loading: () => <LoadingCarousel />,
-  ssr: false,
-});
+export const dynamic = 'force-static';
+export const revalidate = 3600 * 24;
 
-// Hydrating suspense boundary
-const WatchlistCarousel = dynamic(() => import('./watchlist-carousel'), {
+const WatchlistCarousel = nextDynamic(() => import('./watchlist-carousel'), {
   ssr: false,
   loading: () => <LoadingCarousel className='mt-6' aspect='horizontal' />,
 });
