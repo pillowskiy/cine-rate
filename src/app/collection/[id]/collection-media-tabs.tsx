@@ -1,7 +1,5 @@
 import type { CreationImagesResponse } from '#types/creation-types';
 import type { BaseParams } from '#types/index';
-import { MSeparator } from '#ui/separator';
-import { Heading } from '#components/heading';
 import { MediaTabs } from '#components/media-tabs';
 import { $api } from '#api/api-interceptor';
 
@@ -21,14 +19,5 @@ export default async function CollectionMediaTabs({
 }: CollectionMediaTabsProps) {
   const [images] = await getCollectionImages(collectionId);
 
-  return (
-    <section>
-      <Heading
-        title='Collection Images'
-        description="Capturing Creation's Random Moments in Pixel Perfection!"
-      />
-      <MSeparator className='my-4' />
-      <MediaTabs images={images} />
-    </section>
-  );
+  return <MediaTabs images={images} />;
 }

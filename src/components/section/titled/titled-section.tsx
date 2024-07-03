@@ -3,7 +3,7 @@ import { Heading } from '#components/heading';
 
 export interface TitledSectionProps extends React.ComponentProps<'section'> {
   title: string;
-  subTitle: string;
+  subTitle?: string;
   children: React.ReactNode;
 }
 

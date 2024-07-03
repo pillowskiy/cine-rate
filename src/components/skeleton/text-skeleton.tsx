@@ -20,8 +20,8 @@ export function TextSkeleton({
       {Array.from({ length: blocksCount }, (_, i) => (
         <Skeleton
           key={i}
-          className='h-4 sm:h-5'
-          style={{ minWidth: getRandomWidth() }}
+          className='h-4 min-w-[42px] sm:h-5'
+          style={{ width: `${Math.random() * 50}%` }}
         />
       ))}
     </section>

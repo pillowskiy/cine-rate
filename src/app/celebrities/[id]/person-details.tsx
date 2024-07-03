@@ -27,10 +27,8 @@ function getDetailedAge(person: IPersonDetails) {
 
 export default function PersonDetails({ person }: PersonDetailsProps) {
   return (
-    <section>
-      <h2 className='my-4 text-xl font-medium leading-none'>
-        Personal Details
-      </h2>
+    <section className='space-y-4'>
+      <h1 className='truncate text-2xl font-medium'>{person.name}</h1>
 
       <List>
         <ListItem title='Gender:' description={genders[person.gender]} />

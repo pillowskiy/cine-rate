@@ -1,19 +1,15 @@
-import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
 import type { INextPageParams } from '#types/index';
 import { getCollection } from '#actions/getCollection';
+import {
+  TitledSection,
+  TitledStreamingSection,
+} from '#components/section/titled';
 import { LoadingCarousel } from '#components/skeleton/loading-carousel';
 import { pipe } from '#libs/common/next';
+import CollectionCreations from './collection-creations';
 import CollectionHeader from './collection-header';
-
-const CollectionCreations = dynamic(() => import('./collection-creations'), {
-  ssr: false,
-  loading: () => <LoadingCarousel aspect='horizontal' />,
-});
-const CollectionMediaTabs = dynamic(() => import('./collection-media-tabs'), {
-  ssr: false,
-  loading: () => <LoadingCarousel className='mt-6' />,
-});
+import CollectionMediaTabs from './collection-media-tabs';
 
 export default async function CollectionPage({ params }: INextPageParams) {
   const collectionId = pipe.strToInt(params?.id);
@@ -24,8 +20,20 @@ export default async function CollectionPage({ params }: INextPageParams) {
   return (
     <main className='min-h-screen w-full space-y-6'>
       <CollectionHeader details={collection} />
-      <CollectionCreations parts={collection.parts} />
-      <CollectionMediaTabs collectionId={collection.id} />
+      <TitledSection
+        title='Creations'
+        subTitle={`Creations that belongs to the ${collection.name}`}
+      >
+        <CollectionCreations parts={collection.parts} />
+      </TitledSection>
+
+      <TitledStreamingSection
+        title='Media'
+        subTitle='The media associated with this collection.'
+        fallback={<LoadingCarousel withText={false} />}
+      >
+        <CollectionMediaTabs collectionId={collection.id} />
+      </TitledStreamingSection>
     </main>
   );
 }

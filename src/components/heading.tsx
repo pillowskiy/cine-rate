@@ -6,7 +6,7 @@ import { Badge } from '#ui/badge';
 
 interface HeadingProps {
   title: string;
-  description: string;
+  description?: string;
   badges?: string[];
 }
 
@@ -31,7 +31,9 @@ export function Heading({ title, description, badges }: HeadingProps) {
       className='space-y-1'
     >
       <div className='flex items-start gap-2'>
-        <h2 className='text-2xl font-semibold tracking-tight'>{title}</h2>
+        <h2 className='text-2xl font-semibold leading-[110%] tracking-tight'>
+          {title}
+        </h2>
         <div className='flex select-none flex-wrap'>
           {!!badges &&
             badges.map((badge, index) => (
@@ -41,7 +43,9 @@ export function Heading({ title, description, badges }: HeadingProps) {
             ))}
         </div>
       </div>
-      <p className='text-muted-foreground text-sm'>{description}</p>
+      {description && (
+        <p className='text-muted-foreground text-sm'>{description}</p>
+      )}
     </m.div>
   );
 }

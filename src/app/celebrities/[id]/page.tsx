@@ -2,6 +2,9 @@ import { notFound } from 'next/navigation';
 import type { INextPageParams } from '#types/index';
 import { getPersonDetails } from '#actions/getPersonDetails';
 import { BaseFigure } from '#components/figure/base-figure';
+import { TitledStreamingSection } from '#components/section/titled';
+import { LoadingCarousel } from '#components/skeleton/loading-carousel';
+import { TextSkeleton } from '#components/skeleton/text-skeleton';
 import { generatePersonMetadata } from '#libs/common/metadata';
 import { pipe } from '#libs/common/next';
 import CombinedCredits from './combined-credits';
@@ -30,9 +33,20 @@ export default async function PersonPage({ params }: INextPageParams) {
         <PersonDetails person={person} />
       </section>
       <section className='grow space-y-6 overflow-hidden'>
-        <h1 className='mb-4 truncate text-3xl font-medium'>{person.name}</h1>
-        <PersonBiography personId={person.id} />
-        <CombinedCredits personId={person.id} />
+        <TitledStreamingSection
+          title='Biography'
+          fallback={<TextSkeleton blocksCount={20} />}
+        >
+          <PersonBiography personId={person.id} />
+        </TitledStreamingSection>
+
+        <TitledStreamingSection
+          title='Known For'
+          fallback={<LoadingCarousel aspect='horizontal' />}
+        >
+          <CombinedCredits personId={person.id} />
+        </TitledStreamingSection>
+
         <PersonKnownAs person={person} />
       </section>
     </main>
