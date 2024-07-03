@@ -24,7 +24,7 @@ export default async function MovieHeader({
   });
 
   return (
-    <header className='relative py-4 text-white sm:px-4'>
+    <header className='relative py-4 text-white sm:px-4 md:col-span-2'>
       <div
         className={cn(
           'absolute -left-4 top-0 -z-50 h-full w-screen overflow-hidden bg-black sm:left-0 sm:w-full sm:rounded-md',
@@ -103,6 +103,7 @@ export default async function MovieHeader({
             )}
           </button>
         </ExpandImageDialog>
+
         <CreationTrailer
           className='aspect-[16/9] h-full flex-[70%] rounded-t-md sm:w-auto sm:rounded-md'
           creationId={details.id}

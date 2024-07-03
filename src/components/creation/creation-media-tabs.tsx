@@ -1,7 +1,5 @@
 import { getCreationImages } from '#actions/getCreationImages';
 import type { MediaType } from '#config/enums';
-import { MSeparator } from '#ui/separator';
-import { Heading } from '#components/heading';
 import { MediaTabs } from '#components/media-tabs';
 
 interface MediaTabsProps {
@@ -17,11 +15,5 @@ export default async function CreationMediaTabs({
 
   if (error) return null;
 
-  return (
-    <section>
-      <Heading title='Media' description='Resources that may interest you.' />
-      <MSeparator className='my-4' />
-      <MediaTabs images={images} />
-    </section>
-  );
+  return <MediaTabs images={images} />;
 }

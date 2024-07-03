@@ -38,6 +38,7 @@ interface VideoStateOptions {
   isPlaying?: boolean;
 }
 
+// TODO: to rsc with suspense
 function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
   const { data, error } = useFetch<CreationTrailerResponse>(
     `/api/${mediaType}/${creationId}/trailer`

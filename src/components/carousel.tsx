@@ -10,15 +10,15 @@ interface CarouselProps extends HTMLMotionProps<'div'> {}
 export function Carousel({ children, className, ...props }: CarouselProps) {
   return (
     <ScrollArea>
-      <m.section
+      <m.div
         viewport={{ once: true, amount: 0.2 }}
         initial={Target.HIDDEN}
         whileInView={Target.VISIBLE}
-        className={cn('flex space-x-4 pb-4', className)}
+        className={cn('flex gap-x-4 pb-4', className)}
         {...props}
       >
         {children}
-      </m.section>
+      </m.div>
       <ScrollBar orientation='horizontal' />
     </ScrollArea>
   );
