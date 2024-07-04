@@ -2,7 +2,10 @@ import { notFound } from 'next/navigation';
 import type { INextPageParams } from '#types/index';
 import { getPersonDetails } from '#actions/getPersonDetails';
 import { BaseFigure } from '#components/figure/base-figure';
-import { TitledStreamingSection } from '#components/section/titled';
+import {
+  TitledSection,
+  TitledStreamingSection,
+} from '#components/section/titled';
 import { LoadingCarousel } from '#components/skeleton/loading-carousel';
 import { TextSkeleton } from '#components/skeleton/text-skeleton';
 import { generatePersonMetadata } from '#libs/common/metadata';
@@ -47,7 +50,9 @@ export default async function PersonPage({ params }: INextPageParams) {
           <CombinedCredits personId={person.id} />
         </TitledStreamingSection>
 
-        <PersonKnownAs person={person} />
+        <TitledSection title='Also Known As'>
+          <PersonKnownAs person={person} />
+        </TitledSection>
       </section>
     </main>
   );
