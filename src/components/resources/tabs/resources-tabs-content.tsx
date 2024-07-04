@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import type { CreationsResponse } from '#types/creation-types';
 import type { IPagination } from '#types/index';
@@ -40,22 +39,16 @@ function HandleItems({
   return items.map(
     (creation) =>
       defaultMediaType && (
-        <Link
+        <HorizontalCreationArticle
           key={creation.id}
-          href={`/${defaultMediaType}/${creation.id}`}
-          legacyBehavior
-          passHref
-        >
-          <HorizontalCreationArticle
-            defaultMediaType={defaultMediaType}
-            className='border'
-            creation={creation}
-            alt='Series Backdrop'
-            width={260}
-            height={190}
-            withStates
-          />
-        </Link>
+          defaultMediaType={defaultMediaType}
+          className='border'
+          creation={creation}
+          alt='Series Backdrop'
+          width={260}
+          height={190}
+          withStates
+        />
       )
   );
 }

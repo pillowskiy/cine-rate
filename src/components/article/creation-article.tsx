@@ -120,30 +120,33 @@ export const HorizontalCreationArticle = memo(
     return (
       <article
         className={cn(
-          'hover:bg-accent flex w-full cursor-pointer gap-2 rounded-md p-2 transition-all',
+          'hover:bg-accent flex w-full gap-2 rounded-md p-2 transition-all',
           className
         )}
         {...props}
       >
-        <BaseFigure
-          className='aspect-[16/9] min-w-[120px] max-w-[120px] rounded-md'
-          path={creation.backdrop_path}
-          scale='backdrop'
-          alt={alt}
-          width={width}
-          height={height}
-        />
-
+        <Link href={`/${mediaType}/${creation.id}`}>
+          <BaseFigure
+            className='aspect-[16/9] min-w-[120px] max-w-[120px] rounded-md'
+            path={creation.backdrop_path}
+            scale='backdrop'
+            alt={alt}
+            width={width}
+            height={height}
+          />
+        </Link>
         <div className='overflow-hidden'>
-          <h2 className='truncate text-lg font-semibold' title={displayTitle}>
+          <Link
+            href={`/${mediaType}/${creation.id}`}
+            className='truncate text-lg font-semibold transition-all hover:underline'
+            title={displayTitle}
+          >
             {displayTitle}
-          </h2>
-          <div className='flex items-center gap-2 text-xs'>
-            <div className='flex items-center space-x-1.5'>
-              <Star className='size-4 fill-yellow-300 text-yellow-400' />
-              <span>{creation.vote_average.toFixed(1)}</span>
-            </div>
-            <span>({creation.vote_count} reviews)</span>
+          </Link>
+          <div className='flex items-center text-xs'>
+            <Star className='mr-1.5 size-4 fill-yellow-300 text-yellow-400' />
+            <span>{creation.vote_average.toFixed(1)}</span>
+            <span className='ml-2'>({creation.vote_count} reviews)</span>
           </div>
           <span className='text-xs'>
             Realese Date: {new Date(creation.release_date).toDateString()}
