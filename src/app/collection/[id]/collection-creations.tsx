@@ -22,7 +22,6 @@ export default function CollectionCreations({
           key={creation.id}
           creation={creation}
           className='w-[260px]'
-          size='sm'
           width={260}
           height={140}
         />

@@ -38,7 +38,6 @@ export default async function CombinedCredits({
             key={credit.id}
             creation={credit}
             className='w-[260px]'
-            size='sm'
             width={260}
             height={140}
           />

@@ -21,7 +21,6 @@ import {
 } from './base-article';
 
 interface CreationArticleProps extends Omit<BaseArticleProps, 'src' | 'href'> {
-  size?: 'default' | 'sm';
   width: number;
   height: number;
   creation: ICreation;
@@ -32,7 +31,6 @@ interface CreationArticleProps extends Omit<BaseArticleProps, 'src' | 'href'> {
 export const CreationArticle = memo(
   ({
     creation,
-    size = 'default',
     width,
     height,
     defaultMediaType,
@@ -51,7 +49,7 @@ export const CreationArticle = memo(
           <Link href={`/${mediaType}/${creation.id}`}>
             <BaseArticleFigure
               src={buildImagePath(
-                size === 'default'
+                aspect === 'vertical'
                   ? { path: creation.poster_path, scale: 'poster' }
                   : { path: creation.backdrop_path, scale: 'backdrop' }
               )}
@@ -81,12 +79,10 @@ export const CreationArticle = memo(
           >
             {creationTitle}
           </h2>
-          <div className='flex items-center justify-between text-xs'>
-            <div className='flex items-center space-x-1.5'>
-              <Star className='size-4 fill-yellow-300 text-yellow-400' />
-              <span>{(creation.vote_average ?? 0).toFixed(1)}</span>
-            </div>
-            <span>({creation.vote_count} reviews)</span>
+          <div className='flex items-center text-xs'>
+            <Star className='mr-1 size-4 fill-yellow-300 text-yellow-400' />
+            <span>{(creation.vote_average ?? 0).toFixed(1)}</span>
+            <span className='ml-auto'>({creation.vote_count} reviews)</span>
           </div>
         </BaseArticleContent>
       </BaseArticle>
