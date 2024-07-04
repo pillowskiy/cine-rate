@@ -5,6 +5,7 @@ import { cn } from '#libs/index';
 import { buildImagePath } from '#libs/tmdb';
 import {
   BaseArticle,
+  BaseArticleContent,
   BaseArticleFigure,
   type BaseArticleProps,
 } from './base-article';
@@ -23,7 +24,7 @@ export function SeasonArticle({
   return (
     <BaseArticle
       className={cn(
-        'flex w-full flex-col items-center sm:flex-row sm:gap-4',
+        'flex h-max min-h-fit w-full flex-col items-center sm:flex-row sm:gap-4',
         className
       )}
       {...props}
@@ -39,27 +40,23 @@ export function SeasonArticle({
         height={180}
         alt='Season Poster'
       />
-      <div className='w-full space-y-4 sm:w-max'>
-        <div>
-          <h2 className='text-xl font-semibold tracking-tight sm:text-2xl'>
-            {season.name}
-          </h2>
-          <div className='flex items-center justify-between gap-2 text-xs'>
-            <div className='flex items-center space-x-1.5'>
-              <Star className='size-4 fill-yellow-300 text-yellow-400' />
-              <span>{season.vote_average.toFixed(1)}</span>
-            </div>
-            <span>{season.episode_count} Episodes</span>
-          </div>
+      <BaseArticleContent className='w-full sm:w-max'>
+        <h2 className='text-xl font-semibold tracking-tight sm:text-2xl'>
+          {season.name}
+        </h2>
+        <div className='flex items-center text-xs'>
+          <Star className='mr-1 size-4 fill-yellow-300 text-yellow-400' />
+          <span>{season.vote_average.toFixed(1)}</span>
+          <span className='ml-auto'>{season.episode_count} Episodes</span>
         </div>
 
-        <p className='text-sm tracking-tight sm:text-base'>
+        <p className='my-4 text-sm tracking-tight sm:text-base'>
           Season {season.season_number} premiered on{' '}
           {new Date(season.air_date).toDateString()}
         </p>
 
         {!!action && action}
-      </div>
+      </BaseArticleContent>
     </BaseArticle>
   );
 }

@@ -27,17 +27,17 @@ export function PersonArticle({ celebrity, ...props }: PersonArticleProps) {
           height={390}
         />
       </Link>
-      <BaseArticleContent>
+      <BaseArticleContent className='grid grid-cols-2 text-xs'>
         <h2
-          className='text-md truncate font-semibold tracking-tight'
+          className='col-span-2 truncate text-base font-semibold tracking-tight'
           title={celebrity.name}
         >
           {celebrity.name}
         </h2>
-        <div className='flex items-center justify-between text-xs'>
-          <span>{celebrity.known_for_department}</span>
-          <span>{celebrity.popularity.toFixed(1)}</span>
-        </div>
+        <span className='text-xs'>{celebrity.known_for_department}</span>
+        <span className='ml-auto text-xs'>
+          {celebrity.popularity.toFixed(1)}
+        </span>
       </BaseArticleContent>
     </BaseArticle>
   );

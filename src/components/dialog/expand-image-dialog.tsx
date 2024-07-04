@@ -40,7 +40,7 @@ export function ExpandImageDialog({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className='md:max-h-auto h-fit max-h-[90vh] overflow-hidden'>
+      <DialogContent className='h-fit max-h-[90vh] max-w-md overflow-hidden'>
         <DialogHeader>
           <DialogTitle className=''>{alt}</DialogTitle>
           <DialogDescription>

@@ -19,6 +19,7 @@ export function Carousel({ children, className, ...props }: CarouselProps) {
       >
         {children}
       </m.div>
+      <div className='to-background absolute right-0 top-0 hidden h-[calc(100%-16px)] w-[120px] translate-x-px bg-gradient-to-r from-transparent sm:block' />
       <ScrollBar orientation='horizontal' />
     </ScrollArea>
   );
