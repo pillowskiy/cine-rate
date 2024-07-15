@@ -17,9 +17,10 @@ export function rejectFetch(err: unknown): IApiReject {
 }
 
 export function fetchErrorResponse(err: unknown): NextResponse<IApiReject> {
+  // TEMP: bad responsiblity, it's should be inner the safeFetch
   const { message, status } = rejectFetch(err);
   return NextResponse.json({ message, status }, { status });
 }
 
 export * from './fetch-interceptor';
-export { fetch, safeFetch } from './next-fetch';
+export { safeFetch } from './next-fetch';

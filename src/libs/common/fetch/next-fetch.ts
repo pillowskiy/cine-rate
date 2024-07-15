@@ -18,7 +18,7 @@ export async function nextFetch<Params extends BaseParams = BaseParams>(
   return baseFetch(url.href, init);
 }
 
-export async function fetch<
+export async function handledFetch<
   Data = unknown,
   Params extends BaseParams = BaseParams,
 >(input: URL | string, config: RequestConfig<Params> = {}): Promise<Data> {

@@ -1,7 +1,7 @@
 import 'server-only';
 import type { BaseParams } from '#types/index';
 import type { RequestConfig, SafeFetchedData } from '.';
-import { nextFetch } from './next-fetch';
+import { handledFetch, nextFetch } from './next-fetch';
 
 type Callback<T> = (value: T) => void;
 
@@ -41,7 +41,7 @@ export function createFetchInterceptor(
     const fetchConfig = Object.assign(init, config);
     request.intercept(fetchConfig);
     const url = assignPathname(input);
-    return fetch(url, fetchConfig);
+    return handledFetch(url, fetchConfig);
   }
 
   return { fetch, safeFetch, request, response };
