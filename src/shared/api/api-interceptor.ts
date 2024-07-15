@@ -1,3 +1,4 @@
+import 'server-only';
 import { createFetchInterceptor } from '#libs/common/fetch';
 
 const { TMDB_API_URL, TMDB_ACCESS_TOKEN, TMDB_API_VERSION = '3' } = process.env;

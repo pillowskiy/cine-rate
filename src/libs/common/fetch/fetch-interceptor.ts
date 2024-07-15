@@ -1,7 +1,7 @@
 import 'server-only';
 import type { BaseParams } from '#types/index';
 import type { RequestConfig, SafeFetchedData } from '.';
-import { handleData, nextFetch } from './next-fetch';
+import { nextFetch } from './next-fetch';
 
 type Callback<T> = (value: T) => void;
 
@@ -41,28 +41,21 @@ export function createFetchInterceptor(
     const fetchConfig = Object.assign(init, config);
     request.intercept(fetchConfig);
     const url = assignPathname(input);
-    const result = await nextFetch(url, fetchConfig);
-    return handleData<Data>(result);
+    return fetch(url, fetchConfig);
   }
 
   return { fetch, safeFetch, request, response };
 }
 
-function interceptor<T>(initial?: T) {
+function interceptor<T extends unknown>() {
   const middlewares: Callback<T>[] = [];
 
   const intercept = (value: T) => {
-    if (initial && value !== initial) {
-      throw Error(
-        'The interceptor cannot intercept values that are not the original'
-      );
-    }
     middlewares.forEach((middleware) => middleware(value));
   };
 
   const use = (cb: Callback<T>) => {
     middlewares.push(cb);
-    if (initial) intercept(initial);
   };
 
   return { intercept, use };

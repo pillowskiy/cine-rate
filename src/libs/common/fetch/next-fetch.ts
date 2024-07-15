@@ -7,7 +7,7 @@ export async function nextFetch<Params extends BaseParams = BaseParams>(
   input: URL | string,
   { params, ...init }: RequestConfig<Params> = {}
 ): Promise<Response> {
-  const url = new URL(input, 'http://localhost:3000/');
+  const url = new URL(input, process.env.NEXT_PUBLIC_API_URL);
   if (params) {
     const paramsArray = Object.entries(params)
       .filter(([key, value]) => key && value)
@@ -22,14 +22,7 @@ export async function fetch<
   Data = unknown,
   Params extends BaseParams = BaseParams,
 >(input: URL | string, config: RequestConfig<Params> = {}): Promise<Data> {
-  const result = await nextFetch(input, config);
-  return handleData<Data>(result);
-}
-
-// TEMP: FUCK THIS!!!!
-export async function handleData<Data = unknown>(
-  response: Response
-): Promise<Data> {
+  const response = await nextFetch(input, config);
   const data = await response.json();
   if (!response.ok) {
     const { status, statusText, url } = response;
@@ -53,6 +46,7 @@ export async function safeFetch<
   return [await result.json(), null];
 }
 
+// TEMP: weird thing
 type FetchErrorOptions = IApiReject & object;
 export class FetchError extends Error {
   constructor(private readonly _options: FetchErrorOptions) {
