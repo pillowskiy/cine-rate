@@ -1,32 +1,18 @@
 'use client';
 
 import Link from 'next/link';
-import { Loader2, LogIn } from 'lucide-react';
+import { LogIn } from 'lucide-react';
 import { useClientReady } from '#hooks/useClientReady';
-import { useAuth } from '#store/hooks';
+import { useUserStore } from '#store/user';
 import { Button } from '#ui/button';
 import { ProfileDropdown } from '#components/dropdown/profile-dropdown';
 import { UserAvatar } from '#components/user-avatar';
 
 export function AuthButton() {
-  const { user, isLoading } = useAuth();
+  const user = useUserStore((state) => state.user);
   const isClientReady = useClientReady();
 
-  if (isLoading || !isClientReady) {
-    return (
-      <Button
-        className='aspect-square'
-        variant='outline'
-        size='icon'
-        aria-label='log in'
-        disabled
-      >
-        <Loader2 className='size-5 animate-spin will-change-transform' />
-      </Button>
-    );
-  }
-
-  if (user) {
+  if (user && isClientReady) {
     return (
       <ProfileDropdown>
         <button className='rounded-full' aria-label='Profile Dropdown'>

@@ -10,8 +10,7 @@ import {
   MessageSquare,
   Star,
 } from 'lucide-react';
-import { useAppDispatch, useAuth } from '#store/hooks';
-import { logout as logoutAction } from '#store/user/user-actions';
+import { useUserStore } from '#store/user';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,30 +29,30 @@ interface ProfileDropdownProps {
 
 export function ProfileDropdown({ children }: ProfileDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useAuth();
-  const dispatch = useAppDispatch();
+  const userStore = useUserStore();
   const { toast } = useToast();
 
   const closeDropdown = useCallback(() => {
     return setIsOpen(false);
   }, []);
 
-  if (!user) return null;
+  if (!userStore.user) return null;
 
-  async function logout() {
-    const result = await dispatch(logoutAction());
-
-    if (logoutAction.fulfilled.match(result)) {
-      toast({
-        title: '✅ You are logged out',
-        description: 'You have successfully logged out of your account',
+  function logout() {
+    userStore
+      .logout()
+      .then(() => {
+        toast({
+          title: '✅ You are logged out',
+          description: 'You have successfully logged out of your account',
+        });
+      })
+      .catch((error) => {
+        toast({
+          title: 'Uh, Oh! Something went wrong.',
+          description: error.message || 'Unhandled error occurred!',
+        });
       });
-    } else {
-      toast({
-        title: 'Uh, Oh! Something went wrong.',
-        description: result.error.message || 'Unhandled error occurred!',
-      });
-    }
 
     closeDropdown();
   }
@@ -64,7 +63,9 @@ export function ProfileDropdown({ children }: ProfileDropdownProps) {
         {children}
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-48'>
-        <DropdownMenuLabel>{user.name || user.username}</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          {userStore.user.name || userStore.user.username}
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem disabled>

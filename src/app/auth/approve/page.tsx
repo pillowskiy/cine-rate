@@ -3,8 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import type { INextPageParams } from '#types/index';
-import { useAppDispatch } from '#store/hooks';
-import { approve } from '#store/user/user-actions';
+import { useUserStore } from '#store/user';
 import { useToast } from '#ui/use-toast';
 import Loader from '#components/loader';
 import { pipe } from '#libs/common/next';
@@ -34,30 +33,30 @@ function getStatusDescription(status: number) {
 
 export default function ApprovePage({ searchParams }: INextPageParams) {
   const requestToken = pipe.string(searchParams?.request_token);
-  const dispatch = useAppDispatch();
-  const router = useRouter();
   const { toast } = useToast();
+  const router = useRouter();
+  const userStore = useUserStore();
 
   useEffect(() => {
-    async function handleResult() {
-      const result = await dispatch(approve(requestToken));
-
-      router.replace('/');
-
-      if (approve.fulfilled.match(result)) {
+    userStore
+      .approve(requestToken)
+      .then(() => {
         toast({
           title: '✅ Successfully approval!',
           description:
             'You have successfully authorized us to receive and modify your data through the TMDB service.',
         });
-      } else {
+      })
+      .catch((error) => {
         toast({
-          title: result.error.message || 'Uh, Oh! Something went wrong.',
-          description: getStatusDescription(result.payload?.status || 500),
+          title: error.message || 'Uh, Oh! Something went wrong.',
+          description: getStatusDescription(error?.status || 500),
         });
-      }
-    }
-    handleResult();
+      })
+      .finally(() => {
+        router.replace('/');
+      });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -3,15 +3,16 @@
 import Link from 'next/link';
 import { m } from 'framer-motion';
 import { BookmarkPlus, LogIn } from 'lucide-react';
-import { useAuth } from '#store/hooks';
+import { useUserStore } from '#store/user';
 import { Target, opacityAnimations } from '#config/animations';
 import { Button } from '#ui/button';
 import { MSeparator } from '#ui/separator';
 import { Heading } from '#components/heading';
 
 export default function WatchlistCarousel() {
-  const { user, isLoading } = useAuth();
-  if (user || isLoading) return null;
+  const user = useUserStore((state) => state.user);
+
+  if (user) return null;
 
   return (
     <m.section

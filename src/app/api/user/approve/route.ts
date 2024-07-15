@@ -1,3 +1,4 @@
+import { revalidateTag } from 'next/cache';
 import { NextResponse } from 'next/server';
 import zod from 'zod';
 import { getSessionUser } from '#actions/getSessionUser';
@@ -27,6 +28,7 @@ export async function GET({ url }: Request) {
     const user = await getSessionUser(session.session_id);
     const response = NextResponse.json(user, { status: 200 });
 
+    revalidateTag('user');
     response.cookies.set('session_id', session.session_id, {
       httpOnly: true,
       sameSite: 'lax',

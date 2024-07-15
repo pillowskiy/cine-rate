@@ -1,3 +1,4 @@
+import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { getSessionUser } from '#actions/getSessionUser';
@@ -37,6 +38,8 @@ export async function DELETE() {
       { status: 403 }
     );
   }
+
+  revalidateTag('user');
 
   cookies().delete('session_id');
   const success = !cookies().get('session_id')?.value;

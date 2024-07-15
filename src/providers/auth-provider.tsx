@@ -1,8 +1,7 @@
 'use client';
 
 import { ReactNode, useEffect } from 'react';
-import { useAppDispatch } from '#store/hooks';
-import { getUser } from '#store/user/user-actions';
+import { useUserStore } from '#store/user';
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -10,13 +9,11 @@ interface AuthProviderProps {
 
 // TEMP: use next-auth for integration with tmdb oAuth;
 export default function AuthProvider({ children }: AuthProviderProps) {
-  const dispatch = useAppDispatch();
+  const userStore = useUserStore();
 
   useEffect(() => {
-    dispatch(getUser())
-      .unwrap()
-      .catch(() => null);
-  }, [dispatch]);
+    userStore.getUser().catch(() => null);
+  }, [userStore]);
 
   return children;
 }

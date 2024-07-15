@@ -5,7 +5,7 @@ import { type HTMLMotionProps, m } from 'framer-motion';
 import ky from 'ky';
 import type { AccountStatesResponse } from '#types/creation-types';
 import useFetch from '#hooks/useFetch';
-import { useAuth } from '#store/hooks';
+import { useUserStore } from '#store/user';
 import { Target, opacityAnimations } from '#config/animations';
 import { Popover, PopoverContent, PopoverTrigger } from '#ui/popover';
 import { cn } from '#libs/index';
@@ -24,7 +24,7 @@ export function StatesPopover({
   mediaType,
   children,
 }: CreationStatesProps) {
-  const { user } = useAuth();
+  const user = useUserStore((state) => state.user);
   const [states, dispatch] = useStatesReducer();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -91,7 +91,7 @@ export function CreationStatesDetailed({
   className,
   ...props
 }: StatesDetailedProps) {
-  const { user } = useAuth();
+  const user = useUserStore((state) => state.user);
   const [states, dispatch] = useStatesReducer();
 
   const { data } = useFetch<AccountStatesResponse>(

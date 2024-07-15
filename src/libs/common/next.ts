@@ -21,5 +21,5 @@ export function generateZodErrorsResponse(
   return NextResponse.json({ message: 'Unhandled zod error' }, { status: 500 });
 }
 
-// One month
+// TEMP: it shouldn't be here
 export const SESSION_COOKIE_EXPIRES = () => Date.now() + 1000 * 3600 * 24 * 30;
