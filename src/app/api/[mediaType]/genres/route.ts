@@ -5,6 +5,9 @@ import { fetchErrorResponse } from '#libs/common/fetch';
 import { generateZodErrorsResponse } from '#libs/common/next';
 import { paramsDto } from '../dto';
 
+export const dynamic = 'force-static';
+export const revalidate = 3600 * 24;
+
 export async function GET(request: NextRequest, { params }: INextPageParams) {
   const requestUrl = new URL(request.url);
   const searchParams = Object.fromEntries(requestUrl.searchParams.entries());
