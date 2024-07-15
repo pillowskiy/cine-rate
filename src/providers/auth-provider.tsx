@@ -11,9 +11,8 @@ interface AuthProviderProps {
 export default function AuthProvider({ children }: AuthProviderProps) {
   const userStore = useUserStore();
 
-  useEffect(() => {
-    userStore.getUser().catch(() => null);
-  }, [userStore]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => void userStore.getUser().catch(() => null), []);
 
   return children;
 }
