@@ -40,7 +40,7 @@ export function SearchDialog() {
       .then((data) => {
         setData(groupBy(data.results, 'media_type'));
       })
-      .catch((err) => {
+      .catch(() => {
         setData(null);
       })
       .finally(() => setIsLoading(false));
