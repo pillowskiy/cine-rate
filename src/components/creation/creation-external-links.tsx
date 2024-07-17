@@ -2,8 +2,7 @@ import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { Facebook, Instagram, Link as LinkIcon, Twitter } from 'lucide-react';
 import type { CreationExternalIds } from '#types/creation-types';
-import { MSeparator } from '#ui/separator';
-import { Heading } from '#components/heading';
+import { TitledSection } from '#components/section/titled';
 import { type CreationExternalUrls, buildExternalUrls } from '#libs/tmdb';
 
 interface CreationExternalLinksProps {
@@ -25,13 +24,10 @@ export default function CreationExternalLinks({
   if (!urls.length) return null;
 
   return (
-    <section>
-      <Heading
-        title='Social Links'
-        description='Social links of the creation.'
-      />
-      <MSeparator className='my-4' />
-
+    <TitledSection
+      title='Social Links'
+      subTitle='Social links of the creation.'
+    >
       <div className='flex w-full gap-4 overflow-x-auto'>
         {urls.map(([icon, url]) => (
           <Link
@@ -45,6 +41,6 @@ export default function CreationExternalLinks({
           </Link>
         ))}
       </div>
-    </section>
+    </TitledSection>
   );
 }

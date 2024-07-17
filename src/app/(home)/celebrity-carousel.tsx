@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import { getPopular } from '#actions/getPopular';
 import { MediaType } from '#config/enums';
-import { MSeparator } from '#ui/separator';
 import { PersonArticle } from '#components/article/person-article';
 import { Carousel } from '#components/carousel';
-import { Heading } from '#components/heading';
 import { NotFound } from '#components/not-found';
+import { TitledSection } from '#components/section/titled';
 
 export default async function CelebrityCarousel() {
   const [celebrities, error] = await getPopular(MediaType.Person);
@@ -13,13 +12,11 @@ export default async function CelebrityCarousel() {
   if (error) return null;
 
   return (
-    <section>
-      <Heading
-        title='Celebrities'
-        description='The most popular celebrities.'
-        badges={['👑 Iconic Idols']}
-      />
-      <MSeparator className='my-4' />
+    <TitledSection
+      title='Celebrities'
+      subTitle='The most popular celebrities.'
+      badges={['👑 Iconic Idols']}
+    >
       {celebrities.results.length ? (
         <Carousel>
           {celebrities.results.map((celebrity, i) => (
@@ -49,6 +46,6 @@ export default async function CelebrityCarousel() {
       ) : (
         <NotFound />
       )}
-    </section>
+    </TitledSection>
   );
 }

@@ -2,9 +2,8 @@ import { notFound } from 'next/navigation';
 import zod from 'zod';
 import type { INextPageParams } from '#types/index';
 import { ResourceTarget } from '#config/enums';
-import { MSeparator } from '#ui/separator';
-import { Heading } from '#components/heading';
 import { ResourcesTabs } from '#components/resources/tabs';
+import { TitledSection } from '#components/section/titled';
 
 const paramsDto = zod.object({
   resourceTarget: zod.nativeEnum(ResourceTarget),
@@ -25,13 +24,12 @@ export default function ResourcesPage({ params }: INextPageParams) {
 
   const { resourceTarget } = parsedParams.data;
   return (
-    <main className='min-h-screen'>
-      <Heading
-        title={`My ${resourceTargetsLabel[resourceTarget]}`}
-        description='Creations that have been influenced by you'
-      />
-      <MSeparator className='my-4' />
+    <TitledSection
+      className='min-h-screen'
+      title={`Your ${resourceTargetsLabel[resourceTarget]}`}
+      subTitle='Creations that was influenced by you.'
+    >
       <ResourcesTabs target={resourceTarget} />
-    </main>
+    </TitledSection>
   );
 }

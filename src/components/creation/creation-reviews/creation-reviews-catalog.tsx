@@ -6,7 +6,7 @@ import { ReviewResponse } from '#types/review-types';
 import { ReviewCard } from '#components/card/review-card';
 import { NotFound } from '#components/not-found';
 import type { CreationIdentifierProps } from '../common/types';
-import { PaginationActionType, PaginationContext } from './common/utils';
+import { PaginationActionType, PaginationContext } from './common/hooks';
 
 export function CreationReviewsCatalog({
   creationId,

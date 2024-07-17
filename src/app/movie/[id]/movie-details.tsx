@@ -2,11 +2,10 @@ import type { ComponentProps } from 'react';
 import type { IMovieDetails } from '#types/movies-types';
 import { MediaType } from '#config/enums';
 import { List, ListItem } from '#ui/list';
-import { MSeparator } from '#ui/separator';
 import { getTitle } from '#components/creation/common/utils';
 import CreationExternalLinks from '#components/creation/creation-external-links';
 import CreationKeywords from '#components/creation/creation-keywords';
-import { Heading } from '#components/heading';
+import { TitledSection } from '#components/section/titled';
 
 interface MovieDetailsProps extends ComponentProps<'div'> {
   details: IMovieDetails;
@@ -28,13 +27,10 @@ export default async function MovieDetails({
 }: MovieDetailsProps) {
   return (
     <div {...props}>
-      <section>
-        <Heading
-          title='Details'
-          description={`Interesting about ${getTitle(details)}.`}
-        />
-        <MSeparator className='my-4' />
-
+      <TitledSection
+        title='Details'
+        subTitle={`Interesting about ${getTitle(details)}.`}
+      >
         <List>
           <ListItem title='Status:' description={details.status} />
           <ListItem
@@ -56,10 +52,9 @@ export default async function MovieDetails({
               .join(', ')}
           />
         </List>
-      </section>
+      </TitledSection>
 
       <CreationExternalLinks externalIds={details.external_ids} />
-
       <CreationKeywords mediaType={MediaType.Movie} details={details} />
     </div>
   );

@@ -1,10 +1,9 @@
 import Link from 'next/link';
 import type { ITVDetails } from '#types/tv-types';
 import { Button } from '#ui/button';
-import { MSeparator } from '#ui/separator';
 import { SeasonArticle } from '#components/article/season-article';
 import { SeasonsDialog } from '#components/dialog/seasons-dialog';
-import { Heading } from '#components/heading';
+import { TitledSection } from '#components/section/titled';
 
 interface SerriesSeasonsProps {
   details: ITVDetails;
@@ -18,10 +17,7 @@ export default function SerriesSeasons({ details }: SerriesSeasonsProps) {
   if (!currentSeason) return null;
 
   return (
-    <section>
-      <Heading title='Seasons' description={`Seasons of the ${title} series`} />
-      <MSeparator className='my-4' />
-
+    <TitledSection title='Seasons' subTitle={`Seasons of the ${title} series`}>
       <SeasonArticle
         className='rounded-md border p-4'
         season={currentSeason}
@@ -41,6 +37,6 @@ export default function SerriesSeasons({ details }: SerriesSeasonsProps) {
           </div>
         }
       />
-    </section>
+    </TitledSection>
   );
 }

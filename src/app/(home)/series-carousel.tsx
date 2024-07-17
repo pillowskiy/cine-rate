@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import { getTV } from '#actions/getTV';
 import { MediaType, TVSort } from '#config/enums';
-import { MSeparator } from '#ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '#ui/tabs';
 import { CreationArticle } from '#components/article/creation-article';
 import { Carousel } from '#components/carousel';
-import { Heading } from '#components/heading';
+import { TitledSection } from '#components/section/titled';
 import { capitalize } from '#libs/index';
 
 const emojis: Record<TVSort, string> = {
@@ -55,12 +54,10 @@ async function CreationCarousel({ sort }: { sort: TVSort }) {
 
 export default function SeriesCarousel() {
   return (
-    <section>
-      <Heading
-        title='Captivating Series'
-        description='The most popular and widely known TV series.'
-      />
-      <MSeparator className='my-4' />
+    <TitledSection
+      title='Movies that Conquer the World!'
+      subTitle='The most popular blockbusters and unforgettable masterpieces.'
+    >
       <Tabs defaultValue={TVSort.TopRated}>
         <TabsList>
           {Object.values(TVSort).map((value) => (
@@ -82,6 +79,6 @@ export default function SeriesCarousel() {
           </TabsContent>
         ))}
       </Tabs>
-    </section>
+    </TitledSection>
   );
 }

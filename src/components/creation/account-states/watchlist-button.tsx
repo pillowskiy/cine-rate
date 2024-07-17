@@ -6,8 +6,8 @@ import { Button } from '#ui/button';
 import { useToast } from '#ui/use-toast';
 import { cn } from '#libs/index';
 import { rejectKy } from '#libs/ky';
+import { StatesAction, StatesContext } from './common/hooks';
 import type { BaseButtonProps } from './common/types';
-import { StatesAction, StatesContext } from './common/utils';
 
 interface RatingButtonProps extends BaseButtonProps {}
 

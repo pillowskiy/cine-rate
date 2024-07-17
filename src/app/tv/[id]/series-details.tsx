@@ -2,11 +2,10 @@ import type { ComponentProps } from 'react';
 import type { ITVDetails } from '#types/tv-types';
 import { MediaType } from '#config/enums';
 import { List, ListItem } from '#ui/list';
-import { MSeparator } from '#ui/separator';
 import { getTitle } from '#components/creation/common/utils';
 import CreationExternalLinks from '#components/creation/creation-external-links';
 import CreationKeywords from '#components/creation/creation-keywords';
-import { Heading } from '#components/heading';
+import { TitledSection } from '#components/section/titled';
 
 interface SeriesDetailsProps extends ComponentProps<'div'> {
   details: ITVDetails;
@@ -18,13 +17,10 @@ export default async function SeriesDetails({
 }: SeriesDetailsProps) {
   return (
     <div {...props}>
-      <section>
-        <Heading
-          title='Details'
-          description={`Interesting about ${getTitle(details)}.`}
-        />
-        <MSeparator className='my-4' />
-
+      <TitledSection
+        title='Details'
+        subTitle={`Interesting about ${getTitle(details)}.`}
+      >
         <List>
           <ListItem title='Status:' description={details.status} />
           <ListItem
@@ -58,10 +54,9 @@ export default async function SeriesDetails({
               .join(', ')}
           />
         </List>
-      </section>
+      </TitledSection>
 
       <CreationExternalLinks externalIds={details.external_ids} />
-
       <CreationKeywords mediaType={MediaType.TV} details={details} />
     </div>
   );

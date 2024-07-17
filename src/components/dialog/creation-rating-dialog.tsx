@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useCallback, useState } from 'react';
 import ky from 'ky';
 import { Loader2, Star, Trash } from 'lucide-react';
 import type {
@@ -41,38 +41,42 @@ export function CreationRatingDialog({
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  async function upsertRating() {
-    setIsLoading(true);
-    return ky
-      .post(`/api/${mediaType}/${creationId}/rating`, {
-        method: 'POST',
-        body: JSON.stringify({
-          value: rating,
-        }),
-      })
-      .then((res) => res.json<RatingResponse>())
-      .then((data) => {
-        if (onUpdate) onUpdate({ rating: isRated ? null : rating });
-        setIsRated((prev) => {
-          return prev || !prev;
-        });
-        toast({
-          title: '✅ Your review has been sent!',
-          description: data.status_message,
-        });
-      })
-      .catch(async (error) => {
-        const { message } = await rejectKy(error);
-        return toast({
-          title: 'Uh Oh! Something went wrong!',
-          description: message,
-          variant: 'destructive',
-        });
-      })
-      .finally(() => setIsLoading(false));
-  }
+  const upsertRating = useCallback(
+    async (rating: number) => {
+      setIsLoading(true);
+      return ky
+        .post(`/api/${mediaType}/${creationId}/rating`, {
+          method: 'POST',
+          body: JSON.stringify({
+            value: rating,
+          }),
+        })
+        .then((res) => res.json<RatingResponse>())
+        .then((data) => {
+          if (onUpdate) onUpdate({ rating: isRated ? null : rating });
+          setIsRated((prev) => {
+            return prev || !prev;
+          });
+          toast({
+            title: '✅ Your review has been sent!',
+            description: data.status_message,
+          });
+        })
+        .catch(async (error) => {
+          const { message } = await rejectKy(error);
+          return toast({
+            title: 'Uh Oh! Something went wrong!',
+            description: message,
+            variant: 'destructive',
+          });
+        })
+        .finally(() => setIsLoading(false));
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isRated]
+  );
 
-  async function deleteRating() {
+  const deleteRating = useCallback(async () => {
     setIsLoading(true);
     return ky
       .delete(`/api/${mediaType}/${creationId}/rating`, {
@@ -88,7 +92,7 @@ export function CreationRatingDialog({
           });
         }
 
-        if (onUpdate) onUpdate({ rating: null });
+        onUpdate?.({ rating: null });
         setIsRated(false);
         setRating(0);
         toast({
@@ -98,7 +102,8 @@ export function CreationRatingDialog({
         });
       })
       .finally(() => setIsLoading(false));
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Dialog>
@@ -160,7 +165,7 @@ export function CreationRatingDialog({
                 )}
               </Button>
               <Button
-                onClick={upsertRating}
+                onClick={() => upsertRating(rating)}
                 className='grow'
                 type='submit'
                 disabled={!rating || isLoading}

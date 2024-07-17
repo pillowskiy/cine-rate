@@ -1,18 +1,15 @@
-import { MSeparator } from '#ui/separator';
 import { BaseFigure } from '#components/figure/base-figure';
-import { Heading } from '../heading';
+import { TitledSection } from '#components/section/titled';
 import type { CreationDetailsProps } from './common/types';
 import { getTitle } from './common/utils';
 import { CreationGenres } from './creation-genres';
 
 export default function CreationOverview({ details }: CreationDetailsProps) {
   return (
-    <section>
-      <Heading
-        title='About'
-        description={(details.tagline || `About ${getTitle(details)}`) + '.'}
-      />
-      <MSeparator className='my-4' />
+    <TitledSection
+      title='About'
+      subTitle={(details.tagline || `About ${getTitle(details)}`) + '.'}
+    >
       <div className='flex space-x-4 sm:space-x-0'>
         <BaseFigure
           className='block aspect-[2/3] h-fit w-[120px] min-w-[120px] sm:hidden'
@@ -31,6 +28,6 @@ export default function CreationOverview({ details }: CreationDetailsProps) {
           </p>
         </div>
       </div>
-    </section>
+    </TitledSection>
   );
 }

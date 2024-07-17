@@ -1,9 +1,8 @@
 import { getTrending } from '#actions/getTrending';
-import { MSeparator } from '#ui/separator';
 import { CreationArticle } from '#components/article/creation-article';
 import { Carousel } from '#components/carousel';
-import { Heading } from '#components/heading';
 import { NotFound } from '#components/not-found';
+import { TitledSection } from '#components/section/titled';
 
 export default async function TrendsCarousel() {
   const [creations, error] = await getTrending();
@@ -11,13 +10,11 @@ export default async function TrendsCarousel() {
   if (error) return null;
 
   return (
-    <section>
-      <Heading
-        title='Trends now'
-        description='The most popular movies and TV series today.'
-        badges={['🔥 The hotest']}
-      />
-      <MSeparator className='my-4' />
+    <TitledSection
+      title='Trends now'
+      subTitle='The most popular movies and TV series today.'
+      badges={['🔥 The hotest']}
+    >
       {creations.results.length ? (
         <Carousel>
           {creations.results.map((creation, i) => (
@@ -34,6 +31,6 @@ export default async function TrendsCarousel() {
       ) : (
         <NotFound />
       )}
-    </section>
+    </TitledSection>
   );
 }

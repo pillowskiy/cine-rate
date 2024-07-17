@@ -10,7 +10,7 @@ import { Target, opacityAnimations } from '#config/animations';
 import { Popover, PopoverContent, PopoverTrigger } from '#ui/popover';
 import { cn } from '#libs/index';
 import type { CreationIdentifierProps } from '../common/types';
-import { StatesAction, StatesContext, useStatesReducer } from './common/utils';
+import { StatesAction, StatesContext, useStatesReducer } from './common/hooks';
 import { FavoriteButton } from './favorite-button';
 import { RatingButton } from './rating-button';
 import { WatchlistButton } from './watchlist-button';

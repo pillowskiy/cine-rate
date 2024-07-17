@@ -10,7 +10,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '#ui/pagination';
-import { PaginationActionType, PaginationContext } from './common/utils';
+import { PaginationActionType, PaginationContext } from './common/hooks';
 
 type PaginationGap = ('ellipsis' | number)[];
 

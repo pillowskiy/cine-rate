@@ -6,8 +6,7 @@ import { BookmarkPlus, LogIn } from 'lucide-react';
 import { useUserStore } from '#store/user';
 import { Target, opacityAnimations } from '#config/animations';
 import { Button } from '#ui/button';
-import { MSeparator } from '#ui/separator';
-import { Heading } from '#components/heading';
+import { TitledSection } from '#components/section/titled';
 
 export default function WatchlistCarousel() {
   const user = useUserStore((state) => state.user);
@@ -15,19 +14,13 @@ export default function WatchlistCarousel() {
   if (user) return null;
 
   return (
-    <m.section
-      viewport={{ once: true, amount: 0.4 }}
-      initial={Target.HIDDEN}
-      whileInView={Target.VISIBLE}
-      className='relative'
+    <TitledSection
+      title='Movies that Conquer the World!'
+      subTitle='The most popular blockbusters and unforgettable masterpieces.'
     >
-      <Heading
-        title='From your watchlist'
-        description='Discover top picks from your watchlist.'
-      />
-      <MSeparator className='my-4' />
-
       <m.div
+        initial={Target.HIDDEN}
+        whileInView={Target.VISIBLE}
         custom={2}
         variants={opacityAnimations}
         className='mt-8 grid w-full place-items-center gap-4 p-8'
@@ -56,6 +49,6 @@ export default function WatchlistCarousel() {
           <div className='absolute left-[55%] top-[40%] size-[32px] -translate-x-1/2 animate-pulse rounded-full bg-blue-500 blur-xl sm:size-[64px]' />
         </div>
       </m.div>
-    </m.section>
+    </TitledSection>
   );
 }

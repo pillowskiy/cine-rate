@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import { getMovies } from '#actions/getMovies';
 import { MediaType, MovieSort } from '#config/enums';
-import { MSeparator } from '#ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '#ui/tabs';
 import { CreationArticle } from '#components/article/creation-article';
 import { Carousel } from '#components/carousel';
-import { Heading } from '#components/heading';
+import { TitledSection } from '#components/section/titled';
 import { capitalize } from '#libs/index';
 
 const emojis: Record<MovieSort, string> = {
@@ -55,12 +54,10 @@ async function CreationCarousel({ sort }: { sort: MovieSort }) {
 
 export default function MoviesCarousel() {
   return (
-    <section>
-      <Heading
-        title='Movies that Conquer the World!'
-        description='The most popular blockbusters and unforgettable masterpieces.'
-      />
-      <MSeparator className='my-4' />
+    <TitledSection
+      title='Movies that Conquer the World!'
+      subTitle='The most popular blockbusters and unforgettable masterpieces.'
+    >
       <Tabs defaultValue={MovieSort.Popular}>
         <TabsList>
           {Object.values(MovieSort).map((value) => (
@@ -82,6 +79,6 @@ export default function MoviesCarousel() {
           </TabsContent>
         ))}
       </Tabs>
-    </section>
+    </TitledSection>
   );
 }

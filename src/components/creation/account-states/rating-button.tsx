@@ -3,8 +3,8 @@ import { Star } from 'lucide-react';
 import { Button } from '#ui/button';
 import { CreationRatingDialog } from '#components/dialog/creation-rating-dialog';
 import { cn } from '#libs/index';
+import { StatesAction, StatesContext } from './common/hooks';
 import type { BaseButtonProps } from './common/types';
-import { StatesAction, StatesContext } from './common/utils';
 
 interface RatingButtonProps extends BaseButtonProps {}
 
