@@ -1,14 +1,8 @@
 'use client';
 
-import { useReducer } from 'react';
-import { MSeparator } from '#ui/separator';
-import { Heading } from '#components/heading';
+import { TitledSection } from '#components/section/titled';
 import type { CreationIdentifierProps } from '../common/types';
-import {
-  PaginationContext,
-  initialPaginationState,
-  paginationReducer,
-} from './common/utils';
+import { PaginationContext, usePaginationReducer } from './common/hooks';
 import { CreationReviewsCatalog } from './creation-reviews-catalog';
 import { CreationReviewsPagination } from './creation-reviews-pagination';
 
@@ -16,20 +10,17 @@ export default function CreationReviews({
   creationId,
   mediaType,
 }: CreationIdentifierProps) {
-  const reducer = useReducer(paginationReducer, initialPaginationState);
+  const reducer = usePaginationReducer();
 
   return (
-    <section className='space-y-4'>
-      <Heading
-        title='Creation Reviews'
-        description='Craft reviews, inspire others'
-      />
-      <MSeparator />
-
+    <TitledSection
+      title='Creation Reviews'
+      subTitle='Craft reviews, inspire others'
+    >
       <PaginationContext.Provider value={reducer}>
         <CreationReviewsCatalog creationId={creationId} mediaType={mediaType} />
         <CreationReviewsPagination />
       </PaginationContext.Provider>
-    </section>
+    </TitledSection>
   );
 }

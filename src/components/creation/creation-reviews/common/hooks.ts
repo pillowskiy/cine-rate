@@ -1,4 +1,4 @@
-import { type Dispatch, createContext } from 'react';
+import { type Dispatch, createContext, useReducer } from 'react';
 
 interface PaginationState {
   page: number;
@@ -62,3 +62,7 @@ export const PaginationContext = createContext<PaginationContextInitial>([
   initialPaginationState,
   () => null,
 ]);
+
+export function usePaginationReducer() {
+  return useReducer(paginationReducer, initialPaginationState);
+}
