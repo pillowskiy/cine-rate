@@ -7,12 +7,15 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-// TEMP: use next-auth for integration with tmdb oAuth;
 export default function AuthProvider({ children }: AuthProviderProps) {
   const userStore = useUserStore();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => void userStore.getUser().catch(() => null), []);
+  useEffect(() => {
+    if (userStore.dirty) {
+      void userStore.getUser().catch(() => null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return children;
 }

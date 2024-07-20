@@ -1,6 +1,6 @@
 'use client';
 
-import { type ReactNode, useCallback, useState } from 'react';
+import { ReactNode, useCallback, useState } from 'react';
 import Link from 'next/link';
 import {
   BookmarkPlus,
