@@ -3,6 +3,7 @@ const nextConfig = {
   images: {
     domains: ['image.tmdb.org'],
   },
+  output: 'standalone',
 };
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
