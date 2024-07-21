@@ -8,10 +8,9 @@ import useInfiniteScroll from '#hooks/useInfiniteScroll';
 import { MediaType, ResourceTarget, ResourceType } from '#config/enums';
 import { initialPagination } from '#config/pagination';
 import { TabsContent } from '#ui/tabs';
-import { HorizontalCreationArticle } from '#components/article/creation-article';
-import { NotFound } from '#components/not-found';
 import { CatalogSkeletonGroup } from '#components/skeleton/catalog-skeleton-group';
 import { getResources } from './action';
+import { ResourceTabsItems } from './resources-tabs-items';
 
 type Items = CreationsResponse['results'] | null;
 
@@ -24,34 +23,6 @@ const mediaTypes = {
   [ResourceType.Movie]: MediaType.Movie,
   [ResourceType.TV]: MediaType.TV,
 } as const;
-
-// TEMP
-function HandleItems({
-  items,
-  defaultMediaType,
-}: {
-  items: Items;
-  defaultMediaType: MediaType;
-}) {
-  if (!items) return <CatalogSkeletonGroup itemsCount={20} />;
-  if (!items.length) return <NotFound />;
-
-  return items.map(
-    (creation) =>
-      defaultMediaType && (
-        <HorizontalCreationArticle
-          key={creation.id}
-          defaultMediaType={defaultMediaType}
-          className='border'
-          creation={creation}
-          alt='Series Backdrop'
-          width={260}
-          height={190}
-          withStates
-        />
-      )
-  );
-}
 
 export default function ResourcesTabsContent({
   resourceType,
@@ -77,15 +48,15 @@ export default function ResourcesTabsContent({
     });
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // @eslint-next-line react-hooks/exhaustive-deps
   useEffect(() => void fetch(), []);
 
-  const stopped = currentPage && currentPage >= totalPages;
-  const { canScroll } = useInfiniteScroll(fetch, currentPage, !!stopped);
+  const stopped: boolean = Boolean(currentPage && currentPage >= totalPages);
+  const { canScroll } = useInfiniteScroll(fetch, currentPage, stopped);
 
   return (
     <TabsContent className='flex flex-wrap gap-4' value={resourceType}>
-      <HandleItems defaultMediaType={mediaTypes[resourceType]} items={items} />
+      <ResourceTabsItems mediaType={mediaTypes[resourceType]} items={items} />
       {!!items?.length && !canScroll && <CatalogSkeletonGroup />}
     </TabsContent>
   );
