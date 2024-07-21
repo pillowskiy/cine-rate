@@ -1,6 +1,6 @@
 'use client';
 
-import { type ComponentProps, useEffect, useState } from 'react';
+import { ComponentProps, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ky from 'ky';
 import type { CreationsResponse } from '#types/creation-types';
@@ -39,8 +39,15 @@ export function CreationCatalog({
       });
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => void getData(), []);
+  useEffect(() => {
+    console.log('Fetching Initial');
+    setPagination(initialPagination);
+    setItems([]);
+    window.scrollTo(0, 0);
+    getData(initialPagination.currentPage + 1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParamsMap]);
+
   const { canScroll } = useInfiniteScroll(getData, currentPage);
 
   function handleItems() {
