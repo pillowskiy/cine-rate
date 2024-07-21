@@ -1,14 +1,14 @@
 'use client';
 
-import { type ComponentProps, useEffect, useState } from 'react';
+import { ComponentProps, useEffect, useState } from 'react';
 import ky from 'ky';
 import type { IPagination } from '#types/index';
 import type { CelebritiesResponse } from '#types/person-types';
 import useInfiniteScroll from '#hooks/useInfiniteScroll';
 import { initialPagination } from '#config/pagination';
-import { PersonArticle } from '#components/article/person-article';
 import { CatalogSkeletonGroup } from '#components/skeleton/catalog-skeleton-group';
 import { cn } from '#libs/index';
+import { CelebrityCatalogItems } from './celebrity-catalog-items';
 
 type Celebrities = CelebritiesResponse['results'];
 
@@ -39,23 +39,16 @@ export function CelebrityCatalog({
   useEffect(() => void getData(), []);
   const { canScroll } = useInfiniteScroll(getData, currentPage);
 
-  function handleItems() {
-    if (!items) return <CatalogSkeletonGroup itemsCount={20} />;
-
-    return items.map((celebrity, i) => (
-      <PersonArticle
-        custom={i}
-        key={celebrity.id}
-        celebrity={celebrity}
-        className='mb-4 w-2/5 grow md:w-[260px]'
-      />
-    ));
-  }
-
   return (
-    <section className={cn('flex flex-wrap gap-4', className)} {...props}>
-      {handleItems()}
-      {!canScroll && <CatalogSkeletonGroup />}
+    <section
+      className={cn(
+        'grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5',
+        className
+      )}
+      {...props}
+    >
+      <CelebrityCatalogItems items={items} />
+      {!!items?.length && !canScroll && <CatalogSkeletonGroup />}
     </section>
   );
 }

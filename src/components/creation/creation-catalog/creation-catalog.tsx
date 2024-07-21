@@ -8,10 +8,9 @@ import type { IPagination } from '#types/index';
 import useInfiniteScroll from '#hooks/useInfiniteScroll';
 import type { MediaType } from '#config/enums';
 import { initialPagination } from '#config/pagination';
-import { CreationArticle } from '#components/article/creation-article';
-import { NotFound } from '#components/not-found';
 import { CatalogSkeletonGroup } from '#components/skeleton/catalog-skeleton-group';
 import { cn } from '#libs/index';
+import { CreationCatalogItems } from './creation-catalog-items';
 
 interface CreationCatalogProps extends ComponentProps<'div'> {
   mediaType: MediaType;
@@ -40,7 +39,6 @@ export function CreationCatalog({
   };
 
   useEffect(() => {
-    console.log('Fetching Initial');
     setPagination(initialPagination);
     setItems([]);
     window.scrollTo(0, 0);
@@ -50,23 +48,6 @@ export function CreationCatalog({
 
   const { canScroll } = useInfiniteScroll(getData, currentPage);
 
-  function handleItems() {
-    if (!items) return <CatalogSkeletonGroup itemsCount={20} />;
-    if (!items.length) return <NotFound className='col-span-full' />;
-
-    return items.map((movie) => (
-      <CreationArticle
-        variants={{}}
-        defaultMediaType={mediaType}
-        key={movie.id}
-        creation={movie}
-        className='mb-4'
-        width={260}
-        height={390}
-      />
-    ));
-  }
-
   return (
     <section
       className={cn(
@@ -75,7 +56,7 @@ export function CreationCatalog({
       )}
       {...props}
     >
-      {handleItems()}
+      <CreationCatalogItems mediaType={mediaType} items={items} />
       {!!items?.length && !canScroll && <CatalogSkeletonGroup />}
     </section>
   );
