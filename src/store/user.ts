@@ -62,9 +62,6 @@ export const useUserStore = create<IUserState>()(
     {
       name: 'user',
       partialize: (state) => ({ user: state.user }),
-      onRehydrateStorage: (state) => {
-        console.log('Hydrating starts', state);
-      },
     }
   )
 );
