@@ -1,6 +1,5 @@
 'use client';
 
-// Error components must be Client Components
 import { useEffect } from 'react';
 import { Button } from '#ui/button';
 
@@ -11,9 +10,7 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  useEffect(() => {
-    console.error(error.stack);
-  }, [error]);
+  useEffect(() => void console.error(error.stack), [error]);
 
   return (
     <main className='absolute left-1/2 top-1/2 h-fit -translate-x-1/2 -translate-y-1/2 space-y-4 text-center'>

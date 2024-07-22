@@ -18,7 +18,7 @@ export function CelebrityCatalogItems({ items }: CelebrityCatalogItemsProps) {
       custom={i}
       key={celebrity.id}
       celebrity={celebrity}
-      className='mb-4 w-2/5 grow md:w-[260px]'
+      className='mb-4'
     />
   ));
 }

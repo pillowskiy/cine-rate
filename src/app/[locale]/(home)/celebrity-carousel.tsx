@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
 import { getPopular } from '#actions/getPopular';
 import { MediaType } from '#config/enums';
 import { PersonArticle } from '#components/article/person-article';
@@ -9,14 +9,14 @@ import { SeeMoreResources } from '#components/see-more-resources';
 
 export default async function CelebrityCarousel() {
   const [celebrities, error] = await getPopular(MediaType.Person);
-
+  const t = await getTranslations('HomePage.CelebrityCarousel');
   if (error) return null;
 
   return (
     <TitledSection
-      title='Celebrities'
-      subTitle='The most popular celebrities.'
-      badges={['👑 Iconic Idols']}
+      title={t('title')}
+      subTitle={t('description')}
+      badges={[t('badge')]}
     >
       {celebrities.results.length ? (
         <Carousel>

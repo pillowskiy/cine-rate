@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server';
 import { getTrending } from '#actions/getTrending';
 import { CreationArticle } from '#components/article/creation-article';
 import { Carousel } from '#components/carousel';
@@ -6,14 +7,15 @@ import { TitledSection } from '#components/section/titled';
 
 export default async function TrendsCarousel() {
   const [creations, error] = await getTrending();
+  const t = await getTranslations('HomePage.TrendsCarousel');
 
   if (error) return null;
 
   return (
     <TitledSection
-      title='Trends now'
-      subTitle='The most popular movies and TV series today.'
-      badges={['🔥 The hotest']}
+      title={t('title')}
+      subTitle={t('description')}
+      badges={[t('badge')]}
     >
       {creations.results.length ? (
         <Carousel>

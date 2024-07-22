@@ -1,0 +1,31 @@
+{
+  "hello": "world",
+  "seeMore": "See More",
+  "HomePage": {
+    "CelebrityCarousel": {
+      "title": "Celebrities",
+      "description": "The most popular celebrities",
+      "badge": "👑 Iconic Idols"
+    },
+    "MoviesCarousel": {
+      "title": "Movies that Conquer the World!",
+      "description": "The most popular blockbusters and unforgettable masterpieces."
+    },
+    "SeriesCarousel": {
+      "title": "Popular Series",
+      "description": "The most popular series"
+    },
+    "TrendsCarousel": {
+      "title": "Trends Now",
+      "description": "The most popular movies and TV series today.",
+      "badge": "🔥 The Hotest"
+    },
+    "WatchlistCarousel": {
+      "title": "Your Watchlist",
+      "description": "The most popular movies and TV series in your watchlist.",
+      "authForAccess": "Sign in to access your Watchlist",
+      "details": "Save shows and movies to keep track of what you want to watch.",
+      "tmdbSignin": "Sign in with TMDB"
+    }
+  }
+}

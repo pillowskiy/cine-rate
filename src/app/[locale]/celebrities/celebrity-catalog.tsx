@@ -27,7 +27,7 @@ export function CelebrityCatalog({
       page: currentPage + 1,
     };
     return ky
-      .get('api/celebrities', { searchParams, cache: 'force-cache' })
+      .get('/api/celebrities', { searchParams, cache: 'force-cache' })
       .then((res) => res.json<CelebritiesResponse>())
       .then((data) => {
         setItems((prev) => [...(prev || []), ...data.results]);

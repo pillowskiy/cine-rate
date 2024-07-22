@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { getTV } from '#actions/getTV';
 import { MediaType, TVSort } from '#config/enums';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '#ui/tabs';
@@ -45,11 +45,10 @@ async function CreationCarousel({ sort }: { sort: TVSort }) {
 }
 
 export default function SeriesCarousel() {
+  const t = useTranslations('HomePage.SeriesCarousel');
+
   return (
-    <TitledSection
-      title='Movies that Conquer the World!'
-      subTitle='The most popular blockbusters and unforgettable masterpieces.'
-    >
+    <TitledSection title={t('title')} subTitle={t('description')}>
       <Tabs defaultValue={TVSort.TopRated}>
         <TabsList>
           {Object.values(TVSort).map((value) => (

@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import { AppPageParams } from '#types/index';
 import { Toaster } from '#ui/toaster';
 import Footer from '#components/footer';
 import Header from '#components/header';
@@ -7,7 +10,7 @@ import Main from '#components/main';
 import NoInternetConnection from '#components/no-internet-connection';
 import ServeSiteProviders from '#providers/index';
 import { APP_URL } from '#libs/common/metadata';
-import './globals.css';
+import '../globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -63,23 +66,27 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
-}) {
+} & AppPageParams) {
+  const messages = await getMessages();
   return (
-    <html lang='en'>
+    <html lang={params.locale}>
       <body className={inter.className}>
-        <NoInternetConnection />
-        <Toaster />
-        <ServeSiteProviders>
-          <div className='flex min-h-screen flex-col'>
-            <Header />
-            <Main>{children}</Main>
-          </div>
-          <Footer />
-        </ServeSiteProviders>
+        <NextIntlClientProvider messages={messages}>
+          <NoInternetConnection />
+          <Toaster />
+          <ServeSiteProviders>
+            <div className='flex min-h-screen flex-col'>
+              <Header />
+              <Main>{children}</Main>
+            </div>
+            <Footer />
+          </ServeSiteProviders>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

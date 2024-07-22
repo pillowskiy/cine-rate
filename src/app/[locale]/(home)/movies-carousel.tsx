@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { getMovies } from '#actions/getMovies';
 import { MediaType, MovieSort } from '#config/enums';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '#ui/tabs';
@@ -45,11 +45,10 @@ async function CreationCarousel({ sort }: { sort: MovieSort }) {
 }
 
 export default function MoviesCarousel() {
+  const t = useTranslations('HomePage.MoviesCarousel');
+
   return (
-    <TitledSection
-      title='Movies that Conquer the World!'
-      subTitle='The most popular blockbusters and unforgettable masterpieces.'
-    >
+    <TitledSection title={t('title')} subTitle={t('description')}>
       <Tabs defaultValue={MovieSort.Popular}>
         <TabsList>
           {Object.values(MovieSort).map((value) => (

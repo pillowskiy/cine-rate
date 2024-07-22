@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { m } from 'framer-motion';
 import { BookmarkPlus, LogIn } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useUserStore } from '#store/user';
 import { Target, opacityAnimations } from '#config/animations';
 import { Button } from '#ui/button';
@@ -10,14 +11,12 @@ import { TitledSection } from '#components/section/titled';
 
 export default function WatchlistCarousel() {
   const user = useUserStore((state) => state.user);
+  const t = useTranslations('HomePage.WatchlistCarousel');
 
   if (user) return null;
 
   return (
-    <TitledSection
-      title='Movies that Conquer the World!'
-      subTitle='The most popular blockbusters and unforgettable masterpieces.'
-    >
+    <TitledSection title={t('title')} subTitle={t('description')}>
       <m.div
         initial={Target.HIDDEN}
         whileInView={Target.VISIBLE}
@@ -29,17 +28,17 @@ export default function WatchlistCarousel() {
 
         <div className='space-y-1 text-center'>
           <h2 className='text-xl font-semibold tracking-tight sm:text-2xl'>
-            Sign in to access your Watchlist
+            {t('authForAccess')}
           </h2>
           <p className='text-muted-foreground text-xs sm:text-sm'>
-            Save shows and movies to keep track of what you want to watch.
+            {t('details')}
           </p>
         </div>
 
         <Link href='/auth' passHref legacyBehavior>
           <Button variant='outline'>
             <LogIn className='mr-2 size-5' />
-            <span className='truncate'>Sign in with TMDB</span>
+            <span className='truncate'>{t('tmdbSignin')}</span>
           </Button>
         </Link>
 
