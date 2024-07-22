@@ -5,6 +5,7 @@ import { PersonArticle } from '#components/article/person-article';
 import { Carousel } from '#components/carousel';
 import { NotFound } from '#components/not-found';
 import { TitledSection } from '#components/section/titled';
+import { SeeMoreResources } from '#components/see-more-resources';
 
 export default async function CelebrityCarousel() {
   const [celebrities, error] = await getPopular(MediaType.Person);
@@ -27,21 +28,12 @@ export default async function CelebrityCarousel() {
               className='w-[160px] sm:w-[260px]'
             />
           ))}
-          {/* TEMP */}
-          <div className='relative grid aspect-[2/3] h-fit w-[160px] place-items-center rounded-md border sm:w-[260px]'>
-            <Link
-              href='/celebrities'
-              className='z-10 cursor-pointer select-none space-y-1 text-center'
-            >
-              <h2 className='text-4xl shadow-orange-500 drop-shadow-md'>⭐</h2>
-              <p className='transition-all hover:text-orange-500 hover:underline'>
-                See more!
-              </p>
-            </Link>
-
-            <div className='absolute -z-10 size-10 animate-pulse rounded-full bg-orange-500 blur-xl' />
-            <div className='absolute -z-10 size-5 animate-pulse rounded-full bg-red-600 blur-xl' />
-          </div>
+          <SeeMoreResources
+            href='/celebrities'
+            icon={'⭐'}
+            colorSchema='red'
+            aspect='vertical'
+          />
         </Carousel>
       ) : (
         <NotFound />

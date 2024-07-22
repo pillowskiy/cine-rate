@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '#ui/tabs';
 import { CreationArticle } from '#components/article/creation-article';
 import { Carousel } from '#components/carousel';
 import { TitledSection } from '#components/section/titled';
+import { SeeMoreResources } from '#components/see-more-resources';
 import { capitalize } from '#libs/index';
 
 const emojis: Record<TVSort, string> = {
@@ -33,21 +34,12 @@ async function CreationCarousel({ sort }: { sort: TVSort }) {
           height={140}
         />
       ))}
-      {/* TEMP */}
-      <div className='relative grid aspect-[16/9] h-fit w-[260px] place-items-center rounded-md border'>
-        <Link
-          className='z-10 cursor-pointer select-none space-y-1 text-center'
-          href='/tv'
-        >
-          <h2 className='text-4xl shadow-lime-500 drop-shadow-md'>📺</h2>
-          <p className='transition-all hover:text-lime-500 hover:underline'>
-            See more!
-          </p>
-        </Link>
-
-        <div className='absolute -z-10 size-10 animate-pulse rounded-full bg-lime-500 blur-xl' />
-        <div className='absolute -z-10 size-5 animate-pulse rounded-full bg-emerald-600 blur-xl' />
-      </div>
+      <SeeMoreResources
+        href='/tv'
+        icon={'📺'}
+        colorSchema='green'
+        aspect='horizontal'
+      />
     </Carousel>
   );
 }
