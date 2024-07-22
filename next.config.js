@@ -11,4 +11,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   openAnalyzer: true,
 });
 
-module.exports = withBundleAnalyzer(nextConfig);
+const withNextIntl = require('next-intl/plugin')();
+
+module.exports = withBundleAnalyzer(withNextIntl(nextConfig));
