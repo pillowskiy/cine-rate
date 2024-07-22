@@ -36,6 +36,8 @@ export interface INextPageParams {
   params: Record<string, string | number | symbol>;
 }
 
+export type AppPageParams = INextPageParams & { params: { locale: string } };
+
 export interface IApiReject {
   message: string;
   status: number;
