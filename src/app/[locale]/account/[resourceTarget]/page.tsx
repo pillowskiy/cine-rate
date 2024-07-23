@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { unstable_setRequestLocale } from 'next-intl/server';
 import zod from 'zod';
-import type { INextPageParams } from '#types/index';
+import type { AppPageParams } from '#types/index';
 import { ResourceTarget } from '#config/enums';
 import { ResourcesTabs } from '#components/resources/tabs';
 import { TitledSection } from '#components/section/titled';
@@ -9,14 +11,10 @@ const paramsDto = zod.object({
   resourceTarget: zod.nativeEnum(ResourceTarget),
 });
 
-const resourceTargetsLabel = {
-  [ResourceTarget.Favorite]: 'Favorites',
-  [ResourceTarget.Rated]: 'Rated',
-  [ResourceTarget.Watchlist]: 'Watchlist',
-} satisfies Record<ResourceTarget, string>;
-
-export default function ResourcesPage({ params }: INextPageParams) {
+export default function ResourcesPage({ params }: AppPageParams) {
+  unstable_setRequestLocale(params.locale);
   const parsedParams = paramsDto.safeParse(params);
+  const t = useTranslations('Account.Resources');
 
   if (!parsedParams.success) {
     return notFound();
@@ -26,8 +24,10 @@ export default function ResourcesPage({ params }: INextPageParams) {
   return (
     <TitledSection
       className='min-h-screen'
-      title={`Your ${resourceTargetsLabel[resourceTarget]}`}
-      subTitle='Creations that was influenced by you.'
+      title={t('title', {
+        resources: t(`labels.${resourceTarget}`),
+      })}
+      subTitle={t('description')}
     >
       <ResourcesTabs target={resourceTarget} />
     </TitledSection>

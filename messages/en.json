@@ -1,6 +1,11 @@
 {
   "hello": "world",
   "seeMore": "See More",
+  "mediaTypes": {
+    "movie": "Movies",
+    "tv": "TV Series",
+    "person": "Celebrities"
+  },
   "HomePage": {
     "CelebrityCarousel": {
       "title": "Celebrities",
@@ -26,6 +31,36 @@
       "authForAccess": "Sign in to access your Watchlist",
       "details": "Save shows and movies to keep track of what you want to watch.",
       "tmdbSignin": "Sign in with TMDB"
+    }
+  },
+  "Account": {
+    "Resources": {
+      "title": "Your {resources}",
+      "description": "Creations that was influenced by you.",
+      "labels": {
+        "favorite": "Favorites",
+        "rated": "Rated",
+        "watchlist": "Watchlist"
+      }
+    }
+  },
+  "AuthApprove": {
+    "statusDescription": {
+      "200": "You have successfully authorized us to receive and modify your data through the TMDB service.",
+      "401": "You or TMDB did not approve the request for your TMDB account information.",
+      "400": "An error occurred during redirection.",
+      "default": "An unhandled error occurred, please try again later."
+    }
+  },
+
+  "Toast": {
+    "error": {
+      "title": "Uh, Oh! Something went wrong.",
+      "description": "{error}"
+    },
+    "auth": {
+      "title": "✅ Successfully approval!",
+      "description": "You have successfully authorized us to receive and modify your data through the TMDB service."
     }
   }
 }

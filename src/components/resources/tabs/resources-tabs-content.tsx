@@ -48,7 +48,7 @@ export default function ResourcesTabsContent({
     });
   };
 
-  // @eslint-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => void fetch(), []);
 
   const stopped: boolean = Boolean(currentPage && currentPage >= totalPages);

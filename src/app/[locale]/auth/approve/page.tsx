@@ -1,56 +1,50 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import type { INextPageParams } from '#types/index';
 import { useUserStore } from '#store/user';
 import { useToast } from '#ui/use-toast';
 import Loader from '#components/loader';
 import { pipe } from '#libs/common/next';
 
-const statusDescription = {
-  200: 'You have successfully authorized us to receive and modify your data through the TMDB service.',
-  401: 'You or TMDB did not approve the request for your TMDB account information.',
-  400: 'An error occurred during redirection.',
-  default: 'An unhandled error occurred, please try again later.',
-};
-
-function isValidStatus(
-  status: string | number
-): status is keyof typeof statusDescription {
-  return status in statusDescription;
-}
-
-function getStatusDescription(status: number) {
-  return isValidStatus(status)
-    ? statusDescription[status]
-    : statusDescription.default;
-}
+const availableStatuses = [200, 401, 400] as const;
 
 /*
  * https://github.com/vercel/next.js/issues/52799#issuecomment-1645124081
  */
-
 export default function ApprovePage({ searchParams }: INextPageParams) {
   const requestToken = pipe.string(searchParams?.request_token);
   const { toast } = useToast();
   const router = useRouter();
   const userStore = useUserStore();
+  const t = useTranslations('AuthApprove');
+  // TEMP: to own toastBuild foo
+  const tt = useTranslations('Toast');
+
+  const getStatusDescription = useCallback((status: number) => {
+    const isValidStatus = availableStatuses.includes(status as any);
+    const statusKey = isValidStatus ? status.toString() : 'default';
+    return `statusDescription.${statusKey}` as Parameters<typeof t>[0];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     userStore
       .approve(requestToken)
       .then(() => {
         toast({
-          title: '✅ Successfully approval!',
-          description:
-            'You have successfully authorized us to receive and modify your data through the TMDB service.',
+          title: tt('auth.title'),
+          description: tt('auth.description'),
         });
       })
       .catch((error) => {
         toast({
-          title: error.message || 'Uh, Oh! Something went wrong.',
-          description: getStatusDescription(error?.status || 500),
+          title: tt('error.title'),
+          description: tt('error.description', {
+            error: t(getStatusDescription(error?.status || 500)),
+          }),
         });
       })
       .finally(() => {
