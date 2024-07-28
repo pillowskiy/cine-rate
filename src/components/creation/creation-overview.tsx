@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { BaseFigure } from '#components/figure/base-figure';
 import { TitledSection } from '#components/section/titled';
 import type { CreationDetailsProps } from './common/types';
@@ -5,10 +6,14 @@ import { getTitle } from './common/utils';
 import { CreationGenres } from './creation-genres';
 
 export default function CreationOverview({ details }: CreationDetailsProps) {
+  const t = useTranslations('Creations.CreationOverview');
+
   return (
     <TitledSection
-      title='About'
-      subTitle={(details.tagline || `About ${getTitle(details)}`) + '.'}
+      title={t('title')}
+      subTitle={
+        details.tagline || t('description', { title: getTitle(details) })
+      }
     >
       <div className='flex space-x-4 sm:space-x-0'>
         <BaseFigure

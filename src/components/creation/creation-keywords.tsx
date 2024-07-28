@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
 import { getCreationKeywords } from '#actions/getCreationKeywords';
 import type { MediaType } from '#config/enums';
 import { Button } from '#ui/button';
@@ -15,6 +16,7 @@ export default async function CreationKeywords({
   mediaType,
   details,
 }: CreationKeywordsProps) {
+  const t = await getTranslations('Creations.CreationKeywords');
   const [data, error] = await getCreationKeywords(details.id, mediaType);
 
   if (error || !data?.keywords?.length) return null;
@@ -22,8 +24,8 @@ export default async function CreationKeywords({
   return (
     <div>
       <Heading
-        title='Keywords'
-        description={`Keywords of ${getTitle(details)}.`}
+        title={t('title')}
+        description={t('description', { title: getTitle(details) })}
       />
       <MSeparator className='my-4' />
 

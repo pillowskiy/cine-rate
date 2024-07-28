@@ -7,6 +7,7 @@ import {
   createContext,
   useState,
 } from 'react';
+import { useTranslations } from 'next-intl';
 import useQueryParams from '#hooks/useQueryParams';
 import type { GetDiscoverParams } from '#actions/getDiscover';
 import type { MediaType } from '#config/enums';
@@ -48,6 +49,7 @@ export function CreationFilterDialog({
   mediaType,
   children,
 }: CreationFilterDialogProps) {
+  const t = useTranslations('Creations.CreationFilterCatalog');
   const { setQueryParams, urlSearchParams } = useQueryParams();
   const searchParamsObj = Object.fromEntries(urlSearchParams.entries());
   const [filter, setFilter] = useState<FilterDiscoverParams>(searchParamsObj);
@@ -61,18 +63,16 @@ export function CreationFilterDialog({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Filtering</DialogTitle>
-          <DialogDescription>
-            Refine your film experience with our cutting-edge filters.
-          </DialogDescription>
+          <DialogTitle>{t('title')}</DialogTitle>
+          <DialogDescription>{t('description')}</DialogDescription>
         </DialogHeader>
         <FilterContext.Provider value={[filter, setFilter]}>
           <ScrollArea>
             <div className='mr-4 max-h-[460px] space-y-4 px-2'>
-              <h2>Realese Date</h2>
+              <h2>{t('releaseDate.label')}</h2>
               <div className='flex justify-between gap-4'>
                 <div className='grid w-full max-w-sm items-center gap-2'>
-                  <Label htmlFor='realese_from'>From</Label>
+                  <Label htmlFor='realese_from'>{t('releaseDate.from')}</Label>
                   <Input
                     defaultValue={filter['primary_release_date.gte']}
                     onChange={({ target }) =>
@@ -85,7 +85,7 @@ export function CreationFilterDialog({
                   />
                 </div>
                 <div className='grid w-full max-w-sm items-center gap-2'>
-                  <Label htmlFor='realese_to'>To</Label>
+                  <Label htmlFor='realese_to'>{t('releaseDate.to')}</Label>
                   <Input
                     defaultValue={filter['primary_release_date.lte']}
                     onChange={({ target }) =>

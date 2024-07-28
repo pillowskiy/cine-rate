@@ -2,6 +2,7 @@
 
 import { useContext } from 'react';
 import { ChevronDown, Loader } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import type { GenresResponse } from '#types/genre-types';
 import useFetch from '#hooks/useFetch';
 import type { MediaType } from '#config/enums';
@@ -14,6 +15,7 @@ interface CreationGenresProps {
 }
 
 export function CreationGenres({ mediaType }: CreationGenresProps) {
+  const t = useTranslations('Creations.CreationFilterCatalog');
   const [filter, setFilter] = useContext(FilterContext);
   const genreIds = filter.with_genres?.split(',').map(Number) || [];
 
@@ -49,7 +51,7 @@ export function CreationGenres({ mediaType }: CreationGenresProps) {
 
   return (
     <div className='grid w-full items-center gap-2'>
-      <Label>Genres</Label>
+      <Label>{t('genres')}</Label>
       <div className='flex flex-wrap gap-2'>
         {data.genres.map((genre) => (
           <Toggle

@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { TitledSection } from '#components/section/titled';
 import type { CreationIdentifierProps } from '../common/types';
 import { PaginationContext, usePaginationReducer } from './common/hooks';
@@ -10,13 +11,11 @@ export default function CreationReviews({
   creationId,
   mediaType,
 }: CreationIdentifierProps) {
+  const t = useTranslations('Creations.CreationReviews');
   const reducer = usePaginationReducer();
 
   return (
-    <TitledSection
-      title='Creation Reviews'
-      subTitle='Craft reviews, inspire others'
-    >
+    <TitledSection title={t('title')} subTitle={t('description')}>
       <PaginationContext.Provider value={reducer}>
         <CreationReviewsCatalog creationId={creationId} mediaType={mediaType} />
         <CreationReviewsPagination />

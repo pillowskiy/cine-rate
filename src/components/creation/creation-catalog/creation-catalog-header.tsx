@@ -16,12 +16,7 @@ export function CreationCatalogHeader({
   return (
     <header className='flex gap-2 overflow-hidden py-2'>
       <CreationFilterDialog mediaType={mediaType}>
-        <Button
-          size='icon'
-          variant='outline'
-          title='Filter'
-          aria-label='catalog filter'
-        >
+        <Button size='icon' variant='outline' aria-label='Catalog Filter'>
           <Filter className='size-5' />
         </Button>
       </CreationFilterDialog>

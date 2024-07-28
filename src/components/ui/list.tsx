@@ -22,7 +22,7 @@ const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
   ({ children, title, description, ...props }, ref) => {
     return (
       <li ref={ref} {...props}>
-        <span>{title}</span>
+        <span>{title.endsWith(':') ? title : `${title}:`}</span>
         <p className='break-words text-sm opacity-70'>{description}</p>
       </li>
     );

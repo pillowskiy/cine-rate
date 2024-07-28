@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import type { CreationImagesResponse } from '#types/creation-types';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '#ui/tabs';
 import { Carousel } from '#components/carousel';
@@ -11,6 +12,8 @@ interface MediaTabsProps {
 }
 
 export function MediaTabs({ images }: MediaTabsProps) {
+  const t = useTranslations('resourceImagesType');
+
   const isEmpty = !images?.backdrops.length && !images?.posters.length;
   if (isEmpty) {
     return <NotFound />;
@@ -23,10 +26,10 @@ export function MediaTabs({ images }: MediaTabsProps) {
     >
       <TabsList>
         <TabsTrigger value='backdrops' disabled={!images?.backdrops.length}>
-          Backdrops
+          {t('backdrops')}
         </TabsTrigger>
         <TabsTrigger value='posters' disabled={!images?.posters.length}>
-          Posters
+          {t('posters')}
         </TabsTrigger>
       </TabsList>
       <TabsContent value='backdrops'>
