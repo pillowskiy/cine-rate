@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 import type { INextPageParams } from '#types/index';
 import { getCreationDetails } from '#actions/getCreationDetails';
 import { MediaType } from '#config/enums';
@@ -13,7 +14,7 @@ import { LoadingCarousel } from '#components/skeleton/loading-carousel';
 import { generateCreationMetadata } from '#libs/common/metadata';
 import { pipe } from '#libs/common/next';
 import SeriesDetails from './series-details';
-import SerriesSeasons from './series-seasons';
+import SeriesSeasons from './series-seasons';
 
 const CreationReviews = dynamic(
   () => import('#components/creation/creation-reviews'),
@@ -23,6 +24,7 @@ const CreationReviews = dynamic(
 export const generateMetadata = generateCreationMetadata(MediaType.TV);
 
 export default async function TVPage({ params }: INextPageParams) {
+  const t = await getTranslations('Creations');
   const paramId = pipe.strToInt(params?.id);
   const [tv, error] = await getCreationDetails(paramId, MediaType.TV);
 
@@ -34,26 +36,26 @@ export default async function TVPage({ params }: INextPageParams) {
       <div className='grow space-y-6 overflow-hidden'>
         <CreationOverview details={tv} />
         <TitledStreamingSection
-          title='Cast'
-          subTitle={`The ${tv.title ?? tv.original_title} cast.`}
+          title={t('CreationCast.title')}
+          subTitle={t('CreationCast.description', { title: tv.title })}
           fallback={<LoadingCarousel />}
         >
           <CreationCast creationId={tv.id} mediaType={MediaType.TV} />
         </TitledStreamingSection>
 
-        {tv.seasons.length && <SerriesSeasons details={tv} />}
+        {tv.seasons.length && <SeriesSeasons details={tv} />}
 
         <TitledStreamingSection
-          title='Media'
-          subTitle='The media associated with this show.'
+          title={t('CreationMediaTabs.title')}
+          subTitle={t('CreationMediaTabs.description')}
           fallback={<LoadingCarousel withText={false} />}
         >
           <CreationMediaTabs mediaType={MediaType.TV} creationId={tv.id} />
         </TitledStreamingSection>
 
         <TitledStreamingSection
-          title='Similar'
-          subTitle={`More like ${tv.title ?? tv.original_title}.`}
+          title={t('CreationSimilar.title')}
+          subTitle={t('CreationSimilar.description', { title: tv.title })}
           fallback={<LoadingCarousel aspect='horizontal' />}
         >
           <CreationSimilar creationId={tv.id} mediaType={MediaType.TV} />
@@ -62,7 +64,7 @@ export default async function TVPage({ params }: INextPageParams) {
         <CreationReviews creationId={tv.id} mediaType={MediaType.TV} />
       </div>
       <SeriesDetails
-        className='w-full min-w-[260px] space-y-6 sm:w-[260px]'
+        className='w-full min-w-[] space-y-6 sm:w-[260px]'
         details={tv}
       />
     </main>

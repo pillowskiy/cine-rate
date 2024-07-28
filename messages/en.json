@@ -1,10 +1,14 @@
 {
-  "hello": "world",
   "seeMore": "See More",
+  "openOriginal": "Open Original",
   "mediaTypes": {
     "movie": "Movies",
     "tv": "TV Series",
     "person": "Celebrities"
+  },
+  "resourceImagesType": {
+    "backdrops": "Backdrops",
+    "posters": "Posters"
   },
   "HomePage": {
     "CelebrityCarousel": {
@@ -52,7 +56,130 @@
       "default": "An unhandled error occurred, please try again later."
     }
   },
+  "PersonPage": {
+    "PersonBiography": {
+      "title": "Biography"
+    },
+    "KnownFor": {
+      "title": "Known for"
+    },
+    "AlsoKnownFor": {
+      "title": "Also known for"
+    },
+    "Details": {
+      "gender": "Gender",
+      "birthday": "Birthday",
+      "placeOfBirth": "Place of Birth",
+      "knownForDepartment": "Known For department",
+      "yearsOld": "years"
+    }
+  },
+  "CollectionPage": {
+    "CollectionCreations": {
+      "title": "Creations",
+      "description": "Creations that belongs to the {collectionName}"
+    },
+    "CollectionMediaTabs": {
+      "title": "Media",
+      "description": "Media that belongs to the {collectionName}"
+    },
+    "CollectionHeader": {
+      "numberOfMovies": "Number of movies",
+      "lastRelease": "Last release"
+    }
+  },
+  "MoviePage": {
+    "MovieDetails": {
+      "title": "Details",
+      "description": "Interesting about {title}",
+      "noInfo": "Unknown",
+      "List": {
+        "status": "Status",
+        "originalLanguage": "Original Language",
+        "budget": "Budget",
+        "revenue": "Revenue",
+        "productionCompanies": "Production Companies"
+      }
+    }
+  },
+  "TVPage": {
+    "TVDetails": {
+      "title": "Details",
+      "description": "Interesting about {title}",
+      "noInfo": "Unknown",
+      "List": {
+        "status": "Status",
+        "originalLanguage": "Original Language",
+        "createdBy": "Created By",
+        "numberOfSeasons": "Number of Seasons",
+        "firstAirDate": "First Air Date",
+        "runtime": "Runtime",
+        "productionCompanies": "Production Companies"
+      }
+    },
+    "SeriesSeasons": {
+      "title": "Seasons",
+      "description": "Seasons of the {title} series",
+      "moreAboutSeason": "More about the {seasonNumber} season"
+    }
+  },
 
+  "Creations": {
+    "CreationFilterCatalog": {
+      "title": "Filtering",
+      "description": "Refine your film experience with our cutting-edge filters.",
+      "releaseDate": {
+        "label": "Release Date",
+        "from": "From",
+        "to": "To"
+      },
+      "language": "Language",
+      "chooseLanguage": "Choose a language",
+      "genres": "Genres",
+      "submit": "Search"
+    },
+    "CreationSortSelect": {
+      "sortResultsBy": "Sort results by",
+      "popular": "Popular",
+      "topRated": "Top Rated",
+      "upcoming": "Upcoming",
+      "nowPlaying": "Now Playing",
+      "airingToday": "Airing Today",
+      "onTheAir": "On The Air"
+    },
+    "CreationExternalLinks": {
+      "title": "Social Links",
+      "description": "Social links of the creation"
+    },
+    "CreationKeywords": {
+      "title": "Keywords",
+      "description": "Keywords of the {title}"
+    },
+    "CreationCast": {
+      "title": "Cast",
+      "description": "The {title} cast"
+    },
+    "CreationOverview": {
+      "title": "About",
+      "description": "About {title}"
+    },
+    "CreationCollection": {
+      "title": "Collection",
+      "description": "The Ultimate Showcase of Unintentional Accumulation!"
+    },
+    "CreationMediaTabs": {
+      "title": "Media",
+      "description": "The media associated with this show"
+    },
+    "CreationSimilar": {
+      "title": "Similar",
+      "description": "More like {title}"
+    },
+    "CreationReviews": {
+      "title": "Reviews",
+      "description": "Craft reviews, inspire others"
+    }
+  },
   "Toast": {
     "error": {
       "title": "Uh, Oh! Something went wrong.",

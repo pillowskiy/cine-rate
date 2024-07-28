@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 import type { INextPageParams } from '#types/index';
 import { getPersonDetails } from '#actions/getPersonDetails';
 import { BaseFigure } from '#components/figure/base-figure';
@@ -20,7 +21,7 @@ export const generateMetadata = generatePersonMetadata();
 export default async function PersonPage({ params }: INextPageParams) {
   const personId = pipe.strToInt(params?.id);
   const [person, error] = await getPersonDetails(personId);
-
+  const t = await getTranslations('PersonPage');
   if (error) return notFound();
 
   return (
@@ -37,20 +38,20 @@ export default async function PersonPage({ params }: INextPageParams) {
       </section>
       <section className='grow space-y-6 overflow-hidden'>
         <TitledStreamingSection
-          title='Biography'
+          title={t('PersonBiography.title')}
           fallback={<TextSkeleton blocksCount={20} />}
         >
           <PersonBiography personId={person.id} />
         </TitledStreamingSection>
 
         <TitledStreamingSection
-          title='Known For'
+          title={t('KnownFor.title')}
           fallback={<LoadingCarousel aspect='horizontal' />}
         >
           <CombinedCredits personId={person.id} />
         </TitledStreamingSection>
 
-        <TitledSection title='Also Known As'>
+        <TitledSection title={t('AlsoKnownFor.title')}>
           <PersonKnownAs person={person} />
         </TitledSection>
       </section>

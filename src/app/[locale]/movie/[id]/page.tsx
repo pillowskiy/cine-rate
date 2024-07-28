@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 import type { INextPageParams } from '#types/index';
 import { getCreationDetails } from '#actions/getCreationDetails';
 import { MediaType } from '#config/enums';
@@ -23,6 +24,7 @@ const CreationReviews = dynamic(
 export const generateMetadata = generateCreationMetadata(MediaType.Movie);
 
 export default async function MoviePage({ params }: INextPageParams) {
+  const t = await getTranslations('Creations');
   const paramId = pipe.strToInt(params?.id);
   const [movie, error] = await getCreationDetails(paramId, MediaType.Movie);
 
@@ -34,24 +36,24 @@ export default async function MoviePage({ params }: INextPageParams) {
       <div className='grow space-y-6 overflow-hidden'>
         <CreationOverview details={movie} />
         <TitledStreamingSection
-          title='Cast'
-          subTitle={`The ${movie.title ?? movie.original_title} cast.`}
+          title={t('CreationCast.title')}
+          subTitle={t('CreationCast.description', { title: movie.title })}
           fallback={<LoadingCarousel />}
         >
           <CreationCast creationId={movie.id} mediaType={MediaType.Movie} />
         </TitledStreamingSection>
         {movie.belongs_to_collection && (
           <TitledStreamingSection
-            title='Collection'
-            subTitle={`The Ultimate Showcase of Unintentional Accumulation!`}
+            title={t('CreationCollection.title')}
+            subTitle={t('CreationCollection.description')}
             fallback={<LoadingCarousel aspect='horizontal' withText={false} />}
           >
             <CreationCollection collectionId={movie.belongs_to_collection.id} />
           </TitledStreamingSection>
         )}
         <TitledStreamingSection
-          title='Media'
-          subTitle='The media associated with this movie.'
+          title={t('CreationMediaTabs.title')}
+          subTitle={t('CreationMediaTabs.description')}
           fallback={<LoadingCarousel withText={false} />}
         >
           <CreationMediaTabs
@@ -61,8 +63,8 @@ export default async function MoviePage({ params }: INextPageParams) {
         </TitledStreamingSection>
 
         <TitledStreamingSection
-          title='Similar'
-          subTitle={`More like ${movie.title ?? movie.original_title}.`}
+          title={t('CreationSimilar.title')}
+          subTitle={t('CreationSimilar.description', { title: movie.title })}
           fallback={<LoadingCarousel aspect='horizontal' />}
         >
           <CreationSimilar creationId={movie.id} mediaType={MediaType.Movie} />

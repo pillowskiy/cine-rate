@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import type { IDetailedCollection } from '#types/collection-types';
 import { BaseFigure } from '#components/figure/base-figure';
 
@@ -6,7 +7,9 @@ interface CollectionHeaderProps {
 }
 
 export default function CollectionHeader({ details }: CollectionHeaderProps) {
+  const t = useTranslations('CollectionPage.CollectionHeader');
   const lastRealese = details.parts.findLast((el) => !!el.release_date);
+
   return (
     <header className='flex w-full flex-col items-center gap-4 overflow-hidden rounded-md border p-4 sm:flex-row'>
       <BaseFigure
@@ -25,11 +28,11 @@ export default function CollectionHeader({ details }: CollectionHeaderProps) {
 
         <div className='h-full'>
           <p className='truncate text-sm'>
-            <b>Number of movies:</b> {details.parts.length}
+            <b>{t('numberOfMovies')}:</b> {details.parts.length}
           </p>
           {!!lastRealese && (
             <p className='truncate text-sm'>
-              <b>Last realese:</b>{' '}
+              <b>{t('lastRelease')}:</b>{' '}
               {new Date(lastRealese.release_date).toLocaleDateString()}
             </p>
           )}

@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 import type { INextPageParams } from '#types/index';
 import { getCollection } from '#actions/getCollection';
 import {
@@ -14,6 +15,7 @@ import CollectionMediaTabs from './collection-media-tabs';
 export default async function CollectionPage({ params }: INextPageParams) {
   const collectionId = pipe.strToInt(params?.id);
   const [collection, error] = await getCollection(collectionId);
+  const t = await getTranslations('CollectionPage');
 
   if (error) return notFound();
 
@@ -21,15 +23,19 @@ export default async function CollectionPage({ params }: INextPageParams) {
     <main className='min-h-screen w-full space-y-6'>
       <CollectionHeader details={collection} />
       <TitledSection
-        title='Creations'
-        subTitle={`Creations that belongs to the ${collection.name}`}
+        title={t('CollectionCreations.title')}
+        subTitle={t('CollectionCreations.description', {
+          collectionName: collection.name,
+        })}
       >
         <CollectionCreations parts={collection.parts} />
       </TitledSection>
 
       <TitledStreamingSection
-        title='Media'
-        subTitle='The media associated with this collection.'
+        title={t('CollectionMediaTabs.title')}
+        subTitle={t('CollectionMediaTabs.description', {
+          collectionName: collection.name,
+        })}
         fallback={<LoadingCarousel withText={false} />}
       >
         <CollectionMediaTabs collectionId={collection.id} />

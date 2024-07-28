@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import type { IPersonDetails } from '#types/person-types';
 import { List, ListItem } from '#ui/list';
 
@@ -16,26 +17,34 @@ function getDetailedAge(person: IPersonDetails) {
     ? `- ${deathDate.toLocaleDateString()}`
     : '';
 
-  const detailedInfo = [
-    birthDateString,
-    deathDateString,
-    `(${deathDate.getFullYear() - birthDate.getFullYear()} years)`,
-  ];
+  const detailedInfo = [birthDateString, deathDateString];
 
-  return detailedInfo.join(' ');
+  return {
+    birthDateString: detailedInfo.join(' '),
+    age: deathDate.getFullYear() - birthDate.getFullYear(),
+  };
 }
 
 export default function PersonDetails({ person }: PersonDetailsProps) {
+  const t = useTranslations('PersonPage.Details');
+  const { age, birthDateString } = getDetailedAge(person);
+
   return (
     <section className='space-y-4'>
       <h1 className='truncate text-2xl font-medium'>{person.name}</h1>
 
       <List>
-        <ListItem title='Gender:' description={genders[person.gender]} />
-        <ListItem title='Birthday:' description={getDetailedAge(person)} />
-        <ListItem title='Place of birth:' description={person.place_of_birth} />
+        <ListItem title={t('gender')} description={genders[person.gender]} />
         <ListItem
-          title='Known for department:'
+          title={t('birthday')}
+          description={`${birthDateString} (${age} ${t('yearsOld')})`}
+        />
+        <ListItem
+          title={t('placeOfBirth')}
+          description={person.place_of_birth}
+        />
+        <ListItem
+          title={t('knownForDepartment')}
           description={person.known_for_department}
         />
       </List>

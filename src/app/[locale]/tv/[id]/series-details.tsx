@@ -1,4 +1,5 @@
 import type { ComponentProps } from 'react';
+import { useTranslations } from 'next-intl';
 import type { ITVDetails } from '#types/tv-types';
 import { MediaType } from '#config/enums';
 import { List, ListItem } from '#ui/list';
@@ -11,44 +12,46 @@ interface SeriesDetailsProps extends ComponentProps<'div'> {
   details: ITVDetails;
 }
 
-export default async function SeriesDetails({
+export default function SeriesDetails({
   details,
   ...props
 }: SeriesDetailsProps) {
+  const t = useTranslations('TVPage.TVDetails');
+
   return (
     <div {...props}>
       <TitledSection
-        title='Details'
-        subTitle={`Interesting about ${getTitle(details)}.`}
+        title={t('title')}
+        subTitle={t('description', { title: getTitle(details) })}
       >
         <List>
-          <ListItem title='Status:' description={details.status} />
+          <ListItem title={t('List.status')} description={details.status} />
           <ListItem
-            title='Original Language:'
+            title={t('List.originalLanguage')}
             description={details.original_language?.toUpperCase() ?? 'Unknown'}
           />
           <ListItem
-            title='Created By:'
+            title={t('List.createdBy')}
             description={details.created_by
               .map((celebrity) => celebrity.name)
               .join(', ')}
           />
           <ListItem
-            title='Number of Seasons:'
+            title={t('List.numberOfSeasons')}
             description={`${details.number_of_seasons} seasons (${details.number_of_episodes} episodes)`}
           />
           <ListItem
-            title='First Air Date:'
+            title={t('List.firstAirDate')}
             description={new Date(details.first_air_date).toDateString()}
           />
           {details.runtime && (
             <ListItem
-              title='Runtime:'
+              title={t('List.runtime')}
               description={details.runtime.toString()}
             />
           )}
           <ListItem
-            title='Production Companies:'
+            title={t('List.productionCompanies')}
             description={details.production_companies
               .map((company) => company.name)
               .join(', ')}

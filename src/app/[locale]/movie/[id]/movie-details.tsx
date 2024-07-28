@@ -1,4 +1,5 @@
 import type { ComponentProps } from 'react';
+import { getTranslations } from 'next-intl/server';
 import type { IMovieDetails } from '#types/movies-types';
 import { MediaType } from '#config/enums';
 import { List, ListItem } from '#ui/list';
@@ -25,28 +26,32 @@ export default async function MovieDetails({
   details,
   ...props
 }: MovieDetailsProps) {
+  const t = await getTranslations('MoviePage.MovieDetails');
+
   return (
     <div {...props}>
       <TitledSection
-        title='Details'
-        subTitle={`Interesting about ${getTitle(details)}.`}
+        title={t('title')}
+        subTitle={t('description', { title: getTitle(details) })}
       >
         <List>
-          <ListItem title='Status:' description={details.status} />
+          <ListItem title={t('List.status')} description={details.status} />
           <ListItem
-            title='Original Language:'
-            description={details.original_language?.toUpperCase() ?? 'Unknown'}
+            title={t('List.originalLanguage')}
+            description={
+              details.original_language?.toUpperCase() ?? t('noInfo')
+            }
           />
           <ListItem
-            title='Budget:'
+            title={t('List.budget')}
             description={getLocaleCurrency(details.budget)}
           />
           <ListItem
-            title='Revenue:'
+            title={t('List.revenue')}
             description={getLocaleCurrency(details.revenue)}
           />
           <ListItem
-            title='Production Companies:'
+            title={t('List.productionCompanies')}
             description={details.production_companies
               .map((company) => company.name)
               .join(', ')}

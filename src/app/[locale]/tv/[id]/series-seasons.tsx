@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import type { ITVDetails } from '#types/tv-types';
 import { Button } from '#ui/button';
 import { SeasonArticle } from '#components/article/season-article';
@@ -9,7 +10,9 @@ interface SerriesSeasonsProps {
   details: ITVDetails;
 }
 
-export default function SerriesSeasons({ details }: SerriesSeasonsProps) {
+export default function SeriesSeasons({ details }: SerriesSeasonsProps) {
+  const t = useTranslations('TVPage.SeriesSeasons');
+
   const title =
     details.title || details.original_title || details.original_name;
   const currentSeason = details.seasons.filter((s) => s.air_date).at(-1);
@@ -17,7 +20,7 @@ export default function SerriesSeasons({ details }: SerriesSeasonsProps) {
   if (!currentSeason) return null;
 
   return (
-    <TitledSection title='Seasons' subTitle={`Seasons of the ${title} series`}>
+    <TitledSection title={t('title')} subTitle={t('description', { title })}>
       <SeasonArticle
         className='rounded-md border p-4'
         season={currentSeason}
@@ -31,7 +34,11 @@ export default function SerriesSeasons({ details }: SerriesSeasonsProps) {
               passHref
               legacyBehavior
             >
-              <Button>More about Season {currentSeason.season_number}</Button>
+              <Button>
+                {t('moreAboutSeason', {
+                  seasonNumber: currentSeason.season_number,
+                })}
+              </Button>
             </Link>
             <SeasonsDialog seriesId={details.id} seasons={details.seasons} />
           </div>
