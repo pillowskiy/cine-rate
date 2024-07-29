@@ -1,14 +1,15 @@
 import type { ReactNode } from 'react';
 import { Star } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
 import type { ISeason } from '#types/tv-types';
-import { cn } from '#libs/index';
-import { buildImagePath } from '#libs/tmdb';
 import {
   BaseArticle,
   BaseArticleContent,
   BaseArticleFigure,
   type BaseArticleProps,
-} from './base-article';
+} from '#components/article/base-article';
+import { cn } from '#libs/index';
+import { buildImagePath } from '#libs/tmdb';
 
 interface SeasonArticleProps extends BaseArticleProps {
   action?: ReactNode;
@@ -21,6 +22,9 @@ export function SeasonArticle({
   className,
   ...props
 }: SeasonArticleProps) {
+  const t = useTranslations('Articles.SeasonArticle');
+  const locale = useLocale();
+
   return (
     <BaseArticle
       className={cn(
@@ -47,12 +51,20 @@ export function SeasonArticle({
         <div className='flex items-center text-xs'>
           <Star className='mr-1 size-4 fill-yellow-300 text-yellow-400' />
           <span>{season.vote_average.toFixed(1)}</span>
-          <span className='ml-auto'>{season.episode_count} Episodes</span>
+          <span className='ml-auto'>
+            {t('episodesCount', { episodesCount: season.episode_count })}
+          </span>
         </div>
 
         <p className='my-4 text-sm tracking-tight sm:text-base'>
-          Season {season.season_number} premiered on{' '}
-          {new Date(season.air_date).toDateString()}
+          {t('premieredOn', {
+            seasonName: season.name,
+            premieredOn: new Intl.DateTimeFormat(locale, {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            }).format(new Date(season.air_date)),
+          })}
         </p>
 
         {!!action && action}

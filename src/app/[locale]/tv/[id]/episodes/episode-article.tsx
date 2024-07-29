@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { Star } from 'lucide-react';
+import { useLocale } from 'next-intl';
 import type { IEpisode } from '#types/tv-types';
 import {
   BaseArticle,
@@ -16,6 +17,8 @@ interface EpisodeArticleProps extends BaseArticleProps {
 
 export const EpisodeArticle = memo(
   ({ seriesId, episode, ...props }: EpisodeArticleProps) => {
+    const locale = useLocale();
+
     return (
       <BaseArticle
         className='space-y-4 rounded-md border p-4'
@@ -46,7 +49,11 @@ export const EpisodeArticle = memo(
                   <Star className='size-4 fill-yellow-300 text-yellow-400' />
                   <span>{episode.vote_average.toFixed(1)}</span>
                 </div>
-                <span>{new Date(episode.air_date).toDateString()}</span>
+                <span>
+                  {new Intl.DateTimeFormat(locale).format(
+                    new Date(episode.air_date)
+                  )}
+                </span>
               </div>
             </div>
             {!!episode.overview && <p>{episode.overview}</p>}

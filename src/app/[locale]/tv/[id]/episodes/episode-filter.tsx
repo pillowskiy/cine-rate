@@ -2,6 +2,7 @@
 
 import { useTransition } from 'react';
 import { ArrowDownUp, Loader } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import type { ITVDetails } from '#types/tv-types';
 import useQueryParams from '#hooks/useQueryParams';
 import { Button } from '#ui/button';
@@ -24,6 +25,7 @@ interface SeasonFilter {
 }
 
 export default function EpisodeFilter({ series }: EpisodeFilterProps) {
+  const t = useTranslations('EpisodesPage.EpisodeFilter');
   const { urlSearchParams, appendQueryParams } = useQueryParams<SeasonFilter>();
   const [isLoading, startTransition] = useTransition();
 
@@ -50,7 +52,7 @@ export default function EpisodeFilter({ series }: EpisodeFilterProps) {
           disabled={isLoading}
         >
           <SelectTrigger className='w-[160px] truncate'>
-            <SelectValue placeholder='Season' />
+            <SelectValue placeholder={t('seasonPlaceholder')} />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
@@ -65,14 +67,14 @@ export default function EpisodeFilter({ series }: EpisodeFilterProps) {
             </SelectGroup>
           </SelectContent>
         </Select>
-        <h2>OR</h2>
+        <h2>{t('or')}</h2>
         <Select
           value={selectedValue}
           onValueChange={onValueChange}
           disabled={isLoading}
         >
           <SelectTrigger className='w-[160px] truncate'>
-            <SelectValue placeholder='Year' />
+            <SelectValue placeholder={t('yearPlaceholder')} />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>

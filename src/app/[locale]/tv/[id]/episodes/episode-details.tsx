@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server';
 import type { BaseParams } from '#types/index';
 import type { IEpisode } from '#types/tv-types';
 import type { IEpisodeDetails } from '#types/tv-types';
@@ -33,6 +34,7 @@ export async function EpisodeDetails({
   episode,
   seriesId,
 }: EpisodeDetailsProps) {
+  const t = await getTranslations('EpisodesPage.EpisodeDetails');
   const { season_number, episode_number } = episode;
   const [details, error] = await getEpisodeDetails(
     seriesId,
@@ -45,13 +47,15 @@ export async function EpisodeDetails({
   return (
     <Accordion type='single' collapsible className='w-full'>
       <AccordionItem className='border-b-0' value='item-1'>
-        <AccordionTrigger className='p-0'>Expand</AccordionTrigger>
+        <AccordionTrigger className='p-0'>{t('expand')}</AccordionTrigger>
         <AccordionContent>
           <section className='mt-4 flex flex-col gap-4 sm:flex-row'>
             <div className='w-full min-w-[260px] sm:w-[260px]'>
               <Heading
-                title={`Crew (${details.crew.length})`}
-                description='Crew of episode.'
+                title={t('CrewSection.title', {
+                  crewNumber: details.crew.length,
+                })}
+                description={t('CrewSection.description')}
               />
               <MSeparator className='my-4' />
 
@@ -65,16 +69,12 @@ export async function EpisodeDetails({
               </ul>
             </div>
             <div className='grow'>
-              <div className='flex items-center justify-between'>
-                <div className='space-y-1'>
-                  <h2 className='text-2xl font-semibold tracking-tight'>
-                    Guest Stars ({details.guest_stars.length})
-                  </h2>
-                  <p className='text-muted-foreground text-sm'>
-                    Star-Studded Special Appearances.
-                  </p>
-                </div>
-              </div>
+              <Heading
+                title={t('GuestStartsSection.title', {
+                  guestStarsNumber: details.guest_stars.length,
+                })}
+                description={t('GuestStartsSection.description')}
+              />
               <MSeparator className='my-4' />
 
               <section className='grid max-h-[400px] gap-4 overflow-y-auto sm:max-h-[600px] md:grid-cols-2'>

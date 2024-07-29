@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import type { ISeason } from '#types/tv-types';
 import { Button } from '#ui/button';
 import {
@@ -19,15 +20,17 @@ interface SeasonsDialogProps {
 }
 
 export function SeasonsDialog({ seasons, seriesId }: SeasonsDialogProps) {
+  const t = useTranslations('Dialogs.SeasonsDialog');
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant='outline'>View all seasons</Button>
+        <Button variant='outline'>{t('triggerLabel')}</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Seasons</DialogTitle>
-          <DialogDescription>All seasons of the series</DialogDescription>
+          <DialogTitle>{t('title')}</DialogTitle>
+          <DialogDescription>{t('description')}</DialogDescription>
         </DialogHeader>
         <ScrollArea>
           <div className='max-h-[460px] space-y-4'>
@@ -46,7 +49,9 @@ export function SeasonsDialog({ seasons, seriesId }: SeasonsDialogProps) {
                     legacyBehavior
                   >
                     <DialogClose asChild>
-                      <Button className='w-full sm:w-fit'>Read more</Button>
+                      <Button className='w-full sm:w-fit'>
+                        {t('readMore')}
+                      </Button>
                     </DialogClose>
                   </Link>
                 }

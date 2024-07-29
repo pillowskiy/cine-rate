@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import type { ITVDetails } from '#types/tv-types';
 import { getTitle } from '#components/creation/common/utils';
 import { CreationStates } from '#components/creation/creation-states';
@@ -11,6 +12,8 @@ interface EpisodeHeaderProps {
 }
 
 const EpisodeHeader = memo(({ series }: EpisodeHeaderProps) => {
+  const t = useTranslations('EpisodesPage.EpisodeHeader');
+
   return (
     <header className='flex w-full flex-col items-center gap-4 overflow-hidden rounded-md border p-4 sm:flex-row'>
       <div className='w-full sm:w-fit'>
@@ -38,7 +41,7 @@ const EpisodeHeader = memo(({ series }: EpisodeHeaderProps) => {
               ({new Date(series.first_air_date).getFullYear()})
             </span>
           </div>
-          <h2 className='text-2xl font-semibold'>Episode List</h2>
+          <h2 className='text-2xl font-semibold'>{t('title')}</h2>
         </div>
         <CreationStates details={series} />
       </div>
