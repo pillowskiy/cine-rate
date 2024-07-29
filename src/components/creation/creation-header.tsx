@@ -1,4 +1,5 @@
 import { Expand, Star } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import type { MediaType } from '#config/enums';
 import { CreationTrailer } from '#components/creation/creation-trailer';
 import { ImageFromPath } from '#components/image/image-from-path';
@@ -14,10 +15,11 @@ interface CreationHeaderProps extends CreationDetailsProps {
   mediaType: MediaType;
 }
 
-export default async function MovieHeader({
+export default function CreationHeader({
   details,
   mediaType,
 }: CreationHeaderProps) {
+  const t = useTranslations('Creations.CreationHeader');
   const posterPath = buildImagePath({
     path: details.poster_path,
     scale: 'poster',
@@ -97,7 +99,7 @@ export default async function MovieHeader({
               >
                 <div className='m-auto w-fit text-center'>
                   <Expand className='sm:size-[48px] md:size-[64px]' />
-                  <p className='font-semibold'>Expand</p>
+                  <p className='font-semibold'>{t('expandPosterImage')}</p>
                 </div>
               </div>
             )}
@@ -124,7 +126,7 @@ export default async function MovieHeader({
                   </span>
                 </div>
               </div>
-              <p className='text-sm font-medium uppercase'>Rating</p>
+              <p className='text-sm font-medium uppercase'>{t('rating')}</p>
             </div>
           </div>
           <div className='grid h-auto w-full place-items-center rounded-b-md p-2 backdrop-blur-[25px] sm:h-full sm:rounded-md'>
@@ -132,7 +134,9 @@ export default async function MovieHeader({
               <h2 className='select-none text-lg font-medium uppercase leading-none sm:text-3xl md:text-4xl'>
                 {details.popularity.toFixed()}
               </h2>
-              <span className='text-sm font-medium uppercase'>Popularity</span>
+              <span className='text-sm font-medium uppercase'>
+                {t('popularity')}
+              </span>
             </div>
           </div>
         </figure>

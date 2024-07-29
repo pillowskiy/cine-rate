@@ -3,6 +3,7 @@
 import { useContext } from 'react';
 import ky from 'ky';
 import { Heart } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useOptimistic } from '#hooks/useOptimistic';
 import { Button } from '#ui/button';
 import { useToast } from '#ui/use-toast';
@@ -14,6 +15,7 @@ import type { BaseButtonProps } from './common/types';
 interface ToggleFavoriteProps extends BaseButtonProps {}
 
 export function FavoriteButton({ size, ...props }: ToggleFavoriteProps) {
+  const t = useTranslations('Creations.AccountStates.FavoriteButton');
   const [states, dispatch] = useContext(StatesContext);
   const { toast } = useToast();
   const {
@@ -68,9 +70,7 @@ export function FavoriteButton({ size, ...props }: ToggleFavoriteProps) {
           favorite && 'fill-red-500 text-red-500'
         )}
       />
-      <span className='ml-1.5'>
-        {favorite && 'fill-red-500 text-red-500' ? 'Unlist' : 'Add'}
-      </span>
+      <span className='ml-1.5'>{favorite ? t('unlist') : t('addToList')}</span>
     </Button>
   );
 }

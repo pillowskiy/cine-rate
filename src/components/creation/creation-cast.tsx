@@ -15,16 +15,14 @@ export default async function CreationCast({
   return (
     <Carousel>
       {credits?.cast.length ? (
-        credits.cast
-          .slice(0, 10)
-          .map((credit, i) => (
-            <CreditArticle
-              custom={i}
-              className='w-[120px] lg:w-[260px]'
-              key={credit.id}
-              credit={credit}
-            />
-          ))
+        credits.cast.map((credit, i) => (
+          <CreditArticle
+            custom={i}
+            className='w-[120px] lg:w-[260px]'
+            key={credit.id}
+            credit={credit}
+          />
+        ))
       ) : (
         <NotFound />
       )}

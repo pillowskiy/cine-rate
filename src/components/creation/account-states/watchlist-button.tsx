@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import ky from 'ky';
 import { BookmarkPlus } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useOptimistic } from '#hooks/useOptimistic';
 import { Button } from '#ui/button';
 import { useToast } from '#ui/use-toast';
@@ -12,6 +13,7 @@ import type { BaseButtonProps } from './common/types';
 interface RatingButtonProps extends BaseButtonProps {}
 
 export function WatchlistButton({ size, ...props }: RatingButtonProps) {
+  const t = useTranslations('Creations.AccountStates.WatchlistButton');
   const [states, dispatch] = useContext(StatesContext);
   const { toast } = useToast();
 
@@ -67,7 +69,9 @@ export function WatchlistButton({ size, ...props }: RatingButtonProps) {
           inWatchlist && 'fill-foreground'
         )}
       />
-      <span className='ml-1.5'>{inWatchlist ? 'Unlist' : 'Add'}</span>
+      <span className='ml-1.5'>
+        {inWatchlist ? t('unlist') : t('addToList')}
+      </span>
     </Button>
   );
 }

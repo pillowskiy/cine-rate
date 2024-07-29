@@ -1,14 +1,18 @@
 import { CalendarDays, Star } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
 import type { IReview } from '#types/review-types';
-import { Badge } from '../ui/badge';
-import { Card, CardContent } from '../ui/card';
-import { UserAvatar } from '../user-avatar';
+import { Badge } from '#ui/badge';
+import { Card, CardContent } from '#ui/card';
+import { UserAvatar } from '#components/user-avatar';
 
-interface ReviewCardProps {
+interface CreationReviewCardProps {
   review: IReview;
 }
 
-export function ReviewCard({ review }: ReviewCardProps) {
+export default function ReviewCard({ review }: CreationReviewCardProps) {
+  const t = useTranslations('Creations.CreationReviews.CreationReviewCard');
+  const locale = useLocale();
+
   return (
     <Card>
       <CardContent className='flex space-x-4 p-4'>
@@ -42,7 +46,11 @@ export function ReviewCard({ review }: ReviewCardProps) {
             <div className='ml-auto flex items-center'>
               <CalendarDays className='mr-1.5 size-4' />
               <span>
-                Created {new Date(review.created_at).toLocaleDateString()}
+                {t('createdAt', {
+                  createdAt: new Intl.DateTimeFormat(locale).format(
+                    new Date(review.created_at)
+                  ),
+                })}
               </span>
             </div>
           </div>

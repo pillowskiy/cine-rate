@@ -3,6 +3,7 @@
 import { type ReactNode, useEffect, useState } from 'react';
 import { type HTMLMotionProps, m } from 'framer-motion';
 import ky from 'ky';
+import { useTranslations } from 'next-intl';
 import type { AccountStatesResponse } from '#types/creation-types';
 import useFetch from '#hooks/useFetch';
 import { useUserStore } from '#store/user';
@@ -91,6 +92,7 @@ export function CreationStatesDetailed({
   className,
   ...props
 }: StatesDetailedProps) {
+  const t = useTranslations('Creations.AccountStates.CreationStatesDetailed');
   const user = useUserStore((state) => state.user);
   const [states, dispatch] = useStatesReducer();
 
@@ -124,7 +126,7 @@ export function CreationStatesDetailed({
       >
         <div className='flex w-[120px] flex-col items-center justify-center space-y-1 text-center'>
           <span className='truncate text-xs font-semibold uppercase'>
-            Favorite List
+            {t('favoriteList')}
           </span>
           <FavoriteButton
             className='h-7 text-lg text-white'
@@ -135,7 +137,7 @@ export function CreationStatesDetailed({
 
         <div className='flex w-[120px] flex-col items-center justify-center space-y-1 text-center'>
           <span className='truncate text-xs font-semibold uppercase'>
-            Your Watchlist
+            {t('watchlist')}
           </span>
           <WatchlistButton
             className='h-7 text-lg text-white'
@@ -146,7 +148,7 @@ export function CreationStatesDetailed({
 
         <div className='flex w-[120px] flex-col items-center justify-center space-y-1  text-center'>
           <span className='truncate text-xs font-semibold uppercase'>
-            Your Rating
+            {t('rating')}
           </span>
           <RatingButton
             className='h-7 text-lg text-white'

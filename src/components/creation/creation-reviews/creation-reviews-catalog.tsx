@@ -3,10 +3,10 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import ky from 'ky';
 import { ReviewResponse } from '#types/review-types';
-import { ReviewCard } from '#components/card/review-card';
 import { NotFound } from '#components/not-found';
 import type { CreationIdentifierProps } from '../common/types';
 import { PaginationActionType, PaginationContext } from './common/hooks';
+import CreationReviewCard from './creation-review-card';
 
 export function CreationReviewsCatalog({
   creationId,
@@ -53,7 +53,7 @@ export function CreationReviewsCatalog({
   return (
     <section ref={catalogRef} className='space-y-4'>
       {data.results.map((review) => (
-        <ReviewCard key={review.id} review={review} />
+        <CreationReviewCard key={review.id} review={review} />
       ))}
     </section>
   );

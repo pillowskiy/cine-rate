@@ -1,15 +1,18 @@
 import { Star, TrendingUp } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { cn } from '#libs/index';
 import type { CreationDetailsProps } from './common/types';
 
 interface CreationStatesProps extends CreationDetailsProps {}
 
 export function CreationStates({ details }: CreationStatesProps) {
+  const t = useTranslations('Creations.CreationStates');
+
   return (
     <div className='flex w-full justify-between gap-4 overflow-x-auto sm:w-fit sm:justify-start'>
       <div className='flex flex-col items-center justify-center space-y-1 text-center'>
         <span className='truncate text-xs font-semibold uppercase'>
-          TMDB Rating
+          {t('tmdbRating')}
         </span>
         <div
           className={cn(
@@ -24,7 +27,7 @@ export function CreationStates({ details }: CreationStatesProps) {
 
       <div className='flex flex-col items-center justify-center space-y-1 text-center'>
         <span className='truncate text-xs font-semibold uppercase'>
-          Popularity
+          {t('popularity')}
         </span>
         <div
           className={cn(
