@@ -4,23 +4,21 @@ import { unstable_setRequestLocale } from 'next-intl/server';
 import zod from 'zod';
 import type { AppPageParams } from '#types/index';
 import { ResourceTarget } from '#config/enums';
-import { ResourcesTabs } from '#components/resources/tabs';
 import { TitledSection } from '#components/section/titled';
-
-const paramsDto = zod.object({
-  resourceTarget: zod.nativeEnum(ResourceTarget),
-});
+import ResourcesTabs from './resources-tabs';
 
 export default function ResourcesPage({ params }: AppPageParams) {
   unstable_setRequestLocale(params.locale);
-  const parsedParams = paramsDto.safeParse(params);
+  const parsedResourceTarget = zod
+    .nativeEnum(ResourceTarget)
+    .safeParse(params.resourceTarget);
   const t = useTranslations('Account.Resources');
 
-  if (!parsedParams.success) {
+  if (!parsedResourceTarget.success) {
     return notFound();
   }
 
-  const { resourceTarget } = parsedParams.data;
+  const resourceTarget = parsedResourceTarget.data;
   return (
     <TitledSection
       className='min-h-screen'

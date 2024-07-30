@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import ky from 'ky';
 import type { CreationsResponse } from '#types/creation-types';
 import type { IPagination } from '#types/index';
 import useInfiniteScroll from '#hooks/useInfiniteScroll';
@@ -9,7 +10,6 @@ import { MediaType, ResourceTarget, ResourceType } from '#config/enums';
 import { initialPagination } from '#config/pagination';
 import { TabsContent } from '#ui/tabs';
 import { CatalogSkeletonGroup } from '#components/skeleton/catalog-skeleton-group';
-import { getResources } from './action';
 import { ResourceTabsItems } from './resources-tabs-items';
 
 type Items = CreationsResponse['results'] | null;
@@ -39,13 +39,15 @@ export default function ResourcesTabsContent({
   );
 
   const fetch = async (page: number = currentPage) => {
-    return getResources(resourceType, target, {
-      page: page + 1,
-      ...searchParamsObj,
-    }).then((data) => {
-      setItems((prev) => [...(prev || []), ...data.results]);
-      setPagination((prev) => ({ ...prev, currentPage: data.page }));
-    });
+    const searchParams = { page, ...searchParamsObj };
+    ky.get(`/api/account/${resourceType}/${target}`, {
+      searchParams,
+    })
+      .then((res) => res.json<CreationsResponse>())
+      .then((data) => {
+        setItems((prev) => [...(prev || []), ...data.results]);
+        setPagination((prev) => ({ ...prev, currentPage: data.page }));
+      });
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

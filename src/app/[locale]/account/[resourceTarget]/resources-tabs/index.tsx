@@ -7,7 +7,7 @@ interface ResourcesTabsProps {
   target: ResourceTarget;
 }
 
-export function ResourcesTabs({ target }: ResourcesTabsProps) {
+export default function ResourcesTabs({ target }: ResourcesTabsProps) {
   const t = useTranslations('mediaTypes');
 
   return (
