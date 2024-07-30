@@ -7,7 +7,11 @@ interface UserAvatarProps {
   gravatarHash?: string | null;
 }
 
-export function UserAvatar({ username, path, gravatarHash }: UserAvatarProps) {
+export default function UserAvatar({
+  username,
+  path,
+  gravatarHash,
+}: UserAvatarProps) {
   return (
     <Avatar>
       <AvatarImage

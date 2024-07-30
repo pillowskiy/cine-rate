@@ -5,15 +5,15 @@ import { LogIn } from 'lucide-react';
 import { useClientReady } from '#hooks/useClientReady';
 import { useUserStore } from '#store/user';
 import { Button } from '#ui/button';
-import { ProfileDropdown } from '#components/dropdown/profile-dropdown';
-import { UserAvatar } from '#components/user-avatar';
+import UserAvatar from './user-avatar';
+import UserProfileDropdown from './user-profile-dropdown';
 
 export function AuthButton() {
   const user = useUserStore((state) => state.user);
   const isClientReady = useClientReady();
 
   if (!isClientReady) {
-    return <div className='size-10 rounded-full bg-secondary animate-pulse' />;
+    return <div className='bg-secondary size-10 animate-pulse rounded-full' />;
   }
 
   if (!user) {
@@ -32,7 +32,7 @@ export function AuthButton() {
   }
 
   return (
-    <ProfileDropdown>
+    <UserProfileDropdown>
       <button className='rounded-full' aria-label='Profile Dropdown'>
         <UserAvatar
           path={user.avatar.tmdb.avatar_path}
@@ -40,6 +40,6 @@ export function AuthButton() {
           username={user.username}
         />
       </button>
-    </ProfileDropdown>
+    </UserProfileDropdown>
   );
 }

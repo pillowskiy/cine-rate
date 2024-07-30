@@ -3,7 +3,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import type { IReview } from '#types/review-types';
 import { Badge } from '#ui/badge';
 import { Card, CardContent } from '#ui/card';
-import { UserAvatar } from '#components/user-avatar';
+import UserAvatar from '#components/user/user-avatar';
 
 interface CreationReviewCardProps {
   review: IReview;

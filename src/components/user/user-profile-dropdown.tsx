@@ -23,11 +23,13 @@ import {
 } from '#ui/dropdown-menu';
 import { useToast } from '#ui/use-toast';
 
-interface ProfileDropdownProps {
+interface UserProfileDropdownProps {
   children: ReactNode;
 }
 
-export function ProfileDropdown({ children }: ProfileDropdownProps) {
+export default function UserProfileDropdown({
+  children,
+}: UserProfileDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const userStore = useUserStore();
   const { toast } = useToast();
