@@ -4,7 +4,7 @@ import * as React from 'react';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
 import { cn } from '#libs/index';
 
-const ScrollArea = React.forwardRef<
+const ScrollAreaRoot = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
 >(({ className, children, ...props }, ref) => (
@@ -13,12 +13,32 @@ const ScrollArea = React.forwardRef<
     className={cn('relative overflow-hidden', className)}
     {...props}
   >
-    <ScrollAreaPrimitive.Viewport className='size-full rounded-[inherit]'>
-      {children}
-    </ScrollAreaPrimitive.Viewport>
+    {children}
     <ScrollBar />
     <ScrollAreaPrimitive.Corner />
   </ScrollAreaPrimitive.Root>
+));
+ScrollAreaRoot.displayName = ScrollAreaPrimitive.Root.displayName;
+
+const ScrollAreaViewport = React.forwardRef<
+  React.ElementRef<typeof ScrollAreaPrimitive.Viewport>,
+  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Viewport>
+>(({ className, ...props }, ref) => (
+  <ScrollAreaPrimitive.Viewport
+    ref={ref}
+    className={cn('size-full rounded-[inherit]', className)}
+    {...props}
+  />
+));
+ScrollAreaViewport.displayName = ScrollAreaPrimitive.Viewport.displayName;
+
+const ScrollArea = React.forwardRef<
+  React.ElementRef<typeof ScrollAreaPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
+>(({ className, children, ...props }, ref) => (
+  <ScrollAreaRoot className={cn(className)} {...props} ref={ref}>
+    <ScrollAreaViewport>{children}</ScrollAreaViewport>
+  </ScrollAreaRoot>
 ));
 ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName;
 
@@ -44,4 +64,4 @@ const ScrollBar = React.forwardRef<
 ));
 ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName;
 
-export { ScrollArea, ScrollBar };
+export { ScrollArea, ScrollBar, ScrollAreaViewport, ScrollAreaRoot };
