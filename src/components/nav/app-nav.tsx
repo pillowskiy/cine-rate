@@ -21,7 +21,7 @@ export function AppNav({ className, ...props }: AppNavProps) {
           href={href}
           className={cn(
             'hover:text-foreground/80 transition-colors',
-            pathname === href ? 'text-foreground' : 'text-foreground/60'
+            pathname.endsWith(href) ? 'text-foreground' : 'text-foreground/60'
           )}
           {...props}
         >
