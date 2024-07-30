@@ -3,8 +3,8 @@ import { useTranslations } from 'next-intl';
 import type { ITVDetails } from '#types/tv-types';
 import { Button } from '#ui/button';
 import { SeasonArticle } from '#components/article/season-article';
-import { SeasonsDialog } from '#components/dialog/seasons-dialog';
 import { TitledSection } from '#components/section/titled';
+import SeasonsDialog from './seasons-dialog';
 
 interface SerriesSeasonsProps {
   details: ITVDetails;
