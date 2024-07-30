@@ -1,6 +1,5 @@
 'use client';
 
-import { useContext } from 'react';
 import { useTranslations } from 'next-intl';
 import type { LanguagesResponse } from '#types/configuration-types';
 import useFetch from '#hooks/useFetch';
@@ -13,11 +12,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '#ui/select';
-import { FilterContext } from '.';
+import { useCreationFilterContext } from './common/hooks';
 
 export function CreationLanguage() {
   const t = useTranslations('Creations.CreationFilterCatalog');
-  const [filter, setFilter] = useContext(FilterContext);
+  const { filter, updateFilter } = useCreationFilterContext();
   const { data: languages } = useFetch<LanguagesResponse>(
     '/api/configuration/languages'
   );
@@ -26,9 +25,7 @@ export function CreationLanguage() {
     <div className='grid w-full items-center gap-2'>
       <Label>{t('language')}</Label>
       <Select
-        onValueChange={(newValue) => {
-          setFilter((prev) => ({ ...prev, language: newValue }));
-        }}
+        onValueChange={(newValue) => updateFilter({ language: newValue })}
         defaultValue={filter.language}
       >
         <SelectTrigger disabled={!languages}>

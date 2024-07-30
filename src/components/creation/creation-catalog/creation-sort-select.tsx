@@ -12,13 +12,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '#ui/select';
-import { capitalize } from '#libs/index';
 
 interface CreationSortSelectProps {
   Sort: typeof MovieSort | typeof TVSort;
 }
 
-const sortMethodMappings = {
+const localizationSortMethodKeys = {
   [MovieSort.Popular]: 'popular',
   [MovieSort.TopRated]: 'topRated',
   [MovieSort.Upcoming]: 'upcoming',
@@ -27,23 +26,23 @@ const sortMethodMappings = {
   [TVSort.OnTheAir]: 'onTheAir',
 } satisfies Record<MovieSort | TVSort, string>;
 
-const isSortMethod = (
+const isLocalizedSortMethod = (
   method: string
-): method is keyof typeof sortMethodMappings => {
-  return method in sortMethodMappings;
+): method is keyof typeof localizationSortMethodKeys => {
+  return method in localizationSortMethodKeys;
 };
 
-export function CreationSortSelect({ Sort }: CreationSortSelectProps) {
+export default function CreationSortSelect({ Sort }: CreationSortSelectProps) {
   const t = useTranslations('Creations.CreationSortSelect');
   const { appendQueryParams, urlSearchParams } = useQueryParams();
 
-  const getMapedSortMethod = useCallback(
+  const getLocalizedSortMethod = useCallback(
     (method: string | MovieSort | TVSort): string => {
-      if (!isSortMethod(method)) {
+      if (!isLocalizedSortMethod(method)) {
         return method;
       }
 
-      return t(sortMethodMappings[method] as Parameters<typeof t>[0]);
+      return t(localizationSortMethodKeys[method] as Parameters<typeof t>[0]);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
@@ -63,7 +62,7 @@ export function CreationSortSelect({ Sort }: CreationSortSelectProps) {
         <SelectGroup>
           {Object.values(Sort).map((sortMethod) => (
             <SelectItem key={sortMethod} value={sortMethod}>
-              {getMapedSortMethod(sortMethod)}
+              {getLocalizedSortMethod(sortMethod)}
             </SelectItem>
           ))}
         </SelectGroup>

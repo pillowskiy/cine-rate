@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
+import { useCallback } from 'react';
 import { ChevronDown, Loader } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import type { GenresResponse } from '#types/genre-types';
@@ -8,7 +8,7 @@ import useFetch from '#hooks/useFetch';
 import type { MediaType } from '#config/enums';
 import { Label } from '#ui/label';
 import { Toggle } from '#ui/toggle';
-import { FilterContext } from '.';
+import { useCreationFilterContext } from './common/hooks';
 
 interface CreationGenresProps {
   mediaType: MediaType;
@@ -16,8 +16,28 @@ interface CreationGenresProps {
 
 export function CreationGenres({ mediaType }: CreationGenresProps) {
   const t = useTranslations('Creations.CreationFilterCatalog');
-  const [filter, setFilter] = useContext(FilterContext);
-  const genreIds = filter.with_genres?.split(',').map(Number) || [];
+  const { filter, updateFilter } = useCreationFilterContext();
+  const genreIds = filter.with_genres?.split(',').map(Number) ?? [];
+
+  const removeGenre = useCallback(
+    (genreId: number) => {
+      updateFilter({
+        with_genres: genreIds.filter((id) => id !== genreId).join(','),
+      });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [genreIds]
+  );
+
+  const addGenre = useCallback(
+    (genreId: number) => {
+      updateFilter({
+        with_genres: [...genreIds, genreId].join(','),
+      });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [genreIds]
+  );
 
   const { data, error } = useFetch<GenresResponse>(`/api/${mediaType}/genres/`);
 
@@ -34,20 +54,6 @@ export function CreationGenres({ mediaType }: CreationGenresProps) {
   }
 
   if (!data?.genres.length) return null;
-
-  const removeGenre = (genreId: number) => {
-    setFilter((prev) => ({
-      ...prev,
-      with_genres: genreIds.filter((id) => genreId !== id).toString(),
-    }));
-  };
-
-  const addGenre = (genreId: number) => {
-    setFilter((prev) => ({
-      ...prev,
-      with_genres: genreIds.concat(genreId).toString(),
-    }));
-  };
 
   return (
     <div className='grid w-full items-center gap-2'>

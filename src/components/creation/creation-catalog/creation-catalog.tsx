@@ -33,7 +33,7 @@ export function CreationCatalog({
       .get(`/api/${mediaType}/discover`, { searchParams })
       .then((res) => res.json<CreationsResponse>())
       .then((data) => {
-        setItems((prev) => [...(prev || []), ...data.results]);
+        setItems((prev) => [...(prev ?? []), ...data.results]);
         setPagination((prev) => ({ ...prev, currentPage: data.page }));
       });
   };
@@ -57,7 +57,7 @@ export function CreationCatalog({
       {...props}
     >
       <CreationCatalogItems mediaType={mediaType} items={items} />
-      {!!items?.length && !canScroll && <CatalogSkeletonGroup />}
+      {!canScroll && <CatalogSkeletonGroup />}
     </section>
   );
 }

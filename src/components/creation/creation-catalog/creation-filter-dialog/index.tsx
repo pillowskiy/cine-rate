@@ -1,15 +1,7 @@
 'use client';
 
-import {
-  type Dispatch,
-  type ReactNode,
-  type SetStateAction,
-  createContext,
-  useState,
-} from 'react';
+import { type ReactNode, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
-import useQueryParams from '#hooks/useQueryParams';
-import type { GetDiscoverParams } from '#actions/getDiscover';
 import type { MediaType } from '#config/enums';
 import { Button } from '#ui/button';
 import {
@@ -26,6 +18,12 @@ import { Input } from '#ui/input';
 import { Label } from '#ui/label';
 import { ScrollArea, ScrollBar } from '#ui/scroll-area';
 import { MSeparator } from '#ui/separator';
+import {
+  CreationFilterContext,
+  FilterDiscoverParams,
+  useCreationFilterParams,
+} from './common/hooks';
+import { toISO } from './common/utils';
 import { CreationGenres } from './creation-genres';
 import { CreationLanguage } from './creation-language';
 
@@ -34,29 +32,28 @@ interface CreationFilterDialogProps {
   children: ReactNode;
 }
 
-type FilterDiscoverParams = Partial<GetDiscoverParams>;
-
-export const FilterContext = createContext<
-  [FilterDiscoverParams, Dispatch<SetStateAction<FilterDiscoverParams>>]
->([{}, () => null]);
-
-function toISO(stringDate: string) {
-  if (!stringDate) return undefined;
-  return new Date(stringDate).toISOString().split('T')[0];
-}
-
-export function CreationFilterDialog({
+export default function CreationFilterDialog({
   mediaType,
   children,
 }: CreationFilterDialogProps) {
   const t = useTranslations('Creations.CreationFilterCatalog');
-  const { setQueryParams, urlSearchParams } = useQueryParams();
-  const searchParamsObj = Object.fromEntries(urlSearchParams.entries());
-  const [filter, setFilter] = useState<FilterDiscoverParams>(searchParamsObj);
+  const { filter, updateFilter, commitFilter } = useCreationFilterParams();
 
-  const updateFilter = (params: FilterDiscoverParams) => {
-    return setFilter((prev) => ({ ...prev, ...params }));
-  };
+  const onFilterInputChange = useCallback(
+    (filterKey: keyof FilterDiscoverParams) => {
+      return (e: React.ChangeEvent<HTMLInputElement>) => {
+        switch (e.target.type) {
+          case 'date':
+            updateFilter({ [filterKey]: toISO(e.target.value) });
+            break;
+          default:
+            updateFilter({ [filterKey]: e.target.value });
+        }
+      };
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   return (
     <Dialog>
@@ -66,7 +63,9 @@ export function CreationFilterDialog({
           <DialogTitle>{t('title')}</DialogTitle>
           <DialogDescription>{t('description')}</DialogDescription>
         </DialogHeader>
-        <FilterContext.Provider value={[filter, setFilter]}>
+        <CreationFilterContext.Provider
+          value={{ filter, updateFilter, commitFilter }}
+        >
           <ScrollArea>
             <div className='mr-4 max-h-[460px] space-y-4 px-2'>
               <h2>{t('releaseDate.label')}</h2>
@@ -75,11 +74,7 @@ export function CreationFilterDialog({
                   <Label htmlFor='realese_from'>{t('releaseDate.from')}</Label>
                   <Input
                     defaultValue={filter['primary_release_date.gte']}
-                    onChange={({ target }) =>
-                      updateFilter({
-                        'primary_release_date.gte': toISO(target.value),
-                      })
-                    }
+                    onChange={onFilterInputChange('primary_release_date.gte')}
                     id='realese_from'
                     type='date'
                   />
@@ -88,11 +83,7 @@ export function CreationFilterDialog({
                   <Label htmlFor='realese_to'>{t('releaseDate.to')}</Label>
                   <Input
                     defaultValue={filter['primary_release_date.lte']}
-                    onChange={({ target }) =>
-                      updateFilter({
-                        'primary_release_date.lte': toISO(target.value),
-                      })
-                    }
+                    onChange={onFilterInputChange('primary_release_date.lte')}
                     id='realese_to'
                     type='date'
                   />
@@ -107,10 +98,10 @@ export function CreationFilterDialog({
           </ScrollArea>
           <DialogFooter className='pt-4'>
             <DialogClose asChild>
-              <Button onClick={() => setQueryParams(filter)}>Search</Button>
+              <Button onClick={commitFilter}>Search</Button>
             </DialogClose>
           </DialogFooter>
-        </FilterContext.Provider>
+        </CreationFilterContext.Provider>
       </DialogContent>
     </Dialog>
   );
