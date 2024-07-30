@@ -17,7 +17,11 @@ const descriptions = [
   "The Ultimate Minimalist Experience: 'There are no items yet.'",
   'The Great Inventory Vanishing Act: A Comedy in Progress',
   "When Items Play Hide and Seek: 'There are no items yet.' Chronicles",
-];
+] as const;
+
+function getRandomDescription() {
+  return descriptions[Math.floor(Math.random() * descriptions.length)];
+}
 
 export function NotFound({
   className,
@@ -51,7 +55,7 @@ export function NotFound({
           {title || 'There are no items yet ;('}
         </h2>
         <p className='text-muted-foreground text-xs sm:text-sm'>
-          {description || descriptions[~~(Math.random() * descriptions.length)]}
+          {getRandomDescription()}
         </p>
       </div>
 

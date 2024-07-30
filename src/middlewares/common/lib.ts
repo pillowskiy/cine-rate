@@ -1,7 +1,7 @@
 import { type NextMiddleware, NextResponse } from 'next/server';
 import type { AppMiddleware, AppMiddlewareFactory } from './types';
 
-export function makeMiddlewares(
+export function createGuardedMiddlewares(
   factories: AppMiddlewareFactory[]
 ): AppMiddleware[] {
   return factories.map(
@@ -19,14 +19,14 @@ export function makeMiddlewares(
 export function stackMiddlewares(
   ...factories: AppMiddlewareFactory[]
 ): NextMiddleware {
-  const middlewares = makeMiddlewares(factories);
+  const middlewares = createGuardedMiddlewares(factories);
 
-  function makeNextMiddleware(): NextMiddleware {
+  function createChainedMiddleware(): NextMiddleware {
     const current = middlewares.pop();
     if (!current) return () => NextResponse.next();
-    const next = makeNextMiddleware();
+    const next = createChainedMiddleware();
     return (req, event) => current(req, () => next(req, event), event);
   }
 
-  return makeNextMiddleware();
+  return createChainedMiddleware();
 }

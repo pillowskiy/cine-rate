@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import ky from 'ky';
 import { Loader2, Star, Trash } from 'lucide-react';
 import type {
@@ -25,7 +25,7 @@ interface CreationRatingDialogProps {
   mediaType: MediaType;
   creationId: number;
   initialRated: AccountStatesResponse['rated'];
-  children: ReactNode;
+  children: React.ReactNode;
   onUpdate?: (data: { rating: number | null }) => void;
 }
 

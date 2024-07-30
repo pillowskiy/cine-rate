@@ -1,3 +1,3 @@
-export function getRandomWidth(dep: number = 50) {
-  return Math.random() * dep + '%';
+export function getRandomWidth(maxWidthPercent: number = 50) {
+  return Math.random() * maxWidthPercent + '%';
 }

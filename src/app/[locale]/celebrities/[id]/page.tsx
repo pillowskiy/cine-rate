@@ -26,7 +26,7 @@ export default async function PersonPage({ params }: INextPageParams) {
 
   return (
     <main className='flex flex-col gap-4 sm:flex-row'>
-      <section className='flex-[1 1 260px] space-y-6 sm:min-w-[260px]'>
+      <section className='flex-[1_1_260px] space-y-6 sm:min-w-[260px]'>
         <BaseFigure
           path={person.profile_path}
           alt='Person Avatar'
@@ -36,7 +36,7 @@ export default async function PersonPage({ params }: INextPageParams) {
         />
         <PersonDetails person={person} />
       </section>
-      <section className='grow space-y-6 overflow-hidden'>
+      <div className='grow space-y-6 overflow-hidden'>
         <TitledStreamingSection
           title={t('PersonBiography.title')}
           fallback={<TextSkeleton blocksCount={20} />}
@@ -54,7 +54,7 @@ export default async function PersonPage({ params }: INextPageParams) {
         <TitledSection title={t('AlsoKnownFor.title')}>
           <PersonKnownAs person={person} />
         </TitledSection>
-      </section>
+      </div>
     </main>
   );
 }
