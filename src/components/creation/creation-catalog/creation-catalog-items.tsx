@@ -25,8 +25,7 @@ export function CreationCatalogItems({
       key={creation.id}
       creation={creation}
       className='mb-4'
-      width={260}
-      height={390}
+      autoScale={false}
     />
   ));
 }

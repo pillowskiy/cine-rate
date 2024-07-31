@@ -20,14 +20,7 @@ export default async function TrendsCarousel() {
       {creations.results.length ? (
         <Carousel>
           {creations.results.map((creation, i) => (
-            <CreationArticle
-              custom={i}
-              key={creation.id}
-              creation={creation}
-              className='w-[160px] sm:w-[260px]'
-              width={260}
-              height={390}
-            />
+            <CreationArticle custom={i} key={creation.id} creation={creation} />
           ))}
         </Carousel>
       ) : (

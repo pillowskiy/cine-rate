@@ -2,7 +2,7 @@
 
 import { ICreation } from '#types/creation-types';
 import { MediaType } from '#config/enums';
-import { HorizontalCreationArticle } from '#components/article/creation-article';
+import { CreationHorizontalArticle } from '#components/article/creation-article';
 import Loader from '#components/loader';
 import { NotFound } from '#components/not-found';
 
@@ -21,14 +21,12 @@ export function ResourceTabsItems({
   return items.map(
     (creation) =>
       mediaType && (
-        <HorizontalCreationArticle
+        <CreationHorizontalArticle
           key={creation.id}
           defaultMediaType={mediaType}
           className='border'
           creation={creation}
           alt='Series Backdrop'
-          width={260}
-          height={190}
           withStates
         />
       )

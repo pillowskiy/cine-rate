@@ -6,7 +6,7 @@ interface CreationRibbonProps extends React.ComponentPropsWithRef<'div'> {
   creation: ICreation;
 }
 
-export function CreationRibbon({
+export default function CreationRibbon({
   creation,
   className,
   style,

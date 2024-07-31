@@ -9,8 +9,8 @@ import { useDebounce } from '#hooks/useDebounce';
 import { MediaType } from '#config/enums';
 import { Button } from '#ui/button';
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from '#ui/dialog';
+import { CreationHorizontalArticle } from '#components/article/creation-article';
 import { cn, groupBy } from '#libs/index';
-import { HorizontalCreationArticle } from '../article/creation-article';
 import { PersonArticle } from '../article/person-article';
 import { Carousel } from '../carousel';
 
@@ -140,13 +140,11 @@ export function SearchDialog() {
                       passHref
                       legacyBehavior
                     >
-                      <HorizontalCreationArticle
+                      <CreationHorizontalArticle
                         defaultMediaType={MediaType.Movie}
                         creation={movie}
                         alt='Series Backdrop'
                         onClick={() => setIsDialogOpen(false)}
-                        width={260}
-                        height={190}
                       />
                     </Link>
                   );
@@ -171,13 +169,11 @@ export function SearchDialog() {
                       passHref
                       legacyBehavior
                     >
-                      <HorizontalCreationArticle
+                      <CreationHorizontalArticle
                         defaultMediaType={MediaType.TV}
                         creation={tv}
                         onClick={() => setIsDialogOpen(false)}
                         alt='Series Backdrop'
-                        width={260}
-                        height={190}
                       />
                     </Link>
                   );

@@ -37,9 +37,6 @@ export default async function CombinedCredits({
             aspect='horizontal'
             key={credit.id}
             creation={credit}
-            className='w-[260px]'
-            width={260}
-            height={140}
           />
         ))}
     </Carousel>

@@ -21,9 +21,6 @@ export default function CollectionCreations({
           aspect='horizontal'
           key={creation.id}
           creation={creation}
-          className='w-[260px]'
-          width={260}
-          height={140}
         />
       ))}
     </Carousel>

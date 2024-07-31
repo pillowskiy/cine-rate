@@ -29,9 +29,6 @@ async function CreationCarousel({ sort }: { sort: TVSort }) {
           aspect='horizontal'
           key={creation.id}
           creation={creation}
-          className='w-[260px]'
-          width={260}
-          height={140}
         />
       ))}
       <SeeMoreResources
