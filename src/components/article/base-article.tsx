@@ -5,7 +5,7 @@ import type { ImageProps } from 'next/image';
 import { HTMLMotionProps, m } from 'framer-motion';
 import { Target, xTransitionAnimations } from '#config/animations';
 import { Button } from '#ui/button';
-import { ImageFromPath } from '#components/image/image-from-path';
+import { BaseFigure } from '#components/figure/base-figure';
 import { cn } from '#libs/index';
 
 export interface BaseArticleProps extends HTMLMotionProps<'article'> {}
@@ -49,12 +49,7 @@ export function BaseArticleContent({
 
 export interface BaseArticleFigureProps extends Omit<ImageProps, 'src'> {
   className?: string;
-  size?: 'default' | 'sm';
-  height: number;
-  width: number;
-  alt: string;
   src: string | null;
-
   aspect?: 'vertical' | 'horizontal';
 
   actionButtons?: ReturnType<typeof Button>[];
@@ -62,31 +57,18 @@ export interface BaseArticleFigureProps extends Omit<ImageProps, 'src'> {
 
 export function BaseArticleFigure({
   className,
-  height,
-  width,
-  alt,
-  src,
   loading = 'lazy',
   aspect = 'vertical',
   ...props
 }: BaseArticleFigureProps) {
   return (
-    <div
+    <BaseFigure
       className={cn(
-        'relative overflow-hidden rounded-md',
         aspect === 'vertical' ? 'aspect-[2/3]' : 'aspect-[16/9]',
         className
       )}
-    >
-      <ImageFromPath
-        className='h-auto w-full object-cover transition-all ease-in-out hover:scale-105'
-        height={height}
-        width={width}
-        alt={alt}
-        src={src}
-        loading={loading}
-        {...props}
-      />
-    </div>
+      loading={loading}
+      {...props}
+    />
   );
 }

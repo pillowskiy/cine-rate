@@ -5,9 +5,9 @@ import Image, { type ImageProps } from 'next/image';
 import { Image as FallbackIcon } from 'lucide-react';
 import { cn } from '#libs/index';
 
-type ImageFromPathProps = Omit<ImageProps, 'src'> & {
+export interface ImageFromPathProps extends Omit<ImageProps, 'src'> {
   src: string | null;
-};
+}
 
 export function ImageFromPath({
   src,
@@ -21,7 +21,6 @@ export function ImageFromPath({
   if (!src) {
     return (
       <div
-        // Prevent overriden styles from the parent component
         style={{ width: '100%', height: '100%' }}
         className={cn(className, 'bg-secondary grid place-items-center')}
       >

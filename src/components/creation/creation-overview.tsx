@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { BaseFigure } from '#components/figure/base-figure';
 import { TitledSection } from '#components/section/titled';
+import { buildImagePath } from '#libs/tmdb';
 import type { CreationDetailsProps } from './common/types';
 import { getTitle } from './common/utils';
 import { CreationGenres } from './creation-genres';
@@ -18,7 +19,8 @@ export default function CreationOverview({ details }: CreationDetailsProps) {
       <div className='flex space-x-4 sm:space-x-0'>
         <BaseFigure
           className='block aspect-[2/3] h-fit w-[120px] min-w-[120px] sm:hidden'
-          path={details.poster_path}
+          src={buildImagePath({ path: details.poster_path })}
+          alt='Creation Poster'
           width={120}
           height={180}
           quality={100}

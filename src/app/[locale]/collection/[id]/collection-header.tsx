@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import type { IDetailedCollection } from '#types/collection-types';
 import { BaseFigure } from '#components/figure/base-figure';
+import { buildImagePath } from '#libs/tmdb';
 
 interface CollectionHeaderProps {
   details: IDetailedCollection;
@@ -15,8 +16,7 @@ export default function CollectionHeader({ details }: CollectionHeaderProps) {
       <BaseFigure
         className='block aspect-[16/9] w-full min-w-[160px] rounded-md sm:w-[160px]'
         alt='Series Poster'
-        path={details.backdrop_path}
-        scale='backdrop'
+        src={buildImagePath({ path: details.backdrop_path, scale: 'backdrop' })}
         width={160}
         height={90}
       />

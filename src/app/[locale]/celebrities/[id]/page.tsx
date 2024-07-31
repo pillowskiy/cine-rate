@@ -11,6 +11,7 @@ import { LoadingCarousel } from '#components/skeleton/loading-carousel';
 import { TextSkeleton } from '#components/skeleton/text-skeleton';
 import { generatePersonMetadata } from '#libs/common/metadata';
 import { pipe } from '#libs/common/next';
+import { buildImagePath } from '#libs/tmdb';
 import CombinedCredits from './combined-credits';
 import PersonBiography from './person-biography';
 import PersonDetails from './person-details';
@@ -28,7 +29,7 @@ export default async function PersonPage({ params }: INextPageParams) {
     <main className='flex flex-col gap-4 sm:flex-row'>
       <section className='flex-[1_1_260px] space-y-6 sm:min-w-[260px]'>
         <BaseFigure
-          path={person.profile_path}
+          src={buildImagePath({ path: person.profile_path })}
           alt='Person Avatar'
           className='aspect-[2/3] h-auto w-full'
           width={260}
