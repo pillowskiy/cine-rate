@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Star } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Button } from '#ui/button';
-import { CreationRatingDialog } from '#components/dialog/creation-rating-dialog';
+import CreationRatingDialog from '#components/creation/creation-rating-dialog';
 import { cn } from '#libs/index';
 import { StatesAction, StatesContext } from './common/hooks';
 import type { BaseButtonProps } from './common/types';

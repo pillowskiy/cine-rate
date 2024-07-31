@@ -7,7 +7,6 @@ import type {
   AccountStatesResponse,
   RatingResponse,
 } from '#types/creation-types';
-import type { MediaType } from '#config/enums';
 import { Button } from '#ui/button';
 import {
   Dialog,
@@ -20,16 +19,16 @@ import {
 import { useToast } from '#ui/use-toast';
 import { cn } from '#libs/index';
 import { rejectKy } from '#libs/ky';
+import type { CreationIdentifierProps } from './common/types';
 
-interface CreationRatingDialogProps {
-  mediaType: MediaType;
-  creationId: number;
+interface CreationRatingDialogProps extends CreationIdentifierProps {
   initialRated: AccountStatesResponse['rated'];
   children: React.ReactNode;
+  // TEMP: transition to useSWR
   onUpdate?: (data: { rating: number | null }) => void;
 }
 
-export function CreationRatingDialog({
+export default function CreationRatingDialog({
   initialRated,
   mediaType,
   creationId,
