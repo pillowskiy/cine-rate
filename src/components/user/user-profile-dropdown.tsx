@@ -10,6 +10,7 @@ import {
   MessageSquare,
   Star,
 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useUserStore } from '#store/user';
 import {
   DropdownMenu,
@@ -18,7 +19,6 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '#ui/dropdown-menu';
 import { useToast } from '#ui/use-toast';
@@ -30,6 +30,7 @@ interface UserProfileDropdownProps {
 export default function UserProfileDropdown({
   children,
 }: UserProfileDropdownProps) {
+  const t = useTranslations('User.UserProfileDropdown');
   const [isOpen, setIsOpen] = useState(false);
   const userStore = useUserStore();
   const { toast } = useToast();
@@ -72,11 +73,11 @@ export default function UserProfileDropdown({
         <DropdownMenuGroup>
           <DropdownMenuItem disabled>
             <MessageSquare className='mr-2 size-4' />
-            <span>Discussions</span>
+            <span>{t('discussionsLabel')}</span>
           </DropdownMenuItem>
           <DropdownMenuItem disabled>
             <Mails className='mr-2 size-4' />
-            <span>Lists</span>
+            <span>{t('listsLabel')}</span>
           </DropdownMenuItem>
           <Link href='/account/favorite' passHref legacyBehavior>
             <DropdownMenuItem
@@ -84,7 +85,7 @@ export default function UserProfileDropdown({
               className='cursor-pointer'
             >
               <Heart className='mr-2 size-4' />
-              <span>Favorite</span>
+              <span>{t('favoritesLabel')}</span>
             </DropdownMenuItem>
           </Link>
           <Link href='/account/rated' passHref legacyBehavior>
@@ -93,7 +94,7 @@ export default function UserProfileDropdown({
               className='cursor-pointer'
             >
               <Star className='mr-2 size-4' />
-              <span>Rated</span>
+              <span>{t('ratedLabel')}</span>
             </DropdownMenuItem>
           </Link>
           <Link href='/account/watchlist' passHref legacyBehavior>
@@ -102,15 +103,14 @@ export default function UserProfileDropdown({
               className='cursor-pointer'
             >
               <BookmarkPlus className='mr-2 size-4' />
-              <span>Watch List</span>
+              <span>{t('watchlistLabel')}</span>
             </DropdownMenuItem>
           </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={logout}>
           <LogOut className='mr-2 size-4' />
-          <span>Log Out</span>
-          <DropdownMenuShortcut>⇧+Q</DropdownMenuShortcut>
+          <span>{t('logOutLabel')}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

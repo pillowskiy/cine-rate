@@ -15,7 +15,7 @@ interface CreationGenresProps {
 }
 
 export function CreationGenres({ mediaType }: CreationGenresProps) {
-  const t = useTranslations('Creations.CreationFilterCatalog');
+  const t = useTranslations('Creations.CreationCatalog.CreationsFilterDialog');
   const { filter, updateFilter } = useCreationFilterContext();
   const genreIds = filter.with_genres?.split(',').map(Number) ?? [];
 

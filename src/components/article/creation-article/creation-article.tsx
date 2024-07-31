@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import Link from 'next/link';
 import { Info, Star } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Button } from '#ui/button';
 import {
   BaseArticle,
@@ -44,6 +45,7 @@ export const CreationArticle = memo(
     autoScale = true,
     ...props
   }: CreationArticleProps) => {
+    const t = useTranslations('Articles.CreationArticle');
     const mediaType = creation.media_type || defaultMediaType;
     if (!mediaType) return null;
 
@@ -95,7 +97,11 @@ export const CreationArticle = memo(
           <div className='flex items-center text-xs'>
             <Star className='mr-1 size-4 fill-yellow-300 text-yellow-400' />
             <span>{(creation.vote_average ?? 0).toFixed(1)}</span>
-            <span className='ml-auto'>({creation.vote_count} reviews)</span>
+            <span className='ml-auto'>
+              {t('reviewsCount', {
+                reviewsCount: creation.vote_count,
+              })}
+            </span>
           </div>
         </BaseArticleContent>
       </BaseArticle>

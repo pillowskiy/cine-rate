@@ -33,7 +33,7 @@ const isLocalizedSortMethod = (
 };
 
 export default function CreationSortSelect({ Sort }: CreationSortSelectProps) {
-  const t = useTranslations('Creations.CreationSortSelect');
+  const t = useTranslations('Creations.CreationCatalog.CreationSortSelect');
   const { appendQueryParams, urlSearchParams } = useQueryParams();
 
   const getLocalizedSortMethod = useCallback(

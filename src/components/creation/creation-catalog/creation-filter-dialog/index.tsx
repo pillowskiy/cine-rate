@@ -36,7 +36,7 @@ export default function CreationFilterDialog({
   mediaType,
   children,
 }: CreationFilterDialogProps) {
-  const t = useTranslations('Creations.CreationFilterCatalog');
+  const t = useTranslations('Creations.CreationCatalog.CreationsFilterDialog');
   const { filter, updateFilter, commitFilter } = useCreationFilterParams();
 
   const onFilterInputChange = useCallback(

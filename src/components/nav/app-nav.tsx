@@ -2,6 +2,7 @@
 
 import Link, { type LinkProps } from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { OriginRoutes } from '#config/routes';
 import { cn } from '#libs/index';
 
@@ -9,7 +10,14 @@ interface AppNavProps extends Omit<LinkProps, 'href'> {
   className?: string;
 }
 
+const routeTranslationsKeyMapping = {
+  [OriginRoutes.TV]: 'tv',
+  [OriginRoutes.Movies]: 'movies',
+  [OriginRoutes.Celebrities]: 'celebrities',
+} as const satisfies Record<OriginRoutes, string>;
+
 export function AppNav({ className, ...props }: AppNavProps) {
+  const t = useTranslations('Nav.AppNav');
   const pathname = usePathname();
   const routes = Object.entries(OriginRoutes);
 
@@ -25,7 +33,7 @@ export function AppNav({ className, ...props }: AppNavProps) {
           )}
           {...props}
         >
-          {name}
+          {t(routeTranslationsKeyMapping[name as OriginRoutes])}
         </Link>
       ))}
     </nav>

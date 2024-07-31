@@ -1,8 +1,10 @@
 import { ComponentProps, memo } from 'react';
 import Link from 'next/link';
 import { Star } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
 import { CreationStatesDetailed } from '#components/creation/account-states';
 import { BaseFigure } from '#components/figure/base-figure';
+import { formatToLocaleLongDate } from '#libs/i18n';
 import { cn } from '#libs/index';
 import { buildImagePath } from '#libs/tmdb';
 import { BaseCreationArticleProps } from './common/types';
@@ -23,6 +25,8 @@ export const CreationHorizontalArticle = memo(
     defaultMediaType,
     ...props
   }: CreationHorizontalArticleProps) => {
+    const t = useTranslations('Articles.CreationArticle');
+    const locale = useLocale();
     const mediaType = defaultMediaType || creation.media_type;
     if (!mediaType) return null;
 
@@ -59,10 +63,19 @@ export const CreationHorizontalArticle = memo(
           <div className='flex items-center text-xs'>
             <Star className='mr-1.5 size-4 fill-yellow-300 text-yellow-400' />
             <span>{creation.vote_average.toFixed(1)}</span>
-            <span className='ml-2'>({creation.vote_count} reviews)</span>
+            <span className='ml-2'>
+              {t('reviewsCount', {
+                reviewsCount: creation.vote_count,
+              })}
+            </span>
           </div>
           <span className='text-xs'>
-            Realese Date: {new Date(creation.release_date).toDateString()}
+            {t('releaseDate', {
+              releaseDate: formatToLocaleLongDate(
+                locale,
+                creation.release_date
+              ),
+            })}
           </span>
         </div>
 

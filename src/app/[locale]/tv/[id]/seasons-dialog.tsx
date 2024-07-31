@@ -23,7 +23,7 @@ export default function SeasonsDialog({
   seasons,
   seriesId,
 }: SeasonsDialogProps) {
-  const t = useTranslations('Dialogs.SeasonsDialog');
+  const t = useTranslations('TVPage.SeriesSeasons.SeasonsDialog');
 
   return (
     <Dialog>

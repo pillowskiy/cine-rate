@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import type { IDetailedCollection } from '#types/collection-types';
 import { Button } from '#ui/button';
 import { cn } from '#libs/index';
@@ -19,6 +20,8 @@ export function CollectionArticle({
   className,
   ...props
 }: CollectionArticle) {
+  const t = useTranslations('Articles.CollectionArticle');
+
   return (
     <BaseArticle
       className={cn('flex w-full items-center sm:gap-4', className)}
@@ -44,7 +47,7 @@ export function CollectionArticle({
         </p>
 
         <Link href={`/collection/${collection.id}`} passHref legacyBehavior>
-          <Button>View the collection</Button>
+          <Button>{t('viewCollection')}</Button>
         </Link>
       </BaseArticleContent>
     </BaseArticle>

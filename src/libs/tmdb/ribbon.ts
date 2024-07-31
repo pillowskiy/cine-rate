@@ -1,29 +1,29 @@
 import type { ICreation } from '#types/creation-types';
 
 interface IRibbon {
-  name: string;
+  value: string;
   color: string;
 }
 
 export const ribbons = {
   popular: {
-    name: 'Popular',
+    value: 'popular',
     color: '#562275 ',
   },
   top_rated: {
-    name: 'Top Rated',
+    value: 'topRated',
     color: '#3d2e9e ',
   },
   novelty: {
-    name: 'Novelty',
+    value: 'novelty',
     color: '#FF4500 ',
   },
   old_classic: {
-    name: 'Old Classic',
+    value: 'oldClassic',
     color: '#757575 ',
   },
   legendary: {
-    name: 'Legendary',
+    value: 'legendary',
     color: '#F5C518',
   },
 } as const satisfies Record<string, IRibbon>;
@@ -31,7 +31,9 @@ export const ribbons = {
 /*
  * TEMP: I don't quite like it, but as tempopary feature it's ok ¯\_(ツ)_/¯
  */
-export function getCreationRibbon(creation: ICreation): IRibbon | null {
+export function getCreationRibbon(
+  creation: ICreation
+): (typeof ribbons)[keyof typeof ribbons] | null {
   const releaseDate = new Date(creation.release_date).getTime();
   if (
     releaseDate < new Date('01.01.1990').getTime() &&

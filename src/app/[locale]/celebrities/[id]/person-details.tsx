@@ -26,7 +26,7 @@ function getDetailedAge(person: IPersonDetails) {
 }
 
 export default function PersonDetails({ person }: PersonDetailsProps) {
-  const t = useTranslations('PersonPage.Details');
+  const t = useTranslations('PersonPage.PersonDetails');
   const { age, birthDateString } = getDetailedAge(person);
 
   return (

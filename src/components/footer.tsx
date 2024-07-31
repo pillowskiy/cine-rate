@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 export default function Footer() {
+  const t = useTranslations('Footer');
   return (
     <footer className='border-t py-6'>
       <div className='container space-y-4'>
         <div className='flex items-center gap-4'>
-          <span className='text-sm font-semibold'>Made with</span>
+          <span className='text-sm font-semibold'>{t('madeWith')}</span>
           <Link href='https://nextjs.org/'>
             <Image
               className='h-4 w-auto'
@@ -18,7 +20,7 @@ export default function Footer() {
           </Link>
         </div>
         <div className='flex items-center gap-4'>
-          <span className='text-sm font-semibold'>Data provided by</span>
+          <span className='text-sm font-semibold'>{t('dataProvidenBy')}</span>
           <Link href='https://www.themoviedb.org/'>
             <Image
               className='h-4 w-auto'

@@ -15,7 +15,7 @@ import {
 import { useCreationFilterContext } from './common/hooks';
 
 export function CreationLanguage() {
-  const t = useTranslations('Creations.CreationFilterCatalog');
+  const t = useTranslations('Creations.CreationCatalog.CreationsFilterDialog');
   const { filter, updateFilter } = useCreationFilterContext();
   const { data: languages } = useFetch<LanguagesResponse>(
     '/api/configuration/languages'

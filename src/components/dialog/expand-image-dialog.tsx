@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import {
   Dialog,
   DialogContent,
@@ -25,6 +26,7 @@ export function ExpandImageDialog({
   alt,
   children,
 }: ExpandImageDialogProps) {
+  const t = useTranslations('Dialogs.ExpandImageDialog');
   const [isOpen, setIsOpen] = useState(false);
   const imageSrc = useMemo(() => buildImagePath({ path }), [path]);
   useEffect(() => void setIsOpen(false), [imageSrc]);
@@ -37,17 +39,15 @@ export function ExpandImageDialog({
       <DialogContent className='h-fit max-h-[90vh] max-w-md overflow-hidden'>
         <DialogHeader>
           <DialogTitle>{alt}</DialogTitle>
-          <DialogDescription>
-            A Comprehensive Peek into Image Specifications
-          </DialogDescription>
+          <DialogDescription>{t('description')}</DialogDescription>
         </DialogHeader>
         <div className='flex items-center justify-between gap-4'>
-          <ChevronLeft className='size-7 cursor-pointer' />
+          <ChevronLeft className='size-7 cursor-pointer opacity-70' />
           <div className='size-full'>
             <HoverScalableImage src={imageSrc} />
             <OpenOriginalImage path={path} />
           </div>
-          <ChevronRight className='size-7 cursor-pointer' />
+          <ChevronRight className='size-7 cursor-pointer opacity-70' />
         </div>
       </DialogContent>
     </Dialog>

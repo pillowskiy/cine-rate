@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import type { ICreation } from '#types/creation-types';
 import { cn } from '#libs/index';
 import { getCreationRibbon } from '#libs/tmdb';
@@ -12,6 +13,7 @@ export default function CreationRibbon({
   style,
   ...props
 }: CreationRibbonProps) {
+  const t = useTranslations('Articles.CreationArticle.CreationRibbon');
   const ribbon = getCreationRibbon(creation);
 
   if (!ribbon) return null;
@@ -26,7 +28,7 @@ export default function CreationRibbon({
       style={Object.assign({ backgroundColor: ribbon.color }, style ?? {})}
       {...props}
     >
-      <span className='text-xs leading-none'>{ribbon.name}</span>
+      <span className='text-xs leading-none'>{t(ribbon.value)}</span>
     </div>
   );
 }

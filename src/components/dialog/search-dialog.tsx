@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import ky from 'ky';
 import { Loader, Search, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import type { MultiSearchResponse } from '#types/search-types';
 import { useDebounce } from '#hooks/useDebounce';
 import { MediaType } from '#config/enums';
@@ -26,6 +27,7 @@ type SearchedData = Record<MediaType, MultiSearchResponse['results']> | null;
 
 // TEMP: The principle of single responsibility
 export function SearchDialog() {
+  const t = useTranslations('Dialogs.SearchDialog');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<SearchedData | null>(null);
@@ -63,10 +65,8 @@ export function SearchDialog() {
             'aspect-square p-0 sm:p-4 sm:pr-12'
           )}
         >
-          <span className='hidden sm:inline-flex'>
-            Search for a creation...
-          </span>
-          <span className='sr-only'>Search for a creation...</span>
+          <span className='hidden sm:inline-flex'>{t('triggerLabel')}</span>
+          <span className='sr-only sm:hidden'>{t('triggerLabel')}</span>
           <Search className='m-auto size-5 sm:hidden' />
         </Button>
       </DialogTrigger>
@@ -92,7 +92,7 @@ export function SearchDialog() {
           {!isLoading && !!data?.person && (
             <div>
               <span className='text-foreground/70 px-2 text-sm font-semibold'>
-                Most Popular Celebrities
+                {t('foundCelebritiesLabel')}
               </span>
               <Carousel className='space-x-0'>
                 {data.person
@@ -126,7 +126,7 @@ export function SearchDialog() {
           {!isLoading && !!data?.movie && (
             <div>
               <span className='text-foreground/70 px-2 text-sm font-semibold'>
-                Most Popular Movies
+                {t('foundMoviesLabel')}
               </span>
               {data.movie
                 .sort((a, b) => b.popularity - a.popularity)
@@ -155,7 +155,7 @@ export function SearchDialog() {
           {!isLoading && !!data?.tv && (
             <div>
               <span className='text-foreground/70 px-2 text-sm font-semibold'>
-                Most Popular Series and Shows
+                {t('foundSeriesLabel')}
               </span>
               {data.tv
                 .sort((a, b) => b.popularity - a.popularity)

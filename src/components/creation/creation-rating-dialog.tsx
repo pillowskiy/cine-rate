@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react';
 import ky from 'ky';
 import { Loader2, Star, Trash } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import type {
   AccountStatesResponse,
   RatingResponse,
@@ -35,6 +36,7 @@ export default function CreationRatingDialog({
   children,
   onUpdate,
 }: CreationRatingDialogProps) {
+  const t = useTranslations('Creations.CreationRatingDialog');
   const [isRated, setIsRated] = useState(!!initialRated);
   const [rating, setRating] = useState(initialRated ? initialRated.value : 1);
   const [isLoading, setIsLoading] = useState(false);
@@ -126,11 +128,9 @@ export default function CreationRatingDialog({
           </h2>
         </div>
         <DialogHeader className='text-center sm:text-center'>
-          <DialogTitle>Rate This!</DialogTitle>
+          <DialogTitle>{t('title')}</DialogTitle>
           <DialogDescription>
-            {isRated
-              ? 'Upsert or delete your rating for this creation'
-              : 'Rate this creation right now!'}
+            {isRated ? t('upsertRatingDescription') : t('description')}
           </DialogDescription>
         </DialogHeader>
         <div className='grid h-fit place-items-center'>
@@ -172,7 +172,7 @@ export default function CreationRatingDialog({
                 {isLoading ? (
                   <Loader2 className='size-5 animate-spin' />
                 ) : (
-                  'Submit'
+                  t('submit')
                 )}
               </Button>
             </div>
