@@ -7,6 +7,7 @@ import {
   BaseArticleFigure,
   type BaseArticleProps,
 } from '#components/article/base-article';
+import { formatToLocaleLongDate } from '#libs/i18n';
 import { buildImagePath } from '#libs/tmdb';
 import { EpisodeDetails } from './episode-details';
 
@@ -49,11 +50,7 @@ export const EpisodeArticle = memo(
                   <Star className='size-4 fill-yellow-300 text-yellow-400' />
                   <span>{episode.vote_average.toFixed(1)}</span>
                 </div>
-                <span>
-                  {new Intl.DateTimeFormat(locale).format(
-                    new Date(episode.air_date)
-                  )}
-                </span>
+                <span>{formatToLocaleLongDate(locale, episode.air_date)}</span>
               </div>
             </div>
             {!!episode.overview && <p>{episode.overview}</p>}

@@ -10,17 +10,6 @@ interface HeadingProps {
   badges?: string[];
 }
 
-const headingAnimation = {
-  hidden: {
-    y: 100,
-    opacity: 0,
-  },
-  visible: {
-    y: 0,
-    opacity: 1,
-  },
-};
-
 export function Heading({ title, description, badges }: HeadingProps) {
   return (
     <m.div

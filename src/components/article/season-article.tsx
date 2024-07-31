@@ -8,6 +8,7 @@ import {
   BaseArticleFigure,
   type BaseArticleProps,
 } from '#components/article/base-article';
+import { formatToLocaleLongDate } from '#libs/i18n';
 import { cn } from '#libs/index';
 import { buildImagePath } from '#libs/tmdb';
 
@@ -59,11 +60,7 @@ export function SeasonArticle({
         <p className='my-4 text-sm tracking-tight sm:text-base'>
           {t('premieredOn', {
             seasonName: season.name,
-            premieredOn: new Intl.DateTimeFormat(locale, {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            }).format(new Date(season.air_date)),
+            premieredOn: formatToLocaleLongDate(locale, season.air_date),
           })}
         </p>
 

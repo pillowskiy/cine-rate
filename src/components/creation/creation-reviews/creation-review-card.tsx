@@ -4,6 +4,7 @@ import type { IReview } from '#types/review-types';
 import { Badge } from '#ui/badge';
 import { Card, CardContent } from '#ui/card';
 import UserAvatar from '#components/user/user-avatar';
+import { formatToLocaleShortDate } from '#libs/i18n';
 
 interface CreationReviewCardProps {
   review: IReview;
@@ -47,9 +48,7 @@ export default function ReviewCard({ review }: CreationReviewCardProps) {
               <CalendarDays className='mr-1.5 size-4' />
               <span>
                 {t('createdAt', {
-                  createdAt: new Intl.DateTimeFormat(locale).format(
-                    new Date(review.created_at)
-                  ),
+                  createdAt: formatToLocaleShortDate(locale, review.created_at),
                 })}
               </span>
             </div>

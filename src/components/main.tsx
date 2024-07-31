@@ -1,7 +1,5 @@
-import type { ReactNode } from 'react';
-
 interface MainProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export default function Main({ children }: MainProps) {
