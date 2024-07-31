@@ -10,6 +10,16 @@
     "backdrops": "Backdrops",
     "posters": "Posters"
   },
+  "Error": {
+    "title": "Oops!",
+    "description": "Something went wrong.",
+    "action": "Try Again"
+  },
+  "NotFound": {
+    "title": "Not Found",
+    "description": "The requested resource was not found.",
+    "action": "Go Home"
+  },
   "HomePage": {
     "CelebrityCarousel": {
       "title": "Celebrities",
@@ -66,7 +76,7 @@
     "AlsoKnownFor": {
       "title": "Also known for"
     },
-    "Details": {
+    "PersonDetails": {
       "gender": "Gender",
       "birthday": "Birthday",
       "placeOfBirth": "Place of Birth",
@@ -118,34 +128,94 @@
       }
     },
     "SeriesSeasons": {
+      "SeasonsDialog": {
+        "title": "Seasons",
+        "description": "All seasons fo the series",
+        "triggerLabel": "View all seasons",
+        "readMore": "Read more"
+      },
       "title": "Seasons",
       "description": "Seasons of the {title} series",
       "moreAboutSeason": "More about the {seasonNumber} season"
     }
   },
-
-  "Creations": {
-    "CreationFilterCatalog": {
-      "title": "Filtering",
-      "description": "Refine your film experience with our cutting-edge filters.",
-      "releaseDate": {
-        "label": "Release Date",
-        "from": "From",
-        "to": "To"
-      },
-      "language": "Language",
-      "chooseLanguage": "Choose a language",
-      "genres": "Genres",
-      "submit": "Search"
+  "EpisodesPage": {
+    "EpisodeHeader": {
+      "title": "Episode List"
     },
-    "CreationSortSelect": {
-      "sortResultsBy": "Sort results by",
-      "popular": "Popular",
-      "topRated": "Top Rated",
-      "upcoming": "Upcoming",
-      "nowPlaying": "Now Playing",
-      "airingToday": "Airing Today",
-      "onTheAir": "On The Air"
+    "EpisodeFilter": {
+      "or": "OR",
+      "seasonPlaceholder": "Season",
+      "yearPlaceholder": "Year"
+    },
+    "EpisodeDetails": {
+      "expand": "Expand",
+      "CrewSection": {
+        "title": "Crew ({crewNumber})",
+        "description": "Crew of episode"
+      },
+      "GuestStartsSection": {
+        "title": "Guest Stars ({guestStarsNumber})",
+        "description": "Guest stars of episode"
+      }
+    }
+  },
+
+  "Articles": {
+    "CreationArticle": {
+      "reviewsCount": "({reviewsCount} reviews)",
+      "releaseDate": "Released on {releaseDate}",
+      "CreationRibbon": {
+        "popular": "Popular",
+        "topRated": "Top Rated",
+        "novelty": "Novelty",
+        "oldClassic": "Old Classic",
+        "legendary": "Legendary"
+      }
+    },
+    "CollectionArticle": {
+      "viewCollection": "View the Collection"
+    },
+    "SeasonArticle": {
+      "episodesCount": "{episodesCount} Episodes",
+      "premieredOn": "{seasonName} premiered on {premieredOn}"
+    }
+  },
+  "Dialogs": {
+    "ExpandImageDialog": {
+      "description": "A Comprehensive Peek into Image Specifications"
+    },
+    "SearchDialog": {
+      "triggerLabel": "Search for a creation...",
+      "foundCelebritiesLabel": "Most popular Celebrities",
+      "foundMoviesLabel": "Most popular Movies",
+      "foundSeriesLabel": "Most popular Series and Shows"
+    }
+  },
+  "Creations": {
+    "CreationCatalog": {
+      "CreationsFilterDialog": {
+        "title": "Filtering",
+        "description": "Refine your film experience with our cutting-edge filters.",
+        "releaseDate": {
+          "label": "Release Date",
+          "from": "From",
+          "to": "To"
+        },
+        "language": "Language",
+        "chooseLanguage": "Choose a language",
+        "genres": "Genres",
+        "submit": "Search"
+      },
+      "CreationSortSelect": {
+        "sortResultsBy": "Sort results by",
+        "popular": "Popular",
+        "topRated": "Top Rated",
+        "upcoming": "Upcoming",
+        "nowPlaying": "Now Playing",
+        "airingToday": "Airing Today",
+        "onTheAir": "On The Air"
+      }
     },
     "CreationExternalLinks": {
       "title": "Social Links",
@@ -175,10 +245,90 @@
       "title": "Similar",
       "description": "More like {title}"
     },
+    "AccountStates": {
+      "RatingButton": {
+        "rate": "Rate"
+      },
+      "FavoriteButton": {
+        "addToList": "Add",
+        "unlist": "Unlist"
+      },
+      "WatchlistButton": {
+        "addToList": "Add",
+        "unlist": "Unlist"
+      },
+      "CreationStatesDetailed": {
+        "favoriteList": "Favorite List",
+        "watchlist": "Your Watchlist",
+        "rating": "Your Rating"
+      }
+    },
     "CreationReviews": {
       "title": "Reviews",
-      "description": "Craft reviews, inspire others"
+      "description": "Craft reviews, inspire others",
+
+      "CreationReviewCard": {
+        "createdAt": "Created {createdAt}"
+      }
+    },
+    "CreationHeader": {
+      "expandPosterImage": "Expand",
+      "rating": "Rating",
+      "popularity": "Popularity"
+    },
+    "CreationStates": {
+      "tmdbRating": "TMDB Rating",
+      "popularity": "Popularity"
+    },
+    "CreationTrailer": {
+      "VideoResource": {
+        "loadingLabel": "Processing data...",
+        "unhandledError": "O-ops! Something went wrong..",
+        "browserNotSupported": "Video playback is not supported in this browser.",
+        "openOriginalVideo": "Open Original Video",
+        "pauseTrailer": "Pause Trailer",
+        "playTrailer": "Play Trailer"
+      }
+    },
+    "CreationRatingDialog": {
+      "title": "Rate this show!",
+      "upsertRatingDescription": "Upsert or delete your rating for this creation",
+      "description": "Rate this creation in two clicks!",
+      "submit": "Submit"
     }
+  },
+  "User": {
+    "UserProfileDropdown": {
+      "discussionsLabel": "Discussions",
+      "listsLabel": "Lists",
+      "favoritesLabel": "Favorites",
+      "ratedLabel": "Rated",
+      "watchlistLabel": "Watchlist",
+      "logOutLabel": "Log Out"
+    }
+  },
+  "Nav": {
+    "AppNav": {
+      "movies": "Movies",
+      "tv": "TV",
+      "celebrities": "Celebrities"
+    },
+    "MobileNav": {
+      "themes": {
+        "dark": "Dark",
+        "light": "Light"
+      },
+      "themeLabel": "Theme",
+      "privacyLabel": "Privacy",
+      "languagesLabel": "Languages"
+    }
+  },
+  "Footer": {
+    "madeWith": "Made with",
+    "dataProvidenBy": "Data provided by"
+  },
+  "Header": {
+    "toggleTheme": "Toggle Theme"
   },
   "Toast": {
     "error": {
