@@ -1,3 +1,4 @@
+import { useLocale } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { getTrending } from '#actions/getTrending';
 import { CreationArticle } from '#components/article/creation-article';
@@ -6,7 +7,8 @@ import { NotFound } from '#components/not-found';
 import { TitledSection } from '#components/section/titled';
 
 export default async function TrendsCarousel() {
-  const [creations, error] = await getTrending();
+  const locale = useLocale();
+  const [creations, error] = await getTrending('day', { language: locale });
   const t = await getTranslations('HomePage.TrendsCarousel');
 
   if (error) return null;

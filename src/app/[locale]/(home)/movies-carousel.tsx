@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { getMovies } from '#actions/getMovies';
 import { MediaType, MovieSort } from '#config/enums';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '#ui/tabs';
@@ -16,7 +16,8 @@ const emojis: Record<MovieSort, string> = {
 };
 
 async function CreationCarousel({ sort }: { sort: MovieSort }) {
-  const [data, error] = await getMovies(sort);
+  const locale = useLocale();
+  const [data, error] = await getMovies(sort, { language: locale });
 
   if (error) return null;
 

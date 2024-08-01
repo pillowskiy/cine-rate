@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { getTV } from '#actions/getTV';
 import { MediaType, TVSort } from '#config/enums';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '#ui/tabs';
@@ -16,7 +16,8 @@ const emojis: Record<TVSort, string> = {
 };
 
 async function CreationCarousel({ sort }: { sort: TVSort }) {
-  const [data, error] = await getTV(sort);
+  const locale = useLocale();
+  const [data, error] = await getTV(sort, { language: locale });
 
   if (error) return null;
 

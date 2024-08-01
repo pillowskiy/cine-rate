@@ -33,7 +33,11 @@ export function AppNav({ className, ...props }: AppNavProps) {
           )}
           {...props}
         >
-          {t(routeTranslationsKeyMapping[name as OriginRoutes])}
+          {t(
+            routeTranslationsKeyMapping[
+              OriginRoutes[name as keyof typeof OriginRoutes]
+            ]
+          )}
         </Link>
       ))}
     </nav>

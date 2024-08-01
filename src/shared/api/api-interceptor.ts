@@ -20,7 +20,7 @@ export const $api = createFetchInterceptor(
 );
 
 $api.request.use((config) => {
-  config.params = { ...config.params, language: getNextLocale() };
+  config.params = { language: getNextLocale(), ...config.params };
   const newHeaders = new Headers(config.headers);
   newHeaders.set('Accept', 'application/json');
   newHeaders.set('Content-Type', 'application/json');
