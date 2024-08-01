@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import type { INextPageParams } from '#types/index';
+import { getTranslations } from 'next-intl/server';
+import type { AppPageParams, INextPageParams } from '#types/index';
 import { getCreationDetails } from '#actions/getCreationDetails';
 import { getPersonDetails } from '#actions/getPersonDetails';
 import type { MediaType } from '#config/enums';
@@ -10,22 +11,28 @@ export const APP_URL =
   process.env.NEXT_PUBLIC_APP_URL || 'https://cine-rate.vercel.app/';
 
 export function generateCreationMetadata(mediaType: MediaType) {
-  return async ({ params }: INextPageParams): Promise<Metadata> => {
+  return async ({ params }: AppPageParams): Promise<Metadata> => {
     const creationId = pipe.strToInt(params.id);
     const url = APP_URL + `${mediaType}/${creationId}`;
 
-    const [creation, error] = await getCreationDetails(creationId, mediaType);
+    const t = await getTranslations({
+      locale: params.locale,
+      namespace: 'CreationMetadata',
+    });
+    const [creation, error] = await getCreationDetails(creationId, mediaType, {
+      language: params.locale,
+    });
 
     if (error) {
       return generateNotFoundMetadata({
         url,
-        description: `🙈 Some creation with id ${creationId} that couldn't be found`,
+        description: t('error', { creationId }),
       });
     }
 
     const { title, original_title } = creation;
     const assignTitleException =
-      'original_name' in creation ? creation.original_name : 'Unknown';
+      'original_name' in creation ? creation.original_name : t('unknownTitle');
     const creationTitle = title || original_title || assignTitleException;
     const metadataTitle = `${creationTitle} — CineRate`;
 
@@ -71,16 +78,19 @@ export function generateNotFoundMetadata({
 }
 
 export function generatePersonMetadata() {
-  return async ({ params }: INextPageParams): Promise<Metadata> => {
+  return async ({ params }: AppPageParams): Promise<Metadata> => {
     const personId = pipe.strToInt(params.id);
     const url = APP_URL + `person/${personId}`;
 
-    const [person, error] = await getPersonDetails(personId);
+    const t = await getTranslations('PersonMetadata');
+    const [person, error] = await getPersonDetails(personId, {
+      language: params.locale,
+    });
 
     if (error) {
       return generateNotFoundMetadata({
         url,
-        description: `🙈 Some person with id ${personId} that couldn't be found`,
+        description: t('error', { personId }),
       });
     }
 

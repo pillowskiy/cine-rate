@@ -10,6 +10,13 @@
     "backdrops": "Backdrops",
     "posters": "Posters"
   },
+  "CreationMetadata": {
+    "error": "🙈 Some creation with id {creationId} that couldn't be found",
+    "unknownTitle": "Unknown"
+  },
+  "PersonMetadata": {
+    "error": "🙈 Some person with id ${personId} that couldn't be found"
+  },
   "Error": {
     "title": "Oops!",
     "description": "Something went wrong.",
