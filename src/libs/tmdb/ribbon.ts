@@ -34,7 +34,9 @@ export const ribbons = {
 export function getCreationRibbon(
   creation: ICreation
 ): (typeof ribbons)[keyof typeof ribbons] | null {
-  const releaseDate = new Date(creation.release_date).getTime();
+  const releaseDate = new Date(
+    creation.release_date || creation.first_air_date || Date.now()
+  ).getTime();
   if (
     releaseDate < new Date('01.01.1990').getTime() &&
     creation.vote_average >= 7

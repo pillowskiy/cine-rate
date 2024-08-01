@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import type { AppPageParams, INextPageParams } from '#types/index';
+import type { AppPageParams } from '#types/index';
 import { getCreationDetails } from '#actions/getCreationDetails';
 import { getPersonDetails } from '#actions/getPersonDetails';
 import type { MediaType } from '#config/enums';
