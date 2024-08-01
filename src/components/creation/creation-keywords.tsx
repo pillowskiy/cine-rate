@@ -5,8 +5,8 @@ import type { MediaType } from '#config/enums';
 import { Button } from '#ui/button';
 import { MSeparator } from '#ui/separator';
 import { Heading } from '#components/heading';
+import { getCreationTitle } from '#libs/tmdb';
 import type { CreationDetailsProps } from './common/types';
-import { getTitle } from './common/utils';
 
 interface CreationKeywordsProps extends CreationDetailsProps {
   mediaType: MediaType.Movie | MediaType.TV;
@@ -25,7 +25,7 @@ export default async function CreationKeywords({
     <div>
       <Heading
         title={t('title')}
-        description={t('description', { title: getTitle(details) })}
+        description={t('description', { title: getCreationTitle(details) })}
       />
       <MSeparator className='my-4' />
 

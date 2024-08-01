@@ -13,6 +13,7 @@ import { TitledStreamingSection } from '#components/section/titled';
 import { LoadingCarousel } from '#components/skeleton/loading-carousel';
 import { generateCreationMetadata } from '#libs/common/metadata';
 import { pipe } from '#libs/common/next';
+import { getCreationTitle } from '#libs/tmdb';
 import SeriesDetails from './series-details';
 import SeriesSeasons from './series-seasons';
 
@@ -37,7 +38,9 @@ export default async function TVPage({ params }: INextPageParams) {
         <CreationOverview details={tv} />
         <TitledStreamingSection
           title={t('CreationCast.title')}
-          subTitle={t('CreationCast.description', { title: tv.title })}
+          subTitle={t('CreationCast.description', {
+            title: getCreationTitle(tv),
+          })}
           fallback={<LoadingCarousel />}
         >
           <CreationCast creationId={tv.id} mediaType={MediaType.TV} />
@@ -55,7 +58,9 @@ export default async function TVPage({ params }: INextPageParams) {
 
         <TitledStreamingSection
           title={t('CreationSimilar.title')}
-          subTitle={t('CreationSimilar.description', { title: tv.title })}
+          subTitle={t('CreationSimilar.description', {
+            title: getCreationTitle(tv),
+          })}
           fallback={<LoadingCarousel aspect='horizontal' />}
         >
           <CreationSimilar creationId={tv.id} mediaType={MediaType.TV} />

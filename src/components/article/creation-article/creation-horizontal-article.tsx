@@ -4,9 +4,9 @@ import { Star } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { CreationStatesDetailed } from '#components/creation/account-states';
 import { BaseFigure } from '#components/figure/base-figure';
-import { formatToLocaleLongDate } from '#libs/i18n';
+import { formatToLocaleShortDate } from '#libs/i18n';
 import { cn } from '#libs/index';
-import { buildImagePath } from '#libs/tmdb';
+import { buildImagePath, getCreationReleasedDate } from '#libs/tmdb';
 import { BaseCreationArticleProps } from './common/types';
 
 interface CreationHorizontalArticleProps
@@ -28,6 +28,7 @@ export const CreationHorizontalArticle = memo(
     const t = useTranslations('Articles.CreationArticle');
     const locale = useLocale();
     const mediaType = defaultMediaType || creation.media_type;
+    const releaseDate = getCreationReleasedDate(creation);
     if (!mediaType) return null;
 
     const { title, original_title, original_name } = creation;
@@ -71,10 +72,9 @@ export const CreationHorizontalArticle = memo(
           </div>
           <span className='text-xs'>
             {t('releaseDate', {
-              releaseDate: formatToLocaleLongDate(
-                locale,
-                creation.release_date
-              ),
+              releaseDate: releaseDate
+                ? formatToLocaleShortDate(locale, releaseDate)
+                : 'N/A',
             })}
           </span>
         </div>

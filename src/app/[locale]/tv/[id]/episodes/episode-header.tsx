@@ -2,10 +2,9 @@ import { memo } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import type { ITVDetails } from '#types/tv-types';
-import { getTitle } from '#components/creation/common/utils';
 import { CreationStates } from '#components/creation/creation-states';
 import { ImageFromPath } from '#components/image/image-from-path';
-import { buildImagePath } from '#libs/tmdb';
+import { buildImagePath, getCreationTitle } from '#libs/tmdb';
 
 interface EpisodeHeaderProps {
   series: ITVDetails;
@@ -35,7 +34,7 @@ const EpisodeHeader = memo(({ series }: EpisodeHeaderProps) => {
               className='text-xl text-blue-500 transition-all hover:underline'
               href={`/tv/${series.id}`}
             >
-              {getTitle(series)}
+              {getCreationTitle(series)}
             </Link>
             <span className='text-foreground/70 text-sm'>
               ({new Date(series.first_air_date).getFullYear()})

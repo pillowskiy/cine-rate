@@ -4,6 +4,7 @@ import type { ITVDetails } from '#types/tv-types';
 import { Button } from '#ui/button';
 import { SeasonArticle } from '#components/article/season-article';
 import { TitledSection } from '#components/section/titled';
+import { getCreationTitle } from '#libs/tmdb';
 import SeasonsDialog from './seasons-dialog';
 
 interface SerriesSeasonsProps {
@@ -13,8 +14,7 @@ interface SerriesSeasonsProps {
 export default function SeriesSeasons({ details }: SerriesSeasonsProps) {
   const t = useTranslations('TVPage.SeriesSeasons');
 
-  const title =
-    details.title || details.original_title || details.original_name;
+  const title = getCreationTitle(details);
   const currentSeason = details.seasons.filter((s) => s.air_date).at(-1);
 
   if (!currentSeason) return null;

@@ -14,6 +14,7 @@ import { TitledStreamingSection } from '#components/section/titled';
 import { LoadingCarousel } from '#components/skeleton/loading-carousel';
 import { generateCreationMetadata } from '#libs/common/metadata';
 import { pipe } from '#libs/common/next';
+import { getCreationTitle } from '#libs/tmdb';
 import MovieDetails from './movie-details';
 
 const CreationReviews = dynamic(
@@ -37,7 +38,9 @@ export default async function MoviePage({ params }: INextPageParams) {
         <CreationOverview details={movie} />
         <TitledStreamingSection
           title={t('CreationCast.title')}
-          subTitle={t('CreationCast.description', { title: movie.title })}
+          subTitle={t('CreationCast.description', {
+            title: getCreationTitle(movie),
+          })}
           fallback={<LoadingCarousel />}
         >
           <CreationCast creationId={movie.id} mediaType={MediaType.Movie} />
@@ -64,7 +67,9 @@ export default async function MoviePage({ params }: INextPageParams) {
 
         <TitledStreamingSection
           title={t('CreationSimilar.title')}
-          subTitle={t('CreationSimilar.description', { title: movie.title })}
+          subTitle={t('CreationSimilar.description', {
+            title: getCreationTitle(movie),
+          })}
           fallback={<LoadingCarousel aspect='horizontal' />}
         >
           <CreationSimilar creationId={movie.id} mediaType={MediaType.Movie} />

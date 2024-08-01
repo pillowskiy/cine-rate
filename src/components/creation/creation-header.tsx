@@ -4,11 +4,14 @@ import type { MediaType } from '#config/enums';
 import { CreationTrailer } from '#components/creation/creation-trailer';
 import { ImageFromPath } from '#components/image/image-from-path';
 import { cn } from '#libs/index';
-import { buildImagePath } from '#libs/tmdb';
+import {
+  buildImagePath,
+  getCreationReleasedDate,
+  getCreationTitle,
+} from '#libs/tmdb';
 import { ExpandImageDialog } from '../dialog/expand-image-dialog';
 import { CreationStatesDetailed } from './account-states';
 import type { CreationDetailsProps } from './common/types';
-import { getRealesedDate, getTitle } from './common/utils';
 import { CreationGenres } from './creation-genres';
 
 interface CreationHeaderProps extends CreationDetailsProps {
@@ -54,11 +57,11 @@ export default function CreationHeader({
         <div className='space-y-1'>
           <div className='flex flex-col sm:flex-row sm:items-center sm:gap-2'>
             <h2 className='max-w-[600px] truncate text-2xl font-semibold tracking-tight'>
-              {getTitle(details)}
+              {getCreationTitle(details)}
             </h2>
             <div>
               <p className='truncate text-xs opacity-70 sm:text-sm'>
-                {getRealesedDate(details)}
+                {getCreationReleasedDate(details)}
               </p>
             </div>
           </div>
@@ -75,7 +78,7 @@ export default function CreationHeader({
       <div className='my-4 flex flex-col sm:flex-row sm:gap-4'>
         <ExpandImageDialog
           path={details.poster_path}
-          alt={`${getTitle(details)} posters`}
+          alt={`${getCreationTitle(details)} posters`}
         >
           <button
             aria-label='Expand Creation Poster'

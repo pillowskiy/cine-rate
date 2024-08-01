@@ -3,6 +3,7 @@ import type { CreationVideosResponse } from '#types/creation-types';
 export * from './images';
 export * from './externals-links';
 export * from './ribbon';
+export * from './creations';
 
 export function inferOfficialTrailer({ results }: CreationVideosResponse) {
   const officialTrailer = results.find(

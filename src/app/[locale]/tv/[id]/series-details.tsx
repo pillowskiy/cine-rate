@@ -3,10 +3,10 @@ import { useTranslations } from 'next-intl';
 import type { ITVDetails } from '#types/tv-types';
 import { MediaType } from '#config/enums';
 import { List, ListItem } from '#ui/list';
-import { getTitle } from '#components/creation/common/utils';
 import CreationExternalLinks from '#components/creation/creation-external-links';
 import CreationKeywords from '#components/creation/creation-keywords';
 import { TitledSection } from '#components/section/titled';
+import { getCreationTitle } from '#libs/tmdb';
 
 interface SeriesDetailsProps extends ComponentProps<'div'> {
   details: ITVDetails;
@@ -22,7 +22,7 @@ export default function SeriesDetails({
     <div {...props}>
       <TitledSection
         title={t('title')}
-        subTitle={t('description', { title: getTitle(details) })}
+        subTitle={t('description', { title: getCreationTitle(details) })}
       >
         <List>
           <ListItem title={t('List.status')} description={details.status} />

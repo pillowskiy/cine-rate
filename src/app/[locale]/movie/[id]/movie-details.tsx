@@ -3,10 +3,10 @@ import { getTranslations } from 'next-intl/server';
 import type { IMovieDetails } from '#types/movies-types';
 import { MediaType } from '#config/enums';
 import { List, ListItem } from '#ui/list';
-import { getTitle } from '#components/creation/common/utils';
 import CreationExternalLinks from '#components/creation/creation-external-links';
 import CreationKeywords from '#components/creation/creation-keywords';
 import { TitledSection } from '#components/section/titled';
+import { getCreationTitle } from '#libs/tmdb';
 
 interface MovieDetailsProps extends ComponentProps<'div'> {
   details: IMovieDetails;
@@ -32,7 +32,7 @@ export default async function MovieDetails({
     <div {...props}>
       <TitledSection
         title={t('title')}
-        subTitle={t('description', { title: getTitle(details) })}
+        subTitle={t('description', { title: getCreationTitle(details) })}
       >
         <List>
           <ListItem title={t('List.status')} description={details.status} />
