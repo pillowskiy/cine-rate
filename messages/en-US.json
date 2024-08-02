@@ -342,9 +342,21 @@
       "title": "Uh, Oh! Something went wrong.",
       "description": "{error}"
     },
-    "auth": {
+    "authApprove": {
       "title": "✅ Successfully approval!",
       "description": "You have successfully authorized us to receive and modify your data through the TMDB service."
+    },
+    "logOut": {
+      "title": "✅ Successfully logged out!",
+      "description": "You have successfully logged out of your account."
+    },
+    "submitReview": {
+      "title": "✅ Successfully submitted!",
+      "description": "Your review has been submitted."
+    },
+    "deleteReview": {
+      "title": "✅ Successfully deleted!",
+      "description": "Your review has been deleted."
     }
   }
 }

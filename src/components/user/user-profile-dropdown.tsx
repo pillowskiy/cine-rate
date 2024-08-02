@@ -31,6 +31,7 @@ export default function UserProfileDropdown({
   children,
 }: UserProfileDropdownProps) {
   const t = useTranslations('User.UserProfileDropdown');
+  const tt = useTranslations('Toast');
   const [isOpen, setIsOpen] = useState(false);
   const userStore = useUserStore();
   const { toast } = useToast();
@@ -46,14 +47,16 @@ export default function UserProfileDropdown({
       .logout()
       .then(() => {
         toast({
-          title: '✅ You are logged out',
-          description: 'You have successfully logged out of your account',
+          title: tt('logOut.title'),
+          description: tt('logOut.description'),
         });
       })
       .catch((error) => {
         toast({
-          title: 'Uh, Oh! Something went wrong.',
-          description: error.message || 'Unhandled error occurred!',
+          title: tt('error.title'),
+          description: tt('error.description', {
+            error: error.message || 'Unhandled error occurred!',
+          }),
         });
       });
 

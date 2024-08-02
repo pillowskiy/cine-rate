@@ -16,6 +16,7 @@ interface ToggleFavoriteProps extends BaseButtonProps {}
 
 export function FavoriteButton({ size, ...props }: ToggleFavoriteProps) {
   const t = useTranslations('Creations.AccountStates.FavoriteButton');
+  const tt = useTranslations('Toast');
   const [states, dispatch] = useContext(StatesContext);
   const { toast } = useToast();
   const {
@@ -44,8 +45,8 @@ export function FavoriteButton({ size, ...props }: ToggleFavoriteProps) {
         onReject: async (error) => {
           const { message } = await rejectKy(error);
           return toast({
-            title: 'Uh Oh! Something went wrong!',
-            description: message,
+            title: tt('error.title'),
+            description: tt('error.description', { error: message }),
             variant: 'destructive',
           });
         },

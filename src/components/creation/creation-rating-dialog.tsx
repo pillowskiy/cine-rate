@@ -37,6 +37,7 @@ export default function CreationRatingDialog({
   onUpdate,
 }: CreationRatingDialogProps) {
   const t = useTranslations('Creations.CreationRatingDialog');
+  const tt = useTranslations('Toast');
   const [isRated, setIsRated] = useState(!!initialRated);
   const [rating, setRating] = useState(initialRated ? initialRated.value : 1);
   const [isLoading, setIsLoading] = useState(false);
@@ -53,21 +54,21 @@ export default function CreationRatingDialog({
           }),
         })
         .then((res) => res.json<RatingResponse>())
-        .then((data) => {
+        .then(() => {
           if (onUpdate) onUpdate({ rating: isRated ? null : rating });
           setIsRated((prev) => {
             return prev || !prev;
           });
           toast({
-            title: '✅ Your review has been sent!',
-            description: data.status_message,
+            title: tt('submitReview.title'),
+            description: tt('submitReview.description'),
           });
         })
         .catch(async (error) => {
           const { message } = await rejectKy(error);
           return toast({
-            title: 'Uh Oh! Something went wrong!',
-            description: message,
+            title: tt('error.title'),
+            description: tt('error.description', { error: message }),
             variant: 'destructive',
           });
         })
@@ -87,8 +88,8 @@ export default function CreationRatingDialog({
         if (!res.ok) {
           const { message } = await rejectKy(res);
           return toast({
-            title: 'Uh Oh! Something went wrong!',
-            description: message,
+            title: tt('error.title'),
+            description: tt('error.description', { error: message }),
             variant: 'destructive',
           });
         }
@@ -97,9 +98,8 @@ export default function CreationRatingDialog({
         setIsRated(false);
         setRating(0);
         toast({
-          title: '🗑 Your review has been deleted!',
-          description:
-            'Thank you for helping to improve the quality of our resource.',
+          title: tt('deleteReview.title'),
+          description: tt('deleteReview.description'),
         });
       })
       .finally(() => setIsLoading(false));

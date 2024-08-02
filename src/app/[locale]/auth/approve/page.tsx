@@ -15,13 +15,14 @@ const availableStatuses = [200, 401, 400] as const;
  * https://github.com/vercel/next.js/issues/52799#issuecomment-1645124081
  */
 export default function ApprovePage({ searchParams }: INextPageParams) {
+  const t = useTranslations('AuthApprove');
+  const tt = useTranslations('Toast');
+
   const requestToken = pipe.string(searchParams?.request_token);
   const { toast } = useToast();
+
   const router = useRouter();
   const userStore = useUserStore();
-  const t = useTranslations('AuthApprove');
-  // TEMP: to own toastBuild foo
-  const tt = useTranslations('Toast');
 
   const getStatusDescription = useCallback((status: number) => {
     const isValidStatus = availableStatuses.includes(status as any);
@@ -35,8 +36,8 @@ export default function ApprovePage({ searchParams }: INextPageParams) {
       .approve(requestToken)
       .then(() => {
         toast({
-          title: tt('auth.title'),
-          description: tt('auth.description'),
+          title: tt('authApprove.title'),
+          description: tt('authApprove.description'),
         });
       })
       .catch((error) => {

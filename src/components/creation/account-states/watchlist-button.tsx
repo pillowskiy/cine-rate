@@ -14,6 +14,7 @@ interface RatingButtonProps extends BaseButtonProps {}
 
 export function WatchlistButton({ size, ...props }: RatingButtonProps) {
   const t = useTranslations('Creations.AccountStates.WatchlistButton');
+  const tt = useTranslations('Toast');
   const [states, dispatch] = useContext(StatesContext);
   const { toast } = useToast();
 
@@ -43,8 +44,8 @@ export function WatchlistButton({ size, ...props }: RatingButtonProps) {
         onReject: async (error) => {
           const { message } = await rejectKy(error);
           return toast({
-            title: 'Uh Oh! Something went wrong!',
-            description: message,
+            title: tt('error.title'),
+            description: tt('error.description', { error: message }),
             variant: 'destructive',
           });
         },
