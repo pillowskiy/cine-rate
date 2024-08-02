@@ -50,7 +50,7 @@ export interface GetDiscoverParams extends BaseParams {
 
 export function getDiscover<T extends MediaType>(
   mediaType: T,
-  params?: GetDiscoverParams
+  params: GetDiscoverParams = {}
 ) {
   return $api.fetch<CreationsResponse>(`/discover/${mediaType}`, { params });
 }
