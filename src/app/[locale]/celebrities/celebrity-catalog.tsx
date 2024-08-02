@@ -1,7 +1,7 @@
 'use client';
 
 import { ComponentProps, useEffect, useState } from 'react';
-import ky from 'ky';
+import ky, { SearchParamsOption } from 'ky';
 import type { IPagination } from '#types/index';
 import type { CelebritiesResponse } from '#types/person-types';
 import useInfiniteScroll from '#hooks/useInfiniteScroll';
@@ -12,6 +12,12 @@ import { CelebrityCatalogItems } from './celebrity-catalog-items';
 
 type Celebrities = CelebritiesResponse['results'];
 
+function getCelebrities(searchParams: SearchParamsOption) {
+  return ky
+    .get('/api/celebrities', { searchParams, cache: 'force-cache' })
+    .json<CelebritiesResponse>();
+}
+
 interface CreationCatalogProps extends ComponentProps<'div'> {}
 
 export function CelebrityCatalog({
@@ -19,25 +25,23 @@ export function CelebrityCatalog({
   ...props
 }: CreationCatalogProps) {
   const [items, setItems] = useState<Celebrities | null>(null);
-  const [{ currentPage }, setPagination] =
-    useState<IPagination>(initialPagination);
+  const [pagination, setPagination] = useState<IPagination>(initialPagination);
 
   const getData = async () => {
     const searchParams = {
-      page: currentPage + 1,
+      page: pagination.currentPage + 1,
     };
-    return ky
-      .get('/api/celebrities', { searchParams, cache: 'force-cache' })
-      .then((res) => res.json<CelebritiesResponse>())
+    return getCelebrities(searchParams)
       .then((data) => {
         setItems((prev) => [...(prev || []), ...data.results]);
         setPagination((prev) => ({ ...prev, currentPage: data.page }));
       })
       .catch(() => setItems(null));
   };
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => void getData(), []);
-  const { canScroll } = useInfiniteScroll(getData, currentPage);
+  const { canScroll } = useInfiniteScroll(getData, pagination.currentPage);
 
   return (
     <section

@@ -29,7 +29,7 @@ export function CreationReviewsCatalog({
       },
       cache: 'force-cache',
     })
-      .then((res) => res.json<ReviewResponse>())
+      .json<ReviewResponse>()
       .then((data) => {
         if (!state.totalPages) {
           dispatch({
@@ -43,7 +43,6 @@ export function CreationReviewsCatalog({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.page]);
 
-  // TEMP: transition to loading component
   if (!data) return null;
 
   if (!data.results?.length) {
