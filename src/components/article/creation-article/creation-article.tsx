@@ -13,6 +13,7 @@ import {
 import { StatesPopover } from '#components/creation/account-states';
 import { cn } from '#libs/index';
 import { buildImagePath } from '#libs/tmdb';
+import { tmdbSlugify } from '#libs/tmdb/slugify';
 import { BaseCreationArticleProps } from './common/types';
 import CreationRibbon from './creation-ribbon';
 
@@ -62,7 +63,7 @@ export const CreationArticle = memo(
         {...props}
       >
         <div className='relative overflow-hidden p-px'>
-          <Link href={`/${mediaType}/${creation.id}`}>
+          <Link href={`/${mediaType}/${tmdbSlugify(creation)}`}>
             <BaseArticleFigure
               src={buildImagePath(
                 aspect === 'vertical'

@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import type { INextPageParams } from '#types/index';
 import { getCreationDetails } from '#actions/getCreationDetails';
 import { MediaType } from '#config/enums';
-import { pipe } from '#libs/common/next';
+import { pipeSlugId } from '#libs/tmdb/slugify';
 import EpisodeFilter from './episode-filter';
 import EpisodeHeader from './episode-header';
 import EpisodeList from './episode-list';
@@ -11,7 +11,7 @@ export default async function EpisodesPage({
   params,
   searchParams,
 }: INextPageParams) {
-  const seriesId = pipe.strToInt(params?.id);
+  const seriesId = pipeSlugId(params.id);
   const seasonNumber = parseInt(searchParams?.season || '1');
   const sort = searchParams?.sort;
 

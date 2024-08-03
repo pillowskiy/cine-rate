@@ -7,6 +7,7 @@ import { BaseFigure } from '#components/figure/base-figure';
 import { formatToLocaleShortDate } from '#libs/i18n';
 import { cn } from '#libs/index';
 import { buildImagePath, getCreationReleasedDate } from '#libs/tmdb';
+import { tmdbSlugify } from '#libs/tmdb/slugify';
 import { BaseCreationArticleProps } from './common/types';
 
 interface CreationHorizontalArticleProps
@@ -41,7 +42,7 @@ export const CreationHorizontalArticle = memo(
         )}
         {...props}
       >
-        <Link href={`/${mediaType}/${creation.id}`}>
+        <Link href={`/${mediaType}/${tmdbSlugify(creation)}`}>
           <BaseFigure
             className='aspect-[16/9] min-w-[120px] max-w-[120px] rounded-md'
             src={buildImagePath({
@@ -55,7 +56,7 @@ export const CreationHorizontalArticle = memo(
         </Link>
         <div className='overflow-hidden'>
           <Link
-            href={`/${mediaType}/${creation.id}`}
+            href={`/${mediaType}/${tmdbSlugify(creation)}`}
             className='truncate text-lg font-semibold transition-all hover:underline'
             title={displayTitle}
           >

@@ -4,6 +4,7 @@ import type { IDetailedCollection } from '#types/collection-types';
 import { Button } from '#ui/button';
 import { cn } from '#libs/index';
 import { buildImagePath } from '#libs/tmdb';
+import { tmdbSlugify } from '#libs/tmdb/slugify';
 import {
   BaseArticle,
   BaseArticleContent,
@@ -46,7 +47,11 @@ export function CollectionArticle({
           {collection.overview}
         </p>
 
-        <Link href={`/collection/${collection.id}`} passHref legacyBehavior>
+        <Link
+          href={`/collection/${tmdbSlugify(collection)}`}
+          passHref
+          legacyBehavior
+        >
           <Button>{t('viewCollection')}</Button>
         </Link>
       </BaseArticleContent>

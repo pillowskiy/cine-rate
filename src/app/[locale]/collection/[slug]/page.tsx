@@ -7,13 +7,13 @@ import {
   TitledStreamingSection,
 } from '#components/section/titled';
 import { LoadingCarousel } from '#components/skeleton/loading-carousel';
-import { pipe } from '#libs/common/next';
+import { pipeSlugId } from '#libs/tmdb/slugify';
 import CollectionCreations from './collection-creations';
 import CollectionHeader from './collection-header';
 import CollectionMediaTabs from './collection-media-tabs';
 
 export default async function CollectionPage({ params }: INextPageParams) {
-  const collectionId = pipe.strToInt(params?.id);
+  const collectionId = pipeSlugId(params.slug);
   const [collection, error] = await getCollection(collectionId);
   const t = await getTranslations('CollectionPage');
 

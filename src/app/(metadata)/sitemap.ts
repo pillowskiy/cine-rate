@@ -4,6 +4,7 @@ import { getPopular } from '#actions/getPopular';
 import { getTV } from '#actions/getTV';
 import { MediaType, MovieSort, TVSort } from '#config/enums';
 import { $api } from '#api/api-interceptor';
+import { tmdbSlugify } from '#libs/tmdb/slugify';
 
 type Route = {
   url: string;
@@ -56,7 +57,7 @@ async function safePaginationResultRoutes(
   return promise.then(([data, error]): Route[] => {
     if (error) return [];
     return data.results.map((result) => ({
-      url: `${baseUrl}/${path}/${result.id}`,
+      url: `${baseUrl}/${path}/${tmdbSlugify(result)}`,
       lastModified: new Date().toISOString(),
     }));
   });

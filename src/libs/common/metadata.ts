@@ -4,15 +4,15 @@ import type { AppPageParams } from '#types/index';
 import { getCreationDetails } from '#actions/getCreationDetails';
 import { getPersonDetails } from '#actions/getPersonDetails';
 import type { MediaType } from '#config/enums';
-import { pipe } from '#libs/common/next';
 import { buildImagePath } from '#libs/tmdb';
+import { pipeSlugId } from '#libs/tmdb/slugify';
 
 export const APP_URL =
   process.env.NEXT_PUBLIC_APP_URL || 'https://cine-rate.vercel.app/';
 
 export function generateCreationMetadata(mediaType: MediaType) {
   return async ({ params }: AppPageParams): Promise<Metadata> => {
-    const creationId = pipe.strToInt(params.id);
+    const creationId = pipeSlugId(params.slug);
     const url = APP_URL + `${mediaType}/${creationId}`;
 
     const t = await getTranslations({
@@ -79,7 +79,7 @@ export function generateNotFoundMetadata({
 
 export function generatePersonMetadata() {
   return async ({ params }: AppPageParams): Promise<Metadata> => {
-    const personId = pipe.strToInt(params.id);
+    const personId = pipeSlugId(params.slug);
     const url = APP_URL + `person/${personId}`;
 
     const t = await getTranslations('PersonMetadata');

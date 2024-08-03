@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { ICelebrity } from '#types/person-types';
 import { cn } from '#libs/index';
 import { buildImagePath } from '#libs/tmdb';
+import { tmdbSlugify } from '#libs/tmdb/slugify';
 import {
   BaseArticle,
   BaseArticleContent,
@@ -51,7 +52,7 @@ export function PersonArticle({
       )}
       {...props}
     >
-      <Link href={`/celebrities/${person.id}`}>
+      <Link href={`/celebrities/${tmdbSlugify(person)}`}>
         <BaseArticleFigure
           className={cn(aspect === 'horizontal' && 'h-auto w-[80px]')}
           src={buildImagePath({ path: person.profile_path, scale: 'poster' })}

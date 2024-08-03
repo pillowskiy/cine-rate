@@ -10,8 +10,8 @@ import {
 import { LoadingCarousel } from '#components/skeleton/loading-carousel';
 import { TextSkeleton } from '#components/skeleton/text-skeleton';
 import { generatePersonMetadata } from '#libs/common/metadata';
-import { pipe } from '#libs/common/next';
 import { buildImagePath } from '#libs/tmdb';
+import { pipeSlugId } from '#libs/tmdb/slugify';
 import CombinedCredits from './combined-credits';
 import PersonBiography from './person-biography';
 import PersonDetails from './person-details';
@@ -20,7 +20,7 @@ import PersonKnownAs from './person-known-as';
 export const generateMetadata = generatePersonMetadata();
 
 export default async function PersonPage({ params }: INextPageParams) {
-  const personId = pipe.strToInt(params?.id);
+  const personId = pipeSlugId(params.slug);
   const [person, error] = await getPersonDetails(personId);
   const t = await getTranslations('PersonPage');
   if (error) return notFound();
