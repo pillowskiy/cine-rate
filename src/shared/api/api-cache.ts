@@ -1,19 +1,16 @@
 export const hourCacheTerm = {
-  cache: 'force-cache',
   next: {
     revalidate: 3600,
   },
 } as const;
 
 export const dayCacheTerm = {
-  cache: 'force-cache',
   next: {
     revalidate: 3600 * 24,
   },
 } as const;
 
 export const weekCacheTerm = {
-  cache: 'force-cache',
   next: {
     revalidate: 3600 * 24 * 7,
   },

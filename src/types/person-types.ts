@@ -7,23 +7,33 @@ export interface ICelebrity {
   gender: Gender;
   id: number;
   media_type: MediaType;
-  known_for: ICreation[];
   known_for_department: string;
   name: string;
   popularity: number;
   profile_path: string;
 }
 
-export interface ICredit extends Omit<ICelebrity, 'name' | 'known_for'> {
+export interface ICredit extends ICelebrity {
   credit_id: number;
   cast_id: number;
-  character: number;
+  character: string;
   original_name: string;
 }
 
+export type CrewDepartments =
+  | 'Art'
+  | 'Camera'
+  | 'Crew'
+  | 'Costume & Make-Up'
+  | 'Editing'
+  | 'Lighting'
+  | 'Production'
+  | 'Sound'
+  | 'Visual Effects';
+
 export interface ICrew extends Omit<ICredit, 'character' | 'cast_id'> {
   job: string;
-  department: string;
+  department: CrewDepartments;
 }
 
 export interface ICombinedCredits extends ICreation {
@@ -48,6 +58,7 @@ export type CelebritiesResponse = BaseResponse<ICelebrity>;
 export type CreditsResponse = {
   id: number;
   cast: ICredit[];
+  crew: ICrew[];
 };
 export type CombinedCreditsResponse = {
   id: number;

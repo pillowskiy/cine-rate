@@ -2,7 +2,12 @@ import type { ICreationLanguage, IProductionCountry } from '.';
 import type { IPartialCompany } from './company-types';
 import type { ICreationExternalIds } from './creation-types';
 import type { IPartialGenre } from './genre-types';
-import type { ICelebrity, ICredit, ICrew } from './person-types';
+import type {
+  CrewDepartments,
+  ICelebrity,
+  ICredit,
+  ICrew,
+} from './person-types';
 
 export interface ITVDetails extends ICreationExternalIds {
   created_by: ICelebrity[];
@@ -84,3 +89,34 @@ export interface ISeasonDetails extends ISeason {
 }
 
 export type SeasonDetailsResponse = ISeasonDetails;
+
+export interface ITVCreditRole {
+  credit_id: string;
+  character: string;
+  episode_count: number;
+}
+
+export interface ITVCredit extends ICelebrity {
+  roles: ITVCreditRole[];
+  total_episode_count: number;
+  order: number;
+  original_name: string;
+}
+
+export interface ITVCrewRole {
+  credit_id: string;
+  job: string;
+  episode_count: number;
+}
+
+export interface ITVCrew extends ICelebrity {
+  jobs: ITVCrewRole[];
+  total_episode_count: number;
+  department: CrewDepartments;
+}
+
+export interface IAggregateCredit {
+  id: number;
+  cast: ITVCredit[];
+  crew: ITVCrew[];
+}
