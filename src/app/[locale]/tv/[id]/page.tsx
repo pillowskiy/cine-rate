@@ -4,7 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import type { INextPageParams } from '#types/index';
 import { getCreationDetails } from '#actions/getCreationDetails';
 import { MediaType } from '#config/enums';
-import CreationCast from '#components/creation/creation-cast';
+import CreationPartialCast from '#components/creation/creation-credits/creation-partial-cast';
 import CreationHeader from '#components/creation/creation-header';
 import CreationMediaTabs from '#components/creation/creation-media-tabs';
 import CreationOverview from '#components/creation/creation-overview';
@@ -43,7 +43,7 @@ export default async function TVPage({ params }: INextPageParams) {
           })}
           fallback={<LoadingCarousel />}
         >
-          <CreationCast creationId={tv.id} mediaType={MediaType.TV} />
+          <CreationPartialCast creationId={tv.id} mediaType={MediaType.TV} />
         </TitledStreamingSection>
 
         {tv.seasons.length && <SeriesSeasons details={tv} />}

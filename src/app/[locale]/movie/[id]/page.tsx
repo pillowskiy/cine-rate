@@ -4,8 +4,8 @@ import { getTranslations } from 'next-intl/server';
 import type { INextPageParams } from '#types/index';
 import { getCreationDetails } from '#actions/getCreationDetails';
 import { MediaType } from '#config/enums';
-import CreationCast from '#components/creation/creation-cast';
 import CreationCollection from '#components/creation/creation-collection';
+import CreationPartialCast from '#components/creation/creation-credits/creation-partial-cast';
 import CreationHeader from '#components/creation/creation-header';
 import CreationMediaTabs from '#components/creation/creation-media-tabs';
 import CreationOverview from '#components/creation/creation-overview';
@@ -43,7 +43,10 @@ export default async function MoviePage({ params }: INextPageParams) {
           })}
           fallback={<LoadingCarousel />}
         >
-          <CreationCast creationId={movie.id} mediaType={MediaType.Movie} />
+          <CreationPartialCast
+            creationId={movie.id}
+            mediaType={MediaType.Movie}
+          />
         </TitledStreamingSection>
         {movie.belongs_to_collection && (
           <TitledStreamingSection

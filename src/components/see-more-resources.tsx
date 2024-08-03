@@ -34,8 +34,10 @@ export function SeeMoreResources({
   return (
     <div
       className={cn(
-        'relative grid h-fit w-[260px] place-items-center rounded-md border',
-        aspect === 'vertical' ? 'aspect-[2/3]' : 'aspect-[16/9]'
+        'relative grid h-fit place-items-center rounded-md border',
+        aspect === 'vertical'
+          ? 'aspect-[2/3] w-[160px] sm:w-[260px]'
+          : 'aspect-[16/9] w-[260px]'
       )}
     >
       <Link

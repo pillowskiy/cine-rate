@@ -200,6 +200,10 @@
     }
   },
   "Creations": {
+    "CreationCredits": {
+      "CreationCast": { "title": "Acting Credits ({creditsCount})" },
+      "CreationCrew": { "title": "Crew Credits ({creditsCount})" }
+    },
     "CreationCatalog": {
       "CreationsFilterDialog": {
         "title": "Filtering",
