@@ -9,7 +9,7 @@ import {
   AccordionTrigger,
 } from '#ui/accordion';
 import { MSeparator } from '#ui/separator';
-import { CreditArticle } from '#components/article/credit-article';
+import { PersonArticle } from '#components/article/person-article';
 import { Heading } from '#components/heading';
 import { $api } from '#api/api-interceptor';
 
@@ -79,15 +79,12 @@ export async function EpisodeDetails({
 
               <section className='grid max-h-[400px] gap-4 overflow-y-auto sm:max-h-[600px] md:grid-cols-2'>
                 {details.guest_stars.map((star, i) => (
-                  <CreditArticle
+                  <PersonArticle
                     custom={i}
-                    aspect='vertical'
-                    figureClassName='w-[80px] h-auto object-cover object-top'
-                    className='flex gap-4'
+                    aspect='horizontal'
                     key={star.id}
-                    credit={star}
-                    width={80}
-                    height={80}
+                    person={star}
+                    details={<span className='text-sm'>{star.character}</span>}
                   />
                 ))}
               </section>

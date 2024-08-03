@@ -98,7 +98,7 @@ export function SearchDialog() {
                 {data.person
                   .sort((a, b) => b.popularity - a.popularity)
                   .map((person) => {
-                    if (!('known_for' in person)) return null;
+                    if (!('name' in person)) return null;
 
                     return (
                       <Link
@@ -112,8 +112,9 @@ export function SearchDialog() {
                           className='hover:bg-accent flex cursor-pointer gap-2 rounded-md p-2 transition-all'
                         >
                           <PersonArticle
+                            person={person}
                             className='w-[120px] min-w-[120px]'
-                            celebrity={person}
+                            autoScale={false}
                           />
                         </div>
                       </Link>
@@ -132,7 +133,7 @@ export function SearchDialog() {
                 .sort((a, b) => b.popularity - a.popularity)
                 .slice(0, 3)
                 .map((movie) => {
-                  if ('known_for' in movie) return null;
+                  if ('name' in movie) return null;
                   return (
                     <Link
                       key={movie.id}
@@ -161,7 +162,7 @@ export function SearchDialog() {
                 .sort((a, b) => b.popularity - a.popularity)
                 .slice(0, 3)
                 .map((tv) => {
-                  if ('known_for' in tv) return null;
+                  if ('name' in tv) return null;
                   return (
                     <Link
                       key={tv.id}

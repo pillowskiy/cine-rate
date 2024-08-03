@@ -17,8 +17,9 @@ export function CelebrityCatalogItems({ items }: CelebrityCatalogItemsProps) {
     <PersonArticle
       custom={i}
       key={celebrity.id}
-      celebrity={celebrity}
+      person={celebrity}
       className='mb-4'
+      autoScale={false}
     />
   ));
 }

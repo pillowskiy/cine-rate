@@ -25,12 +25,7 @@ export default async function CelebrityCarousel() {
       {celebrities.results.length ? (
         <Carousel>
           {celebrities.results.map((celebrity, i) => (
-            <PersonArticle
-              custom={i}
-              key={celebrity.id}
-              celebrity={celebrity}
-              className='w-[160px] sm:w-[260px]'
-            />
+            <PersonArticle custom={i} key={celebrity.id} person={celebrity} />
           ))}
           <SeeMoreResources
             href='/celebrities'
