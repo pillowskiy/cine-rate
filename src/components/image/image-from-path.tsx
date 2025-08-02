@@ -22,9 +22,9 @@ export function ImageFromPath({
     return (
       <div
         style={{ width: '100%', height: '100%' }}
-        className={cn(className, 'bg-secondary grid place-items-center')}
+        className={cn(className, 'grid place-items-center bg-secondary')}
       >
-        <FallbackIcon className='text-primary/70 m-auto size-12' />
+        <FallbackIcon className='m-auto size-12 text-primary/70' />
       </div>
     );
   }

@@ -30,17 +30,17 @@ export default function WatchlistCarousel() {
           <h2 className='text-xl font-semibold tracking-tight sm:text-2xl'>
             {t('authForAccess')}
           </h2>
-          <p className='text-muted-foreground text-xs sm:text-sm'>
+          <p className='text-xs text-muted-foreground sm:text-sm'>
             {t('details')}
           </p>
         </div>
 
-        <Link href='/auth' passHref legacyBehavior>
-          <Button variant='outline'>
+        <Button variant='outline' asChild>
+          <Link href='/auth'>
             <LogIn className='mr-2 size-5' />
             <span className='truncate'>{t('tmdbSignin')}</span>
-          </Button>
-        </Link>
+          </Link>
+        </Button>
 
         <div className='absolute inset-0 -z-10 size-full'>
           <div className='absolute left-[45%] top-[40%] size-[24px] -translate-x-1/2 animate-pulse rounded-full bg-green-500 blur-xl sm:size-[32px]' />

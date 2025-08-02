@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { getCreationCredits } from '#actions/getCreationCredits';
 import { TitledSection } from '#components/section/titled';
 import { CreationIdentifierProps } from '../common/types';
@@ -9,7 +9,7 @@ export default async function CreationCredits({
   mediaType,
   creationId,
 }: CreationIdentifierProps) {
-  const t = useTranslations('Creations.CreationCredits');
+  const t = await getTranslations('Creations.CreationCredits');
 
   const credits = await getCreationCredits(creationId, mediaType).catch(
     () => null

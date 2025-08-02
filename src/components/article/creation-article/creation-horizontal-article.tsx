@@ -37,7 +37,7 @@ export const CreationHorizontalArticle = memo(
     return (
       <article
         className={cn(
-          'hover:bg-accent flex w-full gap-2 rounded-md p-2 transition-all',
+          'flex w-full gap-2 rounded-md p-2 transition-all hover:bg-accent',
           className
         )}
         {...props}

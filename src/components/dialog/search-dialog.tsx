@@ -62,7 +62,7 @@ export function SearchDialog() {
           variant='outline'
           onClick={() => setIsDialogOpen(true)}
           className={cn(
-            'sm:text-muted-foreground justify-start text-sm sm:w-[260px]',
+            'justify-start text-sm sm:w-[260px] sm:text-muted-foreground',
             'aspect-square p-0 sm:p-4 sm:pr-12'
           )}
         >
@@ -73,26 +73,26 @@ export function SearchDialog() {
       </DialogTrigger>
       <DialogContent className='gap-0 rounded-md p-0'>
         <div className='z-10 mt-1 flex w-full items-center justify-between gap-2 border-b px-2 pb-1'>
-          <Search className='text-foreground/70 size-4' />
+          <Search className='size-4 text-foreground/70' />
           <input
             onChange={({ target }) => setQuery(target.value.toLowerCase())}
-            className='grow border-none bg-transparent px-0 py-2 text-sm outline-hidden'
+            className='outline-hidden grow border-none bg-transparent px-0 py-2 text-sm'
             placeholder='Type a command or search...'
           />
           <DialogClose>
-            <X className='text-foreground/70 size-4 opacity-0' />
+            <X className='size-4 text-foreground/70 opacity-0' />
           </DialogClose>
         </div>
         <div className='relative h-[600px] space-y-4 overflow-y-auto p-2 sm:max-h-[400px] sm:min-h-[400px]'>
           {isLoading && (
-            <div className='bg-background fixed inset-0 grid size-full place-items-center rounded-md'>
+            <div className='fixed inset-0 grid size-full place-items-center rounded-md bg-background'>
               <Loader className='m-auto size-16 animate-spin' />
             </div>
           )}
 
           {!isLoading && !!data?.person && (
             <div>
-              <span className='text-foreground/70 px-2 text-sm font-semibold'>
+              <span className='px-2 text-sm font-semibold text-foreground/70'>
                 {t('foundCelebritiesLabel')}
               </span>
               <Carousel className='space-x-0'>
@@ -106,7 +106,7 @@ export function SearchDialog() {
                         key={person.id}
                         href={`/celebrity/${person.id}`}
                         onClick={() => setIsDialogOpen(false)}
-                        className='hover:bg-accent flex cursor-pointer gap-2 rounded-md p-2 transition-all'
+                        className='flex cursor-pointer gap-2 rounded-md p-2 transition-all hover:bg-accent'
                       >
                         <PersonArticle
                           person={person}
@@ -122,7 +122,7 @@ export function SearchDialog() {
 
           {!isLoading && !!data?.movie && (
             <div>
-              <span className='text-foreground/70 px-2 text-sm font-semibold'>
+              <span className='px-2 text-sm font-semibold text-foreground/70'>
                 {t('foundMoviesLabel')}
               </span>
               {data.movie
@@ -146,7 +146,7 @@ export function SearchDialog() {
 
           {!isLoading && !!data?.tv && (
             <div>
-              <span className='text-foreground/70 px-2 text-sm font-semibold'>
+              <span className='px-2 text-sm font-semibold text-foreground/70'>
                 {t('foundSeriesLabel')}
               </span>
               {data.tv

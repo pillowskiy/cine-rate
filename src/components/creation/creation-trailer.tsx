@@ -67,7 +67,7 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
       <div className='grid size-full place-items-center text-center'>
         <div className='flex flex-col items-center justify-center space-y-1'>
           <Loader2 className='size-[48px] animate-spin sm:size-[64px]' />
-          <span className='text-foreground/70 text-sm'>
+          <span className='text-sm text-foreground/70'>
             {t('loadingLabel')}
           </span>
         </div>
@@ -80,7 +80,7 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
       <div className='grid size-full place-items-center text-center'>
         <div className='flex flex-col items-center justify-center space-y-1 p-6'>
           <Bot className='size-[64px] animate-pulse shadow-yellow-500 ' />
-          <span className='text-foreground/70 text-sm'>
+          <span className='text-sm text-foreground/70'>
             {error?.message || t('unhandledError')}
           </span>
         </div>
@@ -89,7 +89,7 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
   }
 
   return (
-    <div className='relative size-full after:absolute after:inset-0 after:bg-linear-to-t after:from-black'>
+    <div className='after:bg-linear-to-t relative size-full after:absolute after:inset-0 after:from-black'>
       <video
         ref={videoRef}
         className='absolute bottom-0 w-full object-cover align-top'

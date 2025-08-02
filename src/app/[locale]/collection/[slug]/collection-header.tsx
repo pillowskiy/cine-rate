@@ -25,7 +25,7 @@ export default function CollectionHeader({ details }: CollectionHeaderProps) {
       <div className='flex grow flex-col items-center justify-between gap-4 sm:flex-row'>
         <div className='text-center sm:max-w-[80%] sm:text-left'>
           <h3 className='text-xl'>{details.name}</h3>
-          <p className='text-foreground/70 text-sm'>{details.overview}</p>
+          <p className='text-sm text-foreground/70'>{details.overview}</p>
         </div>
 
         <div className='h-full'>

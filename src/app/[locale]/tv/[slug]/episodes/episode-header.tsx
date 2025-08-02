@@ -36,7 +36,7 @@ const EpisodeHeader = memo(({ series }: EpisodeHeaderProps) => {
             >
               {getCreationTitle(series)}
             </Link>
-            <span className='text-foreground/70 text-sm'>
+            <span className='text-sm text-foreground/70'>
               ({new Date(series.first_air_date).getFullYear()})
             </span>
           </div>

@@ -48,7 +48,7 @@ export function CreationGenres({ mediaType }: CreationGenresProps) {
           <Loader className='mr-1.5 size-6 animate-spin' />
           <span className='animate-pulse text-sm'>Loading genres..</span>
         </div>
-        <ChevronDown className='text-foreground/50 size-4' />
+        <ChevronDown className='size-4 text-foreground/50' />
       </div>
     );
   }

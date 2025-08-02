@@ -42,7 +42,7 @@ export function YoutubeEmbedDialog({
         <div className='flex w-full flex-row gap-2'>
           <div className='flex items-center gap-2'>
             <Eye className='size-5' />
-            <span className='text-foreground/80 text-sm'>
+            <span className='text-sm text-foreground/80'>
               {Intl.NumberFormat('en', { notation: 'compact' }).format(
                 +details.viewCount
               )}{' '}
@@ -50,7 +50,7 @@ export function YoutubeEmbedDialog({
             </span>
           </div>
 
-          <span className='text-foreground/80 text-sm'>
+          <span className='text-sm text-foreground/80'>
             {formatTimeAgo(new Date(details.publishDate))}
           </span>
 
@@ -58,7 +58,7 @@ export function YoutubeEmbedDialog({
             {details.likes && (
               <div className='flex gap-x-2'>
                 <ThumbsUp className='size-5 fill-current' />
-                <span className='text-foreground/80 text-sm'>
+                <span className='text-sm text-foreground/80'>
                   {Intl.NumberFormat('en', { notation: 'compact' }).format(
                     details.likes
                   )}
@@ -69,7 +69,7 @@ export function YoutubeEmbedDialog({
             {details.dislikes && (
               <div className='flex gap-x-2'>
                 <ThumbsDown className='size-5 fill-current' />
-                <span className='text-foreground/80 text-sm'>
+                <span className='text-sm text-foreground/80'>
                   {Intl.NumberFormat('en', { notation: 'compact' }).format(
                     details.dislikes
                   )}

@@ -29,7 +29,7 @@ export default function ApprovePage(props: INextPageParams) {
     const isValidStatus = availableStatuses.includes(status as any);
     const statusKey = isValidStatus ? status.toString() : 'default';
     return `statusDescription.${statusKey}` as Parameters<typeof t>[0];
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, []);
 
   useEffect(() => {

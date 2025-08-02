@@ -33,12 +33,12 @@ export default function CreationHeader({
       <div
         className={cn(
           'absolute -left-4 top-0 -z-50 h-full w-screen overflow-hidden bg-black sm:left-0 sm:w-full sm:rounded-md',
-          'after:absolute after:inset-0 after:bg-linear-to-r after:from-black'
+          'after:bg-linear-to-r after:absolute after:inset-0 after:from-black'
         )}
       >
         <ImageFromPath
           className={
-            'aspect-video size-full scale-110 select-none object-cover object-top blur-xs'
+            'blur-xs aspect-video size-full scale-110 select-none object-cover object-top'
           }
           src={buildImagePath({
             path: details.backdrop_path,

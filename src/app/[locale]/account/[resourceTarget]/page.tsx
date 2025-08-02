@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
-import { useTranslations } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import zod from 'zod';
 import type { AppPageParams } from '#types/index';
 import { ResourceTarget } from '#config/enums';
@@ -14,7 +13,7 @@ export default async function ResourcesPage(props: AppPageParams) {
   const parsedResourceTarget = zod
     .enum(ResourceTarget)
     .safeParse(params.resourceTarget);
-  const t = useTranslations('Account.Resources');
+  const t = await getTranslations('Account.Resources');
 
   if (!parsedResourceTarget.success) {
     return notFound();

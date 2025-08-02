@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
-import { getLocale, getMessages } from 'next-intl/server';
+import { getLocale, setRequestLocale } from 'next-intl/server';
 import { AppPageParams } from '#types/index';
 import { Toaster } from '#ui/toaster';
 import Footer from '#components/footer';
@@ -71,15 +71,14 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
-  const locale = await getLocale();
+  params,
+}: AppPageParams & { children: React.ReactNode }) {
+  const { locale } = await params;
 
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={inter.className}>
-        <NextIntlClientProvider>
+        <NextIntlClientProvider locale={locale}>
           <NoInternetConnection />
           <Toaster />
           <ServeSiteProviders>

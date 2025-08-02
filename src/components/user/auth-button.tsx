@@ -13,7 +13,7 @@ export function AuthButton() {
   const isClientReady = useClientReady();
 
   if (!isClientReady) {
-    return <div className='bg-secondary size-10 animate-pulse rounded-full' />;
+    return <div className='size-10 animate-pulse rounded-full bg-secondary' />;
   }
 
   if (!user) {

@@ -45,7 +45,7 @@ export default function HoverScalableImage({ src }: HoverScalableImageProps) {
 
   return (
     <div
-      className='relative aspect-2/3 h-auto w-full cursor-zoom-in overflow-hidden rounded-md'
+      className='aspect-2/3 relative h-auto w-full cursor-zoom-in overflow-hidden rounded-md'
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -62,7 +62,7 @@ export default function HoverScalableImage({ src }: HoverScalableImageProps) {
         className={cn(
           'absolute left-0 top-0 z-20 size-[64px]',
           '-translate-x-1/2 -translate-y-1/2',
-          'bg-background/30 cursor-none rounded-md border',
+          'cursor-none rounded-md border bg-background/30',
           !(proportion.x && proportion.y) && 'hidden'
         )}
         style={{
