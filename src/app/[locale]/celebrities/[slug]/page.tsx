@@ -31,7 +31,7 @@ export default async function PersonPage({ params }: INextPageParams) {
         <BaseFigure
           src={buildImagePath({ path: person.profile_path })}
           alt='Person Avatar'
-          className='aspect-[2/3] h-auto w-full'
+          className='aspect-2/3 h-auto w-full'
           width={260}
           height={390}
         />

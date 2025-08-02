@@ -76,7 +76,7 @@ export function SearchDialog() {
           <Search className='text-foreground/70 size-4' />
           <input
             onChange={({ target }) => setQuery(target.value.toLowerCase())}
-            className='grow border-none bg-transparent px-0 py-2 text-sm outline-none'
+            className='grow border-none bg-transparent px-0 py-2 text-sm outline-hidden'
             placeholder='Type a command or search...'
           />
           <DialogClose>

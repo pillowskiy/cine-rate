@@ -45,7 +45,7 @@ export default function HoverScalableImage({ src }: HoverScalableImageProps) {
 
   return (
     <div
-      className='relative aspect-[2/3] h-auto w-full cursor-zoom-in overflow-hidden rounded-md'
+      className='relative aspect-2/3 h-auto w-full cursor-zoom-in overflow-hidden rounded-md'
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >

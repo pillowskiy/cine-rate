@@ -33,12 +33,12 @@ export default function CreationHeader({
       <div
         className={cn(
           'absolute -left-4 top-0 -z-50 h-full w-screen overflow-hidden bg-black sm:left-0 sm:w-full sm:rounded-md',
-          'after:absolute after:inset-0 after:bg-gradient-to-r after:from-black'
+          'after:absolute after:inset-0 after:bg-linear-to-r after:from-black'
         )}
       >
         <ImageFromPath
           className={
-            'aspect-[16/9] size-full scale-110 select-none object-cover object-top blur-sm'
+            'aspect-video size-full scale-110 select-none object-cover object-top blur-xs'
           }
           src={buildImagePath({
             path: details.backdrop_path,
@@ -97,7 +97,7 @@ export default function CreationHeader({
               <div
                 className={cn(
                   'absolute inset-0 grid size-full place-items-center bg-black/30 opacity-0',
-                  'backdrop-blur-sm transition-opacity duration-300 hover:opacity-100'
+                  'backdrop-blur-xs transition-opacity duration-300 hover:opacity-100'
                 )}
               >
                 <div className='m-auto w-fit text-center'>
@@ -110,7 +110,7 @@ export default function CreationHeader({
         </ExpandImageDialog>
 
         <CreationTrailer
-          className='aspect-[16/9] h-full flex-[70%] rounded-t-md sm:w-auto sm:rounded-md'
+          className='aspect-video h-full flex-[70%] rounded-t-md sm:w-auto sm:rounded-md'
           creationId={details.id}
           mediaType={mediaType}
         />

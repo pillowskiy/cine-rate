@@ -33,7 +33,7 @@ export default async function MoviePage({ params }: INextPageParams) {
   if (error) return notFound();
 
   return (
-    <main className='grid min-h-screen w-full grid-cols-1 gap-6 md:grid-cols-[1fr,260px]'>
+    <main className='grid min-h-screen w-full grid-cols-1 gap-6 md:grid-cols-[1fr_260px]'>
       <CreationHeader details={movie} mediaType={MediaType.Movie} />
       <div className='grow space-y-6 overflow-hidden'>
         <CreationOverview details={movie} />

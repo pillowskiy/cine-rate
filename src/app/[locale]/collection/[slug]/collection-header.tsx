@@ -16,7 +16,7 @@ export default function CollectionHeader({ details }: CollectionHeaderProps) {
   return (
     <header className='flex w-full flex-col items-center gap-4 overflow-hidden rounded-md border p-4 sm:flex-row'>
       <BaseFigure
-        className='block aspect-[16/9] w-full min-w-[160px] rounded-md sm:w-[160px]'
+        className='block aspect-video w-full min-w-[160px] rounded-md sm:w-[160px]'
         alt='Series Poster'
         src={buildImagePath({ path: details.backdrop_path, scale: 'backdrop' })}
         width={160}

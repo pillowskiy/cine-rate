@@ -31,7 +31,7 @@ export function YoutubeEmbedDialog({
         <DialogHeader className='mr-4'>
           <DialogTitle>{details.title}</DialogTitle>
         </DialogHeader>
-        <div className='relative aspect-[16/9] w-full overflow-hidden rounded-md'>
+        <div className='relative aspect-video w-full overflow-hidden rounded-md'>
           <iframe
             src={url.toString()}
             width='100%'

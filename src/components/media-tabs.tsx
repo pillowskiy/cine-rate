@@ -36,7 +36,7 @@ export function MediaTabs({ images }: MediaTabsProps) {
         <Carousel>
           {images.backdrops.slice(0, 20).map((image, index) => (
             <div key={image.file_path}>
-              <div className='aspect-[16/9] h-[150px] overflow-hidden rounded-md md:h-[300px]'>
+              <div className='aspect-video h-[150px] overflow-hidden rounded-md md:h-[300px]'>
                 <ImageFromPath
                   className='h-full w-auto object-cover'
                   src={buildImagePath({
@@ -61,7 +61,7 @@ export function MediaTabs({ images }: MediaTabsProps) {
           {images.posters.slice(0, 20).map((image, index) => (
             <div key={image.file_path}>
               <div
-                className='aspect-[2/3] h-[150px] overflow-hidden rounded-md md:h-[300px]'
+                className='aspect-2/3 h-[150px] overflow-hidden rounded-md md:h-[300px]'
                 key={image.file_path}
               >
                 <ImageFromPath

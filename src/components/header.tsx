@@ -13,7 +13,7 @@ export default function Header() {
   const isMobile = isMobileView();
 
   return (
-    <header className='supports-backdrop-blur:bg-background/60 bg-background/95 sticky top-0 z-40 w-full border-b backdrop-blur'>
+    <header className='supports-backdrop-blur:bg-background/60 bg-background/95 sticky top-0 z-40 w-full border-b backdrop-blur-sm'>
       <div className='container flex h-14 w-full items-center justify-between gap-2'>
         {isMobile ? (
           <div className='flex gap-2'>

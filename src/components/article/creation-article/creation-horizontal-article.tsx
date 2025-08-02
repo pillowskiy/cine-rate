@@ -44,7 +44,7 @@ export const CreationHorizontalArticle = memo(
       >
         <Link href={`/${mediaType}/${tmdbSlugify(creation)}`}>
           <BaseFigure
-            className='aspect-[16/9] min-w-[120px] max-w-[120px] rounded-md'
+            className='aspect-video min-w-[120px] max-w-[120px] rounded-md'
             src={buildImagePath({
               path: creation.backdrop_path,
               scale: 'backdrop',

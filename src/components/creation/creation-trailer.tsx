@@ -89,7 +89,7 @@ function VideoResource({ creationId, mediaType }: CreationIdentifierProps) {
   }
 
   return (
-    <div className='relative size-full after:absolute after:inset-0 after:bg-gradient-to-t after:from-black'>
+    <div className='relative size-full after:absolute after:inset-0 after:bg-linear-to-t after:from-black'>
       <video
         ref={videoRef}
         className='absolute bottom-0 w-full object-cover align-top'

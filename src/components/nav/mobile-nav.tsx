@@ -64,7 +64,7 @@ export function MobileNav() {
               {t('languagesLabel')}
             </AccordionTrigger>
             <AccordionContent asChild>
-              <ul className='text-foreground/70 columns-1 space-y-2 pl-6 text-base [&>*]:w-fit'>
+              <ul className='text-foreground/70 columns-1 space-y-2 pl-6 text-base *:w-fit'>
                 <li>English</li>
               </ul>
             </AccordionContent>

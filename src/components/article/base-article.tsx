@@ -64,7 +64,7 @@ export function BaseArticleFigure({
 	return (
 		<BaseFigure
 			className={cn(
-				aspect === "vertical" ? "aspect-[2/3]" : "aspect-[16/9]",
+				aspect === "vertical" ? "aspect-2/3" : "aspect-video",
 				className,
 			)}
 			loading={loading}
