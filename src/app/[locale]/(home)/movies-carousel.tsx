@@ -1,4 +1,4 @@
-import { useLocale, useTranslations } from 'next-intl';
+import { getLocale } from 'next-intl/server';
 import { getMovies } from '#actions/getMovies';
 import { MediaType, MovieSort } from '#config/enums';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '#ui/tabs';
@@ -7,6 +7,7 @@ import { Carousel } from '#components/carousel';
 import { TitledSection } from '#components/section/titled';
 import { SeeMoreResources } from '#components/see-more-resources';
 import { capitalize } from '#libs/index';
+import { useTranslations } from 'next-intl';
 
 const emojis: Record<MovieSort, string> = {
   [MovieSort.NowPlaying]: '🎥',
@@ -16,7 +17,7 @@ const emojis: Record<MovieSort, string> = {
 };
 
 async function CreationCarousel({ sort }: { sort: MovieSort }) {
-  const locale = useLocale();
+  const locale = await getLocale();
   const [data, error] = await getMovies(sort, { language: locale });
 
   if (error) return null;

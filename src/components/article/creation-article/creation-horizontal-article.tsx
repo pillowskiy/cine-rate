@@ -80,7 +80,7 @@ export const CreationHorizontalArticle = memo(
           </span>
         </div>
 
-        {withStates && (
+3        {withStates && (
           <CreationStatesDetailed
             className='ml-auto hidden md:flex'
             creationId={creation.id}

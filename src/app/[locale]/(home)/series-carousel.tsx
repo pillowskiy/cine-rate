@@ -1,4 +1,4 @@
-import { useLocale, useTranslations } from 'next-intl';
+import { getLocale } from 'next-intl/server';
 import { getTV } from '#actions/getTV';
 import { MediaType, TVSort } from '#config/enums';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '#ui/tabs';
@@ -7,6 +7,7 @@ import { Carousel } from '#components/carousel';
 import { TitledSection } from '#components/section/titled';
 import { SeeMoreResources } from '#components/see-more-resources';
 import { capitalize } from '#libs/index';
+import { useTranslations } from 'next-intl';
 
 const emojis: Record<TVSort, string> = {
   [TVSort.AiringToday]: '🍿',
@@ -16,7 +17,7 @@ const emojis: Record<TVSort, string> = {
 };
 
 async function CreationCarousel({ sort }: { sort: TVSort }) {
-  const locale = useLocale();
+  const locale = await getLocale();
   const [data, error] = await getTV(sort, { language: locale });
 
   if (error) return null;
