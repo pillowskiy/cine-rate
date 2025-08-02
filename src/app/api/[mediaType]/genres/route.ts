@@ -6,9 +6,10 @@ import { generateZodErrorsResponse } from '#libs/common/next';
 import { paramsDto } from '../dto';
 
 export const dynamic = 'force-static';
-export const revalidate = 3600 * 24;
+export const revalidate = 84900;
 
-export async function GET(request: NextRequest, { params }: INextPageParams) {
+export async function GET(request: NextRequest, props: INextPageParams) {
+  const params = await props.params;
   const requestUrl = new URL(request.url);
   const searchParams = Object.fromEntries(requestUrl.searchParams.entries());
 

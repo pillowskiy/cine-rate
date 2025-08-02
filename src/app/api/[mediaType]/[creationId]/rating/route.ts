@@ -12,13 +12,14 @@ const bodyDto = zod.object({
   value: zod.number().max(10).min(1),
 });
 
-export async function POST(request: NextRequest, { params }: INextPageParams) {
+export async function POST(request: NextRequest, props: INextPageParams) {
+  const params = await props.params;
   const parsedParams = paramsDto.safeParse(params);
   if (!parsedParams.success) {
     return generateZodErrorsResponse(parsedParams);
   }
 
-  const sessionCookie = cookies().get('session_id');
+  const sessionCookie = (await cookies()).get('session_id');
   const sessionId = sessionCookie?.value;
   if (!sessionId) {
     return NextResponse.json(
@@ -51,13 +52,14 @@ export async function POST(request: NextRequest, { params }: INextPageParams) {
     });
 }
 
-export async function DELETE(_: NextRequest, { params }: INextPageParams) {
+export async function DELETE(_: NextRequest, props: INextPageParams) {
+  const params = await props.params;
   const parsedParams = paramsDto.safeParse(params);
   if (!parsedParams.success) {
     return generateZodErrorsResponse(parsedParams);
   }
 
-  const sessionCookie = cookies().get('session_id');
+  const sessionCookie = (await cookies()).get('session_id');
   const sessionId = sessionCookie?.value;
   if (!sessionId) {
     return NextResponse.json(

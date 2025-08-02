@@ -94,7 +94,8 @@ const sortMapping = {
   ...tvSortMapping,
 };
 
-export async function GET(request: NextRequest, { params }: INextPageParams) {
+export async function GET(request: NextRequest, props: INextPageParams) {
+  const params = await props.params;
   const parsedParams = paramsDto.safeParse(params);
   if (!parsedParams.success) {
     return generateZodErrorsResponse(parsedParams);

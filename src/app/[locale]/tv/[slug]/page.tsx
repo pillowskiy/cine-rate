@@ -23,7 +23,8 @@ const CreationReviews = dynamic(
 
 export const generateMetadata = generateCreationMetadata(MediaType.TV);
 
-export default async function TVPage({ params }: INextPageParams) {
+export default async function TVPage(props: INextPageParams) {
+  const params = await props.params;
   const t = await getTranslations('Creations');
   const seriesId = pipeSlugId(params.slug);
   const [tv, error] = await getCreationDetails(seriesId, MediaType.TV);

@@ -7,10 +7,9 @@ import EpisodeFilter from './episode-filter';
 import EpisodeHeader from './episode-header';
 import EpisodeList from './episode-list';
 
-export default async function EpisodesPage({
-  params,
-  searchParams,
-}: INextPageParams) {
+export default async function EpisodesPage(props: INextPageParams) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const seriesId = pipeSlugId(params.id);
   const seasonNumber = parseInt(searchParams?.season || '1');
   const sort = searchParams?.sort;

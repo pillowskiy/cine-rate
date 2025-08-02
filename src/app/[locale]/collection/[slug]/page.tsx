@@ -12,7 +12,8 @@ import CollectionCreations from './collection-creations';
 import CollectionHeader from './collection-header';
 import CollectionMediaTabs from './collection-media-tabs';
 
-export default async function CollectionPage({ params }: INextPageParams) {
+export default async function CollectionPage(props: INextPageParams) {
+  const params = await props.params;
   const collectionId = pipeSlugId(params.slug);
   const [collection, error] = await getCollection(collectionId);
   const t = await getTranslations('CollectionPage');

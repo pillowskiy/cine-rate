@@ -1,5 +1,5 @@
 import { Moon, Sun } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { DesktopNav } from '#components/nav/desktop-nav';
 import { MobileNav } from '#components/nav/mobile-nav';
 import { AuthButton } from '#components/user/auth-button';
@@ -8,9 +8,9 @@ import { SearchDialog } from './dialog/search-dialog';
 import { Logo } from './logo';
 import { ToggleTheme } from './toggle-theme';
 
-export default function Header() {
-  const t = useTranslations('Header');
-  const isMobile = isMobileView();
+export default async function Header() {
+  const t = await getTranslations('Header');
+  const isMobile = await isMobileView();
 
   return (
     <header className='supports-backdrop-blur:bg-background/60 bg-background/95 sticky top-0 z-40 w-full border-b backdrop-blur-sm'>

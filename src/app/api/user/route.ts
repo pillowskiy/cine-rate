@@ -5,7 +5,7 @@ import { getSessionUser } from '#actions/getSessionUser';
 import { fetchErrorResponse } from '#libs/common/fetch';
 
 export async function GET() {
-  const sessionCookie = cookies().get('session_id');
+  const sessionCookie = (await cookies()).get('session_id');
   const sessionId = sessionCookie?.value;
 
   if (!sessionId) {
@@ -27,7 +27,7 @@ export async function GET() {
 }
 
 export async function DELETE() {
-  const sessionCookie = cookies().get('session_id');
+  const sessionCookie = (await cookies()).get('session_id');
   const sessionId = sessionCookie?.value;
 
   if (!sessionId) {
@@ -41,7 +41,7 @@ export async function DELETE() {
 
   revalidateTag('user');
 
-  cookies().delete('session_id');
-  const success = !cookies().get('session_id')?.value;
+  (await cookies()).delete('session_id');
+  const success = !(await cookies()).get('session_id')?.value;
   return NextResponse.json(success, { status: 200 });
 }

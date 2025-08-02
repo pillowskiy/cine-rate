@@ -23,9 +23,9 @@ const CreationReviews = dynamic(
 
 export const generateMetadata = generateCreationMetadata(MediaType.Movie);
 
-export default async function MoviePage({ params }: INextPageParams) {
+export default async function MoviePage(props: INextPageParams) {
+  const params = await props.params;
   const t = await getTranslations('Creations');
-  console.log(params.slug, 'slug');
   const movieId = pipeSlugId(params.slug);
   const [movie, error] = await getCreationDetails(movieId, MediaType.Movie);
 

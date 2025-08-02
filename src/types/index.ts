@@ -32,11 +32,17 @@ export interface IPagination {
 }
 
 export interface INextPageParams {
-  searchParams: Record<string, string>;
-  params: Record<string, string | number | symbol>;
+  searchParams: Promise<Record<string, string>>;
+  params: Promise<Record<string, string | number | symbol>>;
 }
 
-export type AppPageParams = INextPageParams & { params: { locale: string } };
+export interface INextPageParamsWithLocale extends INextPageParams {
+  params: Promise<
+    { locale: string } & Record<string, string | number | symbol>
+  >;
+}
+
+export type AppPageParams = INextPageParamsWithLocale;
 
 export interface IApiReject {
   message: string;

@@ -19,7 +19,8 @@ import PersonKnownAs from './person-known-as';
 
 export const generateMetadata = generatePersonMetadata();
 
-export default async function PersonPage({ params }: INextPageParams) {
+export default async function PersonPage(props: INextPageParams) {
+  const params = await props.params;
   const personId = pipeSlugId(params.slug);
   const [person, error] = await getPersonDetails(personId);
   const t = await getTranslations('PersonPage');

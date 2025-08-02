@@ -21,7 +21,7 @@ export function createFetchInterceptor(
     init: RequestConfig<Params> = {}
   ): Promise<SafeFetchedData<Data>> {
     const fetchConfig = Object.assign(init, config);
-    request.intercept(fetchConfig);
+    await request.intercept(fetchConfig);
     const url = assignPathname(input);
     const result = await nextFetch(url, fetchConfig);
 
@@ -29,7 +29,7 @@ export function createFetchInterceptor(
       return [null, result];
     }
 
-    response.intercept(result);
+    await response.intercept(result);
     const data: Data = await result.json();
     return [data, null];
   }
@@ -39,8 +39,9 @@ export function createFetchInterceptor(
     init: RequestConfig<Params> = {}
   ): Promise<Data> {
     const fetchConfig = Object.assign(init, config);
-    request.intercept(fetchConfig);
+    await request.intercept(fetchConfig);
     const url = assignPathname(input);
+    // TODO: add response interceptor
     return handledFetch(url, fetchConfig);
   }
 
@@ -51,7 +52,7 @@ function interceptor<T extends unknown>() {
   const middlewares: Callback<T>[] = [];
 
   const intercept = (value: T) => {
-    middlewares.forEach((middleware) => middleware(value));
+    middlewares.forEach(async (middleware) => await middleware(value));
   };
 
   const use = (cb: Callback<T>) => {

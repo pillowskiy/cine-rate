@@ -7,11 +7,12 @@ import { ResourceTarget } from '#config/enums';
 import { TitledSection } from '#components/section/titled';
 import ResourcesTabs from './resources-tabs';
 
-export default function ResourcesPage({ params }: AppPageParams) {
+export default async function ResourcesPage(props: AppPageParams) {
+  const params = await props.params;
   setRequestLocale(params.locale);
 
   const parsedResourceTarget = zod
-    .nativeEnum(ResourceTarget)
+    .enum(ResourceTarget)
     .safeParse(params.resourceTarget);
   const t = useTranslations('Account.Resources');
 

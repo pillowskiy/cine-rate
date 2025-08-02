@@ -14,8 +14,9 @@ const paramsDto = zod.object({
   resourceTarget: zod.nativeEnum(ResourceTarget),
 });
 
-export function GET(request: NextRequest, { params }: INextPageParams) {
-  const sessionCookie = cookies().get('session_id');
+export async function GET(request: NextRequest, props: INextPageParams) {
+  const params = await props.params;
+  const sessionCookie = (await cookies()).get('session_id');
   const sessionId = sessionCookie?.value;
 
   if (!sessionId) {

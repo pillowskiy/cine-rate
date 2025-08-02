@@ -11,7 +11,8 @@ export const APP_URL =
   process.env.NEXT_PUBLIC_APP_URL || 'https://cine-rate.vercel.app/';
 
 export function generateCreationMetadata(mediaType: MediaType) {
-  return async ({ params }: AppPageParams): Promise<Metadata> => {
+  return async (props: AppPageParams): Promise<Metadata> => {
+    const params = await props.params;
     const creationId = pipeSlugId(params.slug);
     const url = APP_URL + `${mediaType}/${creationId}`;
 
@@ -78,7 +79,8 @@ export function generateNotFoundMetadata({
 }
 
 export function generatePersonMetadata() {
-  return async ({ params }: AppPageParams): Promise<Metadata> => {
+  return async (props: AppPageParams): Promise<Metadata> => {
+    const params = await props.params;
     const personId = pipeSlugId(params.slug);
     const url = APP_URL + `person/${personId}`;
 
