@@ -5,4 +5,6 @@ import type { AppMiddleware } from './common/types';
 export const handler: AppMiddleware = createMiddleware({
   locales: locales,
   defaultLocale: defaultLocale,
+  localePrefix: 'as-needed',
+  localeDetection: true,
 });

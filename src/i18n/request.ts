@@ -1,13 +1,10 @@
-import { notFound } from 'next/navigation';
-import {
-  type GetRequestConfigParams,
-  getRequestConfig,
-} from 'next-intl/server';
-import path from 'path';
-import { locales } from '#config/localization';
+import { cookies } from 'next/headers';
+import { getRequestConfig } from 'next-intl/server';
+import { defaultLocale } from '#config/localization';
 
-export default getRequestConfig(async () => {
-  const locale = 'en-US';
+export default getRequestConfig(async ({ locale: nativeLocale }) => {
+  const cookieLocale = (await cookies()).get('NEXT_LOCALE')?.value;
+  const locale = cookieLocale || nativeLocale || defaultLocale;
 
   return {
     locale,
