@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { unstable_setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import zod from 'zod';
 import type { AppPageParams } from '#types/index';
 import { ResourceTarget } from '#config/enums';
@@ -8,7 +8,8 @@ import { TitledSection } from '#components/section/titled';
 import ResourcesTabs from './resources-tabs';
 
 export default function ResourcesPage({ params }: AppPageParams) {
-  unstable_setRequestLocale(params.locale);
+  setRequestLocale(params.locale);
+
   const parsedResourceTarget = zod
     .nativeEnum(ResourceTarget)
     .safeParse(params.resourceTarget);

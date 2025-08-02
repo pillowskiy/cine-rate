@@ -15,8 +15,10 @@ export function generateStaticParams() {
 }
 
 export default async function Home({ params }: AppPageParams) {
-  const { locale } = params;
+  const { locale } = await params;
   setRequestLocale(locale);
+
+  console.log(`Message inside Home`);
 
   return (
     <main className='min-h-screen w-full space-y-6'>

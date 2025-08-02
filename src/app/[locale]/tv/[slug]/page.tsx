@@ -18,8 +18,7 @@ import SeriesDetails from './series-details';
 import SeriesSeasons from './series-seasons';
 
 const CreationReviews = dynamic(
-  () => import('#components/creation/creation-reviews'),
-  { ssr: false }
+  () => import('#components/creation/creation-reviews')
 );
 
 export const generateMetadata = generateCreationMetadata(MediaType.TV);

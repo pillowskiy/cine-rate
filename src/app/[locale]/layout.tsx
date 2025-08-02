@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getLocale, getMessages } from 'next-intl/server';
 import { AppPageParams } from '#types/index';
 import { Toaster } from '#ui/toaster';
 import Footer from '#components/footer';
@@ -38,8 +38,11 @@ const keywords = [
   'Cinephile Hub',
 ];
 
-export const metadata: Metadata = {
+export const viewport = {
   themeColor: '#ffffff',
+};
+
+export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
   title: 'CineRate',
   description:
@@ -50,7 +53,7 @@ export const metadata: Metadata = {
   authors: [
     {
       name: 'Pillow',
-      url: 'https://github.com/PillowPowa',
+      url: 'https://github.com/pillowskiy',
     },
   ],
   openGraph: {
@@ -68,15 +71,15 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-} & AppPageParams) {
-  const messages = await getMessages();
+}) {
+  const locale = await getLocale();
+
   return (
-    <html lang={params.locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body className={inter.className}>
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider>
           <NoInternetConnection />
           <Toaster />
           <ServeSiteProviders>

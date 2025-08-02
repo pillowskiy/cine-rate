@@ -3,15 +3,14 @@ import {
   type GetRequestConfigParams,
   getRequestConfig,
 } from 'next-intl/server';
+import path from 'path';
 import { locales } from '#config/localization';
 
-export default getRequestConfig(async ({ locale }: GetRequestConfigParams) => {
-  if (typeof locale !== 'string' || !locales.includes(locale as any)) {
-    notFound();
-  }
+export default getRequestConfig(async () => {
+  const locale = 'en-US';
 
   return {
-    locale: locale,
+    locale,
     messages: (await import(`../../messages/${locale}.json`)).default,
   };
 });

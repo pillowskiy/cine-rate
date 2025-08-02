@@ -18,8 +18,7 @@ import { pipeSlugId } from '#libs/tmdb/slugify';
 import MovieDetails from './movie-details';
 
 const CreationReviews = dynamic(
-  () => import('#components/creation/creation-reviews'),
-  { ssr: false }
+  () => import('#components/creation/creation-reviews')
 );
 
 export const generateMetadata = generateCreationMetadata(MediaType.Movie);
