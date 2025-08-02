@@ -18,16 +18,17 @@ export function AuthButton() {
 
   if (!user) {
     return (
-      <Link href='/auth' passHref legacyBehavior>
-        <Button
-          className='aspect-square'
-          variant='outline'
-          aria-label='log in'
-          size='icon'
-        >
+      <Button
+        className='aspect-square'
+        variant='outline'
+        aria-label='log in'
+        size='icon'
+        asChild
+      >
+        <Link href='/auth'>
           <LogIn className='size-5' />
-        </Button>
-      </Link>
+        </Link>
+      </Button>
     );
   }
 

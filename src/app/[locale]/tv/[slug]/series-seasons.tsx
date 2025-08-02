@@ -31,8 +31,6 @@ export default function SeriesSeasons({ details }: SerriesSeasonsProps) {
                 pathname: `/tv/${details.id}/episodes`,
                 query: { season: currentSeason.season_number },
               }}
-              passHref
-              legacyBehavior
             >
               <Button>
                 {t('moreAboutSeason', {

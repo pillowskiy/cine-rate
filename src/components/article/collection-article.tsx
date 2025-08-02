@@ -47,13 +47,11 @@ export function CollectionArticle({
           {collection.overview}
         </p>
 
-        <Link
-          href={`/collection/${tmdbSlugify(collection)}`}
-          passHref
-          legacyBehavior
-        >
-          <Button>{t('viewCollection')}</Button>
-        </Link>
+        <Button asChild>
+          <Link href={`/collection/${tmdbSlugify(collection)}`}>
+            {t('viewCollection')}
+          </Link>
+        </Button>
       </BaseArticleContent>
     </BaseArticle>
   );

@@ -82,7 +82,7 @@ export default function UserProfileDropdown({
             <Mails className='mr-2 size-4' />
             <span>{t('listsLabel')}</span>
           </DropdownMenuItem>
-          <Link href='/account/favorite' passHref legacyBehavior>
+          <Link href='/account/favorite'>
             <DropdownMenuItem
               onClick={closeDropdown}
               className='cursor-pointer'
@@ -91,7 +91,7 @@ export default function UserProfileDropdown({
               <span>{t('favoritesLabel')}</span>
             </DropdownMenuItem>
           </Link>
-          <Link href='/account/rated' passHref legacyBehavior>
+          <Link href='/account/rated'>
             <DropdownMenuItem
               onClick={closeDropdown}
               className='cursor-pointer'
@@ -100,7 +100,7 @@ export default function UserProfileDropdown({
               <span>{t('ratedLabel')}</span>
             </DropdownMenuItem>
           </Link>
-          <Link href='/account/watchlist' passHref legacyBehavior>
+          <Link href='/account/watchlist'>
             <DropdownMenuItem
               onClick={closeDropdown}
               className='cursor-pointer'

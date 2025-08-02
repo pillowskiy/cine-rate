@@ -105,19 +105,14 @@ export function SearchDialog() {
                       <Link
                         key={person.id}
                         href={`/celebrity/${person.id}`}
-                        passHref
-                        legacyBehavior
+                        onClick={() => setIsDialogOpen(false)}
+                        className='hover:bg-accent flex cursor-pointer gap-2 rounded-md p-2 transition-all'
                       >
-                        <div
-                          onClick={() => setIsDialogOpen(false)}
-                          className='hover:bg-accent flex cursor-pointer gap-2 rounded-md p-2 transition-all'
-                        >
-                          <PersonArticle
-                            person={person}
-                            className='w-[120px] min-w-[120px]'
-                            autoScale={false}
-                          />
-                        </div>
+                        <PersonArticle
+                          person={person}
+                          className='w-[120px] min-w-[120px]'
+                          autoScale={false}
+                        />
                       </Link>
                     );
                   })}
@@ -136,12 +131,7 @@ export function SearchDialog() {
                 .map((movie) => {
                   if ('name' in movie) return null;
                   return (
-                    <Link
-                      key={movie.id}
-                      href={`/movie/${tmdbSlugify(movie)}`}
-                      passHref
-                      legacyBehavior
-                    >
+                    <Link key={movie.id} href={`/movie/${tmdbSlugify(movie)}`}>
                       <CreationHorizontalArticle
                         defaultMediaType={MediaType.Movie}
                         creation={movie}
@@ -165,12 +155,7 @@ export function SearchDialog() {
                 .map((tv) => {
                   if ('name' in tv) return null;
                   return (
-                    <Link
-                      key={tv.id}
-                      href={`/tv/${tv.id}`}
-                      passHref
-                      legacyBehavior
-                    >
+                    <Link key={tv.id} href={`/tv/${tv.id}`}>
                       <CreationHorizontalArticle
                         defaultMediaType={MediaType.TV}
                         creation={tv}

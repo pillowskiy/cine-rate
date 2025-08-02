@@ -32,7 +32,7 @@ interface CanvasConfettiProps extends CreationDetailsProps {}
  * @deprecated This component is deprecated in favor of the react-confetti package.
  */
 export default function CanvasConfetti({ details }: CanvasConfettiProps) {
-  const jsConfettiRef = useRef<JSConfetti>();
+  const jsConfettiRef = useRef<JSConfetti>(null);
   const emojis = details.genres.map(
     (genre) => genreEmojis[genre.name as keyof typeof genreEmojis]
   );

@@ -31,21 +31,22 @@ export default async function CreationKeywords({
 
       <div className='flex flex-wrap gap-2'>
         {data.keywords.map((keyword) => (
-          <Link
-            href={{
-              pathname: `/${mediaType}`,
-              query: {
-                with_keywords: keyword.name,
-              },
-            }}
+          <Button
             key={keyword.id}
-            passHref
-            legacyBehavior
+            className='h-7 truncate text-sm'
+            variant='outline'
           >
-            <Button className='h-7 truncate text-sm' variant='outline'>
+            <Link
+              href={{
+                pathname: `/${mediaType}`,
+                query: {
+                  with_keywords: keyword.name,
+                },
+              }}
+            >
               {keyword.name}
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         ))}
       </div>
     </div>
