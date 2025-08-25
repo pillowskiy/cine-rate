@@ -13,7 +13,7 @@ function getTokenApproveURL(requestToken: string) {
 
 export async function GET({ url }: NextRequest) {
   try {
-    if (cookies().get('session_id')) {
+    if ((await cookies()).get('session_id')) {
       throw new Error('You are already authorized');
     }
     const data = await getRequestToken();

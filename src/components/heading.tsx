@@ -33,7 +33,7 @@ export function Heading({ title, description, badges }: HeadingProps) {
         </div>
       </div>
       {description && (
-        <p className='text-muted-foreground text-sm'>{description}</p>
+        <p className='text-sm text-muted-foreground'>{description}</p>
       )}
     </m.div>
   );

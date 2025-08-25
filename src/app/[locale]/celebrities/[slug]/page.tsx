@@ -19,7 +19,8 @@ import PersonKnownAs from './person-known-as';
 
 export const generateMetadata = generatePersonMetadata();
 
-export default async function PersonPage({ params }: INextPageParams) {
+export default async function PersonPage(props: INextPageParams) {
+  const params = await props.params;
   const personId = pipeSlugId(params.slug);
   const [person, error] = await getPersonDetails(personId);
   const t = await getTranslations('PersonPage');
@@ -31,7 +32,7 @@ export default async function PersonPage({ params }: INextPageParams) {
         <BaseFigure
           src={buildImagePath({ path: person.profile_path })}
           alt='Person Avatar'
-          className='aspect-[2/3] h-auto w-full'
+          className='aspect-2/3 h-auto w-full'
           width={260}
           height={390}
         />

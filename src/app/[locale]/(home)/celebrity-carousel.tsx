@@ -1,5 +1,4 @@
-import { useLocale } from 'next-intl';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { getPopular } from '#actions/getPopular';
 import { MediaType } from '#config/enums';
 import { PersonArticle } from '#components/article/person-article';
@@ -9,7 +8,7 @@ import { TitledSection } from '#components/section/titled';
 import { SeeMoreResources } from '#components/see-more-resources';
 
 export default async function CelebrityCarousel() {
-  const locale = useLocale();
+  const locale = await getLocale();
   const [celebrities, error] = await getPopular(MediaType.Person, {
     language: locale,
   });

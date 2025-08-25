@@ -17,7 +17,7 @@ const EpisodeHeader = memo(({ series }: EpisodeHeaderProps) => {
     <header className='flex w-full flex-col items-center gap-4 overflow-hidden rounded-md border p-4 sm:flex-row'>
       <div className='w-full sm:w-fit'>
         <ImageFromPath
-          className='block aspect-[16/9] w-full min-w-[160px] rounded-md sm:w-[160px]'
+          className='block aspect-video w-full min-w-[160px] rounded-md sm:w-[160px]'
           alt='Series Poster'
           src={buildImagePath({
             path: series.backdrop_path,
@@ -36,7 +36,7 @@ const EpisodeHeader = memo(({ series }: EpisodeHeaderProps) => {
             >
               {getCreationTitle(series)}
             </Link>
-            <span className='text-foreground/70 text-sm'>
+            <span className='text-sm text-foreground/70'>
               ({new Date(series.first_air_date).getFullYear()})
             </span>
           </div>

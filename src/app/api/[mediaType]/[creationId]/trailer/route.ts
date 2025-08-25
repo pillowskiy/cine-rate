@@ -7,7 +7,8 @@ import { inferOfficialTrailer } from '#libs/tmdb';
 import { buildURL } from '#libs/ytdl';
 import { paramsDto } from '../dto';
 
-export async function GET(_: unknown, { params }: INextPageParams) {
+export async function GET(_: unknown, props: INextPageParams) {
+  const params = await props.params;
   const parsedParams = paramsDto.safeParse(params);
   if (!parsedParams.success) {
     return generateZodErrorsResponse(parsedParams);

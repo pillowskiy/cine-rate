@@ -8,7 +8,6 @@ export function createGuardedMiddlewares(
     (factory): AppMiddleware =>
       (req, next, ...args) => {
         if (!factory.matcher || factory.matcher.test(req.nextUrl.pathname)) {
-          console.log(factory.matcher + ' has been called for' + req.url);
           return factory.handler(req, next, ...args);
         }
         return next();

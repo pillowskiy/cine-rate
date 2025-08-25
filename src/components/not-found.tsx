@@ -54,7 +54,7 @@ export function NotFound({
         <h2 className='text-xl font-semibold tracking-tight sm:text-2xl'>
           {title || 'There are no items yet ;('}
         </h2>
-        <p className='text-muted-foreground text-xs sm:text-sm'>
+        <p className='text-xs text-muted-foreground sm:text-sm'>
           {getRandomDescription()}
         </p>
       </div>

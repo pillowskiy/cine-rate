@@ -43,20 +43,18 @@ export default function SeasonsDialog({
                 key={season.id}
                 season={season}
                 action={
-                  <Link
-                    href={{
-                      pathname: `/tv/${seriesId}/episodes`,
-                      query: { season: season.season_number },
-                    }}
-                    passHref
-                    legacyBehavior
-                  >
-                    <DialogClose asChild>
-                      <Button className='w-full sm:w-fit'>
+                  <DialogClose asChild>
+                    <Button className='w-full sm:w-fit' asChild>
+                      <Link
+                        href={{
+                          pathname: `/tv/${seriesId}/episodes`,
+                          query: { season: season.season_number },
+                        }}
+                      >
                         {t('readMore')}
-                      </Button>
-                    </DialogClose>
-                  </Link>
+                      </Link>
+                    </Button>
+                  </DialogClose>
                 }
               />
             ))}

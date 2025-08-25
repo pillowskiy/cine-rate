@@ -6,7 +6,8 @@ import { pipeSlugId } from '#libs/tmdb/slugify';
 import SeriesCast from './series-cast';
 import SeriesCrew from './series-crew';
 
-export default async function SeriesCastPage({ params }: INextPageParams) {
+export default async function SeriesCastPage(props: INextPageParams) {
+  const params = await props.params;
   const seriesId = pipeSlugId(params.slug);
   const t = await getTranslations('Creations.CreationCredits');
   const aggregateCredits = await getAggregateCredits(seriesId);

@@ -18,13 +18,13 @@ import SeriesDetails from './series-details';
 import SeriesSeasons from './series-seasons';
 
 const CreationReviews = dynamic(
-  () => import('#components/creation/creation-reviews'),
-  { ssr: false }
+  () => import('#components/creation/creation-reviews')
 );
 
 export const generateMetadata = generateCreationMetadata(MediaType.TV);
 
-export default async function TVPage({ params }: INextPageParams) {
+export default async function TVPage(props: INextPageParams) {
+  const params = await props.params;
   const t = await getTranslations('Creations');
   const seriesId = pipeSlugId(params.slug);
   const [tv, error] = await getCreationDetails(seriesId, MediaType.TV);
@@ -32,7 +32,7 @@ export default async function TVPage({ params }: INextPageParams) {
   if (error) return notFound();
 
   return (
-    <main className='grid min-h-screen w-full grid-cols-1 gap-6 md:grid-cols-[1fr,260px]'>
+    <main className='grid min-h-screen w-full grid-cols-1 gap-6 md:grid-cols-[1fr_260px]'>
       <CreationHeader details={tv} mediaType={MediaType.TV} />
       <div className='grow space-y-6 overflow-hidden'>
         <CreationOverview details={tv} />

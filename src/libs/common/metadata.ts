@@ -11,7 +11,9 @@ export const APP_URL =
   process.env.NEXT_PUBLIC_APP_URL || 'https://cine-rate.vercel.app/';
 
 export function generateCreationMetadata(mediaType: MediaType) {
-  return async ({ params }: AppPageParams): Promise<Metadata> => {
+  // TODO: add average color from url for better opengraph embeds design
+  return async (props: AppPageParams): Promise<Metadata> => {
+    const params = await props.params;
     const creationId = pipeSlugId(params.slug);
     const url = APP_URL + `${mediaType}/${creationId}`;
 
@@ -37,7 +39,6 @@ export function generateCreationMetadata(mediaType: MediaType) {
     const metadataTitle = `${creationTitle} — CineRate`;
 
     const backdropUrl = buildImagePath({ path: creation.backdrop_path });
-    // const themeColor = await getAverageColorFromUrl(backdropUrl);
     const themeColor = '#ffffff';
 
     return {
@@ -78,7 +79,8 @@ export function generateNotFoundMetadata({
 }
 
 export function generatePersonMetadata() {
-  return async ({ params }: AppPageParams): Promise<Metadata> => {
+  return async (props: AppPageParams): Promise<Metadata> => {
+    const params = await props.params;
     const personId = pipeSlugId(params.slug);
     const url = APP_URL + `person/${personId}`;
 
@@ -96,7 +98,6 @@ export function generatePersonMetadata() {
 
     const title = `${person.name} — CineRate`;
     const profileImageUrl = buildImagePath({ path: person.profile_path });
-    // const themeColor = await getAverageColorFromUrl(profileImageUrl);
     const themeColor = '#ffffff';
 
     return {

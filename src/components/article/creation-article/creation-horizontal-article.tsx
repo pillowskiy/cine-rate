@@ -37,14 +37,14 @@ export const CreationHorizontalArticle = memo(
     return (
       <article
         className={cn(
-          'hover:bg-accent flex w-full gap-2 rounded-md p-2 transition-all',
+          'flex w-full gap-2 rounded-md p-2 transition-all hover:bg-accent',
           className
         )}
         {...props}
       >
         <Link href={`/${mediaType}/${tmdbSlugify(creation)}`}>
           <BaseFigure
-            className='aspect-[16/9] min-w-[120px] max-w-[120px] rounded-md'
+            className='aspect-video min-w-[120px] max-w-[120px] rounded-md'
             src={buildImagePath({
               path: creation.backdrop_path,
               scale: 'backdrop',
@@ -80,7 +80,7 @@ export const CreationHorizontalArticle = memo(
           </span>
         </div>
 
-        {withStates && (
+3        {withStates && (
           <CreationStatesDetailed
             className='ml-auto hidden md:flex'
             creationId={creation.id}

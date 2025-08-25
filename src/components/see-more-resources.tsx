@@ -36,8 +36,8 @@ export function SeeMoreResources({
       className={cn(
         'relative grid h-fit place-items-center rounded-md border',
         aspect === 'vertical'
-          ? 'aspect-[2/3] w-[160px] sm:w-[260px]'
-          : 'aspect-[16/9] w-[260px]'
+          ? 'aspect-2/3 w-[160px] sm:w-[260px]'
+          : 'aspect-video w-[260px]'
       )}
     >
       <Link

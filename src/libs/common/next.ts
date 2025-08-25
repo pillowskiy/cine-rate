@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { SafeParseError, ZodAny } from 'zod';
+import { ZodAny, ZodSafeParseError } from 'zod';
 import zod from 'zod';
 
 export const pipe = {
@@ -10,7 +10,7 @@ export const pipe = {
 } as const;
 
 export function generateZodErrorsResponse(
-  result: SafeParseError<zod.infer<ZodAny>>
+  result: ZodSafeParseError<zod.infer<ZodAny>>
 ) {
   if (result.error.issues.length) {
     return NextResponse.json(

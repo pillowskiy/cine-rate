@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import type { INextPageParams } from '#types/index';
@@ -14,7 +14,8 @@ const availableStatuses = [200, 401, 400] as const;
 /*
  * https://github.com/vercel/next.js/issues/52799#issuecomment-1645124081
  */
-export default function ApprovePage({ searchParams }: INextPageParams) {
+export default function ApprovePage(props: INextPageParams) {
+  const searchParams = use(props.searchParams);
   const t = useTranslations('AuthApprove');
   const tt = useTranslations('Toast');
 
@@ -28,7 +29,7 @@ export default function ApprovePage({ searchParams }: INextPageParams) {
     const isValidStatus = availableStatuses.includes(status as any);
     const statusKey = isValidStatus ? status.toString() : 'default';
     return `statusDescription.${statusKey}` as Parameters<typeof t>[0];
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, []);
 
   useEffect(() => {

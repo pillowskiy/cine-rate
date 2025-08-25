@@ -54,7 +54,7 @@ export function MobileNav() {
           </SheetTitle>
         </SheetHeader>
         <AppNav
-          className='text-foreground my-4 flex flex-col space-y-2 pl-6 text-base font-normal'
+          className='my-4 flex flex-col space-y-2 pl-6 text-base font-normal text-foreground'
           onClick={() => setIsOpen(false)}
         />
 
@@ -64,7 +64,7 @@ export function MobileNav() {
               {t('languagesLabel')}
             </AccordionTrigger>
             <AccordionContent asChild>
-              <ul className='text-foreground/70 columns-1 space-y-2 pl-6 text-base [&>*]:w-fit'>
+              <ul className='columns-1 space-y-2 pl-6 text-base text-foreground/70 *:w-fit'>
                 <li>English</li>
               </ul>
             </AccordionContent>
@@ -75,7 +75,7 @@ export function MobileNav() {
               {t('themeLabel')}
             </AccordionTrigger>
             <AccordionContent asChild>
-              <div className='text-foreground/70 space-y-2 pl-6 text-base'>
+              <div className='space-y-2 pl-6 text-base text-foreground/70'>
                 {themes.map((theme) => (
                   <button
                     className={cn(
@@ -100,7 +100,7 @@ export function MobileNav() {
               {t('privacyLabel')}
             </AccordionTrigger>
             <AccordionContent asChild>
-              <ul className='text-foreground/70 space-y-2 pl-6 text-base'>
+              <ul className='space-y-2 pl-6 text-base text-foreground/70'>
                 <li>Cookies</li>
               </ul>
             </AccordionContent>

@@ -14,7 +14,7 @@ const bodyDto = zod.object({
 });
 
 export async function POST(request: NextRequest) {
-  const sessionCookie = cookies().get('session_id');
+  const sessionCookie = (await cookies()).get('session_id');
   const sessionId = sessionCookie?.value;
   if (!sessionId) {
     return NextResponse.json(

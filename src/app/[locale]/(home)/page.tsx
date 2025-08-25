@@ -1,4 +1,4 @@
-import { unstable_setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { AppPageParams } from '#types/index';
 import { locales } from '#config/localization';
 import CelebrityCarousel from './celebrity-carousel';
@@ -8,14 +8,15 @@ import TrendsCarousel from './trends-carousel';
 import WatchlistCarousel from './watchlist-carousel';
 
 export const dynamic = 'force-static';
-export const revalidate = 3600 * 24;
+export const revalidate = 86400; // 24 hours
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
 export default async function Home({ params }: AppPageParams) {
-  unstable_setRequestLocale(params.locale);
+  const { locale } = await params;
+  setRequestLocale(locale);
 
   return (
     <main className='min-h-screen w-full space-y-6'>

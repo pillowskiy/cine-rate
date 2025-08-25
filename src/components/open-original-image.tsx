@@ -7,7 +7,7 @@ export function OpenOriginalImage({ path }: { path: string }) {
 
   return (
     <Link
-      className='text-foreground/50 hover:text-foreground text-xs transition-all hover:underline'
+      className='text-xs text-foreground/50 transition-all hover:text-foreground hover:underline'
       href={TMDB_IMAGE_URL + 'original' + path}
       target='_blank'
     >

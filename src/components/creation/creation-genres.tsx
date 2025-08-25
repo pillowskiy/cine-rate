@@ -25,24 +25,23 @@ export function CreationGenres({
       {...props}
     >
       {genres.map((genre) => (
-        <Link
+        <Button
           key={genre.id}
-          href={{
-            pathname: `/${mediaType}`,
-            query: {
-              with_genres: genre.id,
-            },
-          }}
-          passHref
-          legacyBehavior
+          className='h-full truncate bg-transparent px-2 text-xs'
+          variant='outline'
+          asChild
         >
-          <Button
-            className='h-full truncate bg-transparent px-2 text-xs'
-            variant='outline'
+          <Link
+            href={{
+              pathname: `/${mediaType}`,
+              query: {
+                with_genres: genre.id,
+              },
+            }}
           >
             {genre.name}
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       ))}
     </div>
   );

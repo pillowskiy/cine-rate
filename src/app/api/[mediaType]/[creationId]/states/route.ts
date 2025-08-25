@@ -8,8 +8,9 @@ import { fetchErrorResponse } from '#libs/common/fetch';
 import { generateZodErrorsResponse } from '#libs/common/next';
 import { paramsDto } from '../dto';
 
-export async function GET(_: unknown, { params }: INextPageParams) {
-  const sessionCookie = cookies().get('session_id')?.value;
+export async function GET(_: unknown, props: INextPageParams) {
+  const params = await props.params;
+  const sessionCookie = (await cookies()).get('session_id')?.value;
   const parsedSessionId = zod.string().safeParse(sessionCookie);
 
   if (!parsedSessionId.success) {

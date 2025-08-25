@@ -18,22 +18,21 @@ import { pipeSlugId } from '#libs/tmdb/slugify';
 import MovieDetails from './movie-details';
 
 const CreationReviews = dynamic(
-  () => import('#components/creation/creation-reviews'),
-  { ssr: false }
+  () => import('#components/creation/creation-reviews')
 );
 
 export const generateMetadata = generateCreationMetadata(MediaType.Movie);
 
-export default async function MoviePage({ params }: INextPageParams) {
+export default async function MoviePage(props: INextPageParams) {
+  const params = await props.params;
   const t = await getTranslations('Creations');
-  console.log(params.slug, 'slug');
   const movieId = pipeSlugId(params.slug);
   const [movie, error] = await getCreationDetails(movieId, MediaType.Movie);
 
   if (error) return notFound();
 
   return (
-    <main className='grid min-h-screen w-full grid-cols-1 gap-6 md:grid-cols-[1fr,260px]'>
+    <main className='grid min-h-screen w-full grid-cols-1 gap-6 md:grid-cols-[1fr_260px]'>
       <CreationHeader details={movie} mediaType={MediaType.Movie} />
       <div className='grow space-y-6 overflow-hidden'>
         <CreationOverview details={movie} />

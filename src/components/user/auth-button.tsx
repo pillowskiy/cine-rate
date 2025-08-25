@@ -13,21 +13,22 @@ export function AuthButton() {
   const isClientReady = useClientReady();
 
   if (!isClientReady) {
-    return <div className='bg-secondary size-10 animate-pulse rounded-full' />;
+    return <div className='size-10 animate-pulse rounded-full bg-secondary' />;
   }
 
   if (!user) {
     return (
-      <Link href='/auth' passHref legacyBehavior>
-        <Button
-          className='aspect-square'
-          variant='outline'
-          aria-label='log in'
-          size='icon'
-        >
+      <Button
+        className='aspect-square'
+        variant='outline'
+        aria-label='log in'
+        size='icon'
+        asChild
+      >
+        <Link href='/auth'>
           <LogIn className='size-5' />
-        </Button>
-      </Link>
+        </Link>
+      </Button>
     );
   }
 

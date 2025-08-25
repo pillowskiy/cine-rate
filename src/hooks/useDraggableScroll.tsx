@@ -23,7 +23,7 @@ const orientationMappings = {
 export function useDraggable<T extends HTMLElement>({
   sharpness = 0.8,
   orientation = 'horizontal',
-}: DraggableOptions = {}): React.RefObject<T> {
+}: DraggableOptions = {}): React.RefObject<T | null> {
   const draggableRef = useRef<T>(null);
   const isMouseDown = useRef(false);
   const prevPos = useRef(0);
